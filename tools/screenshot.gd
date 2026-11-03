@@ -31,7 +31,8 @@ func _initialize() -> void:
 
 func _next() -> void:
 	current = queue.pop_front()
-	game.mode = GreyboxScript.Mode.HUMAN_PREY if mode_name == "prey" else GreyboxScript.Mode.AI_VS_AI
+	# Both sides play (the prey view is the same position, turned round).
+	game.mode = GreyboxScript.Mode.AI_VS_AI
 	game.level = 1
 	game._rule_set_id = current
 	game.new_game()
@@ -43,8 +44,9 @@ func _process(_delta: float) -> bool:
 		_next()  # the scene's _ready has run by the first frame
 		return false
 	if game.history.size() >= plies or game.status != HuntState.Status.ONGOING:
-		if mode_name != "prey":
-			game.mode = GreyboxScript.Mode.HOTSEAT  # stop the AI
+		game.mode = GreyboxScript.Mode.HOTSEAT  # stop the AI
+		if mode_name == "prey":
+			game._board_root.rotation.y = PI  # as when you play the prey
 		if game._animating or game._ai_task >= 0:
 			return false
 		wait += 1

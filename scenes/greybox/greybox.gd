@@ -37,12 +37,18 @@ var evaluator: HuntEvaluator
 var personas: Array[AIPersona] = []
 var mode: Mode = Mode.HUMAN_PREY
 var level := 1
+## Use the title's art set where one exists (Bagh Chal, style-frame stage).
+var use_art := true
 var history: Array[PackedInt32Array] = []
 var status: HuntState.Status = HuntState.Status.ONGOING
 
 var _rule_set_id := HuntRuleSets.BAGH_CHAL_STANDARD
 var _komikan_dogs_first := false
 var _camera: Camera3D
+var _world_env: WorldEnvironment
+var _grey_env: Environment
+var _grey_key: DirectionalLight3D
+var _art_env: Environment
 var _board_root: Node3D
 var _pieces_root: Node3D
 var _marks_root: Node3D
@@ -145,6 +151,8 @@ func undo() -> void:
 
 func _after_move() -> void:
 	status = state.status()
+	if _has_art():
+		BaghChalArt.set_awaken(0.0 if history.is_empty() else 0.6)
 	_refresh_ui()
 	_show_last_move()
 	if status == HuntState.Status.ONGOING and _is_ai_side(state.side):
@@ -299,7 +307,10 @@ func _build_environment() -> void:
 	var we := WorldEnvironment.new()
 	we.environment = env
 	add_child(we)
+	_world_env = we
+	_grey_env = env
 	var key := DirectionalLight3D.new()
+	_grey_key = key
 	key.light_color = Color(1.0, 0.86, 0.68)
 	key.light_energy = 1.5
 	key.shadow_enabled = true
@@ -328,6 +339,56 @@ func _build_board() -> void:
 		hi = hi.max(p)
 	_center = (lo + hi) / 2.0
 	var size := (hi - lo) * SPACING
+	var extent := maxf(size.x + 1.4, size.y + 1.4)
+	if _has_art():
+		_build_art_set()
+		extent = BaghChalArt.CAMERA_EXTENT
+	else:
+		_build_grey_board(board, size)
+	# Points: a pick collider on each (the art and the greybox share these).
+	for i in board.point_count():
+		var body := StaticBody3D.new()
+		body.set_meta("point", i)
+		var shape := CollisionShape3D.new()
+		var sphere := SphereShape3D.new()
+		sphere.radius = 0.32
+		shape.shape = sphere
+		body.add_child(shape)
+		body.position = to_world(board.positions[i])
+		_board_root.add_child(body)
+	# Prey players sit at the near edge.
+	_board_root.rotation.y = PI if mode == Mode.HUMAN_PREY else 0.0
+	_camera.position = Vector3(0, extent * 1.25, extent * 0.95)
+	_camera.look_at(Vector3(0, 0, extent * 0.06), Vector3.UP)
+
+
+func _has_art() -> bool:
+	return use_art and _title() == "bagh_chal"
+
+
+func _build_art_set() -> void:
+	var extras := RenderingServer.get_current_rendering_method() == "forward_plus"
+	if _art_env == null:
+		_art_env = BaghChalArt.make_environment(extras)
+	_world_env.environment = _art_env
+	_camera.attributes = BaghChalArt.make_camera_attributes(11.0)
+	# A tight depth range: the Compatibility renderer lights shadowed lights in
+	# extra passes, and with the default 0.05..4000 range those passes z-fought
+	# into stripes across the board.
+	_camera.near = 0.5
+	_camera.far = 400.0
+	_grey_key.visible = false
+	var set_root := Node3D.new()
+	set_root.name = "ArtSet"
+	_board_root.add_child(set_root)
+	BaghChalArt.build_set(set_root, extras)
+	BaghChalArt.set_awaken(0.0 if history.is_empty() else 0.6)
+
+
+func _build_grey_board(board: BoardDef, size: Vector2) -> void:
+	_world_env.environment = _grey_env
+	_camera.attributes = null
+	_grey_key.visible = true
 	# Slab.
 	var slab := MeshInstance3D.new()
 	var box := BoxMesh.new()
@@ -355,7 +416,7 @@ func _build_board() -> void:
 			seg.transform = Transform3D(Basis.looking_at(pb - pa, Vector3.UP), (pa + pb) / 2.0 + Vector3(0, 0.006, 0))
 			seg.set_meta("segment", Vector2i(a, b))
 			_board_root.add_child(seg)
-	# Points: a small stud plus a pick collider.
+	# Points: a small stud.
 	var stud_mat := _mat(Color(0.9, 0.75, 0.45), 0.35, 0.7)
 	var den_mat := _mat(Color(0.75, 0.5, 0.3), 0.5, 0.3)
 	for i in board.point_count():
@@ -368,20 +429,6 @@ func _build_board() -> void:
 		stud.material_override = den_mat if board.has_tag(i, "den") else stud_mat
 		stud.position = to_world(board.positions[i]) + Vector3(0, 0.01, 0)
 		_board_root.add_child(stud)
-		var body := StaticBody3D.new()
-		body.set_meta("point", i)
-		var shape := CollisionShape3D.new()
-		var sphere := SphereShape3D.new()
-		sphere.radius = 0.32
-		shape.shape = sphere
-		body.add_child(shape)
-		body.position = to_world(board.positions[i])
-		_board_root.add_child(body)
-	# Prey players sit at the near edge.
-	_board_root.rotation.y = PI if mode == Mode.HUMAN_PREY else 0.0
-	var extent := maxf(size.x + 1.4, size.y + 1.4)
-	_camera.position = Vector3(0, extent * 1.25, extent * 0.95)
-	_camera.look_at(Vector3(0, 0, extent * 0.06), Vector3.UP)
 
 
 func to_world(p: Vector2) -> Vector3:
@@ -397,6 +444,8 @@ func _title() -> String:
 
 
 func _make_piece(kind: int) -> Node3D:
+	if _has_art():
+		return BaghChalArt.make_piece(kind)
 	var colors: Array = PIECE_COLORS[_title()]
 	var root := Node3D.new()
 	var mi := MeshInstance3D.new()
@@ -440,6 +489,7 @@ func _animate(move: PackedInt32Array) -> void:
 			var node := _make_piece(HuntState.PREY)
 			var target := to_world(board.positions[move[1]])
 			node.position = target + Vector3(0, 1.2, 0)
+			node.rotation.y = _facing(target, move[1])
 			_pieces_root.add_child(node)
 			_piece_nodes[move[1]] = node
 			tween.tween_property(node, "position", target, 0.22).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -447,7 +497,9 @@ func _animate(move: PackedInt32Array) -> void:
 			var node: Node3D = _piece_nodes[move[1]]
 			_piece_nodes.erase(move[1])
 			_piece_nodes[move[2]] = node
-			tween.tween_property(node, "position", to_world(board.positions[move[2]]), 0.25).set_trans(Tween.TRANS_SINE)
+			var to := to_world(board.positions[move[2]])
+			tween.tween_property(node, "rotation:y", _turn_toward(node.rotation.y, _facing(to, move[2])), 0.12)
+			tween.tween_property(node, "position", to, 0.25).set_trans(Tween.TRANS_SINE)
 		HuntState.Kind.JUMP:
 			var node: Node3D = _piece_nodes[move[1]]
 			_piece_nodes.erase(move[1])
@@ -457,6 +509,8 @@ func _animate(move: PackedInt32Array) -> void:
 				tween.tween_property(node, "position", mid, 0.14).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				tween.tween_property(node, "position", land, 0.14).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 			_piece_nodes[move[move.size() - 1]] = node
+			var last := to_world(board.positions[move[move.size() - 1]])
+			tween.tween_property(node, "rotation:y", _turn_toward(node.rotation.y, _facing(last, move[move.size() - 1])), 0.15)
 			for k in range(2, move.size(), 2):
 				var victim: Node3D = _piece_nodes.get(move[k])
 				_piece_nodes.erase(move[k])
@@ -466,6 +520,20 @@ func _animate(move: PackedInt32Array) -> void:
 	tween.tween_callback(func() -> void:
 		_animating = false
 		_after_move())
+
+
+## Yaw that turns a piece (modeled facing -Z) toward the middle of the board,
+## with a little per-point variety so a row of goats doesn't look stamped.
+func _facing(at: Vector3, point: int) -> float:
+	var jitter := (float((point * 7919) % 23) / 22.0 - 0.5) * 0.5
+	if at.length() < 0.01:
+		return jitter
+	return atan2(at.x, at.z) + jitter
+
+
+## The same yaw, unwrapped so a tween turns the short way round.
+func _turn_toward(from: float, to: float) -> float:
+	return from + wrapf(to - from, -PI, PI)
 
 
 # --- View: marks -----------------------------------------------------------

@@ -32,7 +32,9 @@ against the AI (four levels), or AI vs AI.
 | `titles/common/hunt_rule_sets.gd` | The four v1 rule sets (rules doc §6) and starting AI weights. |
 | `scenes/greybox/` | Placeholder 3D board, built in code from the board definitions. |
 | `tests/` | Title tests: board fixtures, rule sets, the Lim & Nievergelt opening result. |
-| `tools/` | Test runner wrapper, search benchmark, headless smoke test, screenshot tool. |
+| `titles/bagh_chal/art/` | Bagh Chal art set (style-frame stage): brass board, cast tiger and goat, dusk courtyard, shaders. Built by `BaghChalArt`; the greybox uses it for Bagh Chal. |
+| `tools/` | Test runner wrapper, search benchmark, headless smoke test, screenshot and style-frame tools. |
+| `tools/art/` | Python generators for the Claude-made art (pieces, board), plus the board geometry they read. |
 
 ## Commands
 
@@ -45,6 +47,27 @@ xvfb-run -s "-screen 0 1600x900x24" godot --path . --rendering-method gl_compati
 ```
 
 Set `GODOT=/path/to/godot` if Godot isn't on your `PATH`.
+
+### Art (Bagh Chal)
+
+```sh
+# Style frame + both game views from one fixed position (needs a display):
+xvfb-run -a -s "-screen 0 1920x1080x24" godot --path . --resolution 1920x1080 \
+  --rendering-method forward_plus -s res://tools/style_frame.gd -- --out=/tmp/frames
+# Same views on the Mobile and Compatibility renderers:
+#   --rendering-method mobile --views=ai,prey   /   --rendering-method gl_compatibility --views=ai
+
+# Regenerate the art (Python 3 with numpy, scipy, scikit-image, trimesh,
+# fast-simplification, Pillow):
+godot --headless --path . -s res://tools/export_boards.gd   # board geometry -> tools/art/boards.json
+python3 tools/art/make_board.py                             # board mesh + engraving textures
+python3 tools/art/make_pieces.py [--preview]                # tiger and goat figurines
+```
+
+The generated files (`*.glb`, `board_*.png`) are committed, so nobody needs
+Python to open the project. Any of them can be replaced one for one by
+outsourced art with the same name, scale (1 unit = one board spacing) and
+orientation (figures face -Z, stand on y = 0).
 
 ## CI
 

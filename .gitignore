@@ -1,0 +1,44 @@
+# Godot 4: editor state plus the import, shader and script-class caches.
+# Godot rebuilds all of it when the project opens. (The *.import and *.uid
+# files next to the assets ARE committed: they keep import settings and
+# resource IDs stable between machines.)
+.godot/
+
+# Android build template, installed per machine (Project > Install Android
+# Build Template).
+/android/
+
+# Exported builds.
+/build/
+/export/
+*.apk
+*.aab
+*.ipa
+*.pck
+*.exe
+*.dmg
+
+# Signing keys: never commit these.
+*.keystore
+*.jks
+*.p12
+
+# Translations Godot compiles from CSV on import.
+*.translation
+
+# Art tooling: Python caches and preview renders
+# (python3 tools/art/make_pieces.py --preview writes them again).
+__pycache__/
+*.pyc
+tools/art/previews/
+
+# Backups and leftovers from art and merge tools.
+*.blend1
+*.orig
+*.tmp
+
+# OS and editor clutter.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
