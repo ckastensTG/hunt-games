@@ -4,6 +4,9 @@ extends SceneTree
 ## 1. Hotseat clicks: a goat placement and a tiger step go through the same
 ##    path as mouse clicks.
 ## 2. AI vs AI (Novice) for every rule set until the game ends or 60 plies.
+## 3. "How to play" for every rule set: every step shown and its moves
+##    played on the board, then the walkthrough closed and the game back.
+## 4. The interface in every launch language.
 ## Exits non-zero on any failure.
 
 const MAX_PLIES := 60
@@ -33,6 +36,11 @@ func _process(_delta: float) -> bool:
 			return _clicks()
 		"ai":
 			return _ai()
+		"tutorial":
+			return _tutorial()
+		"finish":
+			if frames > _finish_at:
+				return _done()
 	return false
 
 
@@ -71,6 +79,7 @@ func _clicks() -> bool:
 			game._rule_set_id = HuntRuleSets.ADUGO
 			game.rules = custom
 			game.state = HuntState.create(custom)
+			game.history_start = game.state.clone()
 			game.history.clear()
 			game._build_board()
 			game._sync_pieces()
@@ -95,7 +104,8 @@ func _clicks() -> bool:
 
 func _next_game() -> void:
 	if queue.is_empty():
-		phase = "done"
+		phase = "tutorial"
+		queue = HuntRuleSets.ALL.duplicate()
 		return
 	current = queue.pop_front()
 	game.mode = GreyboxScript.Mode.AI_VS_AI
@@ -121,6 +131,70 @@ func _ai() -> bool:
 		if phase == "done":
 			return _done()
 	return false
+
+
+var _finish_at := 0
+var _tut_step := -1
+var _tut_move := 0
+
+
+func _tutorial() -> bool:
+	if game._animating:
+		return false
+	var tut = game._tutorial
+	if _tut_step < 0:
+		if queue.is_empty():
+			_languages()
+			phase = "finish"
+			_finish_at = frames + 3  # let the replaced interface free itself
+			return false
+		current = queue.pop_front()
+		game.mode = GreyboxScript.Mode.HOTSEAT
+		game._rule_set_id = current
+		game._komikan_dogs_first = false
+		game.new_game()
+		game.start_tutorial()
+		if not game.tutorial_active:
+			failures.append("%s: walkthrough didn't start" % current)
+			return false
+		_tut_step = 0
+		_tut_move = 0
+		tut._run += 1  # drive the steps from here, not the timed playback
+		game.tutorial_set_state(tut._steps[0].start)
+		return false
+	var step: Dictionary = tut._steps[_tut_step]
+	if _tut_move < step.moves.size():
+		game.tutorial_play(step.moves[_tut_move])
+		_tut_move += 1
+		return false
+	var end: HuntState = step.end
+	if game.state.hash_key != end.hash_key:
+		failures.append("%s, step %d: the board ended somewhere else than the script" % [current, _tut_step + 1])
+	_tut_step += 1
+	_tut_move = 0
+	if _tut_step >= tut._steps.size():
+		tut.stop(false)
+		if game.tutorial_active or game.history.size() != 0:
+			failures.append("%s: closing the walkthrough didn't bring the game back" % current)
+		print("%-28s how to play: %d steps ok" % [current, tut._steps.size()])
+		_tut_step = -1
+		return false
+	tut._index = _tut_step
+	tut._fill_card()
+	game.tutorial_set_state(tut._steps[_tut_step].start)
+	return false
+
+
+## Switches the interface through every launch language: the rebuild must
+## not error, and the turn banner must say something.
+func _languages() -> void:
+	for entry in L10n.LANGUAGES:
+		TranslationServer.set_locale(entry[0])
+		game._hud._build()
+		if game._hud._turn.text.strip_edges() == "":
+			failures.append("%s: empty turn banner" % entry[0])
+	TranslationServer.set_locale("en")
+	print("languages: %d checked" % L10n.LANGUAGES.size())
 
 
 func _done() -> bool:

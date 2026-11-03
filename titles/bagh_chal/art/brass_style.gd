@@ -35,8 +35,8 @@ var board_material: ShaderMaterial
 
 func _init() -> void:
 	id = "brass"
-	display_name = "Temple brass"
-	description = "An engraved brass board and cast figures, at dusk in a temple courtyard."
+	display_name = L10n.N_("Temple brass")
+	description = L10n.N_("An engraved brass board and cast figures, at dusk in a temple courtyard.")
 	camera_extent = 5.7
 	far_blur_from = 11.0
 

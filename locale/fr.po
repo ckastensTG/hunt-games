@@ -1,0 +1,594 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translator: Claude (2026-11-03)\n"
+"X-Review-Status: translation confidence high (bible §7); native review before release\n"
+
+#. Title of the settings panel (this game: rules, players, AI level).
+#: scenes/greybox/hud.gd:188
+msgid "Game"
+msgstr "Partie"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Hide"
+msgstr "Masquer"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Show"
+msgstr "Afficher"
+
+#. Menu label: which rule set to play.
+#: scenes/greybox/hud.gd:213
+msgid "Rules"
+msgstr "Règles"
+
+#: scenes/greybox/hud.gd:216
+msgid "The dogs move first"
+msgstr "Les chiens jouent en premier"
+
+#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
+#: scenes/greybox/hud.gd:229
+msgid "Players"
+msgstr "Joueurs"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Novice"
+msgstr "Novice"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Apprentice"
+msgstr "Apprenti"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Adept"
+msgstr "Adepte"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Master"
+msgstr "Maître"
+
+#. Menu label: the computer opponent's strength. Keep it short.
+#: scenes/greybox/hud.gd:239
+msgid "AI"
+msgstr "IA"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/greybox/hud.gd:247
+msgid "Look"
+msgstr "Style"
+
+#: scenes/greybox/hud.gd:256
+msgid "Language"
+msgstr "Langue"
+
+#: scenes/greybox/hud.gd:262
+msgid "New game"
+msgstr "Nouvelle partie"
+
+#: scenes/greybox/hud.gd:267
+msgid "Undo"
+msgstr "Annuler"
+
+#: scenes/greybox/hud.gd:274
+msgid "How to play"
+msgstr "Comment jouer"
+
+#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
+#: scenes/greybox/hud.gd:278
+msgid "N new game · U undo · H hide panels · T how to play"
+msgstr "N nouvelle partie · U annuler · H masquer les panneaux · T comment jouer"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:304
+msgid "Stop here"
+msgstr "S'arrêter ici"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:322
+msgid "Moves"
+msgstr "Coups"
+
+#: scenes/greybox/hud.gd:371
+msgid "Play again"
+msgstr "Rejouer"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:376
+msgid "Look at the board"
+msgstr "Voir le plateau"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:419
+msgid "thinking"
+msgstr "réfléchit"
+
+#. Two people taking turns on the same device.
+#: scenes/greybox/hud.gd:435
+msgid "Two players (hotseat)"
+msgstr "Deux joueurs (même appareil)"
+
+#: scenes/greybox/hud.gd:438
+msgid "Watch the AI play"
+msgstr "Regarder l'IA jouer"
+
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+msgid "A draw"
+msgstr "Partie nulle"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:475
+#, c-format
+msgid "Captured %d / %d"
+msgstr "Prises %d / %d"
+
+#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
+#: scenes/greybox/hud.gd:486
+#, c-format
+msgid "Moves without a capture: %d / %d"
+msgstr "Coups sans prise : %d / %d"
+
+#: scenes/greybox/hud.gd:504
+msgid "No moves yet"
+msgstr "Aucun coup pour l'instant"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:531
+#, c-format
+msgid "place %s"
+msgstr "pose en %s"
+
+#: scenes/greybox/hud.gd:540
+msgid "Watching the AI play both sides."
+msgstr "L'IA joue les deux camps."
+
+#: scenes/greybox/hud.gd:544
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "Prises en chaîne : choisissez le prochain saut, ou arrêtez-vous ici."
+
+#: scenes/greybox/hud.gd:550
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "Choisissez la destination. Un anneau brisé indique une prise."
+
+#: scenes/greybox/hud.gd:551
+msgid "Pick where it goes."
+msgstr "Choisissez la destination."
+
+#: scenes/greybox/tutorial.gd:76
+msgid "Close"
+msgstr "Fermer"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:80
+msgid "Replay"
+msgstr "Revoir"
+
+#: scenes/greybox/tutorial.gd:83
+msgid "‹ Back"
+msgstr "‹ Retour"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:159
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "Comment jouer · %d sur %d"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Start playing"
+msgstr "Commencer à jouer"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Next ›"
+msgstr "Suivant ›"
+
+#: titles/bagh_chal/art/brass_style.gd:38
+msgid "Temple brass"
+msgstr "Laiton du temple"
+
+#: titles/bagh_chal/art/brass_style.gd:39
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "Un plateau de laiton gravé et des figurines coulées, au crépuscule dans la cour d'un temple."
+
+#: titles/bagh_chal/art/stone_style.gd:38
+msgid "Stone and pebbles"
+msgstr "Pierre et galets"
+
+#: titles/bagh_chal/art/stone_style.gd:39
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "À la manière historique : des lignes taillées dans la pierre et passées à la craie, tigres et chèvres en galets de rivière, sur une natte de paille."
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:26
+msgid "Standard rules"
+msgstr "Règles standard"
+
+#: titles/common/hunt_text.gd:28
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "Parlett 1976 : la chasse jusqu'à la dernière chèvre"
+
+#: titles/common/hunt_text.gd:30
+msgid "Adugo, the Bororo rules"
+msgstr "Adugo, les règles bororo"
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:33
+msgid "Komikan, a Mapuche reconstruction"
+msgstr "Komikan, une reconstitution mapuche"
+
+#: titles/common/hunt_text.gd:40
+msgid "Bagh Chal · Standard"
+msgstr "Bagh Chal · Standard"
+
+#: titles/common/hunt_text.gd:42
+msgid "Bagh Chal · Parlett 1976"
+msgstr "Bagh Chal · Parlett 1976"
+
+#: titles/common/hunt_text.gd:44
+msgid "Jogo da Onça · Adugo"
+msgstr "Jogo da Onça · Adugo"
+
+#: titles/common/hunt_text.gd:46
+msgid "Jogo da Onça · Komikan"
+msgstr "Jogo da Onça · Komikan"
+
+#: titles/common/hunt_text.gd:53
+msgid "Tigers to move"
+msgstr "Aux tigres de jouer"
+
+#: titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "Aux chèvres de jouer"
+
+#: titles/common/hunt_text.gd:55
+msgid "Jaguar to move"
+msgstr "Au jaguar de jouer"
+
+#: titles/common/hunt_text.gd:55 titles/common/hunt_text.gd:57
+msgid "Dogs to move"
+msgstr "Aux chiens de jouer"
+
+#: titles/common/hunt_text.gd:57
+msgid "Puma to move"
+msgstr "Au puma de jouer"
+
+#: titles/common/hunt_text.gd:64
+msgid "The tigers won"
+msgstr "Les tigres ont gagné"
+
+#: titles/common/hunt_text.gd:64
+msgid "The goats won"
+msgstr "Les chèvres ont gagné"
+
+#: titles/common/hunt_text.gd:66
+msgid "The jaguar won"
+msgstr "Le jaguar a gagné"
+
+#: titles/common/hunt_text.gd:66 titles/common/hunt_text.gd:68
+msgid "The dogs won"
+msgstr "Les chiens ont gagné"
+
+#: titles/common/hunt_text.gd:68
+msgid "The puma won"
+msgstr "Le puma a gagné"
+
+#: titles/common/hunt_text.gd:75
+msgid "The tigers win"
+msgstr "Les tigres gagnent"
+
+#: titles/common/hunt_text.gd:75
+msgid "The goats win"
+msgstr "Les chèvres gagnent"
+
+#: titles/common/hunt_text.gd:77
+msgid "The jaguar wins"
+msgstr "Le jaguar gagne"
+
+#: titles/common/hunt_text.gd:77 titles/common/hunt_text.gd:79
+msgid "The dogs win"
+msgstr "Les chiens gagnent"
+
+#: titles/common/hunt_text.gd:79
+msgid "The puma wins"
+msgstr "Le puma gagne"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the tigers"
+msgstr "Vous jouez les tigres"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the goats"
+msgstr "Vous jouez les chèvres"
+
+#: titles/common/hunt_text.gd:87
+msgid "You play the jaguar"
+msgstr "Vous jouez le jaguar"
+
+#: titles/common/hunt_text.gd:87 titles/common/hunt_text.gd:89
+msgid "You play the dogs"
+msgstr "Vous jouez les chiens"
+
+#: titles/common/hunt_text.gd:89
+msgid "You play the puma"
+msgstr "Vous jouez le puma"
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a tiger to move."
+msgstr "Choisissez un tigre à déplacer."
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a goat to move."
+msgstr "Choisissez une chèvre à déplacer."
+
+#: titles/common/hunt_text.gd:97
+msgid "Move the jaguar."
+msgstr "Déplacez le jaguar."
+
+#: titles/common/hunt_text.gd:97 titles/common/hunt_text.gd:99
+msgid "Choose a dog to move."
+msgstr "Choisissez un chien à déplacer."
+
+#: titles/common/hunt_text.gd:99
+msgid "Move the puma."
+msgstr "Déplacez le puma."
+
+#: titles/common/hunt_text.gd:103
+msgid "Place a goat on any empty point."
+msgstr "Posez une chèvre sur n'importe quel point libre."
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "%d chèvre reste à poser"
+msgstr[1] "%d chèvres restent à poser"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every goat has been captured."
+msgstr "Toutes les chèvres ont été prises."
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every dog has been eaten."
+msgstr "Tous les chiens ont été dévorés."
+
+#: titles/common/hunt_text.gd:119
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "%d chèvre prise."
+msgstr[1] "%d chèvres prises."
+
+#: titles/common/hunt_text.gd:120
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] "%d chien pris."
+msgstr[1] "%d chiens pris."
+
+#: titles/common/hunt_text.gd:124
+msgid "The tigers are trapped: none of them can move."
+msgstr "Les tigres sont bloqués : aucun ne peut bouger."
+
+#: titles/common/hunt_text.gd:126
+msgid "The jaguar is trapped and can't move."
+msgstr "Le jaguar est bloqué et ne peut plus bouger."
+
+#: titles/common/hunt_text.gd:128
+msgid "The puma is trapped and can't move."
+msgstr "Le puma est bloqué et ne peut plus bouger."
+
+#: titles/common/hunt_text.gd:130
+msgid "The goats can't move."
+msgstr "Les chèvres ne peuvent pas bouger."
+
+#: titles/common/hunt_text.gd:130
+msgid "The dogs can't move any more."
+msgstr "Les chiens ne peuvent plus bouger."
+
+#: titles/common/hunt_text.gd:132
+msgid "Every move left would repeat an earlier position."
+msgstr "Tous les coups restants répéteraient une position antérieure."
+
+#: titles/common/hunt_text.gd:134
+msgid "The same position came up three times."
+msgstr "La même position s'est présentée trois fois."
+
+#. Reason for a draw: neither side captured during this many moves each.
+#: titles/common/hunt_text.gd:138
+#, c-format
+msgid "No capture in %d move each."
+msgid_plural "No capture in %d moves each."
+msgstr[0] "Aucune prise en %d coup de chaque camp."
+msgstr[1] "Aucune prise en %d coups de chaque camp."
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "Tigres et chèvres"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "Quatre tigres contre vingt chèvres. Les tigres partent des coins ; les chèvres attendent en réserve, hors du plateau. Les chèvres jouent en premier."
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "Poser les chèvres"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "Tant qu'il reste des chèvres en réserve, chaque tour des chèvres est une pose : une chèvre sur n'importe quel point libre. Les chèvres déjà posées ne peuvent pas bouger avant que les vingt soient sur le plateau. Les tigres jouent entre-temps."
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "Comment se déplace un tigre"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "Un tigre avance le long d'une ligne jusqu'au point libre suivant. Les diagonales ne passent que par un point sur deux : certains points ont huit voisins, les autres quatre ou moins."
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+msgid "Capturing"
+msgstr "Les prises"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "Un tigre prend en sautant par-dessus une chèvre voisine sur une ligne, jusqu'au point libre juste derrière. La chèvre quitte le plateau. Une chèvre par saut, et la prise n'est jamais obligatoire."
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "L'union fait la force"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "Une chèvre qui a une autre chèvre juste derrière elle, ou le bord du plateau, ne peut pas être sautée : le tigre a besoin d'un point libre pour atterrir. Les chèvres qui restent groupées sont à l'abri."
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "Déplacer les chèvres"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "Une fois toutes les chèvres en jeu, une chèvre avance le long d'une ligne jusqu'au point libre suivant, comme un tigre. Les chèvres ne sautent jamais et ne prennent jamais."
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "Comment gagnent les tigres"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "Dans la version de Parlett, les tigres doivent prendre les vingt chèvres. Tout le reste est comme dans le jeu standard."
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "Les tigres gagnent en prenant cinq chèvres."
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "Comment gagnent les chèvres"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "Les chèvres gagnent quand aucun tigre ne peut bouger : chaque tigre est encerclé par des chèvres qu'il ne peut pas sauter."
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+msgid "Draws"
+msgstr "Parties nulles"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
+msgstr "Une fois toutes les chèvres posées, aucun coup ne peut ramener une position déjà vue. Si aucun camp ne prend pendant 50 coups chacun, ou si tous les coups restants répéteraient une position, la partie est nulle."
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr "Le jaguar et les chiens"
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr "Un jaguar contre quatorze chiens. Le jaguar part du milieu du plateau et les chiens occupent la moitié opposée. Le jaguar joue en premier."
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr "Les déplacements"
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr "À chaque tour, une pièce avance le long d'une ligne jusqu'au point libre suivant, dans n'importe quelle direction. Le triangle fait partie du plateau, et les deux camps peuvent y entrer."
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr "Le jaguar prend en sautant par-dessus un chien voisin sur une ligne, jusqu'au point libre juste derrière. Le chien quitte le plateau. La prise est facultative."
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr "Les prises en chaîne"
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr "Après une prise, le jaguar peut sauter encore, et encore, en changeant de direction à sa guise, et s'arrêter après n'importe quel saut. Aucun chien ne peut être sauté deux fois dans le même tour."
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr "La force du duo"
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr "Deux chiens à la suite sur une ligne se protègent : le jaguar n'a nulle part où atterrir."
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr "Comment gagne le jaguar"
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr "Le jaguar gagne en prenant cinq chiens."
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+msgid "How the dogs win"
+msgstr "Comment gagnent les chiens"
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr "Les chiens gagnent quand le jaguar ne peut plus bouger du tout."
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
+msgstr "Si la même position se présente trois fois, ou si aucun camp ne prend pendant 50 coups chacun, la partie est nulle."
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr "Le puma et les chiens"
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr "Le komikan est un jeu de chasse mapuche. Le puma part de l'intérieur de la tour, le triangle, et douze chiens attendent à l'autre bout. Le puma joue en premier."
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr "Le puma"
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr "Le puma avance le long de n'importe quelle ligne, dans n'importe quelle direction, en avant comme en arrière."
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "The dogs only advance"
+msgstr "Les chiens ne font qu'avancer"
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
+msgstr "Un chien n'avance que vers la tour : tout droit, ou en diagonale là où une ligne va dans ce sens. Il ne peut jamais aller de côté ni reculer."
+
+#: titles/common/hunt_tutorials.gd:298
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr "Le puma prend en sautant par-dessus un chien isolé jusqu'au point libre derrière lui. Il peut sauter encore et encore, en changeant de direction, et s'arrêter après n'importe quel saut. Deux chiens à la suite sur une ligne se protègent."
+
+#: titles/common/hunt_tutorials.gd:305
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr "Les chiens gagnent en encerclant le puma pour qu'il ne puisse plus bouger."
+
+#: titles/common/hunt_tutorials.gd:313
+msgid "How the puma wins"
+msgstr "Comment gagne le puma"
+
+#: titles/common/hunt_tutorials.gd:314
+msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
+msgstr "Le puma gagne en dévorant les douze chiens, ou quand les chiens ne peuvent plus bouger. Les chiens ne font qu'avancer : tôt ou tard, ils n'ont plus de coups."
+
+#: titles/common/hunt_tutorials.gd:321
+msgid "A reconstruction"
+msgstr "Une reconstitution"
+
+#: titles/common/hunt_tutorials.gd:322
+msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "Le komikan a été décrit par écrit au début du XXe siècle, et les récits ont des lacunes. On ignore ce qui se passe dans la tour et qui joue en premier : ici, la tour est un plateau ordinaire, et le puma joue en premier, sauf si vous le changez dans les réglages."

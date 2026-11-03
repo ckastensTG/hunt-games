@@ -33,6 +33,10 @@ const PREY := 2
 @export var forced_capture: bool = false
 ## Prey may only step to a point of higher rank.
 @export var prey_forward_only: bool = false
+## With prey_forward_only: prey may also step sideways (to a point of equal
+## rank), but never back. One reading of Komikan's "the dogs must always
+## advance"; used for balance tests.
+@export var prey_sideways: bool = false
 @export var capture_target: int = 5
 @export var repetition: Repetition = Repetition.NONE
 ## Draw after this many plies without a capture in the movement phase (0 = off).
@@ -52,7 +56,7 @@ func prey_total() -> int:
 func fingerprint() -> int:
 	var parts: Array = [
 		id, version, board.id if board else "", hunter_start, prey_start, prey_reserve,
-		first_player, multi_jump, forced_capture, prey_forward_only, capture_target,
+		first_player, multi_jump, forced_capture, prey_forward_only, prey_sideways, capture_target,
 		repetition, no_capture_limit_plies, prey_stuck_result,
 	]
 	return hash(var_to_str(parts))

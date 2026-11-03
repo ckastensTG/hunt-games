@@ -181,3 +181,44 @@ func test_clone_is_independent() -> void:
 	c.make(c.legal_moves()[0])
 	check_eq(s.ply, 0, "original untouched")
 	check(s.hash_key != c.hash_key, "clone moved on")
+
+
+func test_sideways_prey_never_step_back() -> void:
+	# prey_sideways (a balance-test reading of Komikan): forward or sideways,
+	# never back. Prey at c3 on the alquerque: three forward, two sideways.
+	var b := HuntFixtures.alquerque()
+	var opts := {"prey_forward_only": true, "prey_sideways": true, "first_player": HuntRuleSet.PREY}
+	var s := HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(2, 2)], opts)
+	var targets := []
+	for m in s.legal_moves():
+		targets.append(b.positions[m[2]])
+	targets.sort()
+	check_eq(targets, [Vector2(1, 2), Vector2(1, 3), Vector2(2, 3), Vector2(3, 2), Vector2(3, 3)], "forward and sideways")
+
+
+func test_set_position() -> void:
+	var s := HuntState.create(HuntFixtures.tigers_and_goats())
+	var b := s.board
+	s.set_position(PackedInt32Array([b.point_at(Vector2(2, 2))]),
+		PackedInt32Array([b.point_at(Vector2(2, 3))]), 3, 2, HuntState.HUNTER)
+	check_eq(s.hunters.size(), 1, "one hunter")
+	check_eq(s.reserve, 3, "reserve")
+	check_eq(s.captured, 2, "captured")
+	check_eq(s.hash_key, s.compute_hash(), "hash matches the new position")
+	var jumps := 0
+	for m in s.legal_moves():
+		if m[0] == HuntState.Kind.JUMP:
+			jumps += 1
+	check_eq(jumps, 1, "the hunter can jump the prey")
+
+
+func test_territory_counts_reachable_points() -> void:
+	var b := HuntFixtures.alquerque()
+	var w := HuntEvalWeights.new()
+	w.hunter_territory = 1
+	var e := HuntEvaluator.new(w)
+	# A hunter in the corner walled off by prey on a2, b1 and b2.
+	var s := HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1)])
+	check_eq(e._territory(s), 0, "walled in")
+	s = HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(4, 4)])
+	check_eq(e._territory(s), 23, "everything but its own point and the prey's")

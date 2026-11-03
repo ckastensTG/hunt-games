@@ -20,3 +20,6 @@ extends Resource
 ## Per prey move available. Matters for forward-only prey (Komikan), whose
 ## moves run out.
 @export var prey_mobility: int = 3
+## Per empty point the hunters can reach by steps without passing a prey
+## (their territory). Trapping games: the prey win by shrinking it. 0 = off.
+@export var hunter_territory: int = 0

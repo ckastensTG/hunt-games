@@ -2,35 +2,15 @@ extends CanvasLayer
 ## The greybox's in-game interface: title, whose turn it is, the score, a
 ## contextual hint, the game settings, the move list and the game-over card.
 ## It reads the greybox's state and calls its methods; it never touches the
-## rules itself. Styled by SeriesTheme. All player-facing text goes through
-## tr() (framework §0.6); the English strings are the source text.
+## rules itself. Styled by SeriesTheme.
 ##
-## Keys: N new game, U undo, H hide the panels, Esc close the result card.
+## Text: every string is English source text, translated through L10n (and
+## HuntText for sentences that name a side). Controls don't auto-translate;
+## the whole interface is rebuilt when the language changes.
+##
+## Keys: N new game, U undo, H hide the panels, T how to play, Esc close the
+## result card.
 
-const TITLE_NAMES := {
-	"bagh_chal": "Bagh Chal",
-	"adugo": "Jogo da Onça",
-	"komikan": "Jogo da Onça",
-}
-const RULE_NAMES := {
-	HuntRuleSets.BAGH_CHAL_STANDARD: "Standard rules",
-	HuntRuleSets.BAGH_CHAL_PARLETT: "Parlett 1976: hunt to the last goat",
-	HuntRuleSets.ADUGO: "Adugo",
-	HuntRuleSets.KOMIKAN: "Komikan (a Mapuche reconstruction)",
-}
-const RULE_MENU := {
-	HuntRuleSets.BAGH_CHAL_STANDARD: "Bagh Chal · Standard",
-	HuntRuleSets.BAGH_CHAL_PARLETT: "Bagh Chal · Parlett 1976",
-	HuntRuleSets.ADUGO: "Jogo da Onça · Adugo",
-	HuntRuleSets.KOMIKAN: "Jogo da Onça · Komikan",
-}
-## Side names: [hunter, hunters, prey, preys]. One jaguar or puma, so the
-## singular and plural read the same.
-const SIDES := {
-	"bagh_chal": ["tiger", "tigers", "goat", "goats"],
-	"adugo": ["jaguar", "jaguar", "dog", "dogs"],
-	"komikan": ["puma", "puma", "dog", "dogs"],
-}
 const HUNTER_TOKEN := Color(0.93, 0.62, 0.25)
 const PREY_TOKEN := Color(0.9, 0.88, 0.82)
 
@@ -53,6 +33,9 @@ var _players: OptionButton
 var _level: OptionButton
 var _look_row: HBoxContainer
 var _look: OptionButton
+var _language: OptionButton
+var _settings_panel: PanelContainer
+var _score_panel: PanelContainer
 var _dogs_first: CheckBox
 var _undo: Button
 var _hint: Label
@@ -73,10 +56,18 @@ func _init(owner_game: Node) -> void:
 
 
 func _ready() -> void:
+	_build()
+
+
+func _build() -> void:
+	if _root:
+		_root.queue_free()
+	_panels.clear()
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.theme = SeriesTheme.theme()
+	_root.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	add_child(_root)
 	_build_title()
 	_build_turn()
@@ -85,6 +76,12 @@ func _ready() -> void:
 	_build_hint()
 	_build_moves()
 	_build_result()
+	refresh()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_build.call_deferred()
 
 
 # --- Building ----------------------------------------------------------------
@@ -166,13 +163,14 @@ func _build_score() -> void:
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_TOP_RIGHT, 28, 22)
 	_panels.append(panel)
+	_score_panel = panel
 
 
 func _row(label_text: String, control: Control) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 12)
-	var l := SeriesTheme.label(tr(label_text), "body", 16, SeriesTheme.TEXT_DIM)
-	l.custom_minimum_size = Vector2(70, 0)
+	var l := SeriesTheme.label(label_text, "body", 16, SeriesTheme.TEXT_DIM)
+	l.custom_minimum_size = Vector2(76, 0)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(l)
@@ -186,10 +184,11 @@ func _build_settings() -> void:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)
 	var head := HBoxContainer.new()
-	var caps := SeriesTheme.label(tr("Game"), "caps", 18, SeriesTheme.ACCENT)
+	# TRANSLATORS: Title of the settings panel (this game: rules, players, AI level).
+	var caps := SeriesTheme.label(L10n.t("Game"), "caps", 18, SeriesTheme.ACCENT)
 	caps.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_hide_btn = Button.new()
-	_hide_btn.text = tr("Hide")
+	_hide_btn.text = L10n.t("Hide") if _settings_body == null or _settings_body.visible else L10n.t("Show")
 	_hide_btn.flat = true
 	_hide_btn.add_theme_font_size_override("font_size", 15)
 	_hide_btn.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
@@ -198,20 +197,23 @@ func _build_settings() -> void:
 	head.add_child(_hide_btn)
 	box.add_child(head)
 
+	var was_open := _settings_body == null or _settings_body.visible
 	_settings_body = VBoxContainer.new()
 	_settings_body.add_theme_constant_override("separation", 10)
+	_settings_body.visible = was_open
 	box.add_child(_settings_body)
 
 	_rules = OptionButton.new()
 	for id in HuntRuleSets.ALL:
-		_rules.add_item(tr(RULE_MENU[id]))
+		_rules.add_item(HuntText.rule_set_menu(id))
 	_rules.item_selected.connect(func(i: int) -> void:
 		game._rule_set_id = HuntRuleSets.ALL[i]
 		game.new_game())
-	_settings_body.add_child(_row("Rules", _rules))
+	# TRANSLATORS: Menu label: which rule set to play.
+	_settings_body.add_child(_row(L10n.t("Rules"), _rules))
 
 	_dogs_first = CheckBox.new()
-	_dogs_first.text = tr("The dogs move first")
+	_dogs_first.text = L10n.t("The dogs move first")
 	_dogs_first.toggled.connect(func(on: bool) -> void:
 		game._komikan_dogs_first = on
 		game.new_game())
@@ -223,46 +225,66 @@ func _build_settings() -> void:
 	_players.item_selected.connect(func(i: int) -> void:
 		game.mode = i
 		game.new_game())
-	_settings_body.add_child(_row("Players", _players))
+	# TRANSLATORS: Menu label: who plays which side (two people, against the AI, or AI vs AI).
+	_settings_body.add_child(_row(L10n.t("Players"), _players))
 
 	_level = OptionButton.new()
-	for label in ["Novice", "Apprentice", "Adept", "Master"]:
-		_level.add_item(tr(label))
+	# TRANSLATORS: The four AI strength levels, weakest to strongest. Later they become named opponents.
+	for label in [L10n.t("Novice"), L10n.t("Apprentice"), L10n.t("Adept"), L10n.t("Master")]:
+		_level.add_item(label)
 	_level.item_selected.connect(func(i: int) -> void:
 		game.level = i
 		refresh())
-	_settings_body.add_child(_row("AI", _level))
+	# TRANSLATORS: Menu label: the computer opponent's strength. Keep it short.
+	_settings_body.add_child(_row(L10n.t("AI"), _level))
 
 	_look = OptionButton.new()
 	_look.item_selected.connect(func(i: int) -> void:
 		var styles: Array = game.art_styles()
 		if i < styles.size():
 			game.set_art_style(styles[i].id))
-	_look_row = _row("Look", _look)
+	# TRANSLATORS: Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+	_look_row = _row(L10n.t("Look"), _look)
 	_settings_body.add_child(_look_row)
+
+	_language = OptionButton.new()
+	for entry in L10n.LANGUAGES:
+		_language.add_item(entry[1])
+	_language.select(L10n.LANGUAGES.map(func(e: Array) -> String: return e[0]).find(L10n.current_language()))
+	_language.item_selected.connect(func(i: int) -> void:
+		L10n.set_language(L10n.LANGUAGES[i][0]))
+	_settings_body.add_child(_row(L10n.t("Language"), _language))
 
 	_settings_body.add_child(HSeparator.new())
 	var buttons := HBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 10)
 	var new_game := Button.new()
-	new_game.text = tr("New game")
+	new_game.text = L10n.t("New game")
 	new_game.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	new_game.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	new_game.pressed.connect(func() -> void: game.new_game())
 	_undo = Button.new()
-	_undo.text = tr("Undo")
+	_undo.text = L10n.t("Undo")
 	_undo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_undo.pressed.connect(func() -> void: game.undo())
 	buttons.add_child(new_game)
 	buttons.add_child(_undo)
 	_settings_body.add_child(buttons)
-	var keys := SeriesTheme.label(tr("N new game · U undo · H hide panels"), "body", 14, Color(SeriesTheme.TEXT_DIM, 0.75))
+	var learn := Button.new()
+	learn.text = L10n.t("How to play")
+	learn.pressed.connect(func() -> void: game.start_tutorial())
+	_settings_body.add_child(learn)
+	# TRANSLATORS: Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
+	var keys := SeriesTheme.label(L10n.t("N new game · U undo · H hide panels · T how to play"), "body", 14, Color(SeriesTheme.TEXT_DIM, 0.75))
+	keys.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	keys.custom_minimum_size = Vector2(290, 0)
 	_settings_body.add_child(keys)
 
 	panel.add_child(box)
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_TOP_LEFT, 28, 118)
 	_panels.append(panel)
+	_settings_panel = panel
 
 
 func _build_hint() -> void:
@@ -278,7 +300,8 @@ func _build_hint() -> void:
 	row.add_theme_constant_override("separation", 14)
 	_hint = SeriesTheme.label("", "book", 20, SeriesTheme.TEXT)
 	_stop = Button.new()
-	_stop.text = tr("Stop here")
+	# TRANSLATORS: Button: end a chain of captures after the current jump.
+	_stop.text = L10n.t("Stop here")
 	_stop.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	_stop.pressed.connect(func() -> void:
 		if game._chain.size() > 2:
@@ -295,7 +318,8 @@ func _build_moves() -> void:
 	_moves_panel.custom_minimum_size = Vector2(250, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 6)
-	box.add_child(SeriesTheme.label(tr("Moves"), "caps", 16, SeriesTheme.ACCENT))
+	# TRANSLATORS: Title of the list of moves played so far.
+	box.add_child(SeriesTheme.label(L10n.t("Moves"), "caps", 16, SeriesTheme.ACCENT))
 	_moves = RichTextLabel.new()
 	_moves.bbcode_enabled = true
 	_moves.fit_content = true
@@ -344,11 +368,12 @@ func _build_result() -> void:
 	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
 	buttons.add_theme_constant_override("separation", 14)
 	var again := Button.new()
-	again.text = tr("Play again")
+	again.text = L10n.t("Play again")
 	again.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	again.pressed.connect(func() -> void: game.new_game())
 	var look := Button.new()
-	look.text = tr("Look at the board")
+	# TRANSLATORS: Button on the game-over card: close it to look at the final position.
+	look.text = L10n.t("Look at the board")
 	look.pressed.connect(func() -> void:
 		_result_dismissed = true
 		refresh())
@@ -364,14 +389,16 @@ func _build_result() -> void:
 
 func _toggle_settings() -> void:
 	_settings_body.visible = not _settings_body.visible
-	_hide_btn.text = tr("Hide") if _settings_body.visible else tr("Show")
+	_hide_btn.text = L10n.t("Hide") if _settings_body.visible else L10n.t("Show")
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	var k := event as InputEventKey
-	if k == null or not k.pressed or k.echo:
+	if k == null or not k.pressed or k.echo or game.tutorial_active:
 		return
 	match k.keycode:
+		KEY_T, KEY_F1:
+			game.start_tutorial()
 		KEY_N:
 			game.new_game()
 		KEY_U:
@@ -388,29 +415,27 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if _thinking.visible:
 		_thinking_t += delta
-		_thinking.text = tr("thinking") + ".".repeat(1 + int(_thinking_t * 2.5) % 3)
-
-
-func _sides() -> Array:
-	return SIDES[game._title()]
+		# TRANSLATORS: The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+		_thinking.text = L10n.t("thinking") + ".".repeat(1 + int(_thinking_t * 2.5) % 3)
 
 
 ## Called by the greybox whenever anything changes.
 func refresh() -> void:
-	if _title == null:
+	if _title == null or game.state == null:
 		return
-	var sides := _sides()
 	var title_id: String = game._title()
 	var state: HuntState = game.state
 	var rules: HuntRuleSet = game.rules
-	_title.text = tr(TITLE_NAMES[title_id])
-	_subtitle.text = tr(RULE_NAMES[game._rule_set_id])
+	var teaching: bool = game.tutorial_active
+	_title.text = HuntText.title_name(title_id)
+	_subtitle.text = HuntText.rule_set_name(game._rule_set_id)
 	# Settings, kept in step when code (tools, tests) changes the setup.
 	_rules.selected = HuntRuleSets.ALL.find(game._rule_set_id)
-	_players.set_item_text(0, tr("Two players (hotseat)"))
-	_players.set_item_text(1, tr("You play the %s") % tr(sides[3]))
-	_players.set_item_text(2, tr("You play the %s") % tr(sides[1]))
-	_players.set_item_text(3, tr("Watch the AI play"))
+	# TRANSLATORS: Two people taking turns on the same device.
+	_players.set_item_text(0, L10n.t("Two players (hotseat)"))
+	_players.set_item_text(1, HuntText.you_play(title_id, false))
+	_players.set_item_text(2, HuntText.you_play(title_id, true))
+	_players.set_item_text(3, L10n.t("Watch the AI play"))
 	_players.selected = game.mode
 	_level.selected = game.level
 	_dogs_first.set_pressed_no_signal(game._komikan_dogs_first)
@@ -419,113 +444,109 @@ func refresh() -> void:
 	_look_row.visible = styles.size() > 1
 	_look.clear()
 	for st in styles:
-		_look.add_item(tr(st.display_name))
-		_look.set_item_tooltip(_look.item_count - 1, tr(st.description))
+		_look.add_item(L10n.t(st.display_name))
+		_look.set_item_tooltip(_look.item_count - 1, L10n.t(st.description))
 	var cur = game.current_style()
 	if cur:
 		_look.selected = styles.find(cur)
 	_undo.disabled = game.history.is_empty()
+	_settings_panel.visible = not teaching and _panels_shown()
+	_moves_panel.visible = not teaching and _panels_shown()
 
 	# Turn.
 	var hunter_turn := state.side == HuntState.HUNTER
-	var mover: String = sides[1] if hunter_turn else sides[3]
 	(_turn_token.get_theme_stylebox("panel") as StyleBoxFlat).bg_color = HUNTER_TOKEN if hunter_turn else PREY_TOKEN
 	var thinking: bool = game._ai_task >= 0 or (game.status == HuntState.Status.ONGOING and game._is_ai_side(state.side))
 	match game.status:
 		HuntState.Status.ONGOING:
-			_turn.text = tr("%s to move") % tr(mover).capitalize()
+			_turn.text = HuntText.to_move(title_id, hunter_turn)
 		HuntState.Status.HUNTER_WIN:
-			_turn.text = tr("The %s won") % tr(sides[1])
+			_turn.text = HuntText.won(title_id, true)
 		HuntState.Status.PREY_WIN:
-			_turn.text = tr("The %s won") % tr(sides[3])
+			_turn.text = HuntText.won(title_id, false)
 		_:
-			_turn.text = tr("A draw")
+			_turn.text = L10n.t("A draw")
 	_thinking.visible = thinking and game.status == HuntState.Status.ONGOING
 	if not _thinking.visible:
 		_thinking_t = 0.0
 
 	# Score.
-	_captured_label.text = tr("Captured  %d / %d") % [state.captured, rules.capture_target]
+	# TRANSLATORS: Pieces captured so far / captures needed to win.
+	_captured_label.text = L10n.t("Captured %d / %d") % [state.captured, rules.capture_target]
 	for c in _captured_pips.get_children():
 		c.queue_free()
 	var pip := 12 if rules.capture_target <= 12 else 9
 	for i in rules.capture_target:
 		_captured_pips.add_child(SeriesTheme.token(PREY_TOKEN, pip, i < state.captured))
 	_hand.visible = state.reserve > 0
-	_hand.text = tr("%d %s still to place") % [state.reserve, tr(sides[3])]
+	_hand.text = HuntText.prey_in_hand(state.reserve)
 	var quiet_on: bool = rules.no_capture_limit_plies > 0 and state.reserve == 0 and state.quiet_plies > 0
 	_quiet.visible = quiet_on
-	_quiet.text = tr("Moves without a capture: %d / %d") % [state.quiet_plies, rules.no_capture_limit_plies]
+	# TRANSLATORS: Count toward the draw rule: moves (by either side) since the last capture / the limit.
+	_quiet.text = L10n.t("Moves without a capture: %d / %d") % [state.quiet_plies, rules.no_capture_limit_plies]
 
 	# Hint.
-	_hint.text = _hint_text(sides)
-	_stop.visible = game._chain.size() > 2
+	_hint.text = "" if teaching else _hint_text(title_id)
+	_stop.visible = game._chain.size() > 2 and not teaching
 	_hint.get_parent().get_parent().visible = _hint.text != "" or _stop.visible
 
 	# Moves.
 	var lines: PackedStringArray = []
 	var start := maxi(0, game.history.size() - 10)
-	var replay := HuntState.create(rules)
+	var replay: HuntState = game.history_start.clone() if game.history_start else HuntState.create(rules)
 	for k in game.history.size():
 		if k >= start:
 			var mv: PackedInt32Array = game.history[k]
 			var who: Color = HUNTER_TOKEN if replay.side == HuntState.HUNTER else PREY_TOKEN
 			lines.append("[color=#%s]%3d[/color]  [color=#%s]●[/color] %s" % [
-				SeriesTheme.TEXT_DIM.to_html(false), k + 1, who.to_html(false), replay.describe(mv)])
+				SeriesTheme.TEXT_DIM.to_html(false), k + 1, who.to_html(false), _describe(replay, mv)])
 		replay.make(game.history[k])
-	_moves.text = "\n".join(lines) if not lines.is_empty() else "[color=#%s]%s[/color]" % [SeriesTheme.TEXT_DIM.to_html(false), tr("No moves yet")]
+	_moves.text = "\n".join(lines) if not lines.is_empty() else "[color=#%s]%s[/color]" % [SeriesTheme.TEXT_DIM.to_html(false), L10n.t("No moves yet")]
 
-	# Result card.
+	# Result card (not during the walkthrough: it shows wins on purpose).
 	var over: bool = game.status != HuntState.Status.ONGOING
 	if not over:
 		_result_dismissed = false
-	_result.visible = over and not _result_dismissed
+	_result.visible = over and not _result_dismissed and not teaching
 	if over:
 		match game.status:
 			HuntState.Status.HUNTER_WIN:
-				_result_title.text = tr("The %s win") % tr(sides[1]) if sides[1] != sides[0] else tr("The %s wins") % tr(sides[0])
+				_result_title.text = HuntText.win_title(title_id, true)
 			HuntState.Status.PREY_WIN:
-				_result_title.text = tr("The %s win") % tr(sides[3])
+				_result_title.text = HuntText.win_title(title_id, false)
 			_:
-				_result_title.text = tr("A draw")
-		_result_reason.text = _reason_text(sides, state, rules)
+				_result_title.text = L10n.t("A draw")
+		_result_reason.text = HuntText.reason(title_id, state.last_reason, rules)
 
 
-func _hint_text(sides: Array) -> String:
+func _panels_shown() -> bool:
+	return _score_panel == null or _score_panel.visible
+
+
+## A move for the move list: point names stay as they are ("c3"), the word
+## for a placement is translated.
+func _describe(s: HuntState, mv: PackedInt32Array) -> String:
+	if mv[0] == HuntState.Kind.PLACE:
+		# TRANSLATORS: Move list entry for putting a goat on the board. %s is a point name such as c3.
+		return L10n.t("place %s") % s.point_name(mv[1])
+	return s.describe(mv)
+
+
+func _hint_text(title_id: String) -> String:
 	if game.status != HuntState.Status.ONGOING:
 		return ""
 	var state: HuntState = game.state
 	if game.mode == 3:
-		return tr("Watching the AI play both sides.")
+		return L10n.t("Watching the AI play both sides.")
 	if game._is_ai_side(state.side):
 		return ""
 	if game._chain.size() > 2:
-		return tr("Capture chain: pick the next landing, or stop here.")
+		return L10n.t("Capture chain: pick the next landing, or stop here.")
 	if state.side == HuntState.PREY and state.reserve > 0:
-		return tr("Place a %s on any empty point.") % tr(sides[2])
+		return HuntText.place_prey(title_id)
 	if game._selected >= 0:
 		for m in state.legal_moves(false):
 			if m[0] == HuntState.Kind.JUMP and m[1] == game._selected:
-				return tr("Pick where it goes. A broken ring marks a capture.")
-		return tr("Pick where it goes.")
-	var piece: String = sides[0] if state.side == HuntState.HUNTER else sides[2]
-	return tr("Choose a %s to move.") % tr(piece)
-
-
-func _reason_text(sides: Array, state: HuntState, rules: HuntRuleSet) -> String:
-	match state.last_reason:
-		HuntState.Reason.CAPTURE_TARGET:
-			return tr("%d %s captured.") % [rules.capture_target, tr(sides[3])]
-		HuntState.Reason.HUNTER_TRAPPED:
-			if sides[0] == sides[1]:
-				return tr("The %s is trapped and can't move.") % tr(sides[0])
-			return tr("The %s are trapped: none of them can move.") % tr(sides[1])
-		HuntState.Reason.PREY_STUCK:
-			return tr("The %s can't move.") % tr(sides[3])
-		HuntState.Reason.REPETITION_BLOCKED:
-			return tr("Every move left would repeat an earlier position.")
-		HuntState.Reason.THREEFOLD:
-			return tr("The same position came up three times.")
-		HuntState.Reason.NO_CAPTURE_LIMIT:
-			return tr("No capture in %d moves each.") % (rules.no_capture_limit_plies / 2)
-	return ""
+				return L10n.t("Pick where it goes. A broken ring marks a capture.")
+		return L10n.t("Pick where it goes.")
+	return HuntText.choose_piece(title_id, state.side == HuntState.HUNTER)

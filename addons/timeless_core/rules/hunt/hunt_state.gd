@@ -71,6 +71,28 @@ func reset() -> void:
 	_undo.clear()
 
 
+## Puts an arbitrary position on the board: tutorials, puzzles and tests.
+## The history starts afresh (no earlier positions, no undo).
+func set_position(hunter_points: PackedInt32Array, prey_points: PackedInt32Array,
+		prey_reserve: int, prey_captured: int, to_move: int) -> void:
+	cells.fill(EMPTY)
+	hunters = hunter_points.duplicate()
+	for h in hunters:
+		cells[h] = HUNTER
+	for p in prey_points:
+		assert(cells[p] == EMPTY, "set_position: two pieces on point %d" % p)
+		cells[p] = PREY
+	reserve = prey_reserve
+	captured = prey_captured
+	side = to_move
+	ply = 0
+	quiet_plies = 0
+	last_reason = Reason.NONE
+	hash_key = compute_hash()
+	_rep = {hash_key: 1}
+	_undo.clear()
+
+
 func clone() -> HuntState:
 	var s := HuntState.new()
 	s.rules = rules
@@ -144,14 +166,18 @@ func _prey_moves(out: Array[PackedInt32Array]) -> void:
 				out.append(PackedInt32Array([Kind.PLACE, i]))
 		return
 	var forward_only := rules.prey_forward_only
+	var sideways := rules.prey_sideways
 	for i in cells.size():
 		if cells[i] != PREY:
 			continue
 		for j in board.adj[i]:
 			if cells[j] != EMPTY:
 				continue
-			if forward_only and board.ranks[j] <= board.ranks[i]:
-				continue
+			if forward_only:
+				if board.ranks[j] < board.ranks[i]:
+					continue
+				if board.ranks[j] == board.ranks[i] and not sideways:
+					continue
 			out.append(PackedInt32Array([Kind.STEP, i, j]))
 
 

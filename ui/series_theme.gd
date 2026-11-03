@@ -2,8 +2,12 @@ class_name SeriesTheme
 extends RefCounted
 ## The Timeless Games interface look: dark lacquered panels with a thin brass
 ## edge, parchment text, Alegreya for display and book text, Alegreya Sans for
-## the interface (ui/fonts/README.md). Built in code so it stays in step with
-## the palette below; later it moves to timeless-core's shell (framework §7).
+## the interface (the series fonts, decided 2026-11-03; ui/fonts/README.md).
+## Chinese, Japanese and Korean fall back to Noto Sans SC, JP and KR, subset
+## to the characters the translations use (ui/fonts/cjk/), with the current
+## language's font first so shared Han characters take its regional forms.
+## Built in code so it stays in step with the palette below; later it moves
+## to timeless-core's shell (framework §7).
 
 const PANEL := Color(0.07, 0.055, 0.045, 0.86)
 const PANEL_SOFT := Color(0.07, 0.055, 0.045, 0.6)
@@ -17,6 +21,11 @@ const BUTTON_HOVER := Color(0.24, 0.18, 0.12, 0.95)
 const BUTTON_PRESSED := Color(0.11, 0.08, 0.06, 0.95)
 
 const FONTS := "res://ui/fonts/"
+## The CJK weight that goes with each text role.
+const CJK_WEIGHT := {
+	"display": "Medium", "book": "Regular", "book_italic": "Regular",
+	"ui": "Regular", "ui_medium": "Medium", "ui_bold": "Bold",
+}
 
 static var _theme: Theme
 static var _fonts := {}
@@ -44,7 +53,27 @@ static func font(name: String) -> Font:
 				_fonts[name] = load(FONTS + "AlegreyaSans-Medium.ttf")
 			"ui_bold":
 				_fonts[name] = load(FONTS + "AlegreyaSans-Bold.ttf")
+		(_fonts[name] as Font).fallbacks = _cjk_fallbacks(CJK_WEIGHT[name])
 	return _fonts[name]
+
+
+## Call after changing the language: puts that language's CJK font first.
+static func apply_locale() -> void:
+	for name in _fonts:
+		(_fonts[name] as Font).fallbacks = _cjk_fallbacks(CJK_WEIGHT[name])
+
+
+static func _cjk_fallbacks(weight: String) -> Array[Font]:
+	var order := ["SC", "JP", "KR"]
+	match TranslationServer.get_locale().substr(0, 2):
+		"ja":
+			order = ["JP", "SC", "KR"]
+		"ko":
+			order = ["KR", "SC", "JP"]
+	var out: Array[Font] = []
+	for script in order:
+		out.append(load(FONTS + "cjk/NotoSans%s-%s.subset.ttf" % [script, weight]))
+	return out
 
 
 static func panel_box(bg := PANEL, border := BRASS_DIM, radius := 10) -> StyleBoxFlat:

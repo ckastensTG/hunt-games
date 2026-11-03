@@ -1,0 +1,590 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Translator: Claude (2026-11-03)\n"
+"X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
+
+#. Title of the settings panel (this game: rules, players, AI level).
+#: scenes/greybox/hud.gd:188
+msgid "Game"
+msgstr "대국"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Hide"
+msgstr "숨기기"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Show"
+msgstr "보이기"
+
+#. Menu label: which rule set to play.
+#: scenes/greybox/hud.gd:213
+msgid "Rules"
+msgstr "규칙"
+
+#: scenes/greybox/hud.gd:216
+msgid "The dogs move first"
+msgstr "개가 먼저 둔다"
+
+#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
+#: scenes/greybox/hud.gd:229
+msgid "Players"
+msgstr "플레이어"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Novice"
+msgstr "초보"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Apprentice"
+msgstr "견습"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Adept"
+msgstr "숙련"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Master"
+msgstr "명인"
+
+#. Menu label: the computer opponent's strength. Keep it short.
+#: scenes/greybox/hud.gd:239
+msgid "AI"
+msgstr "AI"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/greybox/hud.gd:247
+msgid "Look"
+msgstr "스타일"
+
+#: scenes/greybox/hud.gd:256
+msgid "Language"
+msgstr "언어"
+
+#: scenes/greybox/hud.gd:262
+msgid "New game"
+msgstr "새 대국"
+
+#: scenes/greybox/hud.gd:267
+msgid "Undo"
+msgstr "무르기"
+
+#: scenes/greybox/hud.gd:274
+msgid "How to play"
+msgstr "게임 방법"
+
+#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
+#: scenes/greybox/hud.gd:278
+msgid "N new game · U undo · H hide panels · T how to play"
+msgstr "N 새 대국 · U 무르기 · H 패널 숨기기 · T 게임 방법"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:304
+msgid "Stop here"
+msgstr "여기서 멈추기"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:322
+msgid "Moves"
+msgstr "기보"
+
+#: scenes/greybox/hud.gd:371
+msgid "Play again"
+msgstr "다시 하기"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:376
+msgid "Look at the board"
+msgstr "판 보기"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:419
+msgid "thinking"
+msgstr "생각 중"
+
+#. Two people taking turns on the same device.
+#: scenes/greybox/hud.gd:435
+msgid "Two players (hotseat)"
+msgstr "2인 플레이 (한 기기)"
+
+#: scenes/greybox/hud.gd:438
+msgid "Watch the AI play"
+msgstr "AI끼리 두는 것 보기"
+
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+msgid "A draw"
+msgstr "무승부"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:475
+#, c-format
+msgid "Captured %d / %d"
+msgstr "잡은 수 %d / %d"
+
+#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
+#: scenes/greybox/hud.gd:486
+#, c-format
+msgid "Moves without a capture: %d / %d"
+msgstr "잡지 않은 수: %d / %d"
+
+#: scenes/greybox/hud.gd:504
+msgid "No moves yet"
+msgstr "아직 둔 수가 없습니다"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:531
+#, c-format
+msgid "place %s"
+msgstr "%s에 놓기"
+
+#: scenes/greybox/hud.gd:540
+msgid "Watching the AI play both sides."
+msgstr "AI가 양쪽을 모두 두고 있습니다."
+
+#: scenes/greybox/hud.gd:544
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "연속 잡기: 다음 착지점을 고르거나 여기서 멈추세요."
+
+#: scenes/greybox/hud.gd:550
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "갈 곳을 고르세요. 끊어진 고리는 잡기를 뜻합니다."
+
+#: scenes/greybox/hud.gd:551
+msgid "Pick where it goes."
+msgstr "갈 곳을 고르세요."
+
+#: scenes/greybox/tutorial.gd:76
+msgid "Close"
+msgstr "닫기"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:80
+msgid "Replay"
+msgstr "다시 보기"
+
+#: scenes/greybox/tutorial.gd:83
+msgid "‹ Back"
+msgstr "‹ 이전"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:159
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "게임 방법 · %d / %d"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Start playing"
+msgstr "대국 시작"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Next ›"
+msgstr "다음 ›"
+
+#: titles/bagh_chal/art/brass_style.gd:38
+msgid "Temple brass"
+msgstr "사원의 황동"
+
+#: titles/bagh_chal/art/brass_style.gd:39
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "새김 장식이 있는 황동 판과 주조한 말, 해 질 녘 사원 안뜰에서."
+
+#: titles/bagh_chal/art/stone_style.gd:38
+msgid "Stone and pebbles"
+msgstr "돌과 조약돌"
+
+#: titles/bagh_chal/art/stone_style.gd:39
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "옛 방식 그대로: 돌에 선을 새겨 분필로 칠하고, 냇돌로 만든 호랑이와 염소를 짚 돗자리 위에."
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:26
+msgid "Standard rules"
+msgstr "표준 규칙"
+
+#: titles/common/hunt_text.gd:28
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "팔렛 1976: 마지막 염소까지 사냥"
+
+#: titles/common/hunt_text.gd:30
+msgid "Adugo, the Bororo rules"
+msgstr "Adugo, 보로로족의 규칙"
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:33
+msgid "Komikan, a Mapuche reconstruction"
+msgstr "Komikan, 마푸체족 놀이의 복원"
+
+#: titles/common/hunt_text.gd:40
+msgid "Bagh Chal · Standard"
+msgstr "Bagh Chal · 표준"
+
+#: titles/common/hunt_text.gd:42
+msgid "Bagh Chal · Parlett 1976"
+msgstr "Bagh Chal · 팔렛 1976"
+
+#: titles/common/hunt_text.gd:44
+msgid "Jogo da Onça · Adugo"
+msgstr "Jogo da Onça · Adugo"
+
+#: titles/common/hunt_text.gd:46
+msgid "Jogo da Onça · Komikan"
+msgstr "Jogo da Onça · Komikan"
+
+#: titles/common/hunt_text.gd:53
+msgid "Tigers to move"
+msgstr "호랑이 차례"
+
+#: titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "염소 차례"
+
+#: titles/common/hunt_text.gd:55
+msgid "Jaguar to move"
+msgstr "재규어 차례"
+
+#: titles/common/hunt_text.gd:55 titles/common/hunt_text.gd:57
+msgid "Dogs to move"
+msgstr "개 차례"
+
+#: titles/common/hunt_text.gd:57
+msgid "Puma to move"
+msgstr "퓨마 차례"
+
+#: titles/common/hunt_text.gd:64
+msgid "The tigers won"
+msgstr "호랑이 승리"
+
+#: titles/common/hunt_text.gd:64
+msgid "The goats won"
+msgstr "염소 승리"
+
+#: titles/common/hunt_text.gd:66
+msgid "The jaguar won"
+msgstr "재규어 승리"
+
+#: titles/common/hunt_text.gd:66 titles/common/hunt_text.gd:68
+msgid "The dogs won"
+msgstr "개 승리"
+
+#: titles/common/hunt_text.gd:68
+msgid "The puma won"
+msgstr "퓨마 승리"
+
+#: titles/common/hunt_text.gd:75
+msgid "The tigers win"
+msgstr "호랑이의 승리"
+
+#: titles/common/hunt_text.gd:75
+msgid "The goats win"
+msgstr "염소의 승리"
+
+#: titles/common/hunt_text.gd:77
+msgid "The jaguar wins"
+msgstr "재규어의 승리"
+
+#: titles/common/hunt_text.gd:77 titles/common/hunt_text.gd:79
+msgid "The dogs win"
+msgstr "개의 승리"
+
+#: titles/common/hunt_text.gd:79
+msgid "The puma wins"
+msgstr "퓨마의 승리"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the tigers"
+msgstr "호랑이를 맡습니다"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the goats"
+msgstr "염소를 맡습니다"
+
+#: titles/common/hunt_text.gd:87
+msgid "You play the jaguar"
+msgstr "재규어를 맡습니다"
+
+#: titles/common/hunt_text.gd:87 titles/common/hunt_text.gd:89
+msgid "You play the dogs"
+msgstr "개를 맡습니다"
+
+#: titles/common/hunt_text.gd:89
+msgid "You play the puma"
+msgstr "퓨마를 맡습니다"
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a tiger to move."
+msgstr "움직일 호랑이를 고르세요."
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a goat to move."
+msgstr "움직일 염소를 고르세요."
+
+#: titles/common/hunt_text.gd:97
+msgid "Move the jaguar."
+msgstr "재규어를 움직이세요."
+
+#: titles/common/hunt_text.gd:97 titles/common/hunt_text.gd:99
+msgid "Choose a dog to move."
+msgstr "움직일 개를 고르세요."
+
+#: titles/common/hunt_text.gd:99
+msgid "Move the puma."
+msgstr "퓨마를 움직이세요."
+
+#: titles/common/hunt_text.gd:103
+msgid "Place a goat on any empty point."
+msgstr "빈 점 아무 곳에나 염소 한 마리를 놓으세요."
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "남은 염소: %d"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every goat has been captured."
+msgstr "염소를 모두 잡았습니다."
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every dog has been eaten."
+msgstr "개를 모두 먹어 치웠습니다."
+
+#: titles/common/hunt_text.gd:119
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "잡은 염소: %d."
+
+#: titles/common/hunt_text.gd:120
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] "잡은 개: %d."
+
+#: titles/common/hunt_text.gd:124
+msgid "The tigers are trapped: none of them can move."
+msgstr "호랑이가 갇혔습니다: 어느 호랑이도 움직일 수 없습니다."
+
+#: titles/common/hunt_text.gd:126
+msgid "The jaguar is trapped and can't move."
+msgstr "재규어가 갇혀서 움직일 수 없습니다."
+
+#: titles/common/hunt_text.gd:128
+msgid "The puma is trapped and can't move."
+msgstr "퓨마가 갇혀서 움직일 수 없습니다."
+
+#: titles/common/hunt_text.gd:130
+msgid "The goats can't move."
+msgstr "염소가 움직일 수 없습니다."
+
+#: titles/common/hunt_text.gd:130
+msgid "The dogs can't move any more."
+msgstr "개가 더 이상 움직일 수 없습니다."
+
+#: titles/common/hunt_text.gd:132
+msgid "Every move left would repeat an earlier position."
+msgstr "남은 모든 수가 이전 국면을 되풀이하게 됩니다."
+
+#: titles/common/hunt_text.gd:134
+msgid "The same position came up three times."
+msgstr "같은 국면이 세 번 나왔습니다."
+
+#. Reason for a draw: neither side captured during this many moves each.
+#: titles/common/hunt_text.gd:138
+#, c-format
+msgid "No capture in %d move each."
+msgid_plural "No capture in %d moves each."
+msgstr[0] "양쪽 모두 %d수 동안 잡지 못했습니다."
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "호랑이와 염소"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "호랑이 넷과 염소 스물의 대결. 호랑이는 네 모서리에서 시작하고, 염소는 판 밖에서 손에 든 채로 시작합니다. 염소가 먼저 둡니다."
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "염소 놓기"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "손에 염소가 남아 있는 동안 염소 차례에는 항상 염소를 놓습니다: 빈 점 아무 곳에나 한 마리. 스무 마리를 모두 놓기 전에는 판 위의 염소를 움직일 수 없습니다. 그사이에 호랑이가 움직입니다."
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "호랑이가 움직이는 법"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "호랑이는 선을 따라 이웃한 빈 점으로 갑니다. 대각선은 한 점 걸러 하나씩만 지나가므로, 이웃이 여덟인 점도 있고 넷 이하인 점도 있습니다."
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+msgid "Capturing"
+msgstr "잡기"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "호랑이는 선 위에서 바로 옆에 있는 염소를 뛰어넘어 바로 뒤의 빈 점에 내려앉으며 잡습니다. 잡힌 염소는 판에서 나갑니다. 한 번 뛸 때 한 마리씩이며, 잡기는 결코 의무가 아닙니다."
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "뭉치면 안전하다"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "바로 뒤에 다른 염소나 판의 가장자리가 있는 염소는 뛰어넘을 수 없습니다: 호랑이는 내려앉을 빈 점이 필요합니다. 함께 붙어 있는 염소는 안전합니다."
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "염소 움직이기"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "염소가 모두 판에 나오면, 염소도 호랑이처럼 선을 따라 이웃한 빈 점으로 갑니다. 염소는 뛰지도 잡지도 않습니다."
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "호랑이가 이기는 법"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "팔렛의 판본에서는 호랑이가 염소 스무 마리를 모두 잡아야 합니다. 나머지는 표준 게임과 같습니다."
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "호랑이는 염소 다섯 마리를 잡으면 이깁니다."
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "염소가 이기는 법"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "어느 호랑이도 움직일 수 없으면 염소가 이깁니다: 모든 호랑이가 뛰어넘을 수 없는 염소에게 둘러싸인 것입니다."
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+msgid "Draws"
+msgstr "무승부"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
+msgstr "염소를 모두 놓은 뒤에는 이미 나온 국면을 다시 만드는 수를 둘 수 없습니다. 양쪽이 각자 50수 동안 아무것도 잡지 못하거나, 남은 모든 수가 국면을 되풀이하게 되면 무승부입니다."
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr "재규어와 개"
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr "재규어 하나와 개 열넷의 대결. 재규어는 판 한가운데에서 시작하고, 개는 반대쪽 절반을 채웁니다. 재규어가 먼저 둡니다."
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr "움직이기"
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr "매 차례 말 하나가 선을 따라 어느 방향으로든 이웃한 빈 점으로 갑니다. 삼각형도 판의 일부이며, 양쪽 모두 들어갈 수 있습니다."
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr "재규어는 선 위에서 바로 옆에 있는 개를 뛰어넘어 바로 뒤의 빈 점에 내려앉으며 잡습니다. 잡힌 개는 판에서 나갑니다. 잡을지는 자유입니다."
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr "연속 잡기"
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr "잡은 뒤에도 재규어는 마음대로 방향을 바꾸며 계속 뛸 수 있고, 어느 뜀 뒤에든 멈출 수 있습니다. 한 차례에 같은 개를 두 번 뛰어넘을 수는 없습니다."
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr "둘이면 강하다"
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr "한 선 위에 나란히 선 개 두 마리는 서로를 지킵니다: 재규어가 내려앉을 곳이 없습니다."
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr "재규어가 이기는 법"
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr "재규어는 개 다섯 마리를 잡으면 이깁니다."
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+msgid "How the dogs win"
+msgstr "개가 이기는 법"
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr "재규어가 전혀 움직일 수 없게 되면 개가 이깁니다."
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
+msgstr "같은 국면이 세 번 나오거나, 양쪽이 각자 50수 동안 아무것도 잡지 못하면 무승부입니다."
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr "퓨마와 개"
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr "Komikan은 마푸체족의 사냥 놀이입니다. 퓨마는 탑, 곧 삼각형 안에서 시작하고, 개 열두 마리가 반대편 끝에서 기다립니다. 퓨마가 먼저 둡니다."
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr "퓨마"
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr "퓨마는 어느 선을 따라서든, 어느 방향으로든, 앞으로도 뒤로도 갑니다."
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "The dogs only advance"
+msgstr "개는 앞으로만 간다"
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
+msgstr "개는 탑을 향해 앞으로만 갑니다: 똑바로, 또는 그쪽으로 선이 나 있으면 대각선으로. 옆이나 뒤로는 절대 갈 수 없습니다."
+
+#: titles/common/hunt_tutorials.gd:298
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr "퓨마는 혼자 있는 개를 뛰어넘어 그 뒤의 빈 점에 내려앉으며 잡습니다. 방향을 바꾸며 계속 뛸 수 있고, 어느 뜀 뒤에든 멈출 수 있습니다. 한 선 위에 나란히 선 개 두 마리는 서로를 지킵니다."
+
+#: titles/common/hunt_tutorials.gd:305
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr "퓨마를 움직일 수 없도록 가두면 개가 이깁니다."
+
+#: titles/common/hunt_tutorials.gd:313
+msgid "How the puma wins"
+msgstr "퓨마가 이기는 법"
+
+#: titles/common/hunt_tutorials.gd:314
+msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
+msgstr "개 열두 마리를 모두 먹거나 개가 더 이상 움직일 수 없게 되면 퓨마가 이깁니다. 개는 앞으로만 가므로 머지않아 둘 수가 떨어집니다."
+
+#: titles/common/hunt_tutorials.gd:321
+msgid "A reconstruction"
+msgstr "복원에 대하여"
+
+#: titles/common/hunt_tutorials.gd:322
+msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "Komikan은 20세기 초에 기록되었지만, 기록에는 빈틈이 있습니다. 탑에서 무슨 일이 일어나는지, 누가 먼저 두는지는 기록되어 있지 않습니다: 여기서는 탑을 보통의 판으로 다루며, 설정에서 바꾸지 않으면 퓨마가 먼저 둡니다."

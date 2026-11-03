@@ -1,0 +1,598 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translator: Claude (2026-11-03)\n"
+"X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
+
+#. Title of the settings panel (this game: rules, players, AI level).
+#: scenes/greybox/hud.gd:188
+msgid "Game"
+msgstr "Партия"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Hide"
+msgstr "Скрыть"
+
+#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
+msgid "Show"
+msgstr "Показать"
+
+#. Menu label: which rule set to play.
+#: scenes/greybox/hud.gd:213
+msgid "Rules"
+msgstr "Правила"
+
+#: scenes/greybox/hud.gd:216
+msgid "The dogs move first"
+msgstr "Собаки ходят первыми"
+
+#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
+#: scenes/greybox/hud.gd:229
+msgid "Players"
+msgstr "Игроки"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Novice"
+msgstr "Новичок"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Apprentice"
+msgstr "Ученик"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Adept"
+msgstr "Знаток"
+
+#. The four AI strength levels, weakest to strongest. Later they become named opponents.
+#: scenes/greybox/hud.gd:233
+msgid "Master"
+msgstr "Мастер"
+
+#. Menu label: the computer opponent's strength. Keep it short.
+#: scenes/greybox/hud.gd:239
+msgid "AI"
+msgstr "ИИ"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/greybox/hud.gd:247
+msgid "Look"
+msgstr "Вид"
+
+#: scenes/greybox/hud.gd:256
+msgid "Language"
+msgstr "Язык"
+
+#: scenes/greybox/hud.gd:262
+msgid "New game"
+msgstr "Новая партия"
+
+#: scenes/greybox/hud.gd:267
+msgid "Undo"
+msgstr "Отменить ход"
+
+#: scenes/greybox/hud.gd:274
+msgid "How to play"
+msgstr "Как играть"
+
+#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
+#: scenes/greybox/hud.gd:278
+msgid "N new game · U undo · H hide panels · T how to play"
+msgstr "N новая партия · U отменить ход · H скрыть панели · T как играть"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:304
+msgid "Stop here"
+msgstr "Остановиться"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:322
+msgid "Moves"
+msgstr "Ходы"
+
+#: scenes/greybox/hud.gd:371
+msgid "Play again"
+msgstr "Сыграть ещё"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:376
+msgid "Look at the board"
+msgstr "Посмотреть на доску"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:419
+msgid "thinking"
+msgstr "думает"
+
+#. Two people taking turns on the same device.
+#: scenes/greybox/hud.gd:435
+msgid "Two players (hotseat)"
+msgstr "Два игрока (одно устройство)"
+
+#: scenes/greybox/hud.gd:438
+msgid "Watch the AI play"
+msgstr "Смотреть игру ИИ"
+
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+msgid "A draw"
+msgstr "Ничья"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:475
+#, c-format
+msgid "Captured %d / %d"
+msgstr "Взято: %d / %d"
+
+#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
+#: scenes/greybox/hud.gd:486
+#, c-format
+msgid "Moves without a capture: %d / %d"
+msgstr "Ходов без взятия: %d / %d"
+
+#: scenes/greybox/hud.gd:504
+msgid "No moves yet"
+msgstr "Ходов пока нет"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:531
+#, c-format
+msgid "place %s"
+msgstr "постановка на %s"
+
+#: scenes/greybox/hud.gd:540
+msgid "Watching the AI play both sides."
+msgstr "ИИ играет за обе стороны."
+
+#: scenes/greybox/hud.gd:544
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "Серия взятий: выберите следующий прыжок или остановитесь."
+
+#: scenes/greybox/hud.gd:550
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "Выберите, куда пойти. Разорванное кольцо отмечает взятие."
+
+#: scenes/greybox/hud.gd:551
+msgid "Pick where it goes."
+msgstr "Выберите, куда пойти."
+
+#: scenes/greybox/tutorial.gd:76
+msgid "Close"
+msgstr "Закрыть"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:80
+msgid "Replay"
+msgstr "Повторить"
+
+#: scenes/greybox/tutorial.gd:83
+msgid "‹ Back"
+msgstr "‹ Назад"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:159
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "Как играть · %d из %d"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Start playing"
+msgstr "Начать игру"
+
+#: scenes/greybox/tutorial.gd:162
+msgid "Next ›"
+msgstr "Далее ›"
+
+#: titles/bagh_chal/art/brass_style.gd:38
+msgid "Temple brass"
+msgstr "Храмовая латунь"
+
+#: titles/bagh_chal/art/brass_style.gd:39
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "Гравированная латунная доска и литые фигурки в сумерках во дворе храма."
+
+#: titles/bagh_chal/art/stone_style.gd:38
+msgid "Stone and pebbles"
+msgstr "Камень и галька"
+
+#: titles/bagh_chal/art/stone_style.gd:39
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "Как в старину: линии высечены в камне и натёрты мелом, тигры и козы из речной гальки, на соломенной циновке."
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:26
+msgid "Standard rules"
+msgstr "Стандартные правила"
+
+#: titles/common/hunt_text.gd:28
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "Парлетт, 1976: охота до последней козы"
+
+#: titles/common/hunt_text.gd:30
+msgid "Adugo, the Bororo rules"
+msgstr "Адуго, правила бороро"
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:33
+msgid "Komikan, a Mapuche reconstruction"
+msgstr "Комикан, реконструкция игры мапуче"
+
+#: titles/common/hunt_text.gd:40
+msgid "Bagh Chal · Standard"
+msgstr "Bagh Chal · Стандарт"
+
+#: titles/common/hunt_text.gd:42
+msgid "Bagh Chal · Parlett 1976"
+msgstr "Bagh Chal · Парлетт 1976"
+
+#: titles/common/hunt_text.gd:44
+msgid "Jogo da Onça · Adugo"
+msgstr "Jogo da Onça · Adugo"
+
+#: titles/common/hunt_text.gd:46
+msgid "Jogo da Onça · Komikan"
+msgstr "Jogo da Onça · Komikan"
+
+#: titles/common/hunt_text.gd:53
+msgid "Tigers to move"
+msgstr "Ход тигров"
+
+#: titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "Ход коз"
+
+#: titles/common/hunt_text.gd:55
+msgid "Jaguar to move"
+msgstr "Ход ягуара"
+
+#: titles/common/hunt_text.gd:55 titles/common/hunt_text.gd:57
+msgid "Dogs to move"
+msgstr "Ход собак"
+
+#: titles/common/hunt_text.gd:57
+msgid "Puma to move"
+msgstr "Ход пумы"
+
+#: titles/common/hunt_text.gd:64
+msgid "The tigers won"
+msgstr "Тигры победили"
+
+#: titles/common/hunt_text.gd:64
+msgid "The goats won"
+msgstr "Козы победили"
+
+#: titles/common/hunt_text.gd:66
+msgid "The jaguar won"
+msgstr "Ягуар победил"
+
+#: titles/common/hunt_text.gd:66 titles/common/hunt_text.gd:68
+msgid "The dogs won"
+msgstr "Собаки победили"
+
+#: titles/common/hunt_text.gd:68
+msgid "The puma won"
+msgstr "Пума победила"
+
+#: titles/common/hunt_text.gd:75
+msgid "The tigers win"
+msgstr "Победа тигров"
+
+#: titles/common/hunt_text.gd:75
+msgid "The goats win"
+msgstr "Победа коз"
+
+#: titles/common/hunt_text.gd:77
+msgid "The jaguar wins"
+msgstr "Победа ягуара"
+
+#: titles/common/hunt_text.gd:77 titles/common/hunt_text.gd:79
+msgid "The dogs win"
+msgstr "Победа собак"
+
+#: titles/common/hunt_text.gd:79
+msgid "The puma wins"
+msgstr "Победа пумы"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the tigers"
+msgstr "Вы играете за тигров"
+
+#: titles/common/hunt_text.gd:85
+msgid "You play the goats"
+msgstr "Вы играете за коз"
+
+#: titles/common/hunt_text.gd:87
+msgid "You play the jaguar"
+msgstr "Вы играете за ягуара"
+
+#: titles/common/hunt_text.gd:87 titles/common/hunt_text.gd:89
+msgid "You play the dogs"
+msgstr "Вы играете за собак"
+
+#: titles/common/hunt_text.gd:89
+msgid "You play the puma"
+msgstr "Вы играете за пуму"
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a tiger to move."
+msgstr "Выберите тигра для хода."
+
+#: titles/common/hunt_text.gd:95
+msgid "Choose a goat to move."
+msgstr "Выберите козу для хода."
+
+#: titles/common/hunt_text.gd:97
+msgid "Move the jaguar."
+msgstr "Ходите ягуаром."
+
+#: titles/common/hunt_text.gd:97 titles/common/hunt_text.gd:99
+msgid "Choose a dog to move."
+msgstr "Выберите собаку для хода."
+
+#: titles/common/hunt_text.gd:99
+msgid "Move the puma."
+msgstr "Ходите пумой."
+
+#: titles/common/hunt_text.gd:103
+msgid "Place a goat on any empty point."
+msgstr "Поставьте козу на любую свободную точку."
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "Коз в запасе: %d"
+msgstr[1] "Коз в запасе: %d"
+msgstr[2] "Коз в запасе: %d"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every goat has been captured."
+msgstr "Все козы взяты."
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:118
+msgid "Every dog has been eaten."
+msgstr "Все собаки съедены."
+
+#: titles/common/hunt_text.gd:119
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "Взято коз: %d."
+msgstr[1] "Взято коз: %d."
+msgstr[2] "Взято коз: %d."
+
+#: titles/common/hunt_text.gd:120
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] "Взято собак: %d."
+msgstr[1] "Взято собак: %d."
+msgstr[2] "Взято собак: %d."
+
+#: titles/common/hunt_text.gd:124
+msgid "The tigers are trapped: none of them can move."
+msgstr "Тигры заперты: ни один не может сходить."
+
+#: titles/common/hunt_text.gd:126
+msgid "The jaguar is trapped and can't move."
+msgstr "Ягуар заперт и не может сходить."
+
+#: titles/common/hunt_text.gd:128
+msgid "The puma is trapped and can't move."
+msgstr "Пума заперта и не может сходить."
+
+#: titles/common/hunt_text.gd:130
+msgid "The goats can't move."
+msgstr "Козам некуда ходить."
+
+#: titles/common/hunt_text.gd:130
+msgid "The dogs can't move any more."
+msgstr "Собакам больше некуда ходить."
+
+#: titles/common/hunt_text.gd:132
+msgid "Every move left would repeat an earlier position."
+msgstr "Любой оставшийся ход повторил бы прежнюю позицию."
+
+#: titles/common/hunt_text.gd:134
+msgid "The same position came up three times."
+msgstr "Одна и та же позиция возникла трижды."
+
+#. Reason for a draw: neither side captured during this many moves each.
+#: titles/common/hunt_text.gd:138
+#, c-format
+msgid "No capture in %d move each."
+msgid_plural "No capture in %d moves each."
+msgstr[0] "Ни одного взятия за %d ход каждой стороны."
+msgstr[1] "Ни одного взятия за %d хода каждой стороны."
+msgstr[2] "Ни одного взятия за %d ходов каждой стороны."
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "Тигры и козы"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "Четыре тигра против двадцати коз. Тигры начинают в углах; козы начинают в запасе, вне доски. Первыми ходят козы."
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "Выставление коз"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "Пока у коз есть запас, каждый их ход — это выставление: одна коза на любую свободную точку. Козы на доске не могут ходить, пока не выставлены все двадцать. В промежутках ходят тигры."
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "Как ходит тигр"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "Тигр переходит по линии на соседнюю свободную точку. Диагонали проходят только через каждую вторую точку, поэтому у одних точек восемь соседей, а у остальных — четыре или меньше."
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+msgid "Capturing"
+msgstr "Взятие"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "Тигр берёт козу, которая стоит рядом с ним на линии, перепрыгивая через неё на свободную точку сразу за ней. Коза уходит с доски. Одна коза за прыжок, и брать никогда не обязательно."
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "Вместе безопаснее"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "Козу, за которой сразу стоит другая коза или край доски, перепрыгнуть нельзя: тигру нужна свободная точка для приземления. Козы, которые держатся вместе, в безопасности."
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "Ходы коз"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "Когда все козы в игре, коза переходит по линии на соседнюю свободную точку, так же как тигр. Козы никогда не прыгают и не берут."
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "Как побеждают тигры"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "В версии Парлетта тигры должны взять всех двадцать коз. Всё остальное — как в стандартной игре."
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "Тигры побеждают, взяв пять коз."
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "Как побеждают козы"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "Козы побеждают, когда ни один тигр не может сходить: каждый тигр окружён козами, которых не может перепрыгнуть."
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+msgid "Draws"
+msgstr "Ничьи"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
+msgstr "Когда все козы выставлены, ни один ход не может вернуть позицию, которая уже была. Если ни одна сторона не берёт в течение 50 ходов каждой стороны или любой оставшийся ход повторил бы позицию, партия заканчивается вничью."
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr "Ягуар и собаки"
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr "Один ягуар против четырнадцати собак. Ягуар начинает в центре доски, а собаки занимают дальнюю половину. Первым ходит ягуар."
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr "Ходы"
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr "За ход одна фигура переходит по линии на соседнюю свободную точку в любом направлении. Треугольник — часть доски, и обе стороны могут в него заходить."
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr "Ягуар берёт собаку, которая стоит рядом с ним на линии, перепрыгивая через неё на свободную точку сразу за ней. Собака уходит с доски. Брать не обязательно."
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr "Серии взятий"
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr "После взятия ягуар может прыгнуть снова, и снова, меняя направление как угодно, и остановиться после любого прыжка. Через одну и ту же собаку нельзя прыгнуть дважды за ход."
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr "Сила пары"
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr "Две собаки подряд на линии защищают друг друга: ягуару некуда приземлиться."
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr "Как побеждает ягуар"
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr "Ягуар побеждает, взяв пять собак."
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+msgid "How the dogs win"
+msgstr "Как побеждают собаки"
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr "Собаки побеждают, когда ягуар совсем не может сходить."
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
+msgstr "Если одна и та же позиция возникает трижды или ни одна сторона не берёт в течение 50 ходов каждой стороны, партия заканчивается вничью."
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr "Пума и собаки"
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr "Комикан — охотничья игра народа мапуче. Пума начинает внутри башни — треугольника, а двенадцать собак ждут на другом конце. Первой ходит пума."
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr "Пума"
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr "Пума ходит по любой линии в любом направлении, вперёд и назад."
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "The dogs only advance"
+msgstr "Собаки идут только вперёд"
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
+msgstr "Собака ходит только вперёд, к башне: прямо или по диагонали, где туда идёт линия. Вбок и назад ходить нельзя."
+
+#: titles/common/hunt_tutorials.gd:298
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr "Пума берёт одинокую собаку, перепрыгивая через неё на свободную точку за ней. Она может прыгать снова и снова, меняя направление, и остановиться после любого прыжка. Две собаки подряд на линии защищают друг друга."
+
+#: titles/common/hunt_tutorials.gd:305
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr "Собаки побеждают, если запрут пуму так, что она не сможет сходить."
+
+#: titles/common/hunt_tutorials.gd:313
+msgid "How the puma wins"
+msgstr "Как побеждает пума"
+
+#: titles/common/hunt_tutorials.gd:314
+msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
+msgstr "Пума побеждает, если съест всех двенадцать собак или если собакам больше некуда ходить. Собаки идут только вперёд, поэтому рано или поздно у них кончаются ходы."
+
+#: titles/common/hunt_tutorials.gd:321
+msgid "A reconstruction"
+msgstr "Реконструкция"
+
+#: titles/common/hunt_tutorials.gd:322
+msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "Комикан был описан в начале XX века, и в описаниях есть пробелы. Что происходит в башне и кто ходит первым, неизвестно: здесь башня — обычная часть доски, а первой ходит пума, если вы не измените это в настройках."

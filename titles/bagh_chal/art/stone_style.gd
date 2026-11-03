@@ -9,18 +9,23 @@ extends HuntArtStyle
 ##
 ## Same art direction as the brass style, applied to humbler materials: one
 ## warm key light (a shaft of low sun) against a shaded interior, the courtyard
-## soft beyond, leaf shadows and dust in the light.
+## soft beyond, dust in the light.
 ##
 ## Generated assets (tools/art/make_stone_set.py), replaceable one for one:
-##   stone/board.glb + stone/board_*.png, stone/tiger_0..3.glb, stone/goat_0..7.glb
+##   stone/board.glb + stone/board_*.png + stone/side_*.png (the slab),
+##   stone/mat_*.png + stone/rope_*.png (the mat), stone/tiger_0..3.glb,
+##   stone/goat_0..7.glb
 
 const ART := "res://titles/bagh_chal/art/"
 const STONE_THICK := 0.4      # the slab: its face is y = 0
 const MAT_THICK := 0.12
 const FLOOR_Y := -(STONE_THICK + MAT_THICK)
 const MAT_HALF := Vector2(5.6, 4.6)
+const ROPE_RADIUS := 0.085    # the rope bound round the mat's edge
 const TIGER_SCALE := 1.12
 const GOAT_SCALE := 1.15
+## The afternoon sun, as a spot through the open side (see _add_lights).
+const KEY_AT := Vector3(26.0, 26.0, 0.0)
 ## Light layer for the sunlit courtyard outside, so its sun doesn't light the
 ## shaded interior (the mat and board get only the key's shaft of sun).
 const OUTSIDE_LAYER := 2
@@ -30,8 +35,8 @@ var board_material: ShaderMaterial
 
 func _init() -> void:
 	id = "stone"
-	display_name = "Stone and pebbles"
-	description = "The historical way: lines scratched in stone, tigers and goats of river stone, on a straw mat."
+	display_name = L10n.N_("Stone and pebbles")
+	description = L10n.N_("The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat.")
 	camera_extent = 5.9
 	far_blur_from = 11.0
 	# From inside the rest house, looking out toward the sunlit courtyard, so
@@ -91,7 +96,6 @@ func build_set(root: Node3D, extras: bool) -> void:
 	_add_mat(root)
 	_add_pati(root)
 	_add_lights(root, extras)
-	_add_leaf_shadows(root)
 	_add_dust(root)
 
 
@@ -111,6 +115,9 @@ func _add_board(root: Node3D) -> void:
 		board_material.set_shader_parameter("orm_tex", load(ART + "stone/board_orm.png"))
 		board_material.set_shader_parameter("normal_tex", load(ART + "stone/board_normal.png"))
 		board_material.set_shader_parameter("glow_tex", load(ART + "stone/board_glow.png"))
+		board_material.set_shader_parameter("side_albedo_tex", load(ART + "stone/side_albedo.png"))
+		board_material.set_shader_parameter("side_orm_tex", load(ART + "stone/side_orm.png"))
+		board_material.set_shader_parameter("side_normal_tex", load(ART + "stone/side_normal.png"))
 	mi.material_override = board_material
 	root.add_child(mi)
 
@@ -118,13 +125,83 @@ func _add_board(root: Node3D) -> void:
 func _add_mat(root: Node3D) -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = load(ART + "shaders/straw_mat.gdshader")
-	mat.set_shader_parameter("half_size", MAT_HALF)
-	mat.set_shader_parameter("straw_width", 0.06)
-	mat.set_shader_parameter("row_spacing", 0.95)
-	mat.set_shader_parameter("rope_color", Color(0.5, 0.38, 0.22))
-	var mi := box(root, "StrawMat", Vector3(MAT_HALF.x * 2, MAT_THICK, MAT_HALF.y * 2),
+	mat.set_shader_parameter("albedo_tex", load(ART + "stone/mat_albedo.png"))
+	mat.set_shader_parameter("orm_tex", load(ART + "stone/mat_orm.png"))
+	mat.set_shader_parameter("normal_tex", load(ART + "stone/mat_normal.png"))
+	mat.set_shader_parameter("tile_span", 1.0)
+	mat.set_shader_parameter("tint", Color(0.94, 0.92, 0.88))
+	var mat_root := Node3D.new()
+	mat_root.name = "StrawMat"
+	mat_root.rotation_degrees.y = 3.0   # laid down by hand, not quite square to the room
+	root.add_child(mat_root)
+	box(mat_root, "Weave", Vector3(MAT_HALF.x * 2, MAT_THICK, MAT_HALF.y * 2),
 		Vector3(0, -STONE_THICK - MAT_THICK / 2, 0), mat)
-	mi.rotation_degrees.y = 3.0   # laid down by hand, not quite square to the room
+	var rope := MeshInstance3D.new()
+	rope.name = "EdgeRope"
+	rope.mesh = _rope_mesh(MAT_HALF - Vector2.ONE * ROPE_RADIUS * 0.7, 0.3, ROPE_RADIUS)
+	rope.position.y = -STONE_THICK - MAT_THICK * 0.5 + ROPE_RADIUS * 0.25
+	var rm := StandardMaterial3D.new()
+	rm.albedo_texture = load(ART + "stone/rope_albedo.png")
+	rm.normal_enabled = true
+	rm.normal_texture = load(ART + "stone/rope_normal.png")
+	rm.normal_scale = 1.4
+	rm.roughness = 0.85
+	rm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	rope.material_override = rm
+	mat_root.add_child(rope)
+
+
+## A rope (a tube) round a rounded rectangle at y = 0. UV: U along the rope,
+## one texture tile per `tile` units; V once round it.
+func _rope_mesh(half: Vector2, corner: float, radius: float, tile := 0.6) -> ArrayMesh:
+	# The path: straight sides joined by quarter circles.
+	var path: Array[Vector2] = []
+	var centers := [Vector2(half.x - corner, half.y - corner), Vector2(-half.x + corner, half.y - corner),
+		Vector2(-half.x + corner, -half.y + corner), Vector2(half.x - corner, -half.y + corner)]
+	for c in 4:
+		for k in 9:
+			var a := PI * 0.5 * c + PI * 0.5 * k / 8.0
+			path.append(centers[c] + Vector2(cos(a), sin(a)) * corner)
+	# Resample evenly so the twist doesn't stretch on the corners.
+	var lengths := PackedFloat32Array([0.0])
+	for i in range(1, path.size() + 1):
+		lengths.append(lengths[i - 1] + path[i - 1].distance_to(path[i % path.size()]))
+	var total := lengths[lengths.size() - 1]
+	var steps := int(total / 0.05)
+	var ring := 10
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var seg := 0
+	for s in steps + 1:
+		var d := total * s / steps
+		while seg < path.size() - 1 and lengths[seg + 1] < d:
+			seg += 1
+		var a := path[seg % path.size()]
+		var b := path[(seg + 1) % path.size()]
+		var t := (d - lengths[seg]) / maxf(lengths[seg + 1] - lengths[seg], 1e-6)
+		var p := a.lerp(b, t)
+		var dir := (b - a).normalized()
+		var out := Vector2(dir.y, -dir.x)
+		if out.dot(p) < 0.0:
+			out = -out
+		for r in ring + 1:
+			var ang := TAU * r / ring
+			var n3 := Vector3(out.x * cos(ang), sin(ang), out.y * cos(ang))
+			st.set_normal(n3)
+			st.set_uv(Vector2(d / tile, float(r) / ring))
+			st.add_vertex(Vector3(p.x, 0.0, p.y) + n3 * radius)
+	for s in steps:
+		for r in ring:
+			var i0 := s * (ring + 1) + r
+			var i1 := (s + 1) * (ring + 1) + r
+			st.add_index(i0)
+			st.add_index(i1)
+			st.add_index(i0 + 1)
+			st.add_index(i0 + 1)
+			st.add_index(i1)
+			st.add_index(i1 + 1)
+	st.generate_tangents()
+	return st.commit()
 
 
 func _add_pati(root: Node3D) -> void:
@@ -182,7 +259,7 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	# the AI view and the prey view get the same light, mirrored.
 	var key := SpotLight3D.new()
 	key.name = "Key"
-	key.position = Vector3(26.0, 26.0, 0.0)
+	key.position = KEY_AT
 	key.look_at_from_position(key.position, Vector3(0, 0, 0), Vector3.UP)
 	key.light_color = Color(1.0, 0.82, 0.58)
 	key.light_energy = 3.4
@@ -220,31 +297,6 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	bounce.light_cull_mask = 1
 	bounce.light_volumetric_fog_energy = 0.0
 	root.add_child(bounce)
-
-
-func _add_leaf_shadows(root: Node3D) -> void:
-	# A branch outside the open side: its leaves throw moving dapples across
-	# one end of the mat and the edge of the stone. Shadow-only.
-	var mat := ShaderMaterial.new()
-	mat.shader = load(ART + "shaders/leaf_shadow.gdshader")
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 4061
-	var branch := Node3D.new()
-	branch.name = "LeafShadows"
-	# About halfway along the key's path to the mat beyond the stone's right
-	# edge, so the dapples fall on the straw and only touch the stone's rim.
-	branch.position = Vector3(15.6, 13.2, -1.0)
-	root.add_child(branch)
-	for i in 40:
-		var leaf := MeshInstance3D.new()
-		var q := QuadMesh.new()
-		q.size = Vector2(0.32, 0.5)
-		leaf.mesh = q
-		leaf.material_override = mat
-		leaf.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
-		leaf.position = Vector3(rng.randf_range(-0.6, 0.6), rng.randf_range(-0.8, 0.8), rng.randf_range(-2.4, 2.4))
-		leaf.rotation = Vector3(rng.randf_range(-1.2, 1.2), rng.randf_range(0, TAU), rng.randf_range(-1.0, 1.0))
-		branch.add_child(leaf)
 
 
 func _add_dust(root: Node3D) -> void:

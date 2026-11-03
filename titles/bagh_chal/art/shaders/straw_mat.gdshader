@@ -1,14 +1,15 @@
 shader_type spatial;
-// A straw sitting mat (sukul): straws laid side by side, bound with rows of
-// twisted straw rope, with a rope edge. Drawn entirely here, so it costs no
-// texture memory. For a BoxMesh: coordinates are the mesh's own, in units.
+// The straw sitting mat (sukul) under the stone board. The weave is a baked,
+// tileable texture (tools/art/make_stone_set.py) so it filters cleanly at a
+// distance; this shader only tiles it over the mat's top and darkens the
+// thin sides. The rope round the edge is its own mesh (stone_style.gd).
+// For a BoxMesh: coordinates are the mesh's own, in units.
 
-uniform vec3 straw_light : source_color = vec3(0.8, 0.66, 0.4);
-uniform vec3 straw_dark : source_color = vec3(0.58, 0.45, 0.25);
-uniform vec3 rope_color : source_color = vec3(0.45, 0.33, 0.18);
-uniform vec2 half_size = vec2(5.5, 4.5);
-uniform float straw_width = 0.085;
-uniform float row_spacing = 0.72;
+uniform sampler2D albedo_tex : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D orm_tex : filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D normal_tex : hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform float tile_span = 1.0;   // units covered by one tile of the weave
+uniform vec3 tint : source_color = vec3(1.0);
 
 varying vec3 obj_pos;
 varying vec3 obj_normal;
@@ -18,36 +19,18 @@ void vertex() {
 	obj_normal = NORMAL;
 }
 
-float hash(float n) {
-	return fract(sin(n * 127.1) * 43758.5453);
-}
-
 void fragment() {
-	vec2 p = obj_pos.xz;
-	// Straws run along x, each a little different in color, with joints.
-	float strand = floor(p.y / straw_width);
-	float across = fract(p.y / straw_width) * 2.0 - 1.0;        // -1..1 over one straw
-	float round_shade = sqrt(max(1.0 - across * across, 0.0));
-	float h = hash(strand);
-	float joint = step(0.94, fract(p.x / (1.1 + h * 0.8) + h * 3.0));
-	vec3 straw = mix(straw_dark, straw_light, 0.35 + 0.65 * h) * (0.7 + 0.3 * round_shade);
-	straw *= 1.0 - 0.3 * joint;
-	// Binding rows: a pair of twisted cords across the straws.
-	float local_x = fract(p.x / row_spacing + 0.5) * row_spacing - row_spacing * 0.5;
-	float cord_d = min(abs(local_x - 0.035), abs(local_x + 0.035));
-	float in_cord = 1.0 - smoothstep(0.022, 0.03, cord_d);
-	float twist = fract(p.y / 0.055 + local_x * 14.0);
-	float twist_shade = 0.7 + 0.4 * smoothstep(0.15, 0.45, twist) * (1.0 - smoothstep(0.55, 0.9, twist));
-	// Rope edge round the border, and on the mat's thin sides.
-	vec2 edge_d = half_size - abs(p);
-	float border = 1.0 - smoothstep(0.1, 0.14, min(edge_d.x, edge_d.y));
+	vec2 uv = obj_pos.xz / tile_span;
 	float side = 1.0 - smoothstep(0.3, 0.6, obj_normal.y);
-	float rope = max(in_cord, max(border, side));
-	vec3 rope_col = rope_color * twist_shade;
-	ALBEDO = mix(straw, rope_col, rope);
-	ROUGHNESS = mix(0.7, 0.85, rope);
+	if (side > 0.5) {
+		// The cut ends of the straws.
+		uv = vec2(obj_pos.x + obj_pos.z, obj_pos.y * 4.0) / tile_span;
+	}
+	vec3 orm = texture(orm_tex, uv).rgb;
+	ALBEDO = texture(albedo_tex, uv).rgb * tint * mix(1.0, 0.6, side);
+	AO = orm.r;
+	AO_LIGHT_AFFECT = 0.5;
+	ROUGHNESS = orm.g;
 	SPECULAR = 0.35;
-	// Each straw is round: tilt the normal across it.
-	vec3 tilt = vec3(0.0, -across * 0.35 * (1.0 - rope), 1.0);
-	NORMAL_MAP = normalize(tilt) * 0.5 + 0.5;
+	NORMAL_MAP = texture(normal_tex, uv).rgb;
 }

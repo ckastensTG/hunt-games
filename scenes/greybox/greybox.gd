@@ -3,12 +3,13 @@ extends Node3D
 ## the AI, or AI vs AI. Builds everything in code from the BoardDef, so it
 ## stays correct while the boards and rules evolve. Bagh Chal shows its art
 ## styles (titles/bagh_chal/art/); the other titles still use placeholder
-## meshes. The interface is hud.gd.
+## meshes. The interface is hud.gd; "How to play" is tutorial.gd.
 
 enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI }
 
 const SPACING := 1.0
 const HudScript := preload("res://scenes/greybox/hud.gd")
+const TutorialScript := preload("res://scenes/greybox/tutorial.gd")
 const MarkShader := preload("res://scenes/greybox/mark.gdshader")
 const AI_MOVE_DELAY := 0.35
 
@@ -29,7 +30,11 @@ var use_art := true
 ## The art style picked for each title that has more than one (style id).
 var art_style_ids := {"bagh_chal": "brass"}
 var history: Array[PackedInt32Array] = []
+## The position `history` starts from (the opening, or a tutorial position).
+var history_start: HuntState
 var status: HuntState.Status = HuntState.Status.ONGOING
+## True while "How to play" drives the board: no AI, no clicks.
+var tutorial_active := false
 
 var _rule_set_id := HuntRuleSets.BAGH_CHAL_STANDARD
 var _komikan_dogs_first := false
@@ -39,6 +44,9 @@ var _grey_env: Environment
 var _grey_key: DirectionalLight3D
 var _styles := {}  # title id -> Array[HuntArtStyle]
 var _hud: CanvasLayer
+var _tutorial: CanvasLayer
+var _saved_game := {}
+var _tween: Tween
 var _board_root: Node3D
 var _pieces_root: Node3D
 var _marks_root: Node3D
@@ -58,11 +66,19 @@ var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_rng.seed = 20261102
+	L10n.apply_saved_locale()
 	personas = _make_personas()
 	_styles["bagh_chal"] = BaghChalArt.styles()
+	var saved_look := str(L10n.load_setting("look_bagh_chal", ""))
+	for st in _styles["bagh_chal"]:
+		if st.id == saved_look:
+			art_style_ids["bagh_chal"] = saved_look
 	_build_environment()
 	_hud = HudScript.new(self)
 	add_child(_hud)
+	_tutorial = TutorialScript.new(self)
+	_tutorial.finished.connect(_on_tutorial_finished)
+	add_child(_tutorial)
 	new_game()
 
 
@@ -88,12 +104,15 @@ func _make_personas() -> Array[AIPersona]:
 # --- Game flow -------------------------------------------------------------
 
 func new_game() -> void:
+	if tutorial_active:
+		return
 	_stop_ai()
 	if _rule_set_id == HuntRuleSets.KOMIKAN:
 		rules = HuntRuleSets.komikan(HuntRuleSet.PREY if _komikan_dogs_first else HuntRuleSet.HUNTER)
 	else:
 		rules = HuntRuleSets.by_id(_rule_set_id)
 	state = HuntState.create(rules)
+	history_start = state.clone()
 	evaluator = HuntEvaluator.new(HuntRuleSets.weights_for(rules))
 	history.clear()
 	_selected = -1
@@ -116,7 +135,7 @@ func commit(move: PackedInt32Array) -> void:
 
 
 func undo() -> void:
-	if _animating or history.is_empty():
+	if _animating or history.is_empty() or tutorial_active:
 		return
 	_stop_ai()
 	var steps := 1
@@ -144,6 +163,8 @@ func _after_move() -> void:
 
 
 func _is_ai_side(side: int) -> bool:
+	if tutorial_active:
+		return false
 	match mode:
 		Mode.HUMAN_PREY:
 			return side == HuntState.HUNTER
@@ -215,7 +236,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	var click := _pending_click
 	_pending_click = Vector2.INF
-	if _animating or _ai_task >= 0 or status != HuntState.Status.ONGOING or _is_ai_side(state.side):
+	if tutorial_active or _animating or _ai_task >= 0 or status != HuntState.Status.ONGOING or _is_ai_side(state.side):
 		return
 	var origin := _camera.project_ray_origin(click)
 	var query := PhysicsRayQueryParameters3D.create(origin, origin + _camera.project_ray_normal(click) * 200.0)
@@ -371,6 +392,7 @@ func current_style() -> HuntArtStyle:
 
 ## Switch the look without touching the game in progress.
 func set_art_style(style_id: String) -> void:
+	L10n.save_setting("look_" + _title(), style_id)
 	art_style_ids[_title()] = style_id
 	_build_board()
 	_sync_pieces()
@@ -496,6 +518,7 @@ func _animate(move: PackedInt32Array) -> void:
 	_animating = true
 	var board := rules.board
 	var tween := create_tween()
+	_tween = tween
 	match move[0]:
 		HuntState.Kind.PLACE:
 			var node := _make_piece(HuntState.PREY, move[1])
@@ -609,6 +632,82 @@ func _show_last_move() -> void:
 		return
 	var m := history[history.size() - 1]
 	_mark(m[m.size() - 1], MarkShape.LAST)
+
+
+# --- How to play -----------------------------------------------------------
+
+func start_tutorial() -> void:
+	if tutorial_active:
+		return
+	_stop_ai()
+	_saved_game = {"state": state.clone(), "history": history.duplicate(), "start": history_start}
+	tutorial_active = true
+	_selected = -1
+	_chain = PackedInt32Array()
+	_tutorial.start(rules)
+	_refresh_ui()
+
+
+func _on_tutorial_finished(play_now: bool) -> void:
+	_stop_tween()
+	tutorial_active = false
+	if play_now or _saved_game.is_empty():
+		new_game()
+		return
+	state = _saved_game.state
+	history = _saved_game.history
+	history_start = _saved_game.start
+	_saved_game = {}
+	_clear_marks()
+	_sync_pieces()
+	_after_move()
+
+
+func is_animating() -> bool:
+	return _animating
+
+
+## Shows a tutorial position (a copy: the walkthrough keeps its own).
+func tutorial_set_state(s: HuntState) -> void:
+	_stop_tween()
+	state = s.clone()
+	history_start = s.clone()
+	history.clear()
+	_selected = -1
+	_chain = PackedInt32Array()
+	_clear_marks()
+	_sync_pieces()
+	status = state.status()
+	if _has_art():
+		current_style().set_awaken(0.6)
+	_refresh_ui()
+
+
+func tutorial_mark(p: int, kind: String) -> void:
+	var shapes := {"select": MarkShape.SELECTED, "step": MarkShape.STEP,
+		"capture": MarkShape.CAPTURE, "note": MarkShape.LAST}
+	_mark(p, shapes.get(kind, MarkShape.LAST))
+
+
+func tutorial_clear_marks() -> void:
+	_clear_marks()
+
+
+func tutorial_show_last_move() -> void:
+	_show_last_move()
+
+
+func tutorial_play(move: PackedInt32Array) -> void:
+	history.append(move)
+	_animate(move)
+	state.make(move)
+
+
+func _stop_tween() -> void:
+	if _tween and _tween.is_valid():
+		_tween.kill()
+	_tween = null
+	_animating = false
 
 
 # --- UI --------------------------------------------------------------------

@@ -5,7 +5,8 @@ extends SceneTree
 ##   xvfb-run -a -s "-screen 0 1920x1080x24" godot --path . --resolution 1920x1080 \
 ##     [--rendering-method forward_plus|mobile|gl_compatibility] \
 ##     -s res://tools/style_frame.gd -- --out=DIR [--plies=N] [--views=hero,ai,prey] [--tag=NAME]
-##     [--style=brass|stone] [--ui] [--select] [--result]
+##     [--style=brass|stone] [--ui] [--select] [--result] [--tutorial=STEP]
+##     [--rules=ID] [--locale=CODE] [--pseudo]
 ##
 ## Views: hero = the cinematic style frame; ai = the AI-vs-AI camera;
 ## prey = "You play the prey" (the board, and the room, turned around).
@@ -13,7 +14,12 @@ extends SceneTree
 ## seed, so every run and every renderer shows the same pieces. --style picks
 ## the Bagh Chal art style; --ui keeps the interface on screen; --select
 ## selects a piece of the side to move (a hunter with a capture if there is
-## one) to show the move highlights; --result previews the game-over card.
+## one) to show the move highlights; --result previews the game-over card;
+## --tutorial=STEP opens "How to play" at that step (1 = first); --rules picks
+## the rule set (default bagh_chal_standard); --locale shows the interface in
+## another language (e.g. de, ru, ja); --pseudo turns on Godot's
+## pseudolocalization (accents, 30% longer strings) to find text that doesn't
+## fit (framework §11).
 
 const GreyboxScript := preload("res://scenes/greybox/greybox.gd")
 
@@ -26,6 +32,10 @@ var style := "brass"
 var show_ui := false
 var select := false
 var result := false
+var tutorial_step := 0
+var rule_set := HuntRuleSets.BAGH_CHAL_STANDARD
+var locale := ""
+var pseudo := false
 var moves: Array[PackedInt32Array] = []
 var current := ""
 var frames := 0
@@ -50,17 +60,34 @@ func _initialize() -> void:
 			select = true
 		elif arg == "--result":
 			result = true
+		elif arg.begins_with("--tutorial="):
+			tutorial_step = int(arg.substr(11))
+		elif arg.begins_with("--rules="):
+			rule_set = arg.substr(8)
+		elif arg.begins_with("--locale="):
+			locale = arg.substr(9)
+		elif arg == "--pseudo":
+			pseudo = true
 	if tag == "":
 		tag = "_" + RenderingServer.get_current_rendering_method()
 	tag = "_" + style + tag
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	root.add_child(game)
+	if pseudo:
+		ProjectSettings.set_setting("internationalization/pseudolocalization/expansion_ratio", 0.3)
+		ProjectSettings.set_setting("internationalization/pseudolocalization/double_vowels", false)
+		TranslationServer.pseudolocalization_enabled = true
+		TranslationServer.reload_pseudolocalization()
 
 
 func _setup(view: String) -> void:
 	game.level = 1
-	game._rule_set_id = HuntRuleSets.BAGH_CHAL_STANDARD
+	if locale != "":
+		# After the greybox's _ready, which applies the saved language.
+		TranslationServer.set_locale(locale)
+		SeriesTheme.apply_locale()
+	game._rule_set_id = rule_set
 	game.art_style_ids["bagh_chal"] = style
 	game.mode = GreyboxScript.Mode.HUMAN_PREY if view == "prey" else GreyboxScript.Mode.AI_VS_AI
 	game.new_game()
@@ -75,13 +102,14 @@ func _setup(view: String) -> void:
 	game._clear_marks()
 	if select:
 		_select_a_piece()
+	if tutorial_step > 0:
+		game.start_tutorial()
+		game._tutorial._show(tutorial_step - 1)
 	if result:
 		game.status = HuntState.Status.PREY_WIN
 		game.state.last_reason = HuntState.Reason.HUNTER_TRAPPED
 		game._refresh_ui()
-	for c in game.get_children():
-		if c is CanvasLayer:
-			c.visible = show_ui and view != "hero"
+	game._hud.visible = show_ui and view != "hero"
 	if view == "hero":
 		if hero_cam == null:
 			hero_cam = Camera3D.new()

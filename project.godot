@@ -23,6 +23,11 @@ window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale/de.po", "res://locale/es.po", "res://locale/fr.po", "res://locale/it.po", "res://locale/ja.po", "res://locale/ko.po", "res://locale/pl.po", "res://locale/pt_BR.po", "res://locale/ru.po", "res://locale/tr.po", "res://locale/zh_CN.po")
+locale/include_text_server_data=true
+
 [rendering]
 
 anti_aliasing/quality/msaa_3d=2

@@ -22,7 +22,9 @@ git submodule update --init
 
 Open the folder in **Godot 4.7.2**. The main scene is the greybox
 (`scenes/greybox/greybox.tscn`): every v1 rule set, hotseat, either side
-against the AI (four levels), or AI vs AI.
+against the AI (four levels), or AI vs AI; "How to play" walks through each
+rule set's rules on the board, and the interface is in the 12 launch
+languages (Language in the settings).
 
 ## Layout
 
@@ -31,11 +33,16 @@ against the AI (four levels), or AI vs AI.
 | `titles/common/hunt_boards.gd` | The three boards (Bagh Chal 25 points, Adugo 31, Komikan/Mátus 38), checked by fixture tests. |
 | `titles/common/hunt_rule_sets.gd` | The four v1 rule sets (rules doc §6) and starting AI weights. |
 | `scenes/greybox/` | The playable greybox: board, pieces and move marks built in code from the board definitions, plus the HUD (`hud.gd`). |
-| `ui/` | Series UI: `SeriesTheme` (colors, panels, fonts, built in code) and the proposed fonts (`ui/fonts/README.md`). |
+| `ui/` | Series UI: `SeriesTheme` (colors, panels, fonts, built in code), the series fonts and CJK fallbacks (`ui/fonts/README.md`), and `L10n` (language helpers and the player's settings file). |
+| `titles/common/hunt_text.gd` | Player-facing sentences that name a side, written out whole per title (no "The %s won" assembled from parts). |
+| `titles/common/hunt_tutorials.gd` | "How to play": a scripted walkthrough per rule set; every move is checked by the rules engine (`tests/test_tutorials.gd`). |
+| `locale/` | `messages.pot` (the English source strings), one `.po` per language, and the termbases (`locale/termbase/*.csv`). |
 | `titles/common/hunt_art_style.gd` | `HuntArtStyle`, the base for a title's looks (environment, set, pieces). The player picks one under **Look** in the settings. |
 | `tests/` | Title tests: board fixtures, rule sets, the Lim & Nievergelt opening result. |
 | `titles/bagh_chal/art/` | Bagh Chal looks, listed by `BaghChalArt.styles()`: **Temple brass** (`brass_style.gd`: brass board, cast tiger and goat, dusk courtyard) and **Stone and pebbles** (`stone_style.gd`, `stone/`: chalk-scratched slab, river stones, straw mat in a rest-house). |
-| `tools/` | Test runner wrapper, search benchmark, headless smoke test, screenshot and style-frame tools. |
+| `tools/` | Test runner wrapper, search benchmark, headless smoke test, screenshot and style-frame tools, the Komikan balance test. |
+| `tools/komikan_tower/` | A small C program that checks whether forward-only dogs can ever trap a puma that stays in Komikan's tower (they can't). |
+| `tools/l10n/` | Localization tools (Python 3 + fontTools): string extraction, PO merge and checks, termbase lint, glyph check, CJK font subsetting. |
 | `tools/art/` | Python generators for the Claude-made art (brass board and pieces, stone set), plus the board geometry they read. |
 
 ## Commands
@@ -49,6 +56,35 @@ xvfb-run -s "-screen 0 1600x900x24" godot --path . --rendering-method gl_compati
 ```
 
 Set `GODOT=/path/to/godot` if Godot isn't on your `PATH`.
+
+### Localization
+
+All player-facing text is English source text passed through `tr()`,
+`L10n.t()` / `L10n.tn()` (plurals) or marked with `N_()`. After changing text:
+
+```sh
+python3 tools/l10n/extract_pot.py      # code -> locale/messages.pot
+python3 tools/l10n/update_po.py        # merge into every locale/*.po
+# translate the new entries, then:
+python3 tools/l10n/check_po.py         # complete, placeholders, plural forms
+python3 tools/l10n/lint_termbase.py    # approved terms (locale/termbase/*.csv)
+python3 tools/l10n/subset_cjk_fonts.py --src=DIR   # if zh/ja/ko text changed
+python3 tools/l10n/check_glyphs.py     # the fonts cover every translation
+```
+
+Screenshots in another language or with pseudolocalization (30% longer,
+accented): `tools/style_frame.gd -- ... --ui --locale=de` or `--pseudo`.
+Translations are by Claude (2026-11-03); every language needs a native
+speaker's review before release (bible §7), CJK, Russian, Polish and Turkish
+first.
+
+### Komikan balance
+
+```sh
+godot --headless --path . -s res://tools/komikan_balance.gd -- --games=8 --territory=25 \
+  [--variants=locked,sideways,free,trapial,adugo] [--matches=4v4,6v6,d6p2,d6p0,d2p6]
+cc -O2 -o /tmp/tower tools/komikan_tower/tower.c && /tmp/tower [--sideways] [--simulate=100000]
+```
 
 ### Art (Bagh Chal)
 

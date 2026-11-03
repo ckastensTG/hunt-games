@@ -57,7 +57,32 @@ func evaluate(s: HuntState) -> int:
 					prey_moves += 1
 		score -= prey_moves * w.prey_mobility
 
+	if w.hunter_territory != 0:
+		score += _territory(s) * w.hunter_territory
+
 	return score if s.side == HuntState.HUNTER else -score
+
+
+## Empty points reachable from the hunters by steps alone (prey block).
+func _territory(s: HuntState) -> int:
+	var board := s.board
+	var cells := s.cells
+	var seen := PackedByteArray()
+	seen.resize(cells.size())
+	var stack := PackedInt32Array()
+	for h in s.hunters:
+		seen[h] = 1
+		stack.append(h)
+	var count := 0
+	while not stack.is_empty():
+		var p := stack[stack.size() - 1]
+		stack.resize(stack.size() - 1)
+		for j in board.adj[p]:
+			if seen[j] == 0 and cells[j] == HuntState.EMPTY:
+				seen[j] = 1
+				count += 1
+				stack.append(j)
+	return count
 
 
 static func _popcount(x: int) -> int:
