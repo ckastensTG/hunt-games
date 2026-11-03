@@ -40,8 +40,7 @@ func test_komikan_opening() -> void:
 	check_eq(s.rules.prey_start.size(), 12, "12 dogs")
 	check_eq(s.legal_moves().size(), 4, "the puma has four steps")
 	var dogs_first := HuntState.create(HuntRuleSets.komikan(HuntRuleSet.PREY))
-	var forward := dogs_first.legal_moves()
-	check_eq(forward.size(), 9, "nine forward dog steps (two sideways steps excluded)")
+	check_eq(dogs_first.legal_moves().size(), 11, "nine forward and two sideways dog steps")
 
 
 func test_every_jump_follows_a_straight_drawn_line() -> void:

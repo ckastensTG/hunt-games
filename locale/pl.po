@@ -78,7 +78,7 @@ msgstr "Nowa partia"
 msgid "Undo"
 msgstr "Cofnij"
 
-#: scenes/greybox/hud.gd:274
+#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Jak grać"
 
@@ -120,7 +120,7 @@ msgstr "Dwóch graczy (jedno urządzenie)"
 msgid "Watch the AI play"
 msgstr "Oglądaj grę SI"
 
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
 msgid "A draw"
 msgstr "Remis"
 
@@ -130,35 +130,29 @@ msgstr "Remis"
 msgid "Captured %d / %d"
 msgstr "Zbite: %d / %d"
 
-#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
-#: scenes/greybox/hud.gd:486
-#, c-format
-msgid "Moves without a capture: %d / %d"
-msgstr "Ruchy bez bicia: %d / %d"
-
-#: scenes/greybox/hud.gd:504
+#: scenes/greybox/hud.gd:503
 msgid "No moves yet"
 msgstr "Brak ruchów"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:531
+#: scenes/greybox/hud.gd:530
 #, c-format
 msgid "place %s"
 msgstr "postawienie na %s"
 
-#: scenes/greybox/hud.gd:540
+#: scenes/greybox/hud.gd:539
 msgid "Watching the AI play both sides."
 msgstr "SI gra obiema stronami."
 
-#: scenes/greybox/hud.gd:544
+#: scenes/greybox/hud.gd:543
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Seria bić: wybierz następny skok albo zatrzymaj się."
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:549
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Wybierz, dokąd idzie. Przerwany pierścień oznacza bicie."
 
-#: scenes/greybox/hud.gd:551
+#: scenes/greybox/hud.gd:550
 msgid "Pick where it goes."
 msgstr "Wybierz, dokąd idzie."
 
@@ -188,6 +182,19 @@ msgstr "Zacznij grać"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "Dalej ›"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "Ruch kóz"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "Kozy do postawienia: %d"
+msgstr[1] "Kozy do postawienia: %d"
+msgstr[2] "Kozy do postawienia: %d"
 
 #: titles/bagh_chal/art/brass_style.gd:38
 msgid "Temple brass"
@@ -242,10 +249,6 @@ msgstr "Jogo da Onça · Komikan"
 #: titles/common/hunt_text.gd:53
 msgid "Tigers to move"
 msgstr "Ruch tygrysów"
-
-#: titles/common/hunt_text.gd:53
-msgid "Goats to move"
-msgstr "Ruch kóz"
 
 #: titles/common/hunt_text.gd:55
 msgid "Jaguar to move"
@@ -343,15 +346,6 @@ msgstr "Rusz pumę."
 msgid "Place a goat on any empty point."
 msgstr "Postaw kozę na dowolnym wolnym punkcie."
 
-#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: titles/common/hunt_text.gd:108
-#, c-format
-msgid "%d goat still to place"
-msgid_plural "%d goats still to place"
-msgstr[0] "Kozy do postawienia: %d"
-msgstr[1] "Kozy do postawienia: %d"
-msgstr[2] "Kozy do postawienia: %d"
-
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
 #: titles/common/hunt_text.gd:118
 msgid "Every goat has been captured."
@@ -406,14 +400,46 @@ msgstr "Każdy pozostały ruch powtórzyłby wcześniejszą pozycję."
 msgid "The same position came up three times."
 msgstr "Ta sama pozycja wystąpiła trzy razy."
 
-#. Reason for a draw: neither side captured during this many moves each.
-#: titles/common/hunt_text.gd:138
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:141
 #, c-format
-msgid "No capture in %d move each."
-msgid_plural "No capture in %d moves each."
-msgstr[0] "Brak bicia przez %d ruch każdej strony."
-msgstr[1] "Brak bicia przez %d ruchy każdej strony."
-msgstr[2] "Brak bicia przez %d ruchów każdej strony."
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "Tygrysy wykonały %d ruch bez bicia."
+msgstr[1] "Tygrysy wykonały %d ruchy bez bicia."
+msgstr[2] "Tygrysy wykonały %d ruchów bez bicia."
+
+#: titles/common/hunt_text.gd:143
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "Jaguar wykonał %d ruch bez bicia."
+msgstr[1] "Jaguar wykonał %d ruchy bez bicia."
+msgstr[2] "Jaguar wykonał %d ruchów bez bicia."
+
+#: titles/common/hunt_text.gd:145
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "Puma wykonała %d ruch bez bicia."
+msgstr[1] "Puma wykonała %d ruchy bez bicia."
+msgstr[2] "Puma wykonała %d ruchów bez bicia."
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:160
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "Ruchy tygrysów bez bicia: %d / %d"
+
+#: titles/common/hunt_text.gd:162
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "Ruchy jaguara bez bicia: %d / %d"
+
+#: titles/common/hunt_text.gd:164
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "Ruchy pumy bez bicia: %d / %d"
 
 #: titles/common/hunt_tutorials.gd:134
 msgid "Tigers and goats"
@@ -439,7 +465,7 @@ msgstr "Jak rusza się tygrys"
 msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
 msgstr "Tygrys przechodzi wzdłuż linii na najbliższy wolny punkt. Przekątne biegną tylko przez co drugi punkt, więc niektóre punkty mają ośmiu sąsiadów, a pozostałe czterech lub mniej."
 
-#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
 msgid "Capturing"
 msgstr "Bicie"
 
@@ -484,13 +510,13 @@ msgid "The goats win when no tiger can move: every tiger is hemmed in by goats i
 msgstr "Kozy wygrywają, gdy żaden tygrys nie może się ruszyć: każdy jest otoczony kozami, których nie może przeskoczyć."
 
 #. Walkthrough step title: the rules for a drawn game.
-#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
 msgid "Draws"
 msgstr "Remisy"
 
 #: titles/common/hunt_tutorials.gd:205
-msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
-msgstr "Gdy wszystkie kozy są już na planszy, żaden ruch nie może przywrócić pozycji, która już wystąpiła. Jeśli żadna strona nie bije przez 50 ruchów każdej strony albo każdy pozostały ruch powtórzyłby pozycję, partia kończy się remisem."
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "Gdy wszystkie kozy są już na planszy, żaden ruch nie może przywrócić pozycji, która już wystąpiła. Partia kończy się remisem, jeśli tygrysy wykonają 50 ruchów bez bicia albo każdy pozostały ruch powtórzyłby pozycję."
 
 #: titles/common/hunt_tutorials.gd:218
 msgid "The jaguar and the dogs"
@@ -536,7 +562,7 @@ msgstr "Jak wygrywa jaguar"
 msgid "The jaguar wins by capturing five dogs."
 msgstr "Jaguar wygrywa, zbijając pięć psów."
 
-#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
 msgid "How the dogs win"
 msgstr "Jak wygrywają psy"
 
@@ -545,8 +571,8 @@ msgid "The dogs win when the jaguar can't move at all."
 msgstr "Psy wygrywają, gdy jaguar w ogóle nie może się ruszyć."
 
 #: titles/common/hunt_tutorials.gd:267
-msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
-msgstr "Jeśli ta sama pozycja wystąpi trzy razy albo żadna strona nie bije przez 50 ruchów każdej strony, partia kończy się remisem."
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "Jeśli ta sama pozycja wystąpi trzy razy albo jaguar wykona 50 ruchów bez bicia, partia kończy się remisem."
 
 #: titles/common/hunt_tutorials.gd:278
 msgid "The puma and the dogs"
@@ -566,33 +592,38 @@ msgid "The puma steps along any line, in any direction, forward or back."
 msgstr "Puma chodzi wzdłuż dowolnej linii, w dowolnym kierunku, do przodu i do tyłu."
 
 #: titles/common/hunt_tutorials.gd:291
-msgid "The dogs only advance"
-msgstr "Psy tylko naprzód"
+msgid "Moving the dogs"
+msgstr "Ruchy psów"
 
 #: titles/common/hunt_tutorials.gd:292
-msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
-msgstr "Pies rusza się tylko do przodu, w stronę wieży: prosto albo po przekątnej, tam gdzie biegnie linia. Nigdy nie może iść w bok ani do tyłu."
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "Pies chodzi tak samo: wzdłuż dowolnej linii na najbliższy wolny punkt, do przodu, w bok albo do tyłu. Skakać może tylko puma."
 
-#: titles/common/hunt_tutorials.gd:298
+#: titles/common/hunt_tutorials.gd:300
 msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
 msgstr "Puma bije, przeskakując nad samotnym psem na wolny punkt za nim. Może skakać raz za razem, zmieniając kierunek, i zatrzymać się po dowolnym skoku. Dwa psy jeden za drugim na linii chronią się nawzajem."
 
-#: titles/common/hunt_tutorials.gd:305
+#: titles/common/hunt_tutorials.gd:307
 msgid "The dogs win by hemming the puma in so that it can't move."
 msgstr "Psy wygrywają, osaczając pumę tak, by nie mogła się ruszyć."
 
-#: titles/common/hunt_tutorials.gd:313
+#: titles/common/hunt_tutorials.gd:315
 msgid "How the puma wins"
 msgstr "Jak wygrywa puma"
 
-#: titles/common/hunt_tutorials.gd:314
-msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
-msgstr "Puma wygrywa, zjadając wszystkie dwanaście psów albo gdy psy nie mogą się już ruszyć. Psy idą tylko naprzód, więc prędzej czy później kończą im się ruchy."
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "Puma wygrywa, gdy tylko zje trzy psy."
 
-#: titles/common/hunt_tutorials.gd:321
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "Jeśli ta sama pozycja wystąpi trzy razy albo puma wykona 50 ruchów bez bicia, partia kończy się remisem."
+
+#: titles/common/hunt_tutorials.gd:330
 msgid "A reconstruction"
 msgstr "Rekonstrukcja"
 
-#: titles/common/hunt_tutorials.gd:322
-msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
-msgstr "Komikan został spisany na początku XX wieku, a relacje mają luki. Nie wiadomo, co dzieje się w wieży ani kto zaczyna: tutaj wieża to zwykła część planszy, a pierwsza rusza się puma, chyba że zmienisz to w ustawieniach."
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "W relacjach spisanych sto lat temu psy mogą iść tylko do przodu, a wtedy puma, która zostaje w wieży, nigdy nie zostanie złapana. Tutaj psy chodzą, a puma wygrywa jak w Trapial-Kuzen, współczesnej mapuczeńskiej wersji gry. Wieża to zwykła część planszy, a pierwsza rusza się puma, chyba że zmienisz to w ustawieniach."

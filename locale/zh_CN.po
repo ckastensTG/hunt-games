@@ -78,7 +78,7 @@ msgstr "新对局"
 msgid "Undo"
 msgstr "悔棋"
 
-#: scenes/greybox/hud.gd:274
+#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "玩法"
 
@@ -120,7 +120,7 @@ msgstr "双人（同一设备）"
 msgid "Watch the AI play"
 msgstr "观看 AI 对弈"
 
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
 msgid "A draw"
 msgstr "和棋"
 
@@ -130,35 +130,29 @@ msgstr "和棋"
 msgid "Captured %d / %d"
 msgstr "已吃 %d / %d"
 
-#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
-#: scenes/greybox/hud.gd:486
-#, c-format
-msgid "Moves without a capture: %d / %d"
-msgstr "未吃子步数：%d / %d"
-
-#: scenes/greybox/hud.gd:504
+#: scenes/greybox/hud.gd:503
 msgid "No moves yet"
 msgstr "尚无着法"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:531
+#: scenes/greybox/hud.gd:530
 #, c-format
 msgid "place %s"
 msgstr "放在 %s"
 
-#: scenes/greybox/hud.gd:540
+#: scenes/greybox/hud.gd:539
 msgid "Watching the AI play both sides."
 msgstr "AI 正在替双方下棋。"
 
-#: scenes/greybox/hud.gd:544
+#: scenes/greybox/hud.gd:543
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "连跳吃子：选择下一个落点，或到此为止。"
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:549
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "选择去向。断开的圆环表示吃子。"
 
-#: scenes/greybox/hud.gd:551
+#: scenes/greybox/hud.gd:550
 msgid "Pick where it goes."
 msgstr "选择去向。"
 
@@ -188,6 +182,17 @@ msgstr "开始对局"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "下一步 ›"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "轮到山羊"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "还剩 %d 只山羊待放"
 
 #: titles/bagh_chal/art/brass_style.gd:38
 msgid "Temple brass"
@@ -242,10 +247,6 @@ msgstr "Jogo da Onça · Komikan"
 #: titles/common/hunt_text.gd:53
 msgid "Tigers to move"
 msgstr "轮到老虎"
-
-#: titles/common/hunt_text.gd:53
-msgid "Goats to move"
-msgstr "轮到山羊"
 
 #: titles/common/hunt_text.gd:55
 msgid "Jaguar to move"
@@ -343,13 +344,6 @@ msgstr "移动美洲狮。"
 msgid "Place a goat on any empty point."
 msgstr "将一只山羊放到任意空点上。"
 
-#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: titles/common/hunt_text.gd:108
-#, c-format
-msgid "%d goat still to place"
-msgid_plural "%d goats still to place"
-msgstr[0] "还剩 %d 只山羊待放"
-
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
 #: titles/common/hunt_text.gd:118
 msgid "Every goat has been captured."
@@ -400,12 +394,40 @@ msgstr "剩下的每一步都会重复之前的局面。"
 msgid "The same position came up three times."
 msgstr "同一局面出现了三次。"
 
-#. Reason for a draw: neither side captured during this many moves each.
-#: titles/common/hunt_text.gd:138
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:141
 #, c-format
-msgid "No capture in %d move each."
-msgid_plural "No capture in %d moves each."
-msgstr[0] "双方各 %d 步都没有吃子。"
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "老虎连续走了 %d 步都没有吃子。"
+
+#: titles/common/hunt_text.gd:143
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "美洲豹连续走了 %d 步都没有吃子。"
+
+#: titles/common/hunt_text.gd:145
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "美洲狮连续走了 %d 步都没有吃子。"
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:160
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "老虎未吃子步数：%d / %d"
+
+#: titles/common/hunt_text.gd:162
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "美洲豹未吃子步数：%d / %d"
+
+#: titles/common/hunt_text.gd:164
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "美洲狮未吃子步数：%d / %d"
 
 #: titles/common/hunt_tutorials.gd:134
 msgid "Tigers and goats"
@@ -431,7 +453,7 @@ msgstr "老虎怎么走"
 msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
 msgstr "老虎沿着线走到相邻的空点。斜线只经过每隔一个的点，所以有些点有八个相邻点，其余的只有四个或更少。"
 
-#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
 msgid "Capturing"
 msgstr "吃子"
 
@@ -476,13 +498,13 @@ msgid "The goats win when no tiger can move: every tiger is hemmed in by goats i
 msgstr "当没有一只老虎能移动时，山羊获胜：每只老虎都被跳不过去的山羊围住了。"
 
 #. Walkthrough step title: the rules for a drawn game.
-#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
 msgid "Draws"
 msgstr "和棋"
 
 #: titles/common/hunt_tutorials.gd:205
-msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
-msgstr "山羊全部放完后，任何一步都不能让已经出现过的局面再次出现。如果双方各走 50 步都没有吃子，或者剩下的每一步都会重复局面，则为和棋。"
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "山羊全部放完后，任何一步都不能让已经出现过的局面再次出现。如果老虎连续走 50 步都没有吃子，或者剩下的每一步都会重复局面，则为和棋。"
 
 #: titles/common/hunt_tutorials.gd:218
 msgid "The jaguar and the dogs"
@@ -528,7 +550,7 @@ msgstr "美洲豹怎样获胜"
 msgid "The jaguar wins by capturing five dogs."
 msgstr "美洲豹吃掉五只狗即获胜。"
 
-#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
 msgid "How the dogs win"
 msgstr "狗怎样获胜"
 
@@ -537,8 +559,8 @@ msgid "The dogs win when the jaguar can't move at all."
 msgstr "当美洲豹完全无法移动时，狗获胜。"
 
 #: titles/common/hunt_tutorials.gd:267
-msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
-msgstr "如果同一局面出现三次，或者双方各走 50 步都没有吃子，则为和棋。"
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "如果同一局面出现三次，或者美洲豹连续走 50 步都没有吃子，则为和棋。"
 
 #: titles/common/hunt_tutorials.gd:278
 msgid "The puma and the dogs"
@@ -558,33 +580,38 @@ msgid "The puma steps along any line, in any direction, forward or back."
 msgstr "美洲狮可以沿任何一条线向任意方向走，前进或后退都行。"
 
 #: titles/common/hunt_tutorials.gd:291
-msgid "The dogs only advance"
-msgstr "狗只能前进"
+msgid "Moving the dogs"
+msgstr "移动狗"
 
 #: titles/common/hunt_tutorials.gd:292
-msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
-msgstr "狗只能向前、朝塔的方向走：直走，或者在有斜线的地方斜走。狗永远不能横走或后退。"
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "狗的走法相同：沿任何一条线走到下一个空点，向前、横走或后退都行。只有美洲狮能跳。"
 
-#: titles/common/hunt_tutorials.gd:298
+#: titles/common/hunt_tutorials.gd:300
 msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
 msgstr "美洲狮跳过一只孤立的狗、落在其后的空点上，就吃掉它。它可以改变方向一跳再跳，也可以在任何一跳之后停下。同一条线上前后相连的两只狗互相保护。"
 
-#: titles/common/hunt_tutorials.gd:305
+#: titles/common/hunt_tutorials.gd:307
 msgid "The dogs win by hemming the puma in so that it can't move."
 msgstr "狗把美洲狮围困到无法移动，就获胜。"
 
-#: titles/common/hunt_tutorials.gd:313
+#: titles/common/hunt_tutorials.gd:315
 msgid "How the puma wins"
 msgstr "美洲狮怎样获胜"
 
-#: titles/common/hunt_tutorials.gd:314
-msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
-msgstr "美洲狮吃掉全部十二只狗，或者狗再也无法移动时，美洲狮获胜。狗只能前进，所以迟早会无棋可走。"
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "美洲狮一吃掉三只狗就获胜。"
 
-#: titles/common/hunt_tutorials.gd:321
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "如果同一局面出现三次，或者美洲狮连续走 50 步都没有吃子，则为和棋。"
+
+#: titles/common/hunt_tutorials.gd:330
 msgid "A reconstruction"
 msgstr "一种复原"
 
-#: titles/common/hunt_tutorials.gd:322
-msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
-msgstr "Komikan 是在二十世纪初被记录下来的，记载并不完整。塔里会发生什么、谁先走，都没有记录：这里把塔当作普通棋盘，美洲狮先走，除非你在设置中更改。"
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "在一百年前的记载中，狗只能向前走，这样一来，待在塔里的美洲狮就永远抓不到。这里狗的走法和美洲狮的胜利条件采用 Trapial-Kuzen，这是该游戏的一种现代马普切版本。塔被当作普通棋盘，美洲狮先走，除非你在设置中更改。"

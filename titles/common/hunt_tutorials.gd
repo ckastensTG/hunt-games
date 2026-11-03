@@ -202,7 +202,7 @@ static func _bagh_chal(parlett: bool) -> Array:
 		{
 			# TRANSLATORS: Walkthrough step title: the rules for a drawn game.
 			"title": N_("Draws"),
-			"text": N_("Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."),
+			"text": N_("Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."),
 			"setup": "start",
 			"marks": [["a1", "select"], ["e1", "select"], ["a5", "select"], ["e5", "select"]],
 		},
@@ -264,7 +264,7 @@ static func _adugo() -> Array:
 		{
 			# TRANSLATORS: Walkthrough step title: the rules for a drawn game.
 			"title": N_("Draws"),
-			"text": N_("If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."),
+			"text": N_("If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."),
 			"setup": "start",
 		},
 	]
@@ -288,17 +288,19 @@ static func _komikan() -> Array:
 			"moves": [["step", "T(1.5,0)", "T(1,0)"]],
 		},
 		{
-			"title": N_("The dogs only advance"),
-			"text": N_("A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."),
-			"marks": [["b2", "select"], ["b3", "step"], ["c3", "step"]],
-			"moves": [["step", "b2", "c3"]],
+			"title": N_("Moving the dogs"),
+			"text": N_("A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."),
+			"setup": {"hunters": ["T(1.5,0)"],
+				"prey": ["a1", "b1", "c1", "d1", "e1", "a2", "b2", "d2", "e2", "a3", "e3", "c3"], "side": "prey"},
+			"marks": [["c3", "select"], ["c2", "step"], ["b3", "step"], ["d3", "step"], ["b4", "step"], ["c4", "step"], ["d4", "step"]],
+			"moves": [["step", "c3", "c2"]],
 		},
 		{
 			"title": N_("Capturing"),
 			"text": N_("The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."),
 			"setup": {"hunters": ["a1"], "prey": ["a2", "b3", "c4", "d2", "e2", "d3", "e3", "d4", "e4", "b5", "d5", "e5"], "side": "hunter"},
-			"marks": [["a1", "select"], ["a3", "capture"], ["c3", "capture"], ["c5", "capture"]],
-			"moves": [["jump", "a1", "a3", "c3", "c5"]],
+			"marks": [["a1", "select"], ["a3", "capture"], ["c3", "capture"]],
+			"moves": [["jump", "a1", "a3", "c3"]],
 		},
 		{
 			"title": N_("How the dogs win"),
@@ -311,15 +313,23 @@ static func _komikan() -> Array:
 		},
 		{
 			"title": N_("How the puma wins"),
-			"text": N_("The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."),
-			"setup": {"hunters": ["c3"], "prey": ["c4"], "captured": 11, "side": "hunter"},
+			"text": N_("The puma wins as soon as it has eaten three dogs."),
+			"setup": {"hunters": ["c3"], "prey": ["c4", "a1", "b1", "d1", "e1", "a2", "e2", "b2", "d2", "a3"],
+				"captured": 2, "side": "hunter"},
 			"marks": [["c3", "select"], ["c5", "capture"]],
 			"moves": [["jump", "c3", "c5"]],
 			"outcome": "hunter_win",
 		},
 		{
+			# TRANSLATORS: Walkthrough step title: the rules for a drawn game.
+			"title": N_("Draws"),
+			"text": N_("If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."),
+			"setup": "start",
+		},
+		{
 			"title": N_("A reconstruction"),
-			"text": N_("Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."),
+			# TRANSLATORS: Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+			"text": N_("In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."),
 			"setup": "start",
 		},
 	]

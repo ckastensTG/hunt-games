@@ -133,7 +133,32 @@ static func reason(title: String, why: HuntState.Reason, rules: HuntRuleSet) -> 
 		HuntState.Reason.THREEFOLD:
 			return L10n.t("The same position came up three times.")
 		HuntState.Reason.NO_CAPTURE_LIMIT:
-			var each := rules.no_capture_limit_plies / 2
-			# TRANSLATORS: Reason for a draw: neither side captured during this many moves each.
-			return L10n.tn("No capture in %d move each.", "No capture in %d moves each.", each) % each
+			# Only the hunters capture, so the limit is told as their moves.
+			var n := rules.no_capture_limit_plies / 2
+			match title:
+				"bagh_chal":
+					# TRANSLATORS: Reason for a draw: the tigers made this many moves in a row without a capture.
+					return L10n.tn("The tigers went %d move without capturing.", "The tigers went %d moves without capturing.", n) % n
+				"adugo":
+					return L10n.tn("The jaguar went %d move without capturing.", "The jaguar went %d moves without capturing.", n) % n
+				_:
+					return L10n.tn("The puma went %d move without capturing.", "The puma went %d moves without capturing.", n) % n
 	return ""
+
+
+## The count toward the no-capture draw, in the hunter's moves (the rule is
+## 50 moves each, and only the hunter captures): "Tiger moves without
+## capturing: 12 / 50".
+static func quiet_moves(title: String, state: HuntState, rules: HuntRuleSet) -> String:
+	var q := state.quiet_plies
+	# The last ply was by the side not to move; with an odd count it also made the first.
+	var hunter_moves := (q + 1) / 2 if q % 2 == 1 and state.side == HuntState.PREY else q / 2
+	var limit := rules.no_capture_limit_plies / 2
+	match title:
+		"bagh_chal":
+			# TRANSLATORS: Count toward the draw rule: tiger moves since the last capture / the limit.
+			return L10n.t("Tiger moves without capturing: %d / %d") % [hunter_moves, limit]
+		"adugo":
+			return L10n.t("Jaguar moves without capturing: %d / %d") % [hunter_moves, limit]
+		_:
+			return L10n.t("Puma moves without capturing: %d / %d") % [hunter_moves, limit]

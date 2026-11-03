@@ -78,7 +78,7 @@ msgstr "Yeni oyun"
 msgid "Undo"
 msgstr "Geri al"
 
-#: scenes/greybox/hud.gd:274
+#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Nasıl oynanır"
 
@@ -120,7 +120,7 @@ msgstr "İki oyuncu (aynı cihaz)"
 msgid "Watch the AI play"
 msgstr "YZ'yi izle"
 
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
 msgid "A draw"
 msgstr "Berabere"
 
@@ -130,35 +130,29 @@ msgstr "Berabere"
 msgid "Captured %d / %d"
 msgstr "Alınan: %d / %d"
 
-#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
-#: scenes/greybox/hud.gd:486
-#, c-format
-msgid "Moves without a capture: %d / %d"
-msgstr "Taş alınmayan hamleler: %d / %d"
-
-#: scenes/greybox/hud.gd:504
+#: scenes/greybox/hud.gd:503
 msgid "No moves yet"
 msgstr "Henüz hamle yok"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:531
+#: scenes/greybox/hud.gd:530
 #, c-format
 msgid "place %s"
 msgstr "koy: %s"
 
-#: scenes/greybox/hud.gd:540
+#: scenes/greybox/hud.gd:539
 msgid "Watching the AI play both sides."
 msgstr "YZ iki tarafı da oynuyor."
 
-#: scenes/greybox/hud.gd:544
+#: scenes/greybox/hud.gd:543
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Alış zinciri: sıradaki atlamayı seç ya da burada dur."
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:549
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Nereye gideceğini seç. Kırık halka bir alışı gösterir."
 
-#: scenes/greybox/hud.gd:551
+#: scenes/greybox/hud.gd:550
 msgid "Pick where it goes."
 msgstr "Nereye gideceğini seç."
 
@@ -188,6 +182,18 @@ msgstr "Oynamaya başla"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "İleri ›"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "Sıra keçilerde"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "Konacak keçi: %d"
+msgstr[1] "Konacak keçi: %d"
 
 #: titles/bagh_chal/art/brass_style.gd:38
 msgid "Temple brass"
@@ -242,10 +248,6 @@ msgstr "Jogo da Onça · Komikan"
 #: titles/common/hunt_text.gd:53
 msgid "Tigers to move"
 msgstr "Sıra kaplanlarda"
-
-#: titles/common/hunt_text.gd:53
-msgid "Goats to move"
-msgstr "Sıra keçilerde"
 
 #: titles/common/hunt_text.gd:55
 msgid "Jaguar to move"
@@ -343,14 +345,6 @@ msgstr "Pumayı oynat."
 msgid "Place a goat on any empty point."
 msgstr "Herhangi bir boş noktaya bir keçi koy."
 
-#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: titles/common/hunt_text.gd:108
-#, c-format
-msgid "%d goat still to place"
-msgid_plural "%d goats still to place"
-msgstr[0] "Konacak keçi: %d"
-msgstr[1] "Konacak keçi: %d"
-
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
 #: titles/common/hunt_text.gd:118
 msgid "Every goat has been captured."
@@ -403,13 +397,43 @@ msgstr "Kalan her hamle daha önceki bir konumu tekrarlar."
 msgid "The same position came up three times."
 msgstr "Aynı konum üç kez ortaya çıktı."
 
-#. Reason for a draw: neither side captured during this many moves each.
-#: titles/common/hunt_text.gd:138
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:141
 #, c-format
-msgid "No capture in %d move each."
-msgid_plural "No capture in %d moves each."
-msgstr[0] "İki taraf da %d hamle boyunca taş almadı."
-msgstr[1] "İki taraf da %d hamle boyunca taş almadı."
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "Kaplanlar %d hamle boyunca taş almadı."
+msgstr[1] "Kaplanlar %d hamle boyunca taş almadı."
+
+#: titles/common/hunt_text.gd:143
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "Jaguar %d hamle boyunca taş almadı."
+msgstr[1] "Jaguar %d hamle boyunca taş almadı."
+
+#: titles/common/hunt_text.gd:145
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "Puma %d hamle boyunca taş almadı."
+msgstr[1] "Puma %d hamle boyunca taş almadı."
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:160
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "Kaplanların taş almadan yaptığı hamleler: %d / %d"
+
+#: titles/common/hunt_text.gd:162
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "Jaguarın taş almadan yaptığı hamleler: %d / %d"
+
+#: titles/common/hunt_text.gd:164
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "Pumanın taş almadan yaptığı hamleler: %d / %d"
 
 #: titles/common/hunt_tutorials.gd:134
 msgid "Tigers and goats"
@@ -435,7 +459,7 @@ msgstr "Kaplan nasıl hareket eder"
 msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
 msgstr "Kaplan bir çizgi boyunca bir sonraki boş noktaya gider. Çaprazlar yalnızca her iki noktadan birinden geçer; bu yüzden bazı noktaların sekiz komşusu, diğerlerinin ise dört ya da daha az komşusu vardır."
 
-#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
 msgid "Capturing"
 msgstr "Taş almak"
 
@@ -480,13 +504,13 @@ msgid "The goats win when no tiger can move: every tiger is hemmed in by goats i
 msgstr "Hiçbir kaplan hareket edemediğinde keçiler kazanır: her kaplan, üstünden atlayamadığı keçilerle çevrilmiştir."
 
 #. Walkthrough step title: the rules for a drawn game.
-#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
 msgid "Draws"
 msgstr "Beraberlik"
 
 #: titles/common/hunt_tutorials.gd:205
-msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
-msgstr "Bütün keçiler konduktan sonra hiçbir hamle daha önce görülmüş bir konumu geri getiremez. Taraflardan hiçbiri 50'şer hamle boyunca taş almazsa ya da kalan her hamle bir konumu tekrarlayacaksa oyun berabere biter."
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "Bütün keçiler konduktan sonra hiçbir hamle daha önce görülmüş bir konumu geri getiremez. Kaplanlar 50 hamle boyunca taş almazsa ya da kalan her hamle bir konumu tekrarlayacaksa oyun berabere biter."
 
 #: titles/common/hunt_tutorials.gd:218
 msgid "The jaguar and the dogs"
@@ -532,7 +556,7 @@ msgstr "Jaguar nasıl kazanır"
 msgid "The jaguar wins by capturing five dogs."
 msgstr "Jaguar beş köpek alarak kazanır."
 
-#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
 msgid "How the dogs win"
 msgstr "Köpekler nasıl kazanır"
 
@@ -541,8 +565,8 @@ msgid "The dogs win when the jaguar can't move at all."
 msgstr "Jaguar hiç hareket edemediğinde köpekler kazanır."
 
 #: titles/common/hunt_tutorials.gd:267
-msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
-msgstr "Aynı konum üç kez ortaya çıkarsa ya da taraflardan hiçbiri 50'şer hamle boyunca taş almazsa oyun berabere biter."
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "Aynı konum üç kez ortaya çıkarsa ya da jaguar 50 hamle boyunca taş almazsa oyun berabere biter."
 
 #: titles/common/hunt_tutorials.gd:278
 msgid "The puma and the dogs"
@@ -562,33 +586,38 @@ msgid "The puma steps along any line, in any direction, forward or back."
 msgstr "Puma herhangi bir çizgi boyunca, herhangi bir yönde, ileri ya da geri gider."
 
 #: titles/common/hunt_tutorials.gd:291
-msgid "The dogs only advance"
-msgstr "Köpekler yalnızca ilerler"
+msgid "Moving the dogs"
+msgstr "Köpeklerin hamleleri"
 
 #: titles/common/hunt_tutorials.gd:292
-msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
-msgstr "Köpek yalnızca ileri, kuleye doğru gider: dümdüz ya da o yöne bir çizgi uzanıyorsa çapraz. Asla yana ya da geri gidemez."
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "Köpek de aynı şekilde gider: herhangi bir çizgi boyunca bir sonraki boş noktaya, ileri, yana ya da geri. Yalnızca puma atlayabilir."
 
-#: titles/common/hunt_tutorials.gd:298
+#: titles/common/hunt_tutorials.gd:300
 msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
 msgstr "Puma, yalnız duran bir köpeğin üstünden atlayıp arkasındaki boş noktaya konarak onu alır. Yön değiştirerek yine ve yine atlayabilir ve herhangi bir atlamadan sonra durabilir. Bir çizgi üzerinde art arda duran iki köpek birbirini korur."
 
-#: titles/common/hunt_tutorials.gd:305
+#: titles/common/hunt_tutorials.gd:307
 msgid "The dogs win by hemming the puma in so that it can't move."
 msgstr "Köpekler, pumayı hareket edemeyecek biçimde kuşatarak kazanır."
 
-#: titles/common/hunt_tutorials.gd:313
+#: titles/common/hunt_tutorials.gd:315
 msgid "How the puma wins"
 msgstr "Puma nasıl kazanır"
 
-#: titles/common/hunt_tutorials.gd:314
-msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
-msgstr "Puma, on iki köpeğin hepsini yiyerek ya da köpekler artık hareket edemediğinde kazanır. Köpekler yalnızca ilerler, bu yüzden er ya da geç hamleleri tükenir."
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "Puma üç köpek yer yemez kazanır."
 
-#: titles/common/hunt_tutorials.gd:321
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "Aynı konum üç kez ortaya çıkarsa ya da puma 50 hamle boyunca taş almazsa oyun berabere biter."
+
+#: titles/common/hunt_tutorials.gd:330
 msgid "A reconstruction"
 msgstr "Bir yeniden kurgu"
 
-#: titles/common/hunt_tutorials.gd:322
-msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
-msgstr "Komikan yirminci yüzyılın başında yazıya geçirildi ve anlatımlarda boşluklar var. Kulede ne olduğu ve ilk hamleyi kimin yaptığı kayıtlı değil: burada kule sıradan bir tahta parçasıdır ve sen ayarlardan değiştirmedikçe ilk hamleyi puma yapar."
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "Yüz yıl önce yazıya geçirilen anlatımlarda köpekler yalnızca ileri gidebilir; o zaman kulede kalan bir puma asla yakalanamaz. Burada köpeklerin hareketi ve pumanın kazanması, oyunun günümüzdeki bir Mapuche sürümü olan Trapial-Kuzen'deki gibidir. Kule sıradan bir tahta parçasıdır ve sen ayarlardan değiştirmedikçe ilk hamleyi puma yapar."

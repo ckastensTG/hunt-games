@@ -77,8 +77,12 @@ static func adugo() -> HuntRuleSet:
 	return r
 
 
-## Jogo da Onça, Komikan (rules §4.2). Who moves first is an option; the
-## puma moves first by default.
+## Jogo da Onça, Komikan (rules §4.2): the Mátus board and setup, with the
+## movement and win of the modern Mapuche Trapial-Kuzen rules (decided by
+## Christopher 2026-11-03): dogs step in any direction and the puma wins at
+## three captures. Mátus's forward-only dogs can never trap a puma that stays
+## in the tower (tools/komikan_tower/). Draws as in Adugo [ENGINE RULE]. Who
+## moves first is an option; the puma moves first by default.
 static func komikan(first_player := HuntRuleSet.HUNTER) -> HuntRuleSet:
 	var board := HuntBoards.komikan_matus()
 	var r := HuntRuleSet.new()
@@ -93,11 +97,10 @@ static func komikan(first_player := HuntRuleSet.HUNTER) -> HuntRuleSet:
 	r.prey_start = _ids(board, dogs)
 	r.first_player = first_player
 	r.multi_jump = true
-	r.prey_forward_only = true
-	r.capture_target = 12
-	r.repetition = HuntRuleSet.Repetition.NONE
-	r.no_capture_limit_plies = 0
-	r.prey_stuck_result = HuntRuleSet.StuckResult.HUNTER_WIN
+	r.capture_target = 3
+	r.repetition = HuntRuleSet.Repetition.THREEFOLD_DRAW
+	r.no_capture_limit_plies = 100
+	r.prey_stuck_result = HuntRuleSet.StuckResult.DRAW
 	r.name_key = "RULESET_KOMIKAN"
 	r.source_key = "SOURCE_KOMIKAN"
 	return r
@@ -118,7 +121,6 @@ static func weights_for(rule_set: HuntRuleSet) -> HuntEvalWeights:
 			w.hunter_blocked = 0
 			w.hunter_mobility = 18
 			w.prey_mobility = 12
-			w.capture = 400  # twelve to eat; each one matters less than in Bagh Chal
 	return w
 
 

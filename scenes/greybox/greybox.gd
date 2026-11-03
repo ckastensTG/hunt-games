@@ -83,22 +83,7 @@ func _ready() -> void:
 
 
 func _make_personas() -> Array[AIPersona]:
-	var out: Array[AIPersona] = []
-	for spec in [
-		["novice", 2, 0, 400, 0.6, 120.0],
-		["apprentice", 3, 0, 200, 0.35, 80.0],
-		["adept", 5, 1500, 80, 0.15, 40.0],
-		["master", 8, 2500, 0, 0.0, 1.0],
-	]:
-		var p := AIPersona.new()
-		p.id = spec[0]
-		p.max_depth = spec[1]
-		p.time_limit_ms = spec[2]
-		p.candidate_window = spec[3]
-		p.mistake_rate = spec[4]
-		p.temperature = spec[5]
-		out.append(p)
-	return out
+	return HuntPersonas.all()
 
 
 # --- Game flow -------------------------------------------------------------

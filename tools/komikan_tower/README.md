@@ -2,7 +2,7 @@
 
 Can the dogs ever beat a puma that stays inside the tower (the triangle)?
 
-**Under the locked rules (dogs step forward only): no.** The tower has one way in, its apex. Dogs that can only go forward reach it one at a time, can't spread sideways around the puma and can't back out. The puma never has to leave, and it eats any dog that comes in without a second dog behind it. Since forward-only dogs have a limited number of moves, they eventually can't move and lose. The puma wins with correct play, whoever moves first.
+**With Mátus's forward-only dogs (Komikan's rules until 2026-11-03): no.** The tower has one way in, its apex. Dogs that can only go forward reach it one at a time, can't spread sideways around the puma and can't back out. The puma never has to leave, and it eats any dog that comes in without a second dog behind it. Since forward-only dogs have a limited number of moves, they eventually can't move and lose. The puma wins with correct play, whoever moves first. That's why Komikan now follows the modern Trapial-Kuzen rules for movement and the win (rules doc §4.2).
 
 If the dogs may also step sideways (never back), the same check finds that 6 dogs can force a trap in the tower.
 
@@ -17,7 +17,7 @@ The puma only moves inside the tower. Both sides then play perfectly over every 
 ## Running it
 ```
 cc -O2 -o /tmp/tower tools/komikan_tower/tower.c
-/tmp/tower                      # forward-only dogs (the locked rules)
+/tmp/tower                      # forward-only dogs (Mátus)
 /tmp/tower --sideways           # dogs may also step sideways
 /tmp/tower --simulate=100000    # real games, puma in the tower
 ```

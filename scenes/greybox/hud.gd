@@ -480,10 +480,9 @@ func refresh() -> void:
 		_captured_pips.add_child(SeriesTheme.token(PREY_TOKEN, pip, i < state.captured))
 	_hand.visible = state.reserve > 0
 	_hand.text = HuntText.prey_in_hand(state.reserve)
-	var quiet_on: bool = rules.no_capture_limit_plies > 0 and state.reserve == 0 and state.quiet_plies > 0
+	var quiet_on: bool = rules.no_capture_limit_plies > 0 and state.reserve == 0 and state.quiet_plies >= 2
 	_quiet.visible = quiet_on
-	# TRANSLATORS: Count toward the draw rule: moves (by either side) since the last capture / the limit.
-	_quiet.text = L10n.t("Moves without a capture: %d / %d") % [state.quiet_plies, rules.no_capture_limit_plies]
+	_quiet.text = HuntText.quiet_moves(title_id, state, rules)
 
 	# Hint.
 	_hint.text = "" if teaching else _hint_text(title_id)

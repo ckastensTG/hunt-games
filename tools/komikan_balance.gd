@@ -1,20 +1,22 @@
 extends SceneTree
-## Komikan balance test: AI self-play under the locked rules (rules doc §4.2)
-## and under alternative readings, to see how hard each side finds it to win.
+## Komikan balance test: AI self-play under the shipped rules (rules doc §4.2)
+## and under other readings, to see how hard each side finds it to win.
 ##
 ##   godot --headless --path . -s res://tools/komikan_balance.gd -- \
-##     [--variants=locked,sideways,free,trapial] [--matches=2v2,4v4,6v6,d6p2,d2p6]
+##     [--variants=shipped,matus,sideways,free,adugo] [--matches=2v2,4v4,6v6,d6p2,d2p6]
 ##     [--games=16] [--first=hunter|prey] [--seed=1] [--csv=PATH] [--territory=W]
 ##
 ## Variants:
-##   locked    the rules as locked: dogs step forward only (never sideways or
-##             back), the puma must eat all 12, dogs that can't move lose.
-##   sideways  dogs may also step sideways, never back ("must always advance"
-##             read as "never retreat"). Threefold repetition and the 100-ply
-##             no-capture limit are draws.
-##   free      dogs move in any direction, as in Adugo. Eat all 12 to win;
-##             stuck dogs, threefold and the no-capture limit are draws.
-##   trapial   the modern Trapial-Kuzen reading: any direction, 3 captures win.
+##   shipped   the rules in the game since 2026-11-03 (Trapial-Kuzen movement
+##             and win): dogs step in any direction, 3 captures win, threefold
+##             repetition, the 100-ply no-capture limit and stuck dogs draw.
+##   matus     the rules until 2026-11-03 (Mátus 1918-19): dogs step forward
+##             only, never sideways or back; the puma must eat all 12; dogs
+##             that can't move lose. The dogs can never trap a puma that stays
+##             in the tower (tools/komikan_tower/).
+##   sideways  matus, but dogs may also step sideways, never back. Threefold
+##             repetition and the 100-ply no-capture limit are draws.
+##   free      dogs move in any direction and the puma must eat all 12.
 ##   adugo     Jogo da Onça's own rules, for comparison (14 dogs, 5 captures).
 ##
 ## Matches: "4v4" = dogs search depth 4 vs puma depth 4; "d6p2" = dogs 6 vs
@@ -23,7 +25,7 @@ extends SceneTree
 ## evaluator's territory term (the puma's reachable space), which the dogs
 ## need to plan a trap.
 
-var variants := ["locked", "sideways", "free", "trapial"]
+var variants := ["shipped", "matus", "sideways", "free"]
 var matches := ["2v2", "4v4", "6v6", "d6p2", "d2p6"]
 var games := 16
 var first := HuntRuleSet.HUNTER
@@ -52,7 +54,7 @@ func _init() -> void:
 	if csv_path != "":
 		csv = FileAccess.open(csv_path, FileAccess.WRITE)
 		csv.store_line("variant,first,match,game,result,reason,plies,captured")
-	print("variant   first  match  games  dogs win  puma win (all eaten / dogs stuck / other)  draws  avg plies  avg eaten")
+	print("variant   first  match  games  dogs win  puma win (capture target / dogs stuck / other)  draws  avg plies  avg eaten")
 	for v in variants:
 		var rules := make_rules(v)
 		for m in matches:
@@ -79,7 +81,7 @@ func _init() -> void:
 					csv.store_line("%s,%s,%s,%d,%s,%s,%d,%d" % [v, "puma" if first == HuntRuleSet.HUNTER else "dogs", m, g,
 						HuntState.Status.keys()[r.status], HuntState.Reason.keys()[r.reason], r.plies, r.captured])
 					csv.flush()
-			print("%-9s %-6s %-6s %5d  %8d  %8d (%d / %d / %d)  %26d  %9.0f  %9.1f" % [
+			print("%-9s %-6s %-6s %5d  %8d  %8d (%d / %d / %d)  %32d  %9.0f  %9.1f" % [
 				v, "puma" if first == HuntRuleSet.HUNTER else "dogs", m, games, tally.dogs, tally.puma,
 				tally.eaten, tally.stuck, tally.puma_other, tally.draw,
 				float(tally.plies) / games, float(tally.captured) / games])
@@ -88,23 +90,22 @@ func _init() -> void:
 
 func make_rules(variant: String) -> HuntRuleSet:
 	var r := HuntRuleSets.komikan(first)
-	if variant == "adugo":
-		return HuntRuleSets.adugo()
+	var matus := {"prey_forward_only": true, "capture_target": 12, "repetition": HuntRuleSet.Repetition.NONE,
+		"no_capture_limit_plies": 0, "prey_stuck_result": HuntRuleSet.StuckResult.HUNTER_WIN}
 	match variant:
-		"locked":
-			pass
+		"shipped":
+			return r
+		"matus":
+			return r.copy_with(matus)
 		"sideways":
-			r = r.copy_with({"prey_sideways": true,
-				"repetition": HuntRuleSet.Repetition.THREEFOLD_DRAW, "no_capture_limit_plies": 100})
+			matus.merge({"prey_sideways": true, "repetition": HuntRuleSet.Repetition.THREEFOLD_DRAW,
+				"no_capture_limit_plies": 100}, true)
+			return r.copy_with(matus)
 		"free":
-			r = r.copy_with({"prey_forward_only": false, "prey_stuck_result": HuntRuleSet.StuckResult.DRAW,
-				"repetition": HuntRuleSet.Repetition.THREEFOLD_DRAW, "no_capture_limit_plies": 100})
-		"trapial":
-			r = r.copy_with({"prey_forward_only": false, "prey_stuck_result": HuntRuleSet.StuckResult.DRAW,
-				"repetition": HuntRuleSet.Repetition.THREEFOLD_DRAW, "no_capture_limit_plies": 100,
-				"capture_target": 3})
-		_:
-			push_error("unknown variant %s" % variant)
+			return r.copy_with({"capture_target": 12})
+		"adugo":
+			return HuntRuleSets.adugo()
+	push_error("unknown variant %s" % variant)
 	return r
 
 

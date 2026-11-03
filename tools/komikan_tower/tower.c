@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
     for (int i = 0; i < NL; i++) L[G[i]] = i;
     solve();
     int start = L[HSTART];
-    printf("Dogs %s.\n", sideways ? "step forward or sideways, never back" : "step forward only (the locked rules)");
+    printf("Dogs %s.\n", sideways ? "step forward or sideways, never back" : "step forward only (Mátus 1918-19, the rules until 2026-11-03)");
     printf("Puma moves first: %s\n", Wp[0][start][12] ? "the dogs can force a trap in the tower" : "the dogs can't trap a puma that stays in the tower");
     printf("Dogs move first:  %s\n", Wd[0][start][12] ? "the dogs can force a trap in the tower" : "the dogs can't trap a puma that stays in the tower");
     for (int r = 1; r <= 12; r++)

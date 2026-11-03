@@ -78,7 +78,7 @@ msgstr "新しい対局"
 msgid "Undo"
 msgstr "一手戻す"
 
-#: scenes/greybox/hud.gd:274
+#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "遊び方"
 
@@ -120,7 +120,7 @@ msgstr "二人対戦（同じ端末）"
 msgid "Watch the AI play"
 msgstr "AI同士の対局を見る"
 
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:518
+#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
 msgid "A draw"
 msgstr "引き分け"
 
@@ -130,35 +130,29 @@ msgstr "引き分け"
 msgid "Captured %d / %d"
 msgstr "取った数 %d / %d"
 
-#. Count toward the draw rule: moves (by either side) since the last capture / the limit.
-#: scenes/greybox/hud.gd:486
-#, c-format
-msgid "Moves without a capture: %d / %d"
-msgstr "取りのない手数：%d / %d"
-
-#: scenes/greybox/hud.gd:504
+#: scenes/greybox/hud.gd:503
 msgid "No moves yet"
 msgstr "まだ手がありません"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:531
+#: scenes/greybox/hud.gd:530
 #, c-format
 msgid "place %s"
 msgstr "%s に置く"
 
-#: scenes/greybox/hud.gd:540
+#: scenes/greybox/hud.gd:539
 msgid "Watching the AI play both sides."
 msgstr "AI が両方を指しています。"
 
-#: scenes/greybox/hud.gd:544
+#: scenes/greybox/hud.gd:543
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "連続取り：次の着地点を選ぶか、ここで止めてください。"
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:549
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "行き先を選んでください。切れた輪は取りを表します。"
 
-#: scenes/greybox/hud.gd:551
+#: scenes/greybox/hud.gd:550
 msgid "Pick where it goes."
 msgstr "行き先を選んでください。"
 
@@ -188,6 +182,17 @@ msgstr "対局を始める"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "次へ ›"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+msgid "Goats to move"
+msgstr "山羊の番"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "残りの山羊：%d"
 
 #: titles/bagh_chal/art/brass_style.gd:38
 msgid "Temple brass"
@@ -242,10 +247,6 @@ msgstr "Jogo da Onça · Komikan"
 #: titles/common/hunt_text.gd:53
 msgid "Tigers to move"
 msgstr "虎の番"
-
-#: titles/common/hunt_text.gd:53
-msgid "Goats to move"
-msgstr "山羊の番"
 
 #: titles/common/hunt_text.gd:55
 msgid "Jaguar to move"
@@ -343,13 +344,6 @@ msgstr "ピューマを動かしてください。"
 msgid "Place a goat on any empty point."
 msgstr "空いている点に山羊を1頭置いてください。"
 
-#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: titles/common/hunt_text.gd:108
-#, c-format
-msgid "%d goat still to place"
-msgid_plural "%d goats still to place"
-msgstr[0] "残りの山羊：%d"
-
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
 #: titles/common/hunt_text.gd:118
 msgid "Every goat has been captured."
@@ -400,12 +394,40 @@ msgstr "残りのどの手も、以前の局面を繰り返すことになりま
 msgid "The same position came up three times."
 msgstr "同じ局面が3回現れました。"
 
-#. Reason for a draw: neither side captured during this many moves each.
-#: titles/common/hunt_text.gd:138
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:141
 #, c-format
-msgid "No capture in %d move each."
-msgid_plural "No capture in %d moves each."
-msgstr[0] "双方とも %d 手のあいだ取りがありませんでした。"
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "虎は %d 手のあいだ取りがありませんでした。"
+
+#: titles/common/hunt_text.gd:143
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "ジャガーは %d 手のあいだ取りがありませんでした。"
+
+#: titles/common/hunt_text.gd:145
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "ピューマは %d 手のあいだ取りがありませんでした。"
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:160
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "虎が取らずに指した手数：%d / %d"
+
+#: titles/common/hunt_text.gd:162
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "ジャガーが取らずに指した手数：%d / %d"
+
+#: titles/common/hunt_text.gd:164
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "ピューマが取らずに指した手数：%d / %d"
 
 #: titles/common/hunt_tutorials.gd:134
 msgid "Tigers and goats"
@@ -431,7 +453,7 @@ msgstr "虎の動き方"
 msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
 msgstr "虎は線に沿って隣の空いている点へ進みます。斜めの線は一つおきの点にしか通っていないので、隣が8つある点と、4つ以下の点があります。"
 
-#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:297
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
 msgid "Capturing"
 msgstr "取り"
 
@@ -476,13 +498,13 @@ msgid "The goats win when no tiger can move: every tiger is hemmed in by goats i
 msgstr "どの虎も動けなくなったら山羊の勝ちです：どの虎も、跳び越せない山羊に囲まれています。"
 
 #. Walkthrough step title: the rules for a drawn game.
-#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
 msgid "Draws"
 msgstr "引き分け"
 
 #: titles/common/hunt_tutorials.gd:205
-msgid "Once all the goats are placed, no move may bring back a position that has already occurred. If neither side captures for 50 moves each, or every move left would repeat a position, the game is a draw."
-msgstr "山羊をすべて置いたあとは、すでに現れた局面に戻す手は指せません。双方とも50手ずつ取りがないとき、または残りのどの手も局面の繰り返しになるときは、引き分けです。"
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "山羊をすべて置いたあとは、すでに現れた局面に戻す手は指せません。虎が50手続けて取らないとき、または残りのどの手も局面の繰り返しになるときは、引き分けです。"
 
 #: titles/common/hunt_tutorials.gd:218
 msgid "The jaguar and the dogs"
@@ -528,7 +550,7 @@ msgstr "ジャガーの勝ち方"
 msgid "The jaguar wins by capturing five dogs."
 msgstr "ジャガーは犬を5匹取れば勝ちです。"
 
-#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:304
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
 msgid "How the dogs win"
 msgstr "犬の勝ち方"
 
@@ -537,8 +559,8 @@ msgid "The dogs win when the jaguar can't move at all."
 msgstr "ジャガーがまったく動けなくなったら犬の勝ちです。"
 
 #: titles/common/hunt_tutorials.gd:267
-msgid "If the same position comes up three times, or neither side captures for 50 moves each, the game is a draw."
-msgstr "同じ局面が3回現れるか、双方とも50手ずつ取りがなければ、引き分けです。"
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "同じ局面が3回現れるか、ジャガーが50手続けて取らなければ、引き分けです。"
 
 #: titles/common/hunt_tutorials.gd:278
 msgid "The puma and the dogs"
@@ -558,33 +580,38 @@ msgid "The puma steps along any line, in any direction, forward or back."
 msgstr "ピューマはどの線に沿っても、どの方向へでも、前にも後ろにも進めます。"
 
 #: titles/common/hunt_tutorials.gd:291
-msgid "The dogs only advance"
-msgstr "犬は前進するだけ"
+msgid "Moving the dogs"
+msgstr "犬を動かす"
 
 #: titles/common/hunt_tutorials.gd:292
-msgid "A dog steps forward only, toward the tower: straight ahead, or diagonally where a line runs that way. It can never step sideways or back."
-msgstr "犬は塔に向かって前にしか進めません：まっすぐか、その向きに線があれば斜めに。横や後ろには決して進めません。"
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "犬も同じように動きます：どの線に沿っても次の空いた点へ、前へも横へも後ろへも。跳べるのはピューマだけです。"
 
-#: titles/common/hunt_tutorials.gd:298
+#: titles/common/hunt_tutorials.gd:300
 msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
 msgstr "ピューマは孤立した犬を跳び越え、後ろの空いている点に着地して取ります。向きを変えながら何度でも跳べ、どの跳躍のあとでも止められます。線上に並んだ2匹の犬は互いを守ります。"
 
-#: titles/common/hunt_tutorials.gd:305
+#: titles/common/hunt_tutorials.gd:307
 msgid "The dogs win by hemming the puma in so that it can't move."
 msgstr "ピューマを動けないように囲い込めば、犬の勝ちです。"
 
-#: titles/common/hunt_tutorials.gd:313
+#: titles/common/hunt_tutorials.gd:315
 msgid "How the puma wins"
 msgstr "ピューマの勝ち方"
 
-#: titles/common/hunt_tutorials.gd:314
-msgid "The puma wins by eating all twelve dogs, or when the dogs can't move any more. Dogs only go forward, so sooner or later they run out of moves."
-msgstr "12匹の犬をすべて食べるか、犬がもう動けなくなれば、ピューマの勝ちです。犬は前にしか進めないので、遅かれ早かれ指す手がなくなります。"
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "ピューマは犬を3匹食べた時点で勝ちです。"
 
-#: titles/common/hunt_tutorials.gd:321
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "同じ局面が3回現れるか、ピューマが50手続けて取らなければ、引き分けです。"
+
+#: titles/common/hunt_tutorials.gd:330
 msgid "A reconstruction"
 msgstr "復元について"
 
-#: titles/common/hunt_tutorials.gd:322
-msgid "Komikan was written down in the early twentieth century, and the accounts leave gaps. What happens in the tower and who moves first aren't recorded: here the tower is ordinary board, and the puma moves first unless you change it in the settings."
-msgstr "Komikan は20世紀初めに書き留められましたが、記録には欠けている部分があります。塔の中で何が起きるのか、どちらが先手なのかは記録がありません：ここでは塔を普通の盤として扱い、設定で変えない限りピューマが先手です。"
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "100年前の記録では犬は前にしか進めず、それでは塔にとどまるピューマを決して捕まえられません。ここでは犬の動きとピューマの勝ち方を、この遊びの現代のマプチェ版である Trapial-Kuzen に合わせています。塔は普通の盤として扱い、設定で変えない限りピューマが先手です。"

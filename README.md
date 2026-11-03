@@ -40,8 +40,8 @@ languages (Language in the settings).
 | `titles/common/hunt_art_style.gd` | `HuntArtStyle`, the base for a title's looks (environment, set, pieces). The player picks one under **Look** in the settings. |
 | `tests/` | Title tests: board fixtures, rule sets, the Lim & Nievergelt opening result. |
 | `titles/bagh_chal/art/` | Bagh Chal looks, listed by `BaghChalArt.styles()`: **Temple brass** (`brass_style.gd`: brass board, cast tiger and goat, dusk courtyard) and **Stone and pebbles** (`stone_style.gd`, `stone/`: chalk-scratched slab, river stones, straw mat in a rest-house). |
-| `tools/` | Test runner wrapper, search benchmark, headless smoke test, screenshot and style-frame tools, the Komikan balance test. |
-| `tools/komikan_tower/` | A small C program that checks whether forward-only dogs can ever trap a puma that stays in Komikan's tower (they can't). |
+| `tools/` | Test runner wrapper, search benchmark, AI level ladder, headless smoke test, screenshot and style-frame tools, the Komikan balance test. |
+| `tools/komikan_tower/` | A small C program that checks whether forward-only dogs (Komikan's rules until 2026-11-03) can ever trap a puma that stays in the tower (they can't). |
 | `tools/l10n/` | Localization tools (Python 3 + fontTools): string extraction, PO merge and checks, termbase lint, glyph check, CJK font subsetting. |
 | `tools/art/` | Python generators for the Claude-made art (brass board and pieces, stone set), plus the board geometry they read. |
 
@@ -50,6 +50,7 @@ languages (Language in the settings).
 ```sh
 tools/run_tests.sh                       # core + title tests (headless)
 godot --headless --path . -s res://tools/bench_search.gd -- --depth=6
+godot --headless --path . -s res://tools/persona_ladder.gd -- --rules=bagh_chal_standard --pairs=adept:master --games=4
 godot --headless --fixed-fps 60 --path . -s res://tools/smoke_greybox.gd
 xvfb-run -s "-screen 0 1600x900x24" godot --path . --rendering-method gl_compatibility \
   -s res://tools/screenshot.gd -- --out=/tmp/shots
@@ -82,7 +83,7 @@ first.
 
 ```sh
 godot --headless --path . -s res://tools/komikan_balance.gd -- --games=8 --territory=25 \
-  [--variants=locked,sideways,free,trapial,adugo] [--matches=4v4,6v6,d6p2,d6p0,d2p6]
+  [--variants=shipped,matus,sideways,free,adugo] [--matches=4v4,6v6,d6p2,d6p0,d2p6]
 cc -O2 -o /tmp/tower tools/komikan_tower/tower.c && /tmp/tower [--sideways] [--simulate=100000]
 ```
 
