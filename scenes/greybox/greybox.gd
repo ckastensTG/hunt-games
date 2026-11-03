@@ -1,12 +1,15 @@
 extends Node3D
-## Greybox: every v1 rule set playable on a placeholder 3D board.
-## Hotseat, either side against the AI, or AI vs AI. Builds everything in code
-## from the BoardDef, so it stays correct while the boards and rules evolve.
-## Art replaces the meshes later; the rules and AI underneath stay the same.
+## Greybox: every v1 rule set playable in 3D. Hotseat, either side against
+## the AI, or AI vs AI. Builds everything in code from the BoardDef, so it
+## stays correct while the boards and rules evolve. Bagh Chal shows its art
+## styles (titles/bagh_chal/art/); the other titles still use placeholder
+## meshes. The interface is hud.gd.
 
 enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI }
 
 const SPACING := 1.0
+const HudScript := preload("res://scenes/greybox/hud.gd")
+const MarkShader := preload("res://scenes/greybox/mark.gdshader")
 const AI_MOVE_DELAY := 0.35
 
 const PIECE_COLORS := {
@@ -15,30 +18,16 @@ const PIECE_COLORS := {
 	"komikan": [Color(0.66, 0.55, 0.42), Color(0.5, 0.33, 0.2)],       # puma, dog
 }
 
-const RULE_SET_LABELS := {
-	HuntRuleSets.BAGH_CHAL_STANDARD: "Bagh Chal: Standard",
-	HuntRuleSets.BAGH_CHAL_PARLETT: "Bagh Chal: Parlett 1976",
-	HuntRuleSets.ADUGO: "Jogo da Onça: Adugo",
-	HuntRuleSets.KOMIKAN: "Jogo da Onça: Komikan",
-}
-
-const REASONS := {
-	HuntState.Reason.CAPTURE_TARGET: "capture target reached",
-	HuntState.Reason.HUNTER_TRAPPED: "the hunter is trapped",
-	HuntState.Reason.PREY_STUCK: "the prey can't move",
-	HuntState.Reason.REPETITION_BLOCKED: "every move would repeat a position",
-	HuntState.Reason.THREEFOLD: "threefold repetition",
-	HuntState.Reason.NO_CAPTURE_LIMIT: "no capture for 50 moves each",
-}
-
 var rules: HuntRuleSet
 var state: HuntState
 var evaluator: HuntEvaluator
 var personas: Array[AIPersona] = []
 var mode: Mode = Mode.HUMAN_PREY
 var level := 1
-## Use the title's art set where one exists (Bagh Chal, style-frame stage).
+## Use the title's art where it exists (Bagh Chal); false shows the greybox.
 var use_art := true
+## The art style picked for each title that has more than one (style id).
+var art_style_ids := {"bagh_chal": "brass"}
 var history: Array[PackedInt32Array] = []
 var status: HuntState.Status = HuntState.Status.ONGOING
 
@@ -48,7 +37,8 @@ var _camera: Camera3D
 var _world_env: WorldEnvironment
 var _grey_env: Environment
 var _grey_key: DirectionalLight3D
-var _art_env: Environment
+var _styles := {}  # title id -> Array[HuntArtStyle]
+var _hud: CanvasLayer
 var _board_root: Node3D
 var _pieces_root: Node3D
 var _marks_root: Node3D
@@ -64,21 +54,15 @@ var _ai_result := PackedInt32Array()
 var _ai_wait := 0.0
 var _rng := RandomNumberGenerator.new()
 
-var _ui_status: Label
-var _ui_info: Label
-var _ui_moves: Label
-var _ui_end_chain: Button
-var _ui_dogs_first: CheckBox
-var _ui_rule_set: OptionButton
-var _ui_mode: OptionButton
-var _ui_level: OptionButton
 
 
 func _ready() -> void:
 	_rng.seed = 20261102
 	personas = _make_personas()
+	_styles["bagh_chal"] = BaghChalArt.styles()
 	_build_environment()
-	_build_ui()
+	_hud = HudScript.new(self)
+	add_child(_hud)
 	new_game()
 
 
@@ -152,7 +136,7 @@ func undo() -> void:
 func _after_move() -> void:
 	status = state.status()
 	if _has_art():
-		BaghChalArt.set_awaken(0.0 if history.is_empty() else 0.6)
+		current_style().set_awaken(0.0 if history.is_empty() else 0.6)
 	_refresh_ui()
 	_show_last_move()
 	if status == HuntState.Status.ONGOING and _is_ai_side(state.side):
@@ -342,7 +326,7 @@ func _build_board() -> void:
 	var extent := maxf(size.x + 1.4, size.y + 1.4)
 	if _has_art():
 		_build_art_set()
-		extent = BaghChalArt.CAMERA_EXTENT
+		extent = current_style().camera_extent
 	else:
 		_build_grey_board(board, size)
 	# Points: a pick collider on each (the art and the greybox share these).
@@ -363,15 +347,43 @@ func _build_board() -> void:
 
 
 func _has_art() -> bool:
-	return use_art and _title() == "bagh_chal"
+	return current_style() != null
+
+
+## The art styles the current title offers (empty: greybox only).
+func art_styles() -> Array:
+	if not use_art:
+		return []
+	return _styles.get(_title(), [])
+
+
+## The active art style for the current title, or null for the greybox.
+func current_style() -> HuntArtStyle:
+	var list := art_styles()
+	if list.is_empty():
+		return null
+	var want: String = art_style_ids.get(_title(), "")
+	for st in list:
+		if st.id == want:
+			return st
+	return list[0]
+
+
+## Switch the look without touching the game in progress.
+func set_art_style(style_id: String) -> void:
+	art_style_ids[_title()] = style_id
+	_build_board()
+	_sync_pieces()
+	_clear_marks()
+	_show_last_move()
+	_refresh_ui()
 
 
 func _build_art_set() -> void:
+	var style := current_style()
 	var extras := RenderingServer.get_current_rendering_method() == "forward_plus"
-	if _art_env == null:
-		_art_env = BaghChalArt.make_environment(extras)
-	_world_env.environment = _art_env
-	_camera.attributes = BaghChalArt.make_camera_attributes(11.0)
+	_world_env.environment = style.environment(extras)
+	_camera.attributes = style.camera_attributes()
 	# A tight depth range: the Compatibility renderer lights shadowed lights in
 	# extra passes, and with the default 0.05..4000 range those passes z-fought
 	# into stripes across the board.
@@ -381,8 +393,8 @@ func _build_art_set() -> void:
 	var set_root := Node3D.new()
 	set_root.name = "ArtSet"
 	_board_root.add_child(set_root)
-	BaghChalArt.build_set(set_root, extras)
-	BaghChalArt.set_awaken(0.0 if history.is_empty() else 0.6)
+	style.build_set(set_root, extras)
+	style.set_awaken(0.0 if history.is_empty() else 0.6)
 
 
 func _build_grey_board(board: BoardDef, size: Vector2) -> void:
@@ -443,9 +455,9 @@ func _title() -> String:
 	return "bagh_chal"
 
 
-func _make_piece(kind: int) -> Node3D:
+func _make_piece(kind: int, variant: int) -> Node3D:
 	if _has_art():
-		return BaghChalArt.make_piece(kind)
+		return current_style().make_piece(kind, variant)
 	var colors: Array = PIECE_COLORS[_title()]
 	var root := Node3D.new()
 	var mi := MeshInstance3D.new()
@@ -474,7 +486,7 @@ func _sync_pieces() -> void:
 	_piece_nodes.clear()
 	for i in state.cells.size():
 		if state.cells[i] != HuntState.EMPTY:
-			var node := _make_piece(state.cells[i])
+			var node := _make_piece(state.cells[i], i)
 			node.position = to_world(rules.board.positions[i])
 			_pieces_root.add_child(node)
 			_piece_nodes[i] = node
@@ -486,7 +498,7 @@ func _animate(move: PackedInt32Array) -> void:
 	var tween := create_tween()
 	match move[0]:
 		HuntState.Kind.PLACE:
-			var node := _make_piece(HuntState.PREY)
+			var node := _make_piece(HuntState.PREY, move[1])
 			var target := to_world(board.positions[move[1]])
 			node.position = target + Vector3(0, 1.2, 0)
 			node.rotation.y = _facing(target, move[1])
@@ -543,35 +555,52 @@ func _clear_marks() -> void:
 		c.queue_free()
 
 
-func _mark(p: int, color: Color, radius := 0.24) -> void:
+enum MarkShape { SELECTED, STEP, CAPTURE, LAST }
+
+
+## A highlight on a point. Shape and color both differ per kind, so they read
+## for colorblind players too (framework §6); colors come from the art style.
+func _mark(p: int, shape: MarkShape) -> void:
+	var style := current_style()
+	var colors := {
+		MarkShape.SELECTED: style.mark_select if style else Color(1.0, 0.85, 0.3),
+		MarkShape.STEP: style.mark_step if style else Color(0.4, 0.9, 0.5),
+		MarkShape.CAPTURE: style.mark_capture if style else Color(1.0, 0.35, 0.25),
+		MarkShape.LAST: style.mark_last if style else Color(0.45, 0.6, 1.0),
+	}
 	var mi := MeshInstance3D.new()
-	var torus := TorusMesh.new()
-	torus.inner_radius = radius - 0.05
-	torus.outer_radius = radius
-	mi.mesh = torus
-	mi.material_override = _mat(color, 0.3, 0.0, true)
-	mi.position = to_world(rules.board.positions[p]) + Vector3(0, 0.03, 0)
+	var quad := PlaneMesh.new()
+	quad.size = Vector2(1.0, 1.0)
+	mi.mesh = quad
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var m := ShaderMaterial.new()
+	m.shader = MarkShader
+	m.set_shader_parameter("shape", shape)
+	m.set_shader_parameter("color", colors[shape])
+	mi.material_override = m
+	mi.position = to_world(rules.board.positions[p]) + Vector3(0, 0.012, 0)
 	_marks_root.add_child(mi)
 
 
 func _show_targets(moves: Array[PackedInt32Array]) -> void:
 	_clear_marks()
 	_show_last_move()
-	_mark(_selected, Color(1.0, 0.85, 0.3), 0.3)
+	_mark(_selected, MarkShape.SELECTED)
 	for m in moves:
 		if m[1] != _selected:
 			continue
 		if m[0] == HuntState.Kind.STEP:
-			_mark(m[2], Color(0.4, 0.9, 0.5))
+			_mark(m[2], MarkShape.STEP)
 		elif m[0] == HuntState.Kind.JUMP and m.size() == 4:
-			_mark(m[3], Color(1.0, 0.35, 0.25))
+			_mark(m[3], MarkShape.CAPTURE)
+	_refresh_ui()
 
 
 func _show_chain_marks(moves: Array[PackedInt32Array]) -> void:
 	_clear_marks()
-	_mark(_chain[_chain.size() - 1], Color(1.0, 0.85, 0.3), 0.3)
+	_mark(_chain[_chain.size() - 1], MarkShape.SELECTED)
 	for m in _chain_continuations(moves):
-		_mark(m[m.size() - 1], Color(1.0, 0.35, 0.25))
+		_mark(m[m.size() - 1], MarkShape.CAPTURE)
 	_refresh_ui()
 
 
@@ -579,138 +608,14 @@ func _show_last_move() -> void:
 	if history.is_empty():
 		return
 	var m := history[history.size() - 1]
-	_mark(m[m.size() - 1], Color(0.45, 0.6, 1.0), 0.2)
+	_mark(m[m.size() - 1], MarkShape.LAST)
 
 
 # --- UI --------------------------------------------------------------------
 
-func _build_ui() -> void:
-	var layer := CanvasLayer.new()
-	add_child(layer)
-	var panel := PanelContainer.new()
-	panel.position = Vector2(16, 16)
-	panel.custom_minimum_size = Vector2(330, 0)
-	layer.add_child(panel)
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 8)
-	panel.add_child(box)
-	var title := Label.new()
-	title.text = "Hunt games: greybox"
-	title.add_theme_font_size_override("font_size", 20)
-	box.add_child(title)
-
-	var rs := OptionButton.new()
-	_ui_rule_set = rs
-	for id in HuntRuleSets.ALL:
-		rs.add_item(RULE_SET_LABELS[id])
-	rs.item_selected.connect(func(i: int) -> void:
-		_rule_set_id = HuntRuleSets.ALL[i]
-		new_game())
-	box.add_child(rs)
-
-	_ui_dogs_first = CheckBox.new()
-	_ui_dogs_first.text = "Dogs move first (Komikan option)"
-	_ui_dogs_first.toggled.connect(func(on: bool) -> void:
-		_komikan_dogs_first = on
-		new_game())
-	box.add_child(_ui_dogs_first)
-
-	var md := OptionButton.new()
-	_ui_mode = md
-	for label in ["Hotseat (two players)", "You play the prey", "You play the hunter", "AI vs AI"]:
-		md.add_item(label)
-	md.selected = mode
-	md.item_selected.connect(func(i: int) -> void:
-		mode = i as Mode
-		new_game())
-	box.add_child(md)
-
-	var lv := OptionButton.new()
-	_ui_level = lv
-	for label in ["AI: Novice", "AI: Apprentice", "AI: Adept", "AI: Master"]:
-		lv.add_item(label)
-	lv.selected = level
-	lv.item_selected.connect(func(i: int) -> void: level = i)
-	box.add_child(lv)
-
-	var row := HBoxContainer.new()
-	var ng := Button.new()
-	ng.text = "New game"
-	ng.pressed.connect(new_game)
-	row.add_child(ng)
-	var ud := Button.new()
-	ud.text = "Undo"
-	ud.pressed.connect(undo)
-	row.add_child(ud)
-	_ui_end_chain = Button.new()
-	_ui_end_chain.text = "End capture chain"
-	_ui_end_chain.pressed.connect(func() -> void:
-		if _chain.size() > 2:
-			commit(_chain))
-	row.add_child(_ui_end_chain)
-	box.add_child(row)
-
-	_ui_status = Label.new()
-	_ui_status.add_theme_font_size_override("font_size", 17)
-	_ui_status.autowrap_mode = TextServer.AUTOWRAP_WORD
-	box.add_child(_ui_status)
-	_ui_info = Label.new()
-	box.add_child(_ui_info)
-	_ui_moves = Label.new()
-	_ui_moves.autowrap_mode = TextServer.AUTOWRAP_WORD
-	_ui_moves.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
-	box.add_child(_ui_moves)
-	var help := Label.new()
-	help.text = "Click a piece, then a point. Capture chains: click each landing,\nthen the hunter or right-click to stop."
-	help.add_theme_font_size_override("font_size", 12)
-	help.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
-	box.add_child(help)
-
-
 func _refresh_ui() -> void:
-	if _ui_status == null:
-		return
-	var names := _side_names()
-	# Keep the controls in step when code (tools, tests) changes the setup.
-	_ui_rule_set.selected = HuntRuleSets.ALL.find(_rule_set_id)
-	_ui_mode.selected = mode
-	_ui_level.selected = level
-	_ui_dogs_first.set_pressed_no_signal(_komikan_dogs_first)
-	_ui_dogs_first.visible = _rule_set_id == HuntRuleSets.KOMIKAN
-	_ui_end_chain.visible = _chain.size() > 2
-	match status:
-		HuntState.Status.ONGOING:
-			var who: String = names[0] if state.side == HuntState.HUNTER else names[1]
-			_ui_status.text = "%s to move%s" % [who.capitalize(), " (AI thinking...)" if _ai_task >= 0 else ""]
-		HuntState.Status.HUNTER_WIN:
-			_ui_status.text = "%s win: %s" % [names[0].capitalize(), REASONS.get(state.last_reason, "")]
-		HuntState.Status.PREY_WIN:
-			_ui_status.text = "%s win: %s" % [names[1].capitalize(), REASONS.get(state.last_reason, "")]
-		HuntState.Status.DRAW:
-			_ui_status.text = "Draw: %s" % REASONS.get(state.last_reason, "")
-	var info := "Captured %d / %d" % [state.captured, rules.capture_target]
-	if state.reserve > 0:
-		info += "    %s to place: %d" % [names[1], state.reserve]
-	if rules.no_capture_limit_plies > 0 and state.reserve == 0:
-		info += "    quiet plies %d / %d" % [state.quiet_plies, rules.no_capture_limit_plies]
-	_ui_info.text = info
-	var shown: Array[String] = []
-	var start := maxi(0, history.size() - 10)
-	var replay := HuntState.create(rules)
-	for k in history.size():
-		if k >= start:
-			shown.append("%d. %s" % [k + 1, replay.describe(history[k])])
-		replay.make(history[k])
-	_ui_moves.text = "  ".join(shown)
-
-
-func _side_names() -> Array[String]:
-	match _title():
-		"bagh_chal":
-			return ["tigers", "goats"]
-		"adugo":
-			return ["jaguar", "dogs"]
-	return ["puma", "dogs"]
+	if _hud:
+		_hud.refresh()
 
 
 static func _mat(color: Color, roughness := 0.6, metallic := 0.0, unshaded := false) -> StandardMaterial3D:
