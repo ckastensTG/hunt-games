@@ -21,6 +21,10 @@ config/icon="res://titles/bagh_chal/art/icon_placeholder.png"
 config/name.title_bagh_chal="Bagh Chal"
 config/name.title_jogo_da_onca="Jogo da Onça"
 
+[autoload]
+
+EOSGRuntime="*res://addons/epic-online-services-godot/runtime.gd"
+
 [display]
 
 window/size/viewport_width=540
@@ -28,6 +32,10 @@ window/size/viewport_height=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=6
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/timeless_core/plugin.cfg")
 
 [internationalization]
 

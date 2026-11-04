@@ -6,23 +6,32 @@ They follow the house template `TEX_Splash_TimeGalleon.png`: a white logo on bla
 
 | File | Size | Use |
 |---|---|---|
-| `TEX_Splash_TimelessGames_Landscape.png` | 3840×2160 | Timeless Games titles locked to landscape |
-| `TEX_Splash_TimelessGames_Portrait.png` | 2160×3840 | Timeless Games titles locked to portrait |
-| `TEX_Splash_TimelessGames_Square.png` | 2160×2160 | Timeless Games titles that rotate (`window/handheld/orientation` = sensor) |
-| `TEX_Splash_Boards_Landscape.png` | 3840×2160 | Galleon Boards titles locked to landscape |
-| `TEX_Splash_Boards_Portrait.png` | 2160×3840 | Galleon Boards titles locked to portrait |
-| `TEX_Splash_Boards_Square.png` | 2160×2160 | Galleon Boards titles that rotate |
+| `TEX_Splash_TimelessGames_Landscape.png` | 3840×2160 | Desktop builds (Steam, later), trailers, store art |
+| `TEX_Splash_TimelessGames_Portrait.png` | 2160×3840 | Store art, or a title locked to portrait |
+| `TEX_Splash_TimelessGames_Square.png` | 2160×2160 | **iOS launch screen** (works in both orientations) |
+| `TEX_Splash_Boards_Landscape.png` | 3840×2160 | The same uses, for Galleon Boards titles |
+| `TEX_Splash_Boards_Portrait.png` | 2160×3840 | The same uses, for Galleon Boards titles |
+| `TEX_Splash_Boards_Square.png` | 2160×2160 | **iOS launch screen** for Galleon Boards titles |
 | `TEX_Logo_TimelessGames_White.png` | 2490×2218 | The lockup alone: white on transparent, for menus, credits and store art |
 | `TEX_Logo_Boards_White.png` | 2490×2218 | The same lockup for Galleon Boards |
 
-## Godot boot splash settings
-- **`application/boot_splash/bg_color`:** set to `#000000`. Bars at any aspect ratio then blend into the image.
-- **`application/boot_splash/image`:** pick by orientation.
-  - A title that rotates (hunt-games currently uses `window/handheld/orientation=6`) uses the **Square** file.
-  - A title locked to one orientation uses **Landscape** or **Portrait**.
-- **`application/boot_splash/stretch_mode`:** set to `Keep`. This fits the whole image on screen and never crops the logo.
-- **Per-title override:** use a feature tag where one engine-family project hosts both lines, for example `application/boot_splash/image.title_<id>`.
-- **Before Godot starts:** set the native launch screens to black too, so nothing flashes white before Godot's splash. That means the iOS launch screen background and the Android splash background.
+## Standard for every game: no Godot splash (Christopher, 2026-11-04)
+The player sees **one** splash: the Time Galleon splash for the title's line, drawn by the device's own launch screen. Never the Godot logo, and never a second splash. Full settings are in `../android/README.md`, which covers iOS and desktop as well as Android.
+- **Project:**
+  - `application/boot_splash/show_image` **off**, so Godot draws only black while it starts.
+  - `bg_color` #000000.
+- **iOS launch screen:**
+  - `storyboard/custom_image@2x` and `@3x` = the line's **Square** file (both orientations).
+  - `image_scale_mode` Scale to Fit (2).
+  - The background follows `bg_color`.
+- **Android 12+ launch screen:**
+  - `splash_screen/icon` = `../android/TEX_Android_SplashIcon_TimeGalleon.png`.
+  - `branding_image` = `../android/TEX_Android_SplashBranding_TimelessGames.png` or `…_Boards.png`.
+  - Black background. Android can't show a full-screen picture.
+- **Desktop (Steam, later):**
+  - Desktop has no launch screen of its own, so use a feature override, e.g. `boot_splash/show_image.pc=true`.
+  - Point it at the line's **Landscape** file, with `stretch_mode` Keep.
+- **Export filters:** ship only the files a preset uses, i.e. leave out the other line and the other orientations.
 
 ## Recreating the lockup for a new imprint
 1. Take `Time Galleon logo branco vertical 300dpi.png` from the logos folder on Drive and erase the sub-line.

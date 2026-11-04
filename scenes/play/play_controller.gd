@@ -7,11 +7,13 @@ extends Node
 ## the interface what happens (signals below). The network work itself is in
 ## timeless_core (NetMatch, QuickMatch, FriendMatch, LanDiscovery).
 ##
-## Online goes through an OnlineBackend. Until the EOS plugin is in (bible
-## §13 #2), release builds get the unavailable backend, so the online menu
-## hides, and debug builds get a simulated service on this device with a
-## simulated opponent, always labeled "test build". Release builds never
-## create one (bible §5.3: never fake opponents).
+## Online goes through an OnlineBackend: Epic Online Services
+## (EOSOnlineBackend) when the EOS plugin runs on this platform and the
+## title's EOS client is in its config file. Without EOS, release builds get
+## the unavailable backend, so the online menu hides, and debug builds get a
+## simulated service on this device with a simulated opponent, always labeled
+## "test build". Release builds never create one (bible §5.3: never fake
+## opponents).
 
 ## Something the menu shows changed (flow, error, code, search time).
 signal changed
@@ -73,10 +75,13 @@ var _now := 0
 func _init(owner_game: Node) -> void:
 	game = owner_game
 	_rng.randomize()
-	if OS.is_debug_build():
+	var eos := EOSOnlineBackend.new(EOSOnlineBackend.plugin_api(), _eos_ids())
+	if eos.is_available():
+		backend = eos
+	elif OS.is_debug_build():
 		backend = FakeOnlineBackend.new()
 	else:
-		backend = OnlineBackend.new()  # unavailable until the EOS backend lands
+		backend = OnlineBackend.new()
 
 
 func _ready() -> void:
@@ -86,6 +91,10 @@ func _ready() -> void:
 	else:
 		player_name = PlayerNames.random(_rng)
 		L10n.save_setting("player_name", player_name)
+	if backend is EOSOnlineBackend:
+		# EOS wants a display name for the device's user. Other players never
+		# see it: they get the word name from the match itself.
+		(backend as EOSOnlineBackend).display_name = "%s %d" % [player_name.get("key", "player"), int(player_name.get("n", 0))]
 	get_tree().on_request_permissions_result.connect(_on_permission)
 
 
@@ -385,6 +394,9 @@ func cancel() -> void:
 
 func _process(_delta: float) -> void:
 	_now = Time.get_ticks_msec()
+	# EOS runs its callbacks and hands over P2P packets here, every frame,
+	# also once a match is under way.
+	backend.poll()
 	if _lan:
 		_lan.poll(_now)
 	if _quick:
@@ -531,6 +543,14 @@ func _stop_lan() -> void:
 func _set_flow(f: Flow) -> void:
 	flow = f
 	changed.emit()
+
+
+## This title's EOS IDs (TitleConfig) and client (config/eos_<title>.cfg).
+static func _eos_ids() -> Dictionary:
+	var title := TitleConfig.active()
+	var ids := title.eos.duplicate()
+	ids.merge(title.eos_client(), true)
+	return ids
 
 
 func _resolver() -> Callable:

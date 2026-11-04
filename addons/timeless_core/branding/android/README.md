@@ -17,6 +17,7 @@ Android 12 and later draw their own launch screen: a round icon in the middle an
 |---|---|---|
 | `TEX_Android_SplashIcon_TimeGalleon.png` | 1152×1152 (288 dp at 4×), the emblem inside the 192 dp circle Android keeps | `splash_screen/icon` |
 | `TEX_Android_SplashBranding_TimelessGames.png` | 800×320 (200×80 dp at 4×), TIME GALLEON / TIMELESS GAMES | `splash_screen/branding_image` |
+| `TEX_Android_SplashBranding_Boards.png` | 800×320, TIME GALLEON / BOARDS, same layout | `splash_screen/branding_image` for **Galleon Boards** titles (added by the series thread, 2026-11-04) |
 | `TEX_Android_IconBackground_Black.png` | 432×432, black | `launcher_icons/adaptive_background_432x432`; Android also uses it as the launch screen's background |
 | `TEX_Android_SplashIcon_Blank.png` | 1024×1024, transparent | Not used now: a plain black launch screen, if a title ever wants one |
 
