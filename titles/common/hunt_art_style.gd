@@ -27,6 +27,9 @@ var mark_select := Color(1.0, 0.78, 0.35)
 var mark_step := Color(0.55, 0.95, 0.65)
 var mark_capture := Color(1.0, 0.38, 0.22)
 var mark_last := Color(0.5, 0.7, 1.0)
+## Draw the highlights as opaque ink instead of added light: for pale boards,
+## where light does not show against the wood.
+var mark_ink := false
 
 var _meshes := {}
 var _materials := {}

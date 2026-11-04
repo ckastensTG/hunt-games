@@ -5,8 +5,9 @@ extends CanvasLayer
 ## Android's back gesture.
 ##
 ##   Home ─ Play against the AI · Pass and play · Play local · Play online
-##          · How to play · Language · Quit game (not on iOS) (Continue only
-##          when an AI game was set aside for an online match)
+##          · How to play · Game origins · Language · Quit game (not on iOS)
+##          (Continue only when an AI game was set aside for an online match)
+##   Game origins ─ the game's history and its sources (HuntOrigins)
 ##   Play against the AI ─ side, opponent level, rules → Start
 ##   Pass and play ─ rules → Start
 ##   Play local ─ Host a game (side, rules → waiting, with a code)
@@ -52,6 +53,7 @@ func _ready() -> void:
 	var play: Node = game.play
 	play.changed.connect(_on_play_changed)
 	play.nearby_hosts_changed.connect(_fill_hosts)
+	get_viewport().size_changed.connect(_on_resized)
 	_build()
 
 
@@ -196,6 +198,14 @@ func _render() -> void:
 			_confirm_leave()
 		"pause":
 			_pause()
+		"origins":
+			_origins()
+
+
+## The Game origins text is sized to the screen: lay it out again after a turn.
+func _on_resized() -> void:
+	if visible and _screen == "origins":
+		_render.call_deferred()
 
 
 func _title(text: String, size := 40) -> void:
@@ -337,6 +347,9 @@ func _home() -> void:
 	if game.play.online_available():
 		_button(L10n.t("Play online"), func() -> void: _guard(func() -> void: _go("online")))
 	_button(L10n.t("How to play"), func() -> void: _guard(func() -> void: game.start_tutorial()))
+	if HuntOrigins.has_text(_title_id()):
+		# TRANSLATORS: Main menu button: opens a short history of the game, with its sources.
+		_button(L10n.t("Game origins"), func() -> void: _go("origins"))
 	_gap(2)
 	_language_row()
 	# Not on iOS: apps there don't close themselves (Apple: users leave with
@@ -634,6 +647,61 @@ func _confirm_leave() -> void:
 	_button(L10n.t("Stay"), func() -> void:
 		_after_confirm = Callable()
 		back())
+
+
+## Game origins: the game's history, then its sources as written (HuntOrigins).
+## The text scrolls inside the card, which keeps the menu's size and style.
+func _origins() -> void:
+	var title := _title_id()
+	_title(HuntText.title_name(title), 44)
+	_text(L10n.t("Game origins"), "italic", 19, SeriesTheme.TEXT_DIM)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var screen_h := get_viewport().get_visible_rect().size.y
+	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, clampf(screen_h - 330.0, 260.0, 1060.0))
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
+	box.add_theme_constant_override("separation", 16)
+	for p in HuntOrigins.paragraphs(title):
+		box.add_child(_rich(p, 20, SeriesTheme.TEXT))
+	var line := HSeparator.new()
+	line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(line)
+	# TRANSLATORS: Heading over the list of books and articles at the end of "Game origins".
+	var heading := SeriesTheme.label(L10n.t("Sources"), "medium", 18, SeriesTheme.ACCENT)
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(heading)
+	for s in HuntOrigins.sources(title):
+		box.add_child(_rich(s, 16, SeriesTheme.TEXT_DIM))
+	var pad := MarginContainer.new()  # keeps the text clear of the scroll bar
+	pad.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pad.mouse_filter = Control.MOUSE_FILTER_PASS
+	pad.add_theme_constant_override("margin_right", 18)
+	pad.add_child(box)
+	scroll.add_child(pad)
+	_card_box.add_child(scroll)
+	_back_button()
+
+
+## Body text with [i]…[/i] italics, wrapping to the card's width. It lets
+## drags through, so a finger scrolls the text.
+func _rich(bbcode: String, size: int, color: Color) -> RichTextLabel:
+	var r := RichTextLabel.new()
+	r.bbcode_enabled = true
+	r.fit_content = true
+	r.scroll_active = false
+	r.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	r.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	r.add_theme_font_override("normal_font", SeriesTheme.font("book"))
+	r.add_theme_font_override("italics_font", SeriesTheme.font("book_italic"))
+	r.add_theme_font_size_override("normal_font_size", size)
+	r.add_theme_font_size_override("italics_font_size", size)
+	r.add_theme_color_override("default_color", color)
+	r.add_theme_constant_override("line_separation", 3)
+	r.text = bbcode
+	return r
 
 
 ## The in-game menu.

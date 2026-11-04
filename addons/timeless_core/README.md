@@ -21,6 +21,7 @@ This repo is a Godot 4 addon. Game projects include it as a git submodule at
 | `net/` | Two-device play, protocol v1 (framework §9): `NetProtocol` (checked messages), `NetTransport` with ENet (local Wi-Fi) and loopback (tests), `NetMatch` (handshake, moves with position hash, resync, reconnect window, turn clock, draw/undo/rematch), `JoinCode` (nearby codes), `LanDiscovery` (Wi-Fi beacons). |
 | `online/` | Online play behind `OnlineBackend` (EOS to come; the base class is "unavailable"): `QuickMatch` (search, host, merge rule), `FriendMatch` (TG-XXXX codes), `PlayerNames`, and `FakeOnlineBackend` (in-process, for tests and debug builds). |
 | `testing/` | Headless test runner and `TestCase` base class. |
+| `branding/splash/` | Shared boot splashes (Timeless Games and Galleon Boards; landscape, portrait, square) and white logo lockups. Usage notes in its README. |
 | `tests/` | Core unit tests. |
 
 ## Requirements
@@ -37,6 +38,6 @@ godot --headless --path . -s res://addons/timeless_core/testing/test_runner.gd -
   --dir=res://addons/timeless_core/tests
 ```
 
-CI does the same in a throwaway host project (`.github/workflows/ci.yml`).
+There is no hosted CI. Run the tests locally before committing.
 
 Copyright © Time Galleon. All rights reserved.

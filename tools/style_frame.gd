@@ -5,7 +5,7 @@ extends SceneTree
 ##   xvfb-run -a -s "-screen 0 1920x1080x24" godot --path . --resolution 1920x1080 \
 ##     [--rendering-method forward_plus|mobile|gl_compatibility] \
 ##     -s res://tools/style_frame.gd -- --out=DIR [--plies=N] [--views=hero,ai,prey] [--tag=NAME]
-##     [--style=brass|stone] [--ui] [--select] [--result] [--tutorial=STEP]
+##     [--style=brass|stone|modern] [--ui] [--select] [--result] [--tutorial=STEP]
 ##     [--rules=ID] [--locale=CODE] [--pseudo]
 ##
 ## Views: hero = the cinematic style frame; ai = the AI-vs-AI camera;

@@ -7,6 +7,8 @@ extends SceneTree
 ## 3. "How to play" for every rule set: every step shown and its moves
 ##    played on the board, then the walkthrough closed and the game back.
 ## 4. The interface in every launch language.
+## Along the way, every Bagh Chal look is built and shows its move marks with
+## the right shader (added light, or ink on pale boards).
 ## Exits non-zero on any failure.
 
 const MAX_PLIES := 60
@@ -70,6 +72,7 @@ func _clicks() -> bool:
 			game.undo()
 			if game.history.size() != 1:
 				failures.append("hotseat undo")
+			_check_looks()
 			# A two-jump chain on the Adugo board: c3 x c4 -> c5 (apex) x c6 -> c7.
 			var adugo := HuntRuleSets.adugo()
 			var ab := adugo.board
@@ -101,6 +104,33 @@ func _clicks() -> bool:
 			phase = "ai"
 			_next_game()
 	return false
+
+
+## Every Bagh Chal look builds, and its move marks use that look's shader.
+func _check_looks() -> void:
+	var b: BoardDef = game.rules.board
+	var ids: Array[String] = []
+	for st: HuntArtStyle in game.art_styles():
+		ids.append(st.id)
+	if ids.size() < 3:
+		failures.append("expected at least 3 Bagh Chal looks, got %s" % [ids])
+	for id in ids:
+		game.set_art_style(id)
+		game._on_point_clicked(b.point_at(Vector2(0, 0)))  # select a tiger
+		var want: Shader = GreyboxScript.MarkInkShader if game.current_style().mark_ink else GreyboxScript.MarkShader
+		var shown := 0
+		for mark: Node in game._marks_root.get_children():
+			if mark.is_queued_for_deletion():
+				continue
+			shown += 1
+			if (mark as MeshInstance3D).material_override.shader != want:
+				failures.append("look %s: a move mark uses the wrong shader" % id)
+				break
+		if shown < 2:
+			failures.append("look %s: expected the selection and its steps, got %d marks" % [id, shown])
+	game._selected = -1
+	game.set_art_style(ids[0])
+	print("looks: %s ok" % [", ".join(ids)])
 
 
 func _next_game() -> void:

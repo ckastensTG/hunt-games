@@ -136,7 +136,7 @@ msgstr "Avanti ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:601
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:614
 msgid "Looking for an opponent…"
 msgstr "Cerco un avversario…"
 
@@ -205,7 +205,7 @@ msgid "Resign this game?"
 msgstr "Abbandonare questa partita?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:660
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:728
 msgid "Resign"
 msgstr "Abbandona"
 
@@ -270,256 +270,266 @@ msgstr "L'altro giocatore non si è collegato. Continuiamo a cercare…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Tempo scaduto: è stata giocata una mossa per te (%d su 3)."
 
-#: scenes/play/play_menu.gd:231
+#: scenes/play/play_menu.gd:241
 msgid "Back"
 msgstr "Indietro"
 
-#: scenes/play/play_menu.gd:286
+#: scenes/play/play_menu.gd:296
 msgid "Rules"
 msgstr "Regole"
 
-#: scenes/play/play_menu.gd:305
+#: scenes/play/play_menu.gd:315
 msgid "Language"
 msgstr "Lingua"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:644
+#: scenes/play/play_menu.gd:341 scenes/play/play_menu.gd:712
 msgid "Continue"
 msgstr "Continua"
 
-#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:355
+#: scenes/play/play_menu.gd:342 scenes/play/play_menu.gd:368
 msgid "Play against the AI"
 msgstr "Gioca contro l'IA"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:375
+#: scenes/play/play_menu.gd:344 scenes/play/play_menu.gd:388
 msgid "Pass and play"
 msgstr "In due sullo stesso dispositivo"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:384
+#: scenes/play/play_menu.gd:346 scenes/play/play_menu.gd:397
 msgid "Play local"
 msgstr "Gioca in locale"
 
-#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:487
+#: scenes/play/play_menu.gd:348 scenes/play/play_menu.gd:500
 msgid "Play online"
 msgstr "Gioca online"
 
-#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:349 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Come si gioca"
 
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:657
+msgid "Game origins"
+msgstr "Origini del gioco"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:346
+#: scenes/play/play_menu.gd:359
 msgid "Quit game"
 msgstr "Esci dal gioco"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Novice"
 msgstr "Novizio"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Apprentice"
 msgstr "Apprendista"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Adept"
 msgstr "Esperto"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Master"
 msgstr "Maestro"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:364 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:377 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "Avversario"
 
-#: scenes/play/play_menu.gd:367 scenes/play/play_menu.gd:379 scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:392 scenes/play/play_menu.gd:416
 msgid "Start"
 msgstr "Inizia"
 
-#: scenes/play/play_menu.gd:376
+#: scenes/play/play_menu.gd:389
 msgid "Two players share this device and take turns."
 msgstr "Due giocatori condividono questo dispositivo e giocano a turno."
 
-#: scenes/play/play_menu.gd:385
+#: scenes/play/play_menu.gd:398
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "I due dispositivi devono essere sulla stessa rete Wi-Fi."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:412
 msgid "Host a game"
 msgstr "Crea una partita"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:431
+#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:444
 msgid "Join a game"
 msgstr "Unisciti a una partita"
 
-#: scenes/play/play_menu.gd:399 scenes/play/play_menu.gd:518
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:531
 msgid "Create a code"
 msgstr "Crea un codice"
 
-#: scenes/play/play_menu.gd:417
+#: scenes/play/play_menu.gd:430
 msgid "Waiting for a player"
 msgstr "In attesa di un giocatore"
 
-#: scenes/play/play_menu.gd:418
+#: scenes/play/play_menu.gd:431
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "Sull'altro dispositivo scegli Gioca in locale, poi Unisciti a una partita."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:422
+#: scenes/play/play_menu.gd:435
 msgid "If the game doesn't appear there, enter this code"
 msgstr "Se la partita non compare, inserisci questo codice"
 
-#: scenes/play/play_menu.gd:427 scenes/play/play_menu.gd:547 scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:610
+#: scenes/play/play_menu.gd:440 scenes/play/play_menu.gd:560 scenes/play/play_menu.gd:611 scenes/play/play_menu.gd:618 scenes/play/play_menu.gd:623
 msgid "Cancel"
 msgstr "Annulla"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:433
+#: scenes/play/play_menu.gd:446
 msgid "Looking for games on this Wi-Fi…"
 msgstr "Cerco partite su questa rete Wi-Fi…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:444
+#: scenes/play/play_menu.gd:457
 msgid "Code"
 msgstr "Codice"
 
-#: scenes/play/play_menu.gd:452 scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:465 scenes/play/play_menu.gd:592
 msgid "Join"
 msgstr "Unisciti"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:489
+#: scenes/play/play_menu.gd:502
 msgid "Play with someone online"
 msgstr "Gioca con qualcuno online"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:494 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:507 scenes/play/play_menu.gd:616
 msgid "Standard rules, about a minute per move"
 msgstr "Regole standard, circa un minuto a mossa"
 
-#: scenes/play/play_menu.gd:495 scenes/play/play_menu.gd:515
+#: scenes/play/play_menu.gd:508 scenes/play/play_menu.gd:528
 msgid "Play with a friend"
 msgstr "Gioca con un amico"
 
-#: scenes/play/play_menu.gd:516
+#: scenes/play/play_menu.gd:529
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "Uno crea un codice, l'altro lo inserisce. Funziona tra telefoni, tablet e computer."
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:563
+#: scenes/play/play_menu.gd:532 scenes/play/play_menu.gd:576
 msgid "Enter a code"
 msgstr "Inserisci un codice"
 
-#: scenes/play/play_menu.gd:527
+#: scenes/play/play_menu.gd:540
 msgid "Your code"
 msgstr "Il tuo codice"
 
-#: scenes/play/play_menu.gd:529 scenes/play/play_menu.gd:609
+#: scenes/play/play_menu.gd:542 scenes/play/play_menu.gd:622
 msgid "Connecting…"
 msgstr "Connessione…"
 
-#: scenes/play/play_menu.gd:532
+#: scenes/play/play_menu.gd:545
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "Invia questo codice al tuo amico. La partita inizia quando lo inserisce."
 
-#: scenes/play/play_menu.gd:535
+#: scenes/play/play_menu.gd:548
 msgid "Share"
 msgstr "Condividi"
 
-#: scenes/play/play_menu.gd:537
+#: scenes/play/play_menu.gd:550
 msgid "Copy"
 msgstr "Copia"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:540 scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:572
 msgid "Copied"
 msgstr "Copiato"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:553
+#: scenes/play/play_menu.gd:566
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Gioca con me su Timeless Games! Il mio codice partita è %s."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:589
+#: scenes/play/play_menu.gd:602
 msgid "No one is free right now"
 msgstr "Al momento non c'è nessuno libero"
 
-#: scenes/play/play_menu.gd:590
+#: scenes/play/play_menu.gd:603
 msgid "We can keep looking while you play."
 msgstr "Possiamo continuare a cercare mentre giochi."
 
-#: scenes/play/play_menu.gd:591
+#: scenes/play/play_menu.gd:604
 msgid "Play against the AI while we keep looking"
 msgstr "Gioca contro l'IA mentre cerchiamo"
 
-#: scenes/play/play_menu.gd:594
+#: scenes/play/play_menu.gd:607
 msgid "Keep searching"
 msgstr "Continua a cercare"
 
-#: scenes/play/play_menu.gd:595
+#: scenes/play/play_menu.gd:608
 msgid "Invite a friend instead"
 msgstr "Invita un amico"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:628
 msgid "Couldn't start the game"
 msgstr "Impossibile avviare la partita"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:631
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:626
+#: scenes/play/play_menu.gd:639
 msgid "Leave this game?"
 msgstr "Lasciare questa partita?"
 
-#: scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:640
 msgid "It counts as a loss."
 msgstr "Conta come una sconfitta."
 
-#: scenes/play/play_menu.gd:628
+#: scenes/play/play_menu.gd:641
 msgid "Leave"
 msgstr "Esci"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:647
 msgid "Stay"
 msgstr "Resta"
 
-#: scenes/play/play_menu.gd:650
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:672
+msgid "Sources"
+msgstr "Fonti"
+
+#: scenes/play/play_menu.gd:718
 msgid "Offer a draw"
 msgstr "Proponi patta"
 
-#: scenes/play/play_menu.gd:655
+#: scenes/play/play_menu.gd:723
 msgid "Ask to undo"
 msgstr "Chiedi di annullare"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:675
+#: scenes/play/play_menu.gd:743
 msgid "Look"
 msgstr "Stile"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:679
+#: scenes/play/play_menu.gd:747
 msgid "Quit to main menu"
 msgstr "Esci al menu principale"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:724
+#: scenes/play/play_menu.gd:792
 #, c-format
 msgid "Your name: %s"
 msgstr "Il tuo nome: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:829
 msgid "Waiting"
 msgstr "In attesa"
 
@@ -651,6 +661,14 @@ msgstr "Ottone del tempio"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Un tavoliere di ottone inciso e figure fuse, al tramonto nel cortile di un tempio."
 
+#: titles/bagh_chal/art/modern_style.gd:33
+msgid "Modern edition"
+msgstr "Edizione moderna"
+
+#: titles/bagh_chal/art/modern_style.gd:34
+msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
+msgstr "Un set di design di oggi: una tavola di rovere con linee intarsiate, tigri e capre in ceramica, sotto una lampada a sospensione."
+
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"
 msgstr "Pietra e ciottoli"
@@ -658,6 +676,41 @@ msgstr "Pietra e ciottoli"
 #: titles/bagh_chal/art/stone_style.gd:39
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "Alla maniera storica: linee incise nella pietra e ripassate col gesso, tigri e capre di sassi di fiume, su una stuoia di paglia."
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "Il Bagh Chal viene dal Nepal. Il suo nome unisce le parole nepalesi per «tigre» e «mossa». Quattro tigri cacciano venti capre su un tavoliere di cinque punti per cinque: le tigri catturano le capre saltandoci sopra, e le capre vincono chiudendo le tigri finché nessuna può più muoversi. In nepal bhasa, la lingua dei newar della valle di Kathmandu, il gioco si chiama [i]dhun kasa[/i], «il gioco della tigre»."
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "Appartiene a una grande famiglia di giochi di caccia, in cui pochi pezzi forti affrontano molti pezzi deboli. In tutta l'Asia meridionale si gioca a tigri contro capre o agnelli su tavolieri molto diversi; nell'India del Sud, per esempio, l'affine [i]aadu puli attam[/i] ha un tavoliere tutto suo."
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "Nessuno sa quanto sia antico il gioco: si è tramandato giocando, non per iscritto. Spesso i giocatori incidevano il tavoliere nel terreno o nella pietra e giocavano con sassi e ciottoli. Nel 1976 lo storico dei giochi David Parlett lo trovò diffuso tra i monaci buddhisti, che lo giocavano proprio così."
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "Una delle più antiche descrizioni scritte risale al 1933, quando lo zoologo Sunder Lal Hora registrò il gioco nella valle della Teesta, nell'Himalaya orientale, sotto i nomi di Bhagchal, Bhagchakar o Chakrachal: quattro tigri e venti capre. Parlett ne annotò le regole in Nepal nel 1976, e il grande maestro di scacchi Jurij Averbach, che lo vide lì nel 1986, lo definì un gioco nazionale, popolare quasi quanto gli scacchi."
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "Le antiche testimonianze non chiudono tutte la caccia allo stesso punto. In Hora e Parlett le tigri danno la caccia a ogni capra, mentre oggi quasi tutti i giocatori si fermano a cinque catture. Questo gioco offre entrambe: le regole Standard, con cinque, e Parlett 1976, la caccia fino all'ultima capra."
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "Nel 2004 gli informatici Lim Yew Jin e Jürg Nievergelt si misero a calcolare ogni posizione del gioco. In seguito dimostrarono che, con un gioco perfetto da entrambe le parti, la partita standard finisce in patta: né le tigri né le capre possono imporre la vittoria."
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "Nella valle di Kathmandu i giocatori più anziani si ritrovano ancora intorno al tavoliere sulle piattaforme dei pati, i luoghi di sosta pubblici, e vicino ai templi, e si vendono tavolieri di metallo e di legno, soprattutto ai visitatori. I giornalisti di Kathmandu notano che oggi i giovani lo giocano meno."
 
 #. Subtitle under the game name: which rule set is being played.
 #: titles/common/hunt_text.gd:26

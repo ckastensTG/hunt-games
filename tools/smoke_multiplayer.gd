@@ -75,8 +75,8 @@ func _run() -> void:
 
 func _menus() -> void:
 	_check(game.menu.is_open(), "the menu opens at start")
-	for screen in ["home", "vs_ai", "pass", "nearby", "nearby_host", "online", "friend", "friend_setup",
-			"friend_join"]:
+	for screen in ["home", "origins", "vs_ai", "pass", "nearby", "nearby_host", "online", "friend",
+			"friend_setup", "friend_join"]:
 		game.menu._go(screen, false)
 		await _frames(3)
 		_check(game.menu._card_box.get_child_count() > 1, "menu screen %s has content" % screen)

@@ -16,6 +16,7 @@ const SPACING := 1.0
 const HudScript := preload("res://scenes/greybox/hud.gd")
 const TutorialScript := preload("res://scenes/greybox/tutorial.gd")
 const MarkShader := preload("res://scenes/greybox/mark.gdshader")
+const MarkInkShader := preload("res://scenes/greybox/mark_ink.gdshader")
 const PlayControllerScript := preload("res://scenes/play/play_controller.gd")
 const PlayMenuScript := preload("res://scenes/play/play_menu.gd")
 const MatchUIScript := preload("res://scenes/play/match_ui.gd")
@@ -884,7 +885,7 @@ func _mark(p: int, shape: MarkShape) -> void:
 	mi.mesh = quad
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var m := ShaderMaterial.new()
-	m.shader = MarkShader
+	m.shader = MarkInkShader if style and style.mark_ink else MarkShader
 	m.set_shader_parameter("shape", shape)
 	m.set_shader_parameter("color", colors[shape])
 	mi.material_override = m

@@ -175,6 +175,19 @@ static func theme() -> Theme:
 	sep.thickness = 1
 	t.set_stylebox("separator", "HSeparator", sep)
 	t.set_constant("separation", "HSeparator", 12)
+
+	# Scroll bars (long texts such as Game origins): a thin brass rail.
+	var rail := StyleBoxFlat.new()
+	rail.bg_color = Color(BRASS_DIM, 0.18)
+	rail.set_corner_radius_all(3)
+	rail.content_margin_left = 3
+	rail.content_margin_right = 3
+	t.set_stylebox("scroll", "VScrollBar", rail)
+	for st in ["grabber", "grabber_highlight", "grabber_pressed"]:
+		var g := StyleBoxFlat.new()
+		g.bg_color = BRASS_DIM if st == "grabber" else BRASS
+		g.set_corner_radius_all(3)
+		t.set_stylebox(st, "VScrollBar", g)
 	_theme = t
 	return t
 

@@ -136,7 +136,7 @@ msgstr "다음 ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:601
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:614
 msgid "Looking for an opponent…"
 msgstr "상대를 찾는 중…"
 
@@ -205,7 +205,7 @@ msgid "Resign this game?"
 msgstr "이 게임을 기권할까요?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:660
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:728
 msgid "Resign"
 msgstr "기권"
 
@@ -270,256 +270,266 @@ msgstr "상대가 연결하지 않았습니다. 계속 찾는 중…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "시간이 다 되어 대신 한 수를 두었습니다 (%d/3)."
 
-#: scenes/play/play_menu.gd:231
+#: scenes/play/play_menu.gd:241
 msgid "Back"
 msgstr "뒤로"
 
-#: scenes/play/play_menu.gd:286
+#: scenes/play/play_menu.gd:296
 msgid "Rules"
 msgstr "규칙"
 
-#: scenes/play/play_menu.gd:305
+#: scenes/play/play_menu.gd:315
 msgid "Language"
 msgstr "언어"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:644
+#: scenes/play/play_menu.gd:341 scenes/play/play_menu.gd:712
 msgid "Continue"
 msgstr "이어 하기"
 
-#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:355
+#: scenes/play/play_menu.gd:342 scenes/play/play_menu.gd:368
 msgid "Play against the AI"
 msgstr "AI와 대국"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:375
+#: scenes/play/play_menu.gd:344 scenes/play/play_menu.gd:388
 msgid "Pass and play"
 msgstr "한 기기로 2인 대국"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:384
+#: scenes/play/play_menu.gd:346 scenes/play/play_menu.gd:397
 msgid "Play local"
 msgstr "로컬 대국"
 
-#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:487
+#: scenes/play/play_menu.gd:348 scenes/play/play_menu.gd:500
 msgid "Play online"
 msgstr "온라인 대국"
 
-#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:349 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "게임 방법"
 
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:657
+msgid "Game origins"
+msgstr "게임의 유래"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:346
+#: scenes/play/play_menu.gd:359
 msgid "Quit game"
 msgstr "게임 종료"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Novice"
 msgstr "초보"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Apprentice"
 msgstr "견습"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Adept"
 msgstr "숙련"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Master"
 msgstr "명인"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:364 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:377 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "상대"
 
-#: scenes/play/play_menu.gd:367 scenes/play/play_menu.gd:379 scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:392 scenes/play/play_menu.gd:416
 msgid "Start"
 msgstr "시작"
 
-#: scenes/play/play_menu.gd:376
+#: scenes/play/play_menu.gd:389
 msgid "Two players share this device and take turns."
 msgstr "두 사람이 이 기기를 함께 쓰며 번갈아 둡니다."
 
-#: scenes/play/play_menu.gd:385
+#: scenes/play/play_menu.gd:398
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "두 기기가 같은 Wi-Fi에 연결되어 있어야 합니다."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:412
 msgid "Host a game"
 msgstr "대국 만들기"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:431
+#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:444
 msgid "Join a game"
 msgstr "대국 참가"
 
-#: scenes/play/play_menu.gd:399 scenes/play/play_menu.gd:518
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:531
 msgid "Create a code"
 msgstr "코드 만들기"
 
-#: scenes/play/play_menu.gd:417
+#: scenes/play/play_menu.gd:430
 msgid "Waiting for a player"
 msgstr "상대를 기다리는 중"
 
-#: scenes/play/play_menu.gd:418
+#: scenes/play/play_menu.gd:431
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "다른 기기에서 '로컬 대국'을 고른 뒤 '대국 참가'를 고르세요."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:422
+#: scenes/play/play_menu.gd:435
 msgid "If the game doesn't appear there, enter this code"
 msgstr "대국이 보이지 않으면 이 코드를 입력하세요"
 
-#: scenes/play/play_menu.gd:427 scenes/play/play_menu.gd:547 scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:610
+#: scenes/play/play_menu.gd:440 scenes/play/play_menu.gd:560 scenes/play/play_menu.gd:611 scenes/play/play_menu.gd:618 scenes/play/play_menu.gd:623
 msgid "Cancel"
 msgstr "취소"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:433
+#: scenes/play/play_menu.gd:446
 msgid "Looking for games on this Wi-Fi…"
 msgstr "이 Wi-Fi에서 대국을 찾는 중…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:444
+#: scenes/play/play_menu.gd:457
 msgid "Code"
 msgstr "코드"
 
-#: scenes/play/play_menu.gd:452 scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:465 scenes/play/play_menu.gd:592
 msgid "Join"
 msgstr "참가"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:489
+#: scenes/play/play_menu.gd:502
 msgid "Play with someone online"
 msgstr "온라인 상대와 대국"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:494 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:507 scenes/play/play_menu.gd:616
 msgid "Standard rules, about a minute per move"
 msgstr "표준 규칙, 한 수에 약 1분"
 
-#: scenes/play/play_menu.gd:495 scenes/play/play_menu.gd:515
+#: scenes/play/play_menu.gd:508 scenes/play/play_menu.gd:528
 msgid "Play with a friend"
 msgstr "친구와 대국"
 
-#: scenes/play/play_menu.gd:516
+#: scenes/play/play_menu.gd:529
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "한 사람이 코드를 만들고 다른 사람이 입력합니다. 휴대폰, 태블릿, 컴퓨터끼리 모두 됩니다."
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:563
+#: scenes/play/play_menu.gd:532 scenes/play/play_menu.gd:576
 msgid "Enter a code"
 msgstr "코드 입력"
 
-#: scenes/play/play_menu.gd:527
+#: scenes/play/play_menu.gd:540
 msgid "Your code"
 msgstr "내 코드"
 
-#: scenes/play/play_menu.gd:529 scenes/play/play_menu.gd:609
+#: scenes/play/play_menu.gd:542 scenes/play/play_menu.gd:622
 msgid "Connecting…"
 msgstr "연결하는 중…"
 
-#: scenes/play/play_menu.gd:532
+#: scenes/play/play_menu.gd:545
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "이 코드를 친구에게 보내세요. 친구가 입력하면 대국이 시작됩니다."
 
-#: scenes/play/play_menu.gd:535
+#: scenes/play/play_menu.gd:548
 msgid "Share"
 msgstr "공유"
 
-#: scenes/play/play_menu.gd:537
+#: scenes/play/play_menu.gd:550
 msgid "Copy"
 msgstr "복사"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:540 scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:572
 msgid "Copied"
 msgstr "복사했습니다"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:553
+#: scenes/play/play_menu.gd:566
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games에서 같이 대국해요! 대국 코드는 %s입니다."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:589
+#: scenes/play/play_menu.gd:602
 msgid "No one is free right now"
 msgstr "지금은 대국할 사람이 없습니다"
 
-#: scenes/play/play_menu.gd:590
+#: scenes/play/play_menu.gd:603
 msgid "We can keep looking while you play."
 msgstr "대국하는 동안 계속 찾을 수 있습니다."
 
-#: scenes/play/play_menu.gd:591
+#: scenes/play/play_menu.gd:604
 msgid "Play against the AI while we keep looking"
 msgstr "찾는 동안 AI와 대국"
 
-#: scenes/play/play_menu.gd:594
+#: scenes/play/play_menu.gd:607
 msgid "Keep searching"
 msgstr "계속 찾기"
 
-#: scenes/play/play_menu.gd:595
+#: scenes/play/play_menu.gd:608
 msgid "Invite a friend instead"
 msgstr "대신 친구 초대"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:628
 msgid "Couldn't start the game"
 msgstr "대국을 시작할 수 없습니다"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:631
 msgid "OK"
 msgstr "확인"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:626
+#: scenes/play/play_menu.gd:639
 msgid "Leave this game?"
 msgstr "이 대국에서 나갈까요?"
 
-#: scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:640
 msgid "It counts as a loss."
 msgstr "패배로 처리됩니다."
 
-#: scenes/play/play_menu.gd:628
+#: scenes/play/play_menu.gd:641
 msgid "Leave"
 msgstr "나가기"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:647
 msgid "Stay"
 msgstr "계속하기"
 
-#: scenes/play/play_menu.gd:650
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:672
+msgid "Sources"
+msgstr "참고 문헌"
+
+#: scenes/play/play_menu.gd:718
 msgid "Offer a draw"
 msgstr "무승부 제안"
 
-#: scenes/play/play_menu.gd:655
+#: scenes/play/play_menu.gd:723
 msgid "Ask to undo"
 msgstr "무르기 요청"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:675
+#: scenes/play/play_menu.gd:743
 msgid "Look"
 msgstr "스타일"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:679
+#: scenes/play/play_menu.gd:747
 msgid "Quit to main menu"
 msgstr "메인 메뉴로 나가기"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:724
+#: scenes/play/play_menu.gd:792
 #, c-format
 msgid "Your name: %s"
 msgstr "내 이름: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:829
 msgid "Waiting"
 msgstr "기다리는 중"
 
@@ -650,6 +660,14 @@ msgstr "사원의 황동"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "새김 장식이 있는 황동 판과 주조한 말, 해 질 녘 사원 안뜰에서."
 
+#: titles/bagh_chal/art/modern_style.gd:33
+msgid "Modern edition"
+msgstr "모던 에디션"
+
+#: titles/bagh_chal/art/modern_style.gd:34
+msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
+msgstr "오늘날의 디자이너 세트: 선을 상감한 오크 보드, 도자기 호랑이와 염소, 펜던트 조명 아래에서."
+
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"
 msgstr "돌과 조약돌"
@@ -657,6 +675,41 @@ msgstr "돌과 조약돌"
 #: titles/bagh_chal/art/stone_style.gd:39
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "옛 방식 그대로: 돌에 선을 새겨 분필로 칠하고, 냇돌로 만든 호랑이와 염소를 짚 돗자리 위에."
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "Bagh Chal은 네팔에서 온 게임입니다. 이름은 네팔어로 ‘호랑이’와 ‘움직임’을 뜻하는 말을 합친 것입니다. 가로세로 다섯 점씩 놓인 판 위에서 호랑이 넷이 염소 스무 마리를 사냥합니다. 호랑이는 염소를 뛰어넘어 잡고, 염소는 호랑이를 몰아붙여 어느 호랑이도 움직이지 못하게 하면 이깁니다. 카트만두 계곡 네와르족의 언어인 네팔 바사어로는 이 게임을 [i]dhun kasa[/i], 곧 ‘호랑이 놀이’라고 부릅니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "이 게임은 강한 말 몇 개가 약한 말 여럿과 맞서는 ‘사냥 게임’이라는 큰 갈래에 속합니다. 남아시아 곳곳에는 호랑이와 염소 또는 어린 양이 겨루는 게임이 있고, 판의 모양은 저마다 다릅니다. 예를 들어 남인도의 비슷한 게임 [i]aadu puli attam[/i]에는 고유한 판이 있습니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "이 게임이 얼마나 오래되었는지는 아무도 모릅니다. 글이 아니라 놀이를 통해 전해졌기 때문입니다. 사람들은 흔히 땅이나 돌에 판을 새기고 돌과 조약돌로 두었습니다. 1976년 게임 역사가 데이비드 팔렛은 이 게임이 불교 승려들 사이에서 인기가 있으며, 바로 그렇게 두어진다고 기록했습니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "가장 오래된 기록 가운데 하나는 1933년의 것입니다. 동물학자 순데르 랄 호라가 히말라야 동부의 티스타강 유역에서 이 게임을 Bhagchal, Bhagchakar 또는 Chakrachal이라는 이름으로, 호랑이 넷과 염소 스물로 하는 게임으로 기록했습니다. 1976년에는 팔렛이 네팔에서 규칙을 적어 두었고, 1986년 그곳에서 이 게임을 본 체스 그랜드마스터 유리 아베르바흐는 체스만큼이나 인기 있는 국민 게임이라고 했습니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "옛 기록들은 사냥을 같은 지점에서 끝내지 않습니다. 호라와 팔렛의 기록에서는 호랑이가 염소를 모두 사냥하지만, 오늘날 대부분의 사람들은 다섯 마리를 잡으면 끝냅니다. 이 게임에서는 둘 다 할 수 있습니다. 다섯 마리로 끝나는 ‘표준’ 규칙과, 마지막 염소까지 사냥하는 ‘팔렛 1976’입니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "2004년 컴퓨터 과학자 Lim Yew Jin과 Jürg Nievergelt는 이 게임의 모든 국면을 계산하기 시작했습니다. 이후 두 사람은 양쪽이 완벽하게 두면 표준 게임은 무승부로 끝난다는 것, 곧 호랑이도 염소도 승리를 강제할 수 없다는 것을 증명했습니다."
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "카트만두 계곡에서는 지금도 나이 든 사람들이 공공 쉼터인 파티의 단 위나 사원 주변에서 판을 둘러싸고 모입니다. 금속과 나무로 된 판도 팔리지만, 주로 여행자들이 삽니다. 카트만두의 기자들은 오늘날 이 게임을 하는 젊은이가 줄었다고 전합니다."
 
 #. Subtitle under the game name: which rule set is being played.
 #: titles/common/hunt_text.gd:26

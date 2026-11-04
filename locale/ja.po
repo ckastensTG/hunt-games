@@ -136,7 +136,7 @@ msgstr "次へ ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:601
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:614
 msgid "Looking for an opponent…"
 msgstr "対戦相手を探しています…"
 
@@ -205,7 +205,7 @@ msgid "Resign this game?"
 msgstr "この対局を投了しますか？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:660
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:728
 msgid "Resign"
 msgstr "投了する"
 
@@ -270,256 +270,266 @@ msgstr "相手が接続しませんでした。引き続き探しています…
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "時間切れのため、代わりに一手指しました（%d／3 回）。"
 
-#: scenes/play/play_menu.gd:231
+#: scenes/play/play_menu.gd:241
 msgid "Back"
 msgstr "戻る"
 
-#: scenes/play/play_menu.gd:286
+#: scenes/play/play_menu.gd:296
 msgid "Rules"
 msgstr "ルール"
 
-#: scenes/play/play_menu.gd:305
+#: scenes/play/play_menu.gd:315
 msgid "Language"
 msgstr "言語"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:644
+#: scenes/play/play_menu.gd:341 scenes/play/play_menu.gd:712
 msgid "Continue"
 msgstr "続ける"
 
-#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:355
+#: scenes/play/play_menu.gd:342 scenes/play/play_menu.gd:368
 msgid "Play against the AI"
 msgstr "AI と対局"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:375
+#: scenes/play/play_menu.gd:344 scenes/play/play_menu.gd:388
 msgid "Pass and play"
 msgstr "1台で2人対戦"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:384
+#: scenes/play/play_menu.gd:346 scenes/play/play_menu.gd:397
 msgid "Play local"
 msgstr "ローカル対戦"
 
-#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:487
+#: scenes/play/play_menu.gd:348 scenes/play/play_menu.gd:500
 msgid "Play online"
 msgstr "オンライン対局"
 
-#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:349 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "遊び方"
 
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:657
+msgid "Game origins"
+msgstr "ゲームの由来"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:346
+#: scenes/play/play_menu.gd:359
 msgid "Quit game"
 msgstr "ゲームを終了"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Novice"
 msgstr "初心者"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Apprentice"
 msgstr "見習い"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Adept"
 msgstr "熟練者"
 
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:372
 msgid "Master"
 msgstr "名人"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:364 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:377 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "対戦相手"
 
-#: scenes/play/play_menu.gd:367 scenes/play/play_menu.gd:379 scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:392 scenes/play/play_menu.gd:416
 msgid "Start"
 msgstr "開始"
 
-#: scenes/play/play_menu.gd:376
+#: scenes/play/play_menu.gd:389
 msgid "Two players share this device and take turns."
 msgstr "2人でこの端末を使い、交互に指します。"
 
-#: scenes/play/play_menu.gd:385
+#: scenes/play/play_menu.gd:398
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "2台の端末を同じ Wi-Fi に接続してください。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:412
 msgid "Host a game"
 msgstr "対局を作る"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:431
+#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:444
 msgid "Join a game"
 msgstr "対局に参加"
 
-#: scenes/play/play_menu.gd:399 scenes/play/play_menu.gd:518
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:531
 msgid "Create a code"
 msgstr "コードを作る"
 
-#: scenes/play/play_menu.gd:417
+#: scenes/play/play_menu.gd:430
 msgid "Waiting for a player"
 msgstr "相手を待っています"
 
-#: scenes/play/play_menu.gd:418
+#: scenes/play/play_menu.gd:431
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "もう1台で「ローカル対戦」、続いて「対局に参加」を選んでください。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:422
+#: scenes/play/play_menu.gd:435
 msgid "If the game doesn't appear there, enter this code"
 msgstr "表示されない場合は、このコードを入力してください"
 
-#: scenes/play/play_menu.gd:427 scenes/play/play_menu.gd:547 scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:610
+#: scenes/play/play_menu.gd:440 scenes/play/play_menu.gd:560 scenes/play/play_menu.gd:611 scenes/play/play_menu.gd:618 scenes/play/play_menu.gd:623
 msgid "Cancel"
 msgstr "キャンセル"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:433
+#: scenes/play/play_menu.gd:446
 msgid "Looking for games on this Wi-Fi…"
 msgstr "この Wi-Fi で対局を探しています…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:444
+#: scenes/play/play_menu.gd:457
 msgid "Code"
 msgstr "コード"
 
-#: scenes/play/play_menu.gd:452 scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:465 scenes/play/play_menu.gd:592
 msgid "Join"
 msgstr "参加"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:489
+#: scenes/play/play_menu.gd:502
 msgid "Play with someone online"
 msgstr "オンラインの誰かと対局"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:494 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:507 scenes/play/play_menu.gd:616
 msgid "Standard rules, about a minute per move"
 msgstr "標準ルール・1手あたり約1分"
 
-#: scenes/play/play_menu.gd:495 scenes/play/play_menu.gd:515
+#: scenes/play/play_menu.gd:508 scenes/play/play_menu.gd:528
 msgid "Play with a friend"
 msgstr "友だちと対局"
 
-#: scenes/play/play_menu.gd:516
+#: scenes/play/play_menu.gd:529
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "1人がコードを作り、もう1人が入力します。スマホ、タブレット、パソコンの間で遊べます。"
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:563
+#: scenes/play/play_menu.gd:532 scenes/play/play_menu.gd:576
 msgid "Enter a code"
 msgstr "コードを入力"
 
-#: scenes/play/play_menu.gd:527
+#: scenes/play/play_menu.gd:540
 msgid "Your code"
 msgstr "あなたのコード"
 
-#: scenes/play/play_menu.gd:529 scenes/play/play_menu.gd:609
+#: scenes/play/play_menu.gd:542 scenes/play/play_menu.gd:622
 msgid "Connecting…"
 msgstr "接続中…"
 
-#: scenes/play/play_menu.gd:532
+#: scenes/play/play_menu.gd:545
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "このコードを友だちに送ってください。入力されると対局が始まります。"
 
-#: scenes/play/play_menu.gd:535
+#: scenes/play/play_menu.gd:548
 msgid "Share"
 msgstr "共有"
 
-#: scenes/play/play_menu.gd:537
+#: scenes/play/play_menu.gd:550
 msgid "Copy"
 msgstr "コピー"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:540 scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:572
 msgid "Copied"
 msgstr "コピーしました"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:553
+#: scenes/play/play_menu.gd:566
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games で一緒に遊ぼう！対局コードは %s です。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:589
+#: scenes/play/play_menu.gd:602
 msgid "No one is free right now"
 msgstr "今は誰も空いていません"
 
-#: scenes/play/play_menu.gd:590
+#: scenes/play/play_menu.gd:603
 msgid "We can keep looking while you play."
 msgstr "対局しているあいだも探し続けられます。"
 
-#: scenes/play/play_menu.gd:591
+#: scenes/play/play_menu.gd:604
 msgid "Play against the AI while we keep looking"
 msgstr "探しているあいだ AI と対局"
 
-#: scenes/play/play_menu.gd:594
+#: scenes/play/play_menu.gd:607
 msgid "Keep searching"
 msgstr "探し続ける"
 
-#: scenes/play/play_menu.gd:595
+#: scenes/play/play_menu.gd:608
 msgid "Invite a friend instead"
 msgstr "代わりに友だちを誘う"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:628
 msgid "Couldn't start the game"
 msgstr "対局を始められませんでした"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:631
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:626
+#: scenes/play/play_menu.gd:639
 msgid "Leave this game?"
 msgstr "この対局を抜けますか？"
 
-#: scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:640
 msgid "It counts as a loss."
 msgstr "負けになります。"
 
-#: scenes/play/play_menu.gd:628
+#: scenes/play/play_menu.gd:641
 msgid "Leave"
 msgstr "抜ける"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:647
 msgid "Stay"
 msgstr "残る"
 
-#: scenes/play/play_menu.gd:650
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:672
+msgid "Sources"
+msgstr "参考文献"
+
+#: scenes/play/play_menu.gd:718
 msgid "Offer a draw"
 msgstr "引き分けを提案"
 
-#: scenes/play/play_menu.gd:655
+#: scenes/play/play_menu.gd:723
 msgid "Ask to undo"
 msgstr "待ったを頼む"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:675
+#: scenes/play/play_menu.gd:743
 msgid "Look"
 msgstr "見た目"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:679
+#: scenes/play/play_menu.gd:747
 msgid "Quit to main menu"
 msgstr "メインメニューに戻る"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:724
+#: scenes/play/play_menu.gd:792
 #, c-format
 msgid "Your name: %s"
 msgstr "あなたの名前：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:829
 msgid "Waiting"
 msgstr "待機中"
 
@@ -650,6 +660,14 @@ msgstr "寺院の真鍮"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "彫刻を施した真鍮の盤と鋳造の駒。夕暮れの寺院の中庭で。"
 
+#: titles/bagh_chal/art/modern_style.gd:33
+msgid "Modern edition"
+msgstr "モダン版"
+
+#: titles/bagh_chal/art/modern_style.gd:34
+msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
+msgstr "現代のデザイナーズセット：線を象嵌したオーク材の盤に、陶器の虎と山羊。ペンダントライトの下で。"
+
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"
 msgstr "石と小石"
@@ -657,6 +675,41 @@ msgstr "石と小石"
 #: titles/bagh_chal/art/stone_style.gd:39
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "昔ながらの遊び方：石に線を刻んで白墨でなぞり、川石の虎と山羊を、わらのむしろの上で。"
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "Bagh Chal はネパール生まれのゲームです。その名前は、ネパール語で「虎」と「動き」を表す言葉を組み合わせたものです。縦横5つずつの点が並ぶ盤の上で、4頭の虎が20頭の山羊を狩ります。虎は山羊を跳び越えて取り、山羊は虎を追い詰めてどの虎も動けなくすれば勝ちです。カトマンズ盆地のネワール人の言葉、ネパール・バサ語では、このゲームは [i]dhun kasa[/i]（「虎の遊び」）と呼ばれます。"
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "このゲームは、少数の強い駒が多数の弱い駒と対決する「狩りのゲーム」という大きな一族に属しています。南アジア各地には、虎が山羊や子羊と戦うゲームがあり、盤の形はさまざまです。たとえば南インドの近縁のゲーム [i]aadu puli attam[/i] には、独自の盤があります。"
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "このゲームがどれほど古いのかは誰にも分かりません。書き残されることなく、遊ぶことで受け継がれてきたからです。人々はよく盤を地面や石に刻み、石や小石を駒にして遊びました。1976年、ゲーム史家のデイヴィッド・パーレットは、このゲームが仏教僧のあいだで人気があり、まさにそのように遊ばれていることを伝えています。"
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "最も古い文字の記録のひとつは1933年のものです。動物学者スンダル・ラール・ホーラが、東ヒマラヤのティースタ川流域で、このゲームを Bhagchal、Bhagchakar、Chakrachal という名前で、4頭の虎と20頭の山羊のゲームとして記録しました。1976年にはパーレットがネパールでそのルールを書き留め、1986年に現地でこのゲームを見たチェスのグランドマスター、ユーリ・アヴェルバフは、チェスとほぼ同じくらい人気のある国民的なゲームだと述べています。"
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "昔の記録は、どこで狩りを終えるかが一致していません。ホーラとパーレットの記録では虎はすべての山羊を狩りますが、今日の多くのプレイヤーは5頭を取ったところで終わりにします。このゲームでは両方を遊べます。5頭で終わる「標準」ルールと、最後の山羊まで狩る「パーレット 1976」です。"
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "2004年、計算機科学者の Lim Yew Jin と Jürg Nievergelt は、このゲームのあらゆる局面を計算することに取りかかりました。のちに二人は、双方が最善の手を打ち続ければ標準のゲームは引き分けになること、つまり虎も山羊も勝ちを強制できないことを証明しました。"
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "カトマンズ盆地では今も、年配の人たちがパティ（公共の休憩所）の基壇や寺院のまわりで盤を囲んでいます。金属や木の盤も売られていますが、買うのはおもに旅行者です。カトマンズの記者たちは、今ではこのゲームを遊ぶ若者が少なくなったと伝えています。"
 
 #. Subtitle under the game name: which rule set is being played.
 #: titles/common/hunt_text.gd:26
