@@ -15,6 +15,27 @@ func test_bagh_chal_build() -> void:
 		check(v.length() == 32 and v.is_valid_hex_number(), "EOS %s is a 32-digit hex ID" % key)
 
 
+func test_bagh_chal_admob_ids() -> void:
+	var c := TitleConfig.for_id(TitleConfig.BAGH_CHAL)
+	var app_re := RegEx.create_from_string("^ca-app-pub-\\d{16}~\\d{10}$")
+	var unit_re := RegEx.create_from_string("^ca-app-pub-\\d{16}/\\d{10}$")
+	var publisher := ""
+	for platform in ["android", "ios"]:
+		var app := c.admob_app_id(platform)
+		check(app_re.search(app) != null, "%s App ID has the ~ form" % platform)
+		var pub := app.get_slice("~", 0)
+		check(publisher == "" or pub == publisher, "one AdMob account")
+		publisher = pub
+		for kind in ["interstitial", "rewarded"]:
+			var live := c.ad_unit(kind, platform, false)
+			var demo := c.ad_unit(kind, platform, true)
+			check(unit_re.search(live) != null and live.begins_with(pub + "/"), "%s %s: a unit of this account" % [platform, kind])
+			check(demo.begins_with("ca-app-pub-3940256099942544/"), "%s %s: debug builds use Google's demo unit" % [platform, kind])
+	check(c.admob_app_id("android") != c.admob_app_id("ios"), "one App ID per platform")
+	check_eq(c.ad_unit("interstitial", ""), "", "no ads on desktop")
+	check_eq(TitleConfig.for_id(TitleConfig.JOGO_DA_ONCA).ad_unit("rewarded", "android", false), "", "Jogo da Onça: none yet")
+
+
 func test_every_title_rule_set_exists() -> void:
 	for title in TitleConfig.TITLES:
 		for id in TitleConfig.for_id(title).rule_sets:

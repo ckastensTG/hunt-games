@@ -9,6 +9,10 @@ extends RefCounted
 ## in the app). The client ID and secret stay out of the repo: they live in
 ## res://config/eos_<title>.cfg, which .gitignore leaves out
 ## (see config/eos_title.example.cfg).
+##
+## AdMob: the App IDs and ad unit IDs aren't secret either (they ship in the
+## app). Debug builds use Google's demo ad units (ad_unit()), so testing never
+## shows or clicks a live ad on the account.
 
 const DEV := "dev"
 const BAGH_CHAL := "bagh_chal"
@@ -30,12 +34,39 @@ const TITLES := {
 			"sandbox_id": "f9acb9d5eaac4f5f9a48151d1b5dc914",  # Live
 			"deployment_id": "62e0d1d7527840f7a52383c2be071b83",  # Live Deployment
 		},
+		# From Christopher's AdMob account, 2026-11-04 (publisher pub-8333290579862415).
+		"admob": {
+			"android": {
+				"app_id": "ca-app-pub-8333290579862415~4379954395",
+				"interstitial": "ca-app-pub-8333290579862415/3728830665",
+				"rewarded": "ca-app-pub-8333290579862415/6782756456",
+			},
+			"ios": {
+				"app_id": "ca-app-pub-8333290579862415~3756750820",
+				"interstitial": "ca-app-pub-8333290579862415/9655944760",
+				"rewarded": "ca-app-pub-8333290579862415/5078792545",
+			},
+		},
 	},
 	JOGO_DA_ONCA: {
 		"short_name": "Jogo da Onça",
 		"rule_sets": [HuntRuleSets.ADUGO, HuntRuleSets.KOMIKAN],
 		"package": "",  # M3
 		"eos": {},  # its own EOS product, M3 (bible §5.2)
+		"admob": {},  # its own AdMob apps, M3
+	},
+}
+
+## Google's demo ad units (developers.google.com/admob/{android,ios}/test-ads).
+## They always fill and never pay, so debug builds can show ads safely.
+const ADMOB_DEMO_UNITS := {
+	"android": {
+		"interstitial": "ca-app-pub-3940256099942544/1033173712",
+		"rewarded": "ca-app-pub-3940256099942544/5224354917",
+	},
+	"ios": {
+		"interstitial": "ca-app-pub-3940256099942544/4411468910",
+		"rewarded": "ca-app-pub-3940256099942544/1712485313",
 	},
 }
 
@@ -44,6 +75,8 @@ var short_name: String
 var rule_sets: Array
 var package: String
 var eos: Dictionary
+## {"android": {app_id, interstitial, rewarded}, "ios": {...}}, or {}.
+var admob: Dictionary
 
 
 static var _active: TitleConfig
@@ -72,12 +105,42 @@ static func for_id(title: String) -> TitleConfig:
 		c.rule_sets = t.rule_sets.duplicate()
 		c.package = t.package
 		c.eos = t.eos.duplicate()
+		c.admob = t.admob.duplicate(true)
 	else:
 		c.short_name = "Hunt Games (dev)"
 		c.rule_sets = HuntRuleSets.ALL.duplicate()
 		c.package = ""
 		c.eos = TITLES[BAGH_CHAL].eos.duplicate()
+		c.admob = TITLES[BAGH_CHAL].admob.duplicate(true)
 	return c
+
+
+## The platform AdMob runs on in this build: "android", "ios" or "" (desktop,
+## editor, web: no ads).
+static func ad_platform() -> String:
+	if OS.has_feature("android"):
+		return "android"
+	if OS.has_feature("ios"):
+		return "ios"
+	return ""
+
+
+## The AdMob App ID for a platform ("" if this title has none). The ads
+## plugin writes it into the Android manifest and the iOS Info.plist
+## (GADApplicationIdentifier); debug builds use the real App ID too, with
+## demo ad units.
+func admob_app_id(platform := ad_platform()) -> String:
+	return str(admob.get(platform, {}).get("app_id", ""))
+
+
+## The ad unit for "interstitial" or "rewarded" on a platform. Debug builds
+## (and `demo`) get Google's demo unit, release builds the title's own.
+func ad_unit(kind: String, platform := ad_platform(), demo := OS.is_debug_build()) -> String:
+	if admob_app_id(platform) == "":
+		return ""
+	if demo:
+		return str(ADMOB_DEMO_UNITS.get(platform, {}).get(kind, ""))
+	return str(admob.get(platform, {}).get(kind, ""))
 
 
 ## The EOS client for this title from res://config/eos_<title>.cfg:

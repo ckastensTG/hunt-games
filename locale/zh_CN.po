@@ -13,97 +13,97 @@ msgstr ""
 msgid "Menu"
 msgstr "菜单"
 
-#: scenes/greybox/hud.gd:162
+#: scenes/greybox/hud.gd:161
 msgid "Undo"
 msgstr "悔棋"
 
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:230
+#: scenes/greybox/hud.gd:229
 msgid "Stop here"
 msgstr "到此为止"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:248
+#: scenes/greybox/hud.gd:247
 msgid "Moves"
 msgstr "着法"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:299 scenes/greybox/hud.gd:455
+#: scenes/greybox/hud.gd:298 scenes/greybox/hud.gd:454
 msgid "Play again"
 msgstr "再来一局"
 
 #. Button after an online quick match: look for someone else to play.
-#: scenes/greybox/hud.gd:309
+#: scenes/greybox/hud.gd:308
 msgid "New opponent"
 msgstr "换个对手"
 
 #. Button on the game-over card: back to the main menu.
-#: scenes/greybox/hud.gd:315
+#: scenes/greybox/hud.gd:314
 msgid "Main menu"
 msgstr "主菜单"
 
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:319
+#: scenes/greybox/hud.gd:318
 msgid "Look at the board"
 msgstr "查看棋盘"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:361
+#: scenes/greybox/hud.gd:360
 msgid "thinking"
 msgstr "思考中"
 
-#: scenes/greybox/hud.gd:394 scenes/greybox/hud.gd:443
+#: scenes/greybox/hud.gd:393 scenes/greybox/hud.gd:442
 msgid "A draw"
 msgstr "和棋"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:401
+#: scenes/greybox/hud.gd:400
 #, c-format
 msgid "Captured %d / %d"
 msgstr "已吃 %d / %d"
 
-#: scenes/greybox/hud.gd:429
+#: scenes/greybox/hud.gd:428
 msgid "No moves yet"
 msgstr "尚无着法"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:285
+#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:285
 msgid "You won"
 msgstr "你赢了"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:154
 msgid "You lost"
 msgstr "你输了"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:455 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:454 tools/smoke_multiplayer.gd:156
 msgid "Rematch"
 msgstr "再战一局"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:465
+#: scenes/greybox/hud.gd:464
 #, c-format
 msgid "place %s"
 msgstr "放在 %s"
 
-#: scenes/greybox/hud.gd:474
+#: scenes/greybox/hud.gd:473
 msgid "Watching the AI play both sides."
 msgstr "AI 正在替双方下棋。"
 
-#: scenes/greybox/hud.gd:478
+#: scenes/greybox/hud.gd:477
 msgid "Waiting for your opponent's move."
 msgstr "等待对手走棋。"
 
-#: scenes/greybox/hud.gd:480
+#: scenes/greybox/hud.gd:479
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "连跳吃子：选择下一个落点，或到此为止。"
 
-#: scenes/greybox/hud.gd:486
+#: scenes/greybox/hud.gd:485
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "选择去向。断开的圆环表示吃子。"
 
-#: scenes/greybox/hud.gd:487
+#: scenes/greybox/hud.gd:486
 msgid "Pick where it goes."
 msgstr "选择去向。"
 
@@ -136,7 +136,7 @@ msgstr "下一步 ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:591
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:601
 msgid "Looking for an opponent…"
 msgstr "正在寻找对手…"
 
@@ -205,7 +205,7 @@ msgid "Resign this game?"
 msgstr "要认输吗？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:650
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:660
 msgid "Resign"
 msgstr "认输"
 
@@ -283,25 +283,25 @@ msgid "Language"
 msgstr "语言"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:644
 msgid "Continue"
 msgstr "继续"
 
-#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:345
+#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:355
 msgid "Play against the AI"
 msgstr "与 AI 对弈"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:365
+#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:375
 msgid "Pass and play"
 msgstr "同屏双人"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:374
+#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:384
 msgid "Play local"
 msgstr "局域网对战"
 
-#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:477
+#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:487
 msgid "Play online"
 msgstr "在线对战"
 
@@ -309,212 +309,217 @@ msgstr "在线对战"
 msgid "How to play"
 msgstr "玩法"
 
-#: scenes/play/play_menu.gd:349
+#. Main menu button: close the game completely.
+#: scenes/play/play_menu.gd:346
+msgid "Quit game"
+msgstr "退出游戏"
+
+#: scenes/play/play_menu.gd:359
 msgid "Novice"
 msgstr "新手"
 
-#: scenes/play/play_menu.gd:349
+#: scenes/play/play_menu.gd:359
 msgid "Apprentice"
 msgstr "学徒"
 
-#: scenes/play/play_menu.gd:349
+#: scenes/play/play_menu.gd:359
 msgid "Adept"
 msgstr "高手"
 
-#: scenes/play/play_menu.gd:349
+#: scenes/play/play_menu.gd:359
 msgid "Master"
 msgstr "大师"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:354 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:364 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "对手"
 
-#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:393
+#: scenes/play/play_menu.gd:367 scenes/play/play_menu.gd:379 scenes/play/play_menu.gd:403
 msgid "Start"
 msgstr "开始"
 
-#: scenes/play/play_menu.gd:366
+#: scenes/play/play_menu.gd:376
 msgid "Two players share this device and take turns."
 msgstr "两位玩家共用这台设备，轮流走棋。"
 
-#: scenes/play/play_menu.gd:375
+#: scenes/play/play_menu.gd:385
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "两台设备需连接同一个 Wi-Fi。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:378 scenes/play/play_menu.gd:389
+#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:399
 msgid "Host a game"
 msgstr "创建对局"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:421
+#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:431
 msgid "Join a game"
 msgstr "加入对局"
 
-#: scenes/play/play_menu.gd:389 scenes/play/play_menu.gd:508
+#: scenes/play/play_menu.gd:399 scenes/play/play_menu.gd:518
 msgid "Create a code"
 msgstr "生成邀请码"
 
-#: scenes/play/play_menu.gd:407
+#: scenes/play/play_menu.gd:417
 msgid "Waiting for a player"
 msgstr "等待玩家加入"
 
-#: scenes/play/play_menu.gd:408
+#: scenes/play/play_menu.gd:418
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "在另一台设备上选择“局域网对战”，再选择“加入对局”。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:412
+#: scenes/play/play_menu.gd:422
 msgid "If the game doesn't appear there, enter this code"
 msgstr "如果那边没有显示这局，请输入此代码"
 
-#: scenes/play/play_menu.gd:417 scenes/play/play_menu.gd:537 scenes/play/play_menu.gd:588 scenes/play/play_menu.gd:595 scenes/play/play_menu.gd:600
+#: scenes/play/play_menu.gd:427 scenes/play/play_menu.gd:547 scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:610
 msgid "Cancel"
 msgstr "取消"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:423
+#: scenes/play/play_menu.gd:433
 msgid "Looking for games on this Wi-Fi…"
 msgstr "正在此 Wi-Fi 中寻找对局…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:434
+#: scenes/play/play_menu.gd:444
 msgid "Code"
 msgstr "代码"
 
-#: scenes/play/play_menu.gd:442 scenes/play/play_menu.gd:569
+#: scenes/play/play_menu.gd:452 scenes/play/play_menu.gd:579
 msgid "Join"
 msgstr "加入"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:479
+#: scenes/play/play_menu.gd:489
 msgid "Play with someone online"
 msgstr "与在线玩家对战"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:484 scenes/play/play_menu.gd:593
+#: scenes/play/play_menu.gd:494 scenes/play/play_menu.gd:603
 msgid "Standard rules, about a minute per move"
 msgstr "标准规则，每步约一分钟"
 
-#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:505
+#: scenes/play/play_menu.gd:495 scenes/play/play_menu.gd:515
 msgid "Play with a friend"
 msgstr "与好友对战"
 
-#: scenes/play/play_menu.gd:506
+#: scenes/play/play_menu.gd:516
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "一人生成代码，另一人输入。手机、平板和电脑之间都能对战。"
 
-#: scenes/play/play_menu.gd:509 scenes/play/play_menu.gd:553
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:563
 msgid "Enter a code"
 msgstr "输入代码"
 
-#: scenes/play/play_menu.gd:517
+#: scenes/play/play_menu.gd:527
 msgid "Your code"
 msgstr "你的代码"
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:599
+#: scenes/play/play_menu.gd:529 scenes/play/play_menu.gd:609
 msgid "Connecting…"
 msgstr "正在连接…"
 
-#: scenes/play/play_menu.gd:522
+#: scenes/play/play_menu.gd:532
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "把代码发给好友，对方输入后对局开始。"
 
-#: scenes/play/play_menu.gd:525
+#: scenes/play/play_menu.gd:535
 msgid "Share"
 msgstr "分享"
 
-#: scenes/play/play_menu.gd:527
+#: scenes/play/play_menu.gd:537
 msgid "Copy"
 msgstr "复制"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:530 scenes/play/play_menu.gd:549
+#: scenes/play/play_menu.gd:540 scenes/play/play_menu.gd:559
 msgid "Copied"
 msgstr "已复制"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:543
+#: scenes/play/play_menu.gd:553
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "来 Timeless Games 和我下一局吧！我的对局代码是 %s。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:589
 msgid "No one is free right now"
 msgstr "暂时没有空闲的玩家"
 
-#: scenes/play/play_menu.gd:580
+#: scenes/play/play_menu.gd:590
 msgid "We can keep looking while you play."
 msgstr "你下棋时我们可以继续寻找。"
 
-#: scenes/play/play_menu.gd:581
+#: scenes/play/play_menu.gd:591
 msgid "Play against the AI while we keep looking"
 msgstr "先与 AI 对弈，同时继续寻找"
 
-#: scenes/play/play_menu.gd:584
+#: scenes/play/play_menu.gd:594
 msgid "Keep searching"
 msgstr "继续寻找"
 
-#: scenes/play/play_menu.gd:585
+#: scenes/play/play_menu.gd:595
 msgid "Invite a friend instead"
 msgstr "改为邀请好友"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:605
+#: scenes/play/play_menu.gd:615
 msgid "Couldn't start the game"
 msgstr "无法开始对局"
 
-#: scenes/play/play_menu.gd:608
+#: scenes/play/play_menu.gd:618
 msgid "OK"
 msgstr "确定"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:616
+#: scenes/play/play_menu.gd:626
 msgid "Leave this game?"
 msgstr "要离开这局吗？"
 
-#: scenes/play/play_menu.gd:617
+#: scenes/play/play_menu.gd:627
 msgid "It counts as a loss."
 msgstr "这将算作输棋。"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:628
 msgid "Leave"
 msgstr "离开"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:624
+#: scenes/play/play_menu.gd:634
 msgid "Stay"
 msgstr "留下"
 
-#: scenes/play/play_menu.gd:640
+#: scenes/play/play_menu.gd:650
 msgid "Offer a draw"
 msgstr "提议和棋"
 
-#: scenes/play/play_menu.gd:645
+#: scenes/play/play_menu.gd:655
 msgid "Ask to undo"
 msgstr "请求悔棋"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:665
+#: scenes/play/play_menu.gd:675
 msgid "Look"
 msgstr "外观"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:669
+#: scenes/play/play_menu.gd:679
 msgid "Quit to main menu"
 msgstr "退出到主菜单"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:714
+#: scenes/play/play_menu.gd:724
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:751
+#: scenes/play/play_menu.gd:761
 msgid "Waiting"
 msgstr "等待中"
 

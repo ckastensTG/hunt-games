@@ -5,8 +5,8 @@ extends CanvasLayer
 ## Android's back gesture.
 ##
 ##   Home ─ Play against the AI · Pass and play · Play local · Play online
-##          · How to play · Language (Continue only when an AI game was set
-##          aside for an online match)
+##          · How to play · Language · Quit game (not on iOS) (Continue only
+##          when an AI game was set aside for an online match)
 ##   Play against the AI ─ side, opponent level, rules → Start
 ##   Pass and play ─ rules → Start
 ##   Play local ─ Host a game (side, rules → waiting, with a code)
@@ -339,6 +339,16 @@ func _home() -> void:
 	_button(L10n.t("How to play"), func() -> void: _guard(func() -> void: game.start_tutorial()))
 	_gap(2)
 	_language_row()
+	# Not on iOS: apps there don't close themselves (Apple: users leave with
+	# the Home gesture; a self-closing app looks like a crash).
+	if not (OS.has_feature("ios") or OS.has_feature("web")):
+		# TRANSLATORS: Main menu button: close the game completely.
+		var quit := _button(L10n.t("Quit game"), func() -> void:
+			game.play.cancel()
+			get_tree().quit())
+		quit.flat = true
+		quit.custom_minimum_size = Vector2(0, 48)
+		quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
 
 
 func _vs_ai() -> void:
