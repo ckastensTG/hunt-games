@@ -661,13 +661,13 @@ msgstr "Ottone del tempio"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Un tavoliere di ottone inciso e figure fuse, al tramonto nel cortile di un tempio."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Edizione moderna"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Un set di design di oggi: una tavola di rovere con linee intarsiate, tigri e capre in ceramica, sotto una lampada a sospensione."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "L'edizione di oggi di una casa di giochi: una tavola stampata dai colori vivaci, tigri e capre di plastica, sotto una lampada a sospensione."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

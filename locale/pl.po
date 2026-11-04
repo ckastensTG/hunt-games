@@ -662,13 +662,13 @@ msgstr "Mosiądz świątynny"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Grawerowana mosiężna plansza i odlewane figurki o zmierzchu na dziedzińcu świątyni."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Edycja nowoczesna"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Designerski zestaw na dziś: dębowa plansza z inkrustowanymi liniami, ceramiczne tygrysy i kozy pod lampą wiszącą."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "Wydanie współczesnego wydawnictwa gier: barwna plansza z tworzywa, plastikowe tygrysy i kozy pod lampą wiszącą."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

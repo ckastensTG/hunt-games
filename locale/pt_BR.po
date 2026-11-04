@@ -661,13 +661,13 @@ msgstr "Latão do templo"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Um tabuleiro de latão gravado e figuras fundidas, ao entardecer no pátio de um templo."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Edição moderna"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Um jogo de design dos dias de hoje: tabuleiro de carvalho com linhas embutidas, tigres e cabras de cerâmica, sob uma luminária pendente."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "A edição atual de uma fabricante de jogos: tabuleiro moldado em cores vivas, tigres e cabras de plástico, sob uma luminária pendente."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

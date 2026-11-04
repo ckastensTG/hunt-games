@@ -662,13 +662,13 @@ msgstr "Храмовая латунь"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Гравированная латунная доска и литые фигурки в сумерках во дворе храма."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Современное издание"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Дизайнерский набор наших дней: дубовая доска с инкрустированными линиями, керамические тигры и козы под подвесной лампой."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "Издание современной компании настольных игр: яркое литое поле, пластиковые тигры и козы под подвесной лампой."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

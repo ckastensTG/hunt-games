@@ -95,6 +95,7 @@ func build_set(root: Node3D, extras: bool) -> void:
 	_add_board(root)
 	_add_mat(root)
 	_add_pati(root)
+	_add_frame_props(root)
 	_add_lights(root, extras)
 	_add_dust(root)
 
@@ -146,7 +147,9 @@ func _add_mat(root: Node3D) -> void:
 	rm.normal_texture = load(ART + "stone/rope_normal.png")
 	rm.normal_scale = 1.4
 	rm.roughness = 0.85
-	rm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	# Not anisotropic: with repeat on, Metal never gets that sampler and the
+	# rope wasn't drawn on the iPad (tests/test_metal_samplers.gd).
+	rm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	rope.material_override = rm
 	mat_root.add_child(rope)
 
@@ -202,6 +205,99 @@ func _rope_mesh(half: Vector2, corner: float, radius: float, tile := 0.6) -> Arr
 			st.add_index(i1 + 1)
 	st.generate_tangents()
 	return st.commit()
+
+
+## Things around the stone, above and below it, so the frame stays full on a
+## 4:3 screen and in portrait. The set turns with the board, so each end is
+## "above" for one of the players; nothing is tall enough to hide a point.
+##   above: two glazed tea bowls and a brass water jug (karuwa) on the mat
+##   below: a folded shawl on the mat, and a pair of rubber sandals left on
+##          the floor beyond it (shoes come off before the mat)
+func _add_frame_props(root: Node3D) -> void:
+	var mat_top := -STONE_THICK
+	clay_cup(root, Vector3(1.05, mat_top, -3.62), "bowl")
+	clay_cup(root, Vector3(1.72, mat_top, -3.92), "bowl")
+	_add_jug(root, Vector3(-1.25, mat_top, -3.8))
+	var shawl := StandardMaterial3D.new()
+	shawl.albedo_texture = _check_cloth()
+	shawl.uv1_triplanar = true
+	shawl.uv1_scale = Vector3(0.9, 0.9, 0.9)
+	shawl.roughness = 0.96
+	var fold := box(root, "Shawl", Vector3(1.9, 0.16, 1.1), Vector3(-0.9, mat_top + 0.08, 3.7), shawl)
+	fold.rotation_degrees.y = 9.0
+	box(fold, "Fold", Vector3(1.9, 0.08, 0.95), Vector3(0.02, 0.12, -0.04), shawl)
+	var rubber := plain(Color(0.13, 0.26, 0.52), 0.6)
+	var strap := plain(Color(0.9, 0.9, 0.88), 0.55)
+	for k in 2:
+		var sandal := Node3D.new()
+		sandal.name = "Sandal"
+		sandal.position = Vector3(1.0 + 0.62 * k, FLOOR_Y, 5.25 + 0.12 * k)
+		sandal.rotation_degrees.y = -14.0 + 22.0 * k
+		root.add_child(sandal)
+		var sole := CylinderMesh.new()
+		sole.top_radius = 0.26
+		sole.bottom_radius = 0.26
+		sole.height = 0.08
+		sole.radial_segments = 24
+		var s_mi := prop(sandal, "Sole", sole, Vector3(0, 0.04, 0), rubber)
+		s_mi.scale = Vector3(1.0, 1.0, 2.9)
+		var loop := TorusMesh.new()
+		loop.inner_radius = 0.17
+		loop.outer_radius = 0.22
+		var l_mi := prop(sandal, "Strap", loop, Vector3(0, 0.07, -0.12), strap)
+		l_mi.rotation_degrees = Vector3(90, 0, 0)
+		l_mi.scale = Vector3(1.25, 1.0, 0.7)
+
+
+## A Nepali brass water jug (karuwa): a round belly, a narrow neck, a flared
+## lip and a spout.
+func _add_jug(root: Node3D, at: Vector3) -> void:
+	var jug := Node3D.new()
+	jug.name = "Karuwa"
+	jug.position = at
+	jug.rotation_degrees.y = 35.0
+	root.add_child(jug)
+	var brass := plain(Color(0.78, 0.57, 0.28), 0.38, 1.0)
+	var outline := PackedVector2Array([
+		Vector2(0, 0), Vector2(0.27, 0), Vector2(0.3, 0.03), Vector2(0.27, 0.09),
+		Vector2(0.4, 0.26), Vector2(0.49, 0.48), Vector2(0.48, 0.66), Vector2(0.4, 0.84),
+		Vector2(0.26, 0.98), Vector2(0.18, 1.08), Vector2(0.17, 1.22), Vector2(0.22, 1.32),
+		Vector2(0.27, 1.38), Vector2(0.255, 1.4), Vector2(0.15, 1.3), Vector2(0, 1.28)])
+	var body := prop(jug, "Body", lathe(outline, 36), Vector3.ZERO, brass)
+	# The low sun drew its shadow as a ragged smear across the mat's slats; a
+	# soft contact shadow sits it down instead.
+	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var blob := contact_shadow(0.6, 0.9)
+	jug.add_child(blob)
+	var spout := CylinderMesh.new()
+	spout.top_radius = 0.03
+	spout.bottom_radius = 0.07
+	spout.height = 0.55
+	var sp := prop(jug, "Spout", spout, Vector3(0.52, 0.8, 0), brass)
+	sp.rotation_degrees.z = -48.0
+	sp.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+
+
+## A woven check for the shawl: maroon with ochre and black stripes.
+func _check_cloth() -> ImageTexture:
+	var img := Image.create(64, 64, true, Image.FORMAT_RGB8)
+	var base := Color(0.4, 0.07, 0.07)
+	var ochre := Color(0.74, 0.52, 0.16)
+	var black := Color(0.06, 0.04, 0.035)
+	for y in 64:
+		for x in 64:
+			var c := base
+			var bx := x % 16
+			var by := y % 16
+			if bx < 2 or by < 2:
+				c = ochre
+			elif bx == 7 or by == 7:
+				c = black
+			if (x + y) % 2 == 0:
+				c = c.darkened(0.06)    # the weave
+			img.set_pixel(x, y, c)
+	img.generate_mipmaps()
+	return ImageTexture.create_from_image(img)
 
 
 func _add_pati(root: Node3D) -> void:

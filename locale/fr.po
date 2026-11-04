@@ -661,13 +661,13 @@ msgstr "Laiton du temple"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Un plateau de laiton gravé et des figurines coulées, au crépuscule dans la cour d'un temple."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Édition moderne"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Un jeu de designer d'aujourd'hui : un plateau en chêne aux lignes incrustées, des tigres et des chèvres en céramique, sous une suspension."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "L'édition d'un éditeur de jeux d'aujourd'hui : un plateau moulé aux couleurs vives, des tigres et des chèvres en plastique, sous une suspension."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

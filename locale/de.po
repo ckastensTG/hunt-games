@@ -661,13 +661,13 @@ msgstr "Tempelmessing"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Ein graviertes Messingbrett und gegossene Figuren, in der Abenddämmerung im Hof eines Tempels."
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "Moderne Edition"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "Ein Designerspiel von heute: ein Eichenbrett mit eingelegten Linien, Tiger und Ziegen aus Keramik, unter einer Hängelampe."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "Die Ausgabe eines Spieleverlags von heute: ein farbiges Brett aus Kunststoff, Tiger und Ziegen aus Plastik, unter einer Hängelampe."
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

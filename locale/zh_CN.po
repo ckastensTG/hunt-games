@@ -660,13 +660,13 @@ msgstr "寺院黄铜"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "刻纹黄铜棋盘与铸造棋子，黄昏时分的寺院庭院。"
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "现代版"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "当代设计款：嵌线橡木棋盘，陶瓷虎与羊，置于吊灯之下。"
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "当代桌游公司出品：色彩明快的模塑棋盘，塑料虎与羊，置于吊灯之下。"
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"

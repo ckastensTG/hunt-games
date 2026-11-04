@@ -657,12 +657,12 @@ msgstr ""
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr ""
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr ""
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr ""
 
 #: titles/bagh_chal/art/stone_style.gd:38

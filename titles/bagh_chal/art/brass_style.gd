@@ -96,6 +96,7 @@ func build_set(root: Node3D, extras: bool) -> void:
 	# both the AI view and the prey view (the set turns with the board).
 	_add_lamp(root, Vector3(TABLE_HALF - 0.7, -0.11, -0.9), 0.0, true)
 	_add_lamp(root, Vector3(-(TABLE_HALF - 0.7), -0.11, 0.9), 1.0, true)
+	_add_frame_props(root)
 	_add_prayer_flags(root)
 	_add_dust(root)
 
@@ -242,6 +243,57 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	fill.light_energy = 0.07
 	fill.light_volumetric_fog_energy = 0.0
 	root.add_child(fill)
+
+
+## Things on the table above and below the board, so the frame stays full on
+## a 4:3 screen and in portrait. The set turns with the board, so each end is
+## "above" for one of the players; both stay low enough never to hide a point.
+##   above: two empty clay tea cups (kulhad)
+##   below: the set's wooden box, its lid slid half open, and a cloth bag
+func _add_frame_props(root: Node3D) -> void:
+	var top := -0.11
+	# Browner than the terracotta default: the lamps' warm light reddens it.
+	var fired := {"clay": Color(0.45, 0.33, 0.26), "clay_dark": Color(0.33, 0.23, 0.17)}
+	clay_cup(root, Vector3(-1.2, top, -3.45), "kulhad", fired)
+	clay_cup(root, Vector3(-0.45, top, -3.7), "kulhad", fired)
+	var dark := wood(Color(0.1, 0.045, 0.025), Color(0.2, 0.1, 0.05))
+	var piece_box := Node3D.new()
+	piece_box.name = "PieceBox"
+	piece_box.position = Vector3(1.0, top, 3.55)
+	piece_box.rotation_degrees.y = -7.0
+	root.add_child(piece_box)
+	box(piece_box, "Floor", Vector3(2.3, 0.06, 1.1), Vector3(0, 0.03, 0), dark)
+	for sz in [-1, 1]:
+		box(piece_box, "Side", Vector3(2.3, 0.36, 0.08), Vector3(0, 0.24, sz * 0.51), dark)
+	for sx in [-1, 1]:
+		box(piece_box, "End", Vector3(0.08, 0.36, 0.94), Vector3(sx * 1.11, 0.24, 0), dark)
+	box(piece_box, "Inside", Vector3(2.14, 0.01, 0.94), Vector3(0, 0.065, 0), plain(Color(0.3, 0.05, 0.04), 0.95))
+	var lid := box(piece_box, "Lid", Vector3(2.3, 0.06, 1.1), Vector3(-0.95, 0.45, 0), dark)
+	lid.rotation_degrees.y = 3.0
+	box(lid, "Inlay", Vector3(1.7, 0.008, 0.06), Vector3(0, 0.032, 0), plain(BRASS, 0.3, 1.0))
+	var cloth := plain(Color(0.42, 0.07, 0.06), 0.95)
+	var bag := Node3D.new()
+	bag.name = "PieceBag"
+	bag.position = Vector3(-1.35, top, 3.4)
+	root.add_child(bag)
+	var body := SphereMesh.new()
+	body.radius = 0.4
+	body.height = 0.52
+	prop(bag, "Body", body, Vector3(0, 0.25, 0), cloth)
+	var neck := CylinderMesh.new()
+	neck.top_radius = 0.07
+	neck.bottom_radius = 0.16
+	neck.height = 0.16
+	prop(bag, "Neck", neck, Vector3(0, 0.54, 0), cloth)
+	var frill := CylinderMesh.new()
+	frill.top_radius = 0.17
+	frill.bottom_radius = 0.07
+	frill.height = 0.1
+	prop(bag, "Frill", frill, Vector3(0, 0.66, 0), cloth)
+	var tie := TorusMesh.new()
+	tie.inner_radius = 0.075
+	tie.outer_radius = 0.1
+	prop(bag, "Tie", tie, Vector3(0, 0.58, 0), plain(Color(0.72, 0.52, 0.16), 0.8))
 
 
 func _add_lamp(root: Node3D, at: Vector3, seed: float, with_light: bool) -> void:

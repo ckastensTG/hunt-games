@@ -6,6 +6,7 @@ extends SceneTree
 ##     [--rendering-method forward_plus|mobile|gl_compatibility] \
 ##     -s res://tools/style_frame.gd -- --out=DIR [--plies=N] [--views=hero,ai,prey] [--tag=NAME]
 ##     [--style=brass|stone|modern] [--ui] [--select] [--result] [--tutorial=STEP]
+##     [--cam=FX,FY,FZ:TX,TY,TZ] [--fov=DEG]
 ##     [--rules=ID] [--locale=CODE] [--pseudo]
 ##
 ## Views: hero = the cinematic style frame; ai = the AI-vs-AI camera;
@@ -40,6 +41,11 @@ var moves: Array[PackedInt32Array] = []
 var current := ""
 var frames := 0
 var hero_cam: Camera3D
+## --cam: a close-up for the hero view instead of the style's own camera
+## (from:to in board space, the AI view's orientation), with no near blur.
+var cam_from := Vector3.ZERO
+var cam_to := Vector3.ZERO
+var cam_fov := 32.0
 
 
 func _initialize() -> void:
@@ -68,6 +74,14 @@ func _initialize() -> void:
 			locale = arg.substr(9)
 		elif arg == "--pseudo":
 			pseudo = true
+		elif arg.begins_with("--cam="):
+			var parts := arg.substr(6).split(":")
+			var f := parts[0].split_floats(",")
+			var t := parts[1].split_floats(",")
+			cam_from = Vector3(f[0], f[1], f[2])
+			cam_to = Vector3(t[0], t[1], t[2])
+		elif arg.begins_with("--fov="):
+			cam_fov = float(arg.substr(6))
 	if tag == "":
 		tag = "_" + RenderingServer.get_current_rendering_method()
 	tag = "_" + style + tag
@@ -130,6 +144,13 @@ func _setup(view: String) -> void:
 		var st: HuntArtStyle = game.current_style()
 		hero_cam.position = st.hero_from
 		hero_cam.look_at(st.hero_to, Vector3.UP)
+		if cam_from != cam_to:
+			hero_cam.fov = cam_fov
+			hero_cam.near = 0.05
+			hero_cam.attributes.dof_blur_near_enabled = false
+			hero_cam.attributes.dof_blur_far_distance = cam_from.distance_to(cam_to) * 2.5
+			hero_cam.position = cam_from
+			hero_cam.look_at(cam_to, Vector3.UP)
 		hero_cam.make_current()
 	else:
 		game._camera.make_current()

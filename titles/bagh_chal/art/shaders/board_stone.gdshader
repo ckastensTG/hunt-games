@@ -4,6 +4,9 @@ shader_type spatial;
 // - The face uses the board textures (grid grooves, chalk, wear) by UV.
 // - The chamfer and the split-face sides use a tileable side texture mapped
 //   triplanar in the mesh's own space, so they don't smear.
+// Repeating textures must not use anisotropic filtering: on the iPad (Metal)
+// that sampler never reaches the GPU and the board isn't drawn at all
+// (tests/test_metal_samplers.gd).
 // When the board "awakens" the chalked lines warm very slightly: much quieter
 // than the brass board's glow.
 
@@ -11,9 +14,9 @@ uniform sampler2D albedo_tex : source_color, filter_linear_mipmap_anisotropic, r
 uniform sampler2D orm_tex : filter_linear_mipmap_anisotropic, repeat_disable;
 uniform sampler2D normal_tex : hint_normal, filter_linear_mipmap_anisotropic, repeat_disable;
 uniform sampler2D glow_tex : filter_linear_mipmap, repeat_disable;
-uniform sampler2D side_albedo_tex : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
-uniform sampler2D side_orm_tex : filter_linear_mipmap_anisotropic, repeat_enable;
-uniform sampler2D side_normal_tex : hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D side_albedo_tex : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D side_orm_tex : filter_linear_mipmap, repeat_enable;
+uniform sampler2D side_normal_tex : hint_normal, filter_linear_mipmap, repeat_enable;
 uniform float side_span = 1.0;   // units covered by one tile of the side texture
 uniform vec3 glow_color : source_color = vec3(1.0, 0.82, 0.55);
 uniform float awaken : hint_range(0.0, 1.0) = 0.0;

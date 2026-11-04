@@ -212,7 +212,12 @@ def tiger_marks(v, n):
 
 # --- Meshing -----------------------------------------------------------------
 
-def build(name, f, bounds, voxel, target_tris, marks=None):
+def build(name, f, bounds, voxel, target_tris, marks=None, smooth=0):
+    """Mesh the field f inside bounds, decimate to about target_tris, and
+    bake occlusion, marks and edge wear into the vertex colors. smooth > 0
+    runs that many Taubin smoothing passes after decimation, which evens out
+    the long thin triangles that otherwise show as streaks in a glossy
+    highlight (the modern set's plastic and glaze)."""
     lo = np.array(bounds[0], np.float32)
     hi = np.array(bounds[1], np.float32)
     shape = np.ceil((hi - lo) / voxel).astype(int) + 1
@@ -227,6 +232,10 @@ def build(name, f, bounds, voxel, target_tris, marks=None):
     verts, faces = fast_simplification.simplify(
         verts, faces, 1.0 - min(1.0, target_tris / len(faces)), agg=7)
     verts = verts.astype(np.float32)
+    if smooth:
+        tm = trimesh.Trimesh(verts, faces, process=False)
+        trimesh.smoothing.filter_taubin(tm, lamb=0.5, nu=-0.53, iterations=smooth)
+        verts = np.asarray(tm.vertices, np.float32)
     # Snap the bottom flat after decimation.
     verts[:, 1] = np.where(verts[:, 1] < 0.002, 0.0, verts[:, 1])
     n = gradient(f, verts)

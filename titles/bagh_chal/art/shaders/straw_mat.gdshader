@@ -4,10 +4,12 @@ shader_type spatial;
 // distance; this shader only tiles it over the mat's top and darkens the
 // thin sides. The rope round the edge is its own mesh (stone_style.gd).
 // For a BoxMesh: coordinates are the mesh's own, in units.
+// No anisotropic filtering on these repeating textures: on the iPad (Metal)
+// the mat wasn't drawn at all (tests/test_metal_samplers.gd).
 
-uniform sampler2D albedo_tex : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
-uniform sampler2D orm_tex : filter_linear_mipmap_anisotropic, repeat_enable;
-uniform sampler2D normal_tex : hint_normal, filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D albedo_tex : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D orm_tex : filter_linear_mipmap, repeat_enable;
+uniform sampler2D normal_tex : hint_normal, filter_linear_mipmap, repeat_enable;
 uniform float tile_span = 1.0;   // units covered by one tile of the weave
 uniform vec3 tint : source_color = vec3(1.0);
 

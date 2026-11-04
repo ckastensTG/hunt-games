@@ -660,13 +660,13 @@ msgstr "寺院の真鍮"
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "彫刻を施した真鍮の盤と鋳造の駒。夕暮れの寺院の中庭で。"
 
-#: titles/bagh_chal/art/modern_style.gd:33
+#: titles/bagh_chal/art/modern_style.gd:38
 msgid "Modern edition"
 msgstr "モダン版"
 
-#: titles/bagh_chal/art/modern_style.gd:34
-msgid "A designer set of today: an oak board with inlaid lines, ceramic tigers and goats, under a pendant lamp."
-msgstr "現代のデザイナーズセット：線を象嵌したオーク材の盤に、陶器の虎と山羊。ペンダントライトの下で。"
+#: titles/bagh_chal/art/modern_style.gd:39
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "現代のボードゲーム会社版：鮮やかな成形ボードに、プラスチックの虎と山羊。ペンダントライトの下で。"
 
 #: titles/bagh_chal/art/stone_style.gd:38
 msgid "Stone and pebbles"
