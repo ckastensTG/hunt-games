@@ -21,10 +21,19 @@ git submodule update --init
 ```
 
 Open the folder in **Godot 4.7.2**. The main scene is the greybox
-(`scenes/greybox/greybox.tscn`): every v1 rule set, hotseat, either side
-against the AI (four levels), or AI vs AI; "How to play" walks through each
-rule set's rules on the board, and the interface is in the 12 launch
-languages (Language in the settings).
+(`scenes/greybox/greybox.tscn`). It opens on the main menu: play against the
+AI (four levels), pass and play, play local (same Wi-Fi: host, or join from
+the list or by code), play online with a friend (TG-XXXX code) or quick
+match, and "How to play", which walks through each rule set's rules on the
+board. In a game, the round button at the top left opens the in-game menu
+(Continue, Look, Language, Quit to main menu). A game on this device is
+saved after every move and carries on if the app is closed and reopened.
+The interface is in the 12 launch languages.
+
+Online play needs the EOS backend (not in yet): release builds hide "Play
+online"; debug builds (the editor, debug exports) simulate the online service
+on the device, with a "Simulated opponent (test build)" for trying every
+flow. Local play is real: run two copies on one Wi-Fi.
 
 ## Layout
 
@@ -32,7 +41,8 @@ languages (Language in the settings).
 |---|---|
 | `titles/common/hunt_boards.gd` | The three boards (Bagh Chal 25 points, Adugo 31, Komikan/Mátus 38), checked by fixture tests. |
 | `titles/common/hunt_rule_sets.gd` | The four v1 rule sets (rules doc §6) and starting AI weights. |
-| `scenes/greybox/` | The playable greybox: board, pieces and move marks built in code from the board definitions, plus the HUD (`hud.gd`). |
+| `scenes/greybox/` | The playable greybox: board, pieces and move marks built in code from the board definitions, plus the HUD (`hud.gd`). Every game is a core `MatchSession`; the board animates whatever move it reports. |
+| `scenes/play/` | Playing other people: `play_menu.gd` (the menu screens), `play_controller.gd` (nearby, friend codes, quick match with "play the AI while we keep looking"), `match_ui.gd` (opponent strip, turn clock, questions, toasts), `play_text.gd` (names, problems, endings) and `sim_opponent.gd` (debug builds only). |
 | `ui/` | Series UI: `SeriesTheme` (colors, panels, fonts, built in code), the series fonts and CJK fallbacks (`ui/fonts/README.md`), and `L10n` (language helpers and the player's settings file). |
 | `titles/common/hunt_text.gd` | Player-facing sentences that name a side, written out whole per title (no "The %s won" assembled from parts). |
 | `titles/common/hunt_tutorials.gd` | "How to play": a scripted walkthrough per rule set; every move is checked by the rules engine (`tests/test_tutorials.gd`). |
@@ -52,6 +62,7 @@ tools/run_tests.sh                       # core + title tests (headless)
 godot --headless --path . -s res://tools/bench_search.gd -- --depth=6
 godot --headless --path . -s res://tools/persona_ladder.gd -- --rules=bagh_chal_standard --pairs=adept:master --games=4
 godot --headless --fixed-fps 60 --path . -s res://tools/smoke_greybox.gd
+godot --headless --path . -s res://tools/smoke_multiplayer.gd   # menu, quick match, friend, nearby
 xvfb-run -s "-screen 0 1600x900x24" godot --path . --rendering-method gl_compatibility \
   -s res://tools/screenshot.gd -- --out=/tmp/shots
 ```

@@ -1,15 +1,20 @@
 extends CanvasLayer
-## The greybox's in-game interface: title, whose turn it is, the score, a
-## contextual hint, the game settings, the move list and the game-over card.
-## It reads the greybox's state and calls its methods; it never touches the
-## rules itself. Styled by SeriesTheme.
+## The in-game interface: the menu button, title, whose turn it is, the
+## score, a contextual hint, Undo (local games), the move list and the
+## game-over card. Game choices live in the menus (scenes/play/play_menu.gd):
+## the main menu sets up a game, and the menu button opens the in-game menu
+## (Continue, Look, Language, Quit to main menu). It reads the greybox's
+## state and calls its methods; it never touches the rules itself. Styled by
+## SeriesTheme.
 ##
 ## Text: every string is English source text, translated through L10n (and
 ## HuntText for sentences that name a side). Controls don't auto-translate;
 ## the whole interface is rebuilt when the language changes.
 ##
-## Keys: N new game, U undo, H hide the panels, T how to play, Esc close the
-## result card.
+## Keys: Esc closes the result card or opens the in-game menu; U undoes.
+##
+## Against another device the opponent strip, toasts and questions are in
+## scenes/play/match_ui.gd.
 
 const HUNTER_TOKEN := Color(0.93, 0.62, 0.25)
 const PREY_TOKEN := Color(0.9, 0.88, 0.82)
@@ -26,18 +31,13 @@ var _captured_label: Label
 var _captured_pips: HFlowContainer
 var _hand: Label
 var _quiet: Label
-var _settings_body: VBoxContainer
-var _hide_btn: Button
-var _rules: OptionButton
-var _players: OptionButton
-var _level: OptionButton
-var _look_row: HBoxContainer
-var _look: OptionButton
-var _language: OptionButton
-var _settings_panel: PanelContainer
+var _title_box: VBoxContainer
+var _menu_button: Button
 var _score_panel: PanelContainer
-var _dogs_first: CheckBox
 var _undo: Button
+var _result_you: Label
+var _again: Button
+var _new_opponent: Button
 var _hint: Label
 var _stop: Button
 var _moves_panel: PanelContainer
@@ -45,7 +45,6 @@ var _moves: RichTextLabel
 var _result: Control
 var _result_title: Label
 var _result_reason: Label
-var _panels: Array[Control] = []
 var _result_dismissed := false
 var _thinking_t := 0.0
 
@@ -56,26 +55,28 @@ func _init(owner_game: Node) -> void:
 
 
 func _ready() -> void:
+	get_viewport().size_changed.connect(_layout)
 	_build()
 
 
 func _build() -> void:
 	if _root:
 		_root.queue_free()
-	_panels.clear()
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.theme = SeriesTheme.theme()
 	_root.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	add_child(_root)
+	_build_menu_button()
 	_build_title()
 	_build_turn()
 	_build_score()
-	_build_settings()
+	_build_undo()
 	_build_hint()
 	_build_moves()
 	_build_result()
+	_layout()
 	refresh()
 
 
@@ -90,7 +91,14 @@ func _margin(c: Control, preset: int, x: float, y: float) -> void:
 	c.set_anchors_and_offsets_preset(preset, Control.PRESET_MODE_MINSIZE)
 	match preset:
 		Control.PRESET_TOP_LEFT:
+			c.grow_horizontal = Control.GROW_DIRECTION_END
+			c.grow_vertical = Control.GROW_DIRECTION_END
 			c.position = Vector2(x, y)
+		Control.PRESET_BOTTOM_LEFT:
+			c.grow_horizontal = Control.GROW_DIRECTION_END
+			c.grow_vertical = Control.GROW_DIRECTION_BEGIN
+			c.offset_left = x
+			c.offset_bottom = -y
 		Control.PRESET_TOP_RIGHT:
 			c.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 			c.offset_right = -x
@@ -118,7 +126,46 @@ func _build_title() -> void:
 	box.add_child(_title)
 	box.add_child(_subtitle)
 	_root.add_child(box)
-	_margin(box, Control.PRESET_TOP_LEFT, 28, 18)
+	_margin(box, Control.PRESET_TOP_LEFT, 96, 18)
+	_title_box = box
+
+
+## The round button that opens the in-game menu.
+func _build_menu_button() -> void:
+	_menu_button = Button.new()
+	_menu_button.custom_minimum_size = Vector2(56, 56)
+	_menu_button.focus_mode = Control.FOCUS_NONE
+	_menu_button.tooltip_text = L10n.t("Menu")
+	for st in ["normal", "hover", "pressed"]:
+		var bg := SeriesTheme.PANEL if st == "normal" else SeriesTheme.BUTTON_HOVER
+		_menu_button.add_theme_stylebox_override(st, SeriesTheme.panel_box(bg, SeriesTheme.BRASS_DIM, 28))
+	var icon := SeriesIcon.make("menu", 26)
+	icon.position = Vector2(15, 15)  # centered in the 56 px button
+	_menu_button.add_child(icon)
+	_menu_button.pressed.connect(func() -> void: game.menu.open("pause"))
+	_root.add_child(_menu_button)
+	_margin(_menu_button, Control.PRESET_TOP_LEFT, 28, 22)
+
+
+## Undo, for games on this device (against the AI, pass and play).
+func _build_undo() -> void:
+	_undo = Button.new()
+	_undo.custom_minimum_size = Vector2(0, 52)
+	_undo.focus_mode = Control.FOCUS_NONE
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.set_anchors_preset(Control.PRESET_FULL_RECT)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_child(SeriesIcon.make("undo", 20))
+	var l := SeriesTheme.label(L10n.t("Undo"), "medium", 18, SeriesTheme.TEXT)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(l)
+	_undo.add_child(row)
+	_undo.custom_minimum_size.x = l.get_minimum_size().x + 70
+	_undo.pressed.connect(func() -> void: game.undo())
+	_root.add_child(_undo)
+	_margin(_undo, Control.PRESET_BOTTOM_LEFT, 28, 22)
 
 
 func _build_turn() -> void:
@@ -162,129 +209,7 @@ func _build_score() -> void:
 	panel.add_child(box)
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_TOP_RIGHT, 28, 22)
-	_panels.append(panel)
 	_score_panel = panel
-
-
-func _row(label_text: String, control: Control) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 12)
-	var l := SeriesTheme.label(label_text, "body", 16, SeriesTheme.TEXT_DIM)
-	l.custom_minimum_size = Vector2(76, 0)
-	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(l)
-	row.add_child(control)
-	return row
-
-
-func _build_settings() -> void:
-	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(330, 0)
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 10)
-	var head := HBoxContainer.new()
-	# TRANSLATORS: Title of the settings panel (this game: rules, players, AI level).
-	var caps := SeriesTheme.label(L10n.t("Game"), "caps", 18, SeriesTheme.ACCENT)
-	caps.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_hide_btn = Button.new()
-	_hide_btn.text = L10n.t("Hide") if _settings_body == null or _settings_body.visible else L10n.t("Show")
-	_hide_btn.flat = true
-	_hide_btn.add_theme_font_size_override("font_size", 15)
-	_hide_btn.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
-	_hide_btn.pressed.connect(_toggle_settings)
-	head.add_child(caps)
-	head.add_child(_hide_btn)
-	box.add_child(head)
-
-	var was_open := _settings_body == null or _settings_body.visible
-	_settings_body = VBoxContainer.new()
-	_settings_body.add_theme_constant_override("separation", 10)
-	_settings_body.visible = was_open
-	box.add_child(_settings_body)
-
-	_rules = OptionButton.new()
-	for id in HuntRuleSets.ALL:
-		_rules.add_item(HuntText.rule_set_menu(id))
-	_rules.item_selected.connect(func(i: int) -> void:
-		game._rule_set_id = HuntRuleSets.ALL[i]
-		game.new_game())
-	# TRANSLATORS: Menu label: which rule set to play.
-	_settings_body.add_child(_row(L10n.t("Rules"), _rules))
-
-	_dogs_first = CheckBox.new()
-	_dogs_first.text = L10n.t("The dogs move first")
-	_dogs_first.toggled.connect(func(on: bool) -> void:
-		game._komikan_dogs_first = on
-		game.new_game())
-	_settings_body.add_child(_dogs_first)
-
-	_players = OptionButton.new()
-	for i in 4:
-		_players.add_item("")
-	_players.item_selected.connect(func(i: int) -> void:
-		game.mode = i
-		game.new_game())
-	# TRANSLATORS: Menu label: who plays which side (two people, against the AI, or AI vs AI).
-	_settings_body.add_child(_row(L10n.t("Players"), _players))
-
-	_level = OptionButton.new()
-	# TRANSLATORS: The four AI strength levels, weakest to strongest. Later they become named opponents.
-	for label in [L10n.t("Novice"), L10n.t("Apprentice"), L10n.t("Adept"), L10n.t("Master")]:
-		_level.add_item(label)
-	_level.item_selected.connect(func(i: int) -> void:
-		game.level = i
-		refresh())
-	# TRANSLATORS: Menu label: the computer opponent's strength. Keep it short.
-	_settings_body.add_child(_row(L10n.t("AI"), _level))
-
-	_look = OptionButton.new()
-	_look.item_selected.connect(func(i: int) -> void:
-		var styles: Array = game.art_styles()
-		if i < styles.size():
-			game.set_art_style(styles[i].id))
-	# TRANSLATORS: Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-	_look_row = _row(L10n.t("Look"), _look)
-	_settings_body.add_child(_look_row)
-
-	_language = OptionButton.new()
-	for entry in L10n.LANGUAGES:
-		_language.add_item(entry[1])
-	_language.select(L10n.LANGUAGES.map(func(e: Array) -> String: return e[0]).find(L10n.current_language()))
-	_language.item_selected.connect(func(i: int) -> void:
-		L10n.set_language(L10n.LANGUAGES[i][0]))
-	_settings_body.add_child(_row(L10n.t("Language"), _language))
-
-	_settings_body.add_child(HSeparator.new())
-	var buttons := HBoxContainer.new()
-	buttons.add_theme_constant_override("separation", 10)
-	var new_game := Button.new()
-	new_game.text = L10n.t("New game")
-	new_game.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	new_game.add_theme_color_override("font_color", SeriesTheme.ACCENT)
-	new_game.pressed.connect(func() -> void: game.new_game())
-	_undo = Button.new()
-	_undo.text = L10n.t("Undo")
-	_undo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_undo.pressed.connect(func() -> void: game.undo())
-	buttons.add_child(new_game)
-	buttons.add_child(_undo)
-	_settings_body.add_child(buttons)
-	var learn := Button.new()
-	learn.text = L10n.t("How to play")
-	learn.pressed.connect(func() -> void: game.start_tutorial())
-	_settings_body.add_child(learn)
-	# TRANSLATORS: Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
-	var keys := SeriesTheme.label(L10n.t("N new game · U undo · H hide panels · T how to play"), "body", 14, Color(SeriesTheme.TEXT_DIM, 0.75))
-	keys.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	keys.custom_minimum_size = Vector2(290, 0)
-	_settings_body.add_child(keys)
-
-	panel.add_child(box)
-	_root.add_child(panel)
-	_margin(panel, Control.PRESET_TOP_LEFT, 28, 118)
-	_panels.append(panel)
-	_settings_panel = panel
 
 
 func _build_hint() -> void:
@@ -332,7 +257,6 @@ func _build_moves() -> void:
 	_moves_panel.add_child(box)
 	_root.add_child(_moves_panel)
 	_margin(_moves_panel, Control.PRESET_BOTTOM_RIGHT, 28, 22)
-	_panels.append(_moves_panel)
 
 
 func _build_result() -> void:
@@ -356,6 +280,9 @@ func _build_result() -> void:
 	card.custom_minimum_size = Vector2(520, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 14)
+	_result_you = SeriesTheme.label("", "caps", 20, SeriesTheme.TEXT_DIM)
+	_result_you.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(_result_you)
 	_result_title = SeriesTheme.label("", "display", 46, SeriesTheme.ACCENT)
 	_result_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_result_reason = SeriesTheme.label("", "italic", 22, SeriesTheme.TEXT)
@@ -370,7 +297,22 @@ func _build_result() -> void:
 	var again := Button.new()
 	again.text = L10n.t("Play again")
 	again.add_theme_color_override("font_color", SeriesTheme.ACCENT)
-	again.pressed.connect(func() -> void: game.new_game())
+	again.pressed.connect(func() -> void:
+		if game.is_network():
+			game.play.request_rematch()
+		else:
+			game.new_game())
+	_again = again
+	_new_opponent = Button.new()
+	# TRANSLATORS: Button after an online quick match: look for someone else to play.
+	_new_opponent.text = L10n.t("New opponent")
+	_new_opponent.pressed.connect(func() -> void:
+		game.quit_to_menu("quick")
+		game.play.quick_start())
+	var to_menu := Button.new()
+	# TRANSLATORS: Button on the game-over card: back to the main menu.
+	to_menu.text = L10n.t("Main menu")
+	to_menu.pressed.connect(func() -> void: game.quit_to_menu())
 	var look := Button.new()
 	# TRANSLATORS: Button on the game-over card: close it to look at the final position.
 	look.text = L10n.t("Look at the board")
@@ -378,6 +320,8 @@ func _build_result() -> void:
 		_result_dismissed = true
 		refresh())
 	buttons.add_child(again)
+	buttons.add_child(_new_opponent)
+	buttons.add_child(to_menu)
 	buttons.add_child(look)
 	box.add_child(buttons)
 	card.add_child(box)
@@ -385,31 +329,28 @@ func _build_result() -> void:
 	_root.add_child(_result)
 
 
-# --- Behaviour ---------------------------------------------------------------
-
-func _toggle_settings() -> void:
-	_settings_body.visible = not _settings_body.visible
-	_hide_btn.text = L10n.t("Hide") if _settings_body.visible else L10n.t("Show")
+## Portrait (phones held upright) has no room for the title beside the turn
+## banner; the in-game menu shows the game's name instead.
+func _layout() -> void:
+	if _title_box == null:
+		return
+	var size := get_viewport().get_visible_rect().size
+	_title_box.visible = size.x >= size.y
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	var k := event as InputEventKey
-	if k == null or not k.pressed or k.echo or game.tutorial_active:
+	if k == null or not k.pressed or k.echo or game.tutorial_active or game.menu.is_open() or game._match_ui.dialog_open():
 		return
 	match k.keycode:
-		KEY_T, KEY_F1:
-			game.start_tutorial()
-		KEY_N:
-			game.new_game()
 		KEY_U:
 			game.undo()
-		KEY_H:
-			for p in _panels:
-				p.visible = not p.visible
 		KEY_ESCAPE:
 			if _result.visible:
 				_result_dismissed = true
 				refresh()
+			else:
+				game.menu.open("pause")
 
 
 func _process(delta: float) -> void:
@@ -429,34 +370,18 @@ func refresh() -> void:
 	var teaching: bool = game.tutorial_active
 	_title.text = HuntText.title_name(title_id)
 	_subtitle.text = HuntText.rule_set_name(game._rule_set_id)
-	# Settings, kept in step when code (tools, tests) changes the setup.
-	_rules.selected = HuntRuleSets.ALL.find(game._rule_set_id)
-	# TRANSLATORS: Two people taking turns on the same device.
-	_players.set_item_text(0, L10n.t("Two players (hotseat)"))
-	_players.set_item_text(1, HuntText.you_play(title_id, false))
-	_players.set_item_text(2, HuntText.you_play(title_id, true))
-	_players.set_item_text(3, L10n.t("Watch the AI play"))
-	_players.selected = game.mode
-	_level.selected = game.level
-	_dogs_first.set_pressed_no_signal(game._komikan_dogs_first)
-	_dogs_first.visible = game._rule_set_id == HuntRuleSets.KOMIKAN
-	var styles: Array = game.art_styles()
-	_look_row.visible = styles.size() > 1
-	_look.clear()
-	for st in styles:
-		_look.add_item(L10n.t(st.display_name))
-		_look.set_item_tooltip(_look.item_count - 1, L10n.t(st.description))
-	var cur = game.current_style()
-	if cur:
-		_look.selected = styles.find(cur)
-	_undo.disabled = game.history.is_empty()
-	_settings_panel.visible = not teaching and _panels_shown()
-	_moves_panel.visible = not teaching and _panels_shown()
+	var net_game: bool = game.is_network()
+	var shown: bool = not teaching
+	_root.visible = game.menu == null or not game.menu.is_open()
+	_menu_button.visible = shown
+	_undo.visible = shown and not net_game and game.mode != game.Mode.AI_VS_AI
+	_undo.disabled = not game.can_undo()
+	_moves_panel.visible = shown
 
 	# Turn.
 	var hunter_turn := state.side == HuntState.HUNTER
 	(_turn_token.get_theme_stylebox("panel") as StyleBoxFlat).bg_color = HUNTER_TOKEN if hunter_turn else PREY_TOKEN
-	var thinking: bool = game._ai_task >= 0 or (game.status == HuntState.Status.ONGOING and game._is_ai_side(state.side))
+	var thinking: bool = game.ai_thinking() or (game.status == HuntState.Status.ONGOING and game._is_ai_side(state.side))
 	match game.status:
 		HuntState.Status.ONGOING:
 			_turn.text = HuntText.to_move(title_id, hunter_turn)
@@ -515,11 +440,20 @@ func refresh() -> void:
 				_result_title.text = HuntText.win_title(title_id, false)
 			_:
 				_result_title.text = L10n.t("A draw")
-		_result_reason.text = HuntText.reason(title_id, state.last_reason, rules)
-
-
-func _panels_shown() -> bool:
-	return _score_panel == null or _score_panel.visible
+		var session: MatchSession = game.session
+		var me: int = game.local_side()
+		_result_you.visible = me >= 0 and game.status != HuntState.Status.DRAW
+		var my_win: bool = (game.status == HuntState.Status.HUNTER_WIN) == (me == HuntState.HUNTER)
+		# TRANSLATORS: Small line above the result when one player is on this device.
+		_result_you.text = L10n.t("You won") if my_win else L10n.t("You lost")
+		if session.ending != MatchSession.Ending.NONE:
+			_result_reason.text = PlayText.ending(session.ending, session.ending_side == me)
+		else:
+			_result_reason.text = HuntText.reason(title_id, state.last_reason, rules)
+		# TRANSLATORS: Button after a game against another player: play them again (sides swap).
+		_again.text = L10n.t("Rematch") if net_game else L10n.t("Play again")
+		_again.disabled = net_game and not game.play.can_rematch()
+		_new_opponent.visible = net_game and session.kind == MatchSession.Kind.QUICK_MATCH
 
 
 ## A move for the move list: point names stay as they are ("c3"), the word
@@ -539,6 +473,8 @@ func _hint_text(title_id: String) -> String:
 		return L10n.t("Watching the AI play both sides.")
 	if game._is_ai_side(state.side):
 		return ""
+	if game.is_network() and state.side != game.local_side():
+		return L10n.t("Waiting for your opponent's move.")
 	if game._chain.size() > 2:
 		return L10n.t("Capture chain: pick the next landing, or stop here.")
 	if state.side == HuntState.PREY and state.reserve > 0:

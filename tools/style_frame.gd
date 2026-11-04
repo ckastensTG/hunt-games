@@ -73,6 +73,7 @@ func _initialize() -> void:
 	tag = "_" + style + tag
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
+	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
 	if pseudo:
 		ProjectSettings.set_setting("internationalization/pseudolocalization/expansion_ratio", 0.3)

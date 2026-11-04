@@ -22,6 +22,7 @@ var failures: Array[String] = []
 
 func _initialize() -> void:
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
+	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
 	phase = "clicks"
 
@@ -121,7 +122,7 @@ func _next_game() -> void:
 
 func _ai() -> bool:
 	if game.status != HuntState.Status.ONGOING or game.history.size() >= MAX_PLIES:
-		if game._animating or game._ai_task >= 0:
+		if game._animating or game.ai_thinking():
 			return false
 		var st: HuntState = game.state
 		print("%-28s plies %3d  captured %2d  status %d  reason %d" % [current, game.history.size(), st.captured, game.status, st.last_reason])

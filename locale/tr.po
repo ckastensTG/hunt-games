@@ -9,150 +9,101 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
-#. Title of the settings panel (this game: rules, players, AI level).
-#: scenes/greybox/hud.gd:188
-msgid "Game"
-msgstr "Oyun"
+#: scenes/greybox/hud.gd:138
+msgid "Menu"
+msgstr "Menü"
 
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Hide"
-msgstr "Gizle"
-
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Show"
-msgstr "Göster"
-
-#. Menu label: which rule set to play.
-#: scenes/greybox/hud.gd:213
-msgid "Rules"
-msgstr "Kurallar"
-
-#: scenes/greybox/hud.gd:216
-msgid "The dogs move first"
-msgstr "Köpekler önce oynar"
-
-#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
-#: scenes/greybox/hud.gd:229
-msgid "Players"
-msgstr "Oyuncular"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Novice"
-msgstr "Acemi"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Apprentice"
-msgstr "Çırak"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Adept"
-msgstr "Kalfa"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Master"
-msgstr "Usta"
-
-#. Menu label: the computer opponent's strength. Keep it short.
-#: scenes/greybox/hud.gd:239
-msgid "AI"
-msgstr "YZ"
-
-#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/greybox/hud.gd:247
-msgid "Look"
-msgstr "Görünüm"
-
-#: scenes/greybox/hud.gd:256
-msgid "Language"
-msgstr "Dil"
-
-#: scenes/greybox/hud.gd:262
-msgid "New game"
-msgstr "Yeni oyun"
-
-#: scenes/greybox/hud.gd:267
+#: scenes/greybox/hud.gd:162
 msgid "Undo"
 msgstr "Geri al"
 
-#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
-msgid "How to play"
-msgstr "Nasıl oynanır"
-
-#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
-#: scenes/greybox/hud.gd:278
-msgid "N new game · U undo · H hide panels · T how to play"
-msgstr "N yeni oyun · U geri al · H panelleri gizle · T nasıl oynanır"
-
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:304
+#: scenes/greybox/hud.gd:230
 msgid "Stop here"
 msgstr "Burada dur"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:322
+#: scenes/greybox/hud.gd:248
 msgid "Moves"
 msgstr "Hamleler"
 
-#: scenes/greybox/hud.gd:371
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:299 scenes/greybox/hud.gd:455
 msgid "Play again"
 msgstr "Tekrar oyna"
 
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:309
+msgid "New opponent"
+msgstr "Yeni rakip"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:315
+msgid "Main menu"
+msgstr "Ana menü"
+
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:376
+#: scenes/greybox/hud.gd:319
 msgid "Look at the board"
 msgstr "Tahtaya bak"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:419
+#: scenes/greybox/hud.gd:361
 msgid "thinking"
 msgstr "düşünüyor"
 
-#. Two people taking turns on the same device.
-#: scenes/greybox/hud.gd:435
-msgid "Two players (hotseat)"
-msgstr "İki oyuncu (aynı cihaz)"
-
-#: scenes/greybox/hud.gd:438
-msgid "Watch the AI play"
-msgstr "YZ'yi izle"
-
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
+#: scenes/greybox/hud.gd:394 scenes/greybox/hud.gd:443
 msgid "A draw"
 msgstr "Berabere"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:475
+#: scenes/greybox/hud.gd:401
 #, c-format
 msgid "Captured %d / %d"
 msgstr "Alınan: %d / %d"
 
-#: scenes/greybox/hud.gd:503
+#: scenes/greybox/hud.gd:429
 msgid "No moves yet"
 msgstr "Henüz hamle yok"
 
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:285
+msgid "You won"
+msgstr "Kazandın"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "Kaybettin"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:455 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "Rövanş"
+
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:530
+#: scenes/greybox/hud.gd:465
 #, c-format
 msgid "place %s"
 msgstr "koy: %s"
 
-#: scenes/greybox/hud.gd:539
+#: scenes/greybox/hud.gd:474
 msgid "Watching the AI play both sides."
 msgstr "YZ iki tarafı da oynuyor."
 
-#: scenes/greybox/hud.gd:543
+#: scenes/greybox/hud.gd:478
+msgid "Waiting for your opponent's move."
+msgstr "Rakibin hamlesi bekleniyor."
+
+#: scenes/greybox/hud.gd:480
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Alış zinciri: sıradaki atlamayı seç ya da burada dur."
 
-#: scenes/greybox/hud.gd:549
+#: scenes/greybox/hud.gd:486
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Nereye gideceğini seç. Kırık halka bir alışı gösterir."
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:487
 msgid "Pick where it goes."
 msgstr "Nereye gideceğini seç."
 
@@ -182,6 +133,498 @@ msgstr "Oynamaya başla"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "İleri ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:591
+msgid "Looking for an opponent…"
+msgstr "Rakip aranıyor…"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "Aramayı durdur"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "Şimdi oyna"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133
+msgid "Not now"
+msgstr "Şimdi değil"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "Yeniden bağlanıyor… %d sn"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "Bağlantı kesildi"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "Rakip hazır, şimdi oynamak ister misin?"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "Rakibin beraberlik teklif ediyor."
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Accept"
+msgstr "Kabul et"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Decline"
+msgstr "Reddet"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent asks to take back their last move."
+msgstr "Rakibin son hamlesini geri almak istiyor."
+
+#: scenes/play/match_ui.gd:274
+msgid "Allow"
+msgstr "İzin ver"
+
+#: scenes/play/match_ui.gd:274
+msgid "Refuse"
+msgstr "Reddet"
+
+#: scenes/play/match_ui.gd:277
+msgid "Your opponent wants a rematch."
+msgstr "Rakibin rövanş istiyor."
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Resign this game?"
+msgstr "Bu oyunda pes edilsin mi?"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:650
+msgid "Resign"
+msgstr "Pes et"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Keep playing"
+msgstr "Oynamaya devam et"
+
+#: scenes/play/play_controller.gd:272
+msgid "We'll let you know when an opponent is ready."
+msgstr "Bir rakip hazır olduğunda haber vereceğiz."
+
+#: scenes/play/play_controller.gd:306
+msgid "Draw offered. Waiting for an answer."
+msgstr "Beraberlik teklif edildi. Yanıt bekleniyor."
+
+#: scenes/play/play_controller.gd:312
+msgid "Asked to take back your last move."
+msgstr "Son hamleni geri almak istedin."
+
+#: scenes/play/play_controller.gd:323
+msgid "Rematch offered. Waiting for an answer."
+msgstr "Rövanş teklif edildi. Yanıt bekleniyor."
+
+#: scenes/play/play_controller.gd:325 scenes/play/play_controller.gd:421 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+msgid "Your opponent left the game."
+msgstr "Rakibin oyundan ayrıldı."
+
+#: scenes/play/play_controller.gd:418
+msgid "Reconnected."
+msgstr "Yeniden bağlandı."
+
+#: scenes/play/play_controller.gd:426 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "Rakibin beraberliği reddetti."
+
+#: scenes/play/play_controller.gd:428 tools/smoke_multiplayer.gd:237
+msgid "Move taken back."
+msgstr "Hamle geri alındı."
+
+#: scenes/play/play_controller.gd:428
+msgid "Your opponent said no to taking back the move."
+msgstr "Rakibin hamlenin geri alınmasına izin vermedi."
+
+#: scenes/play/play_controller.gd:429
+msgid "Your opponent declined the rematch."
+msgstr "Rakibin rövanşı reddetti."
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:446
+#, c-format
+msgid "Playing against %s"
+msgstr "Rakibin: %s"
+
+#: scenes/play/play_controller.gd:456
+msgid "The other player didn't connect. Still looking…"
+msgstr "Diğer oyuncu bağlanmadı. Aramaya devam ediliyor…"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:505
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "Süre doldu, senin yerine hamle yapıldı (%d/3)."
+
+#: scenes/play/play_menu.gd:231
+msgid "Back"
+msgstr "Geri"
+
+#: scenes/play/play_menu.gd:286
+msgid "Rules"
+msgstr "Kurallar"
+
+#: scenes/play/play_menu.gd:305
+msgid "Language"
+msgstr "Dil"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:634
+msgid "Continue"
+msgstr "Devam et"
+
+#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:345
+msgid "Play against the AI"
+msgstr "YZ'ye karşı oyna"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:365
+msgid "Pass and play"
+msgstr "Aynı cihazda iki kişi"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:374
+msgid "Play local"
+msgstr "Yerel oyna"
+
+#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:477
+msgid "Play online"
+msgstr "Çevrimiçi oyna"
+
+#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "Nasıl oynanır"
+
+#: scenes/play/play_menu.gd:349
+msgid "Novice"
+msgstr "Acemi"
+
+#: scenes/play/play_menu.gd:349
+msgid "Apprentice"
+msgstr "Çırak"
+
+#: scenes/play/play_menu.gd:349
+msgid "Adept"
+msgstr "Kalfa"
+
+#: scenes/play/play_menu.gd:349
+msgid "Master"
+msgstr "Usta"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:354 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "Rakip"
+
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:393
+msgid "Start"
+msgstr "Başla"
+
+#: scenes/play/play_menu.gd:366
+msgid "Two players share this device and take turns."
+msgstr "İki oyuncu bu cihazı paylaşır ve sırayla oynar."
+
+#: scenes/play/play_menu.gd:375
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "İki cihaz da aynı Wi-Fi ağında olmalı."
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:378 scenes/play/play_menu.gd:389
+msgid "Host a game"
+msgstr "Oyun kur"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:421
+msgid "Join a game"
+msgstr "Oyuna katıl"
+
+#: scenes/play/play_menu.gd:389 scenes/play/play_menu.gd:508
+msgid "Create a code"
+msgstr "Kod oluştur"
+
+#: scenes/play/play_menu.gd:407
+msgid "Waiting for a player"
+msgstr "Oyuncu bekleniyor"
+
+#: scenes/play/play_menu.gd:408
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "Diğer cihazda Yerel oyna'yı, sonra Oyuna katıl'ı seç."
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:412
+msgid "If the game doesn't appear there, enter this code"
+msgstr "Oyun orada görünmezse bu kodu gir"
+
+#: scenes/play/play_menu.gd:417 scenes/play/play_menu.gd:537 scenes/play/play_menu.gd:588 scenes/play/play_menu.gd:595 scenes/play/play_menu.gd:600
+msgid "Cancel"
+msgstr "İptal"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:423
+msgid "Looking for games on this Wi-Fi…"
+msgstr "Bu Wi-Fi ağında oyun aranıyor…"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:434
+msgid "Code"
+msgstr "Kod"
+
+#: scenes/play/play_menu.gd:442 scenes/play/play_menu.gd:569
+msgid "Join"
+msgstr "Katıl"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:479
+msgid "Play with someone online"
+msgstr "Çevrimiçi biriyle oyna"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:484 scenes/play/play_menu.gd:593
+msgid "Standard rules, about a minute per move"
+msgstr "Standart kurallar, hamle başına yaklaşık bir dakika"
+
+#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:505
+msgid "Play with a friend"
+msgstr "Bir arkadaşla oyna"
+
+#: scenes/play/play_menu.gd:506
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "Biriniz kod oluşturur, diğeri girer. Telefon, tablet ve bilgisayarlar arasında çalışır."
+
+#: scenes/play/play_menu.gd:509 scenes/play/play_menu.gd:553
+msgid "Enter a code"
+msgstr "Kod gir"
+
+#: scenes/play/play_menu.gd:517
+msgid "Your code"
+msgstr "Kodun"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:599
+msgid "Connecting…"
+msgstr "Bağlanıyor…"
+
+#: scenes/play/play_menu.gd:522
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "Bu kodu arkadaşına gönder. Kodu girdiğinde oyun başlar."
+
+#: scenes/play/play_menu.gd:525
+msgid "Share"
+msgstr "Paylaş"
+
+#: scenes/play/play_menu.gd:527
+msgid "Copy"
+msgstr "Kopyala"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:530 scenes/play/play_menu.gd:549
+msgid "Copied"
+msgstr "Kopyalandı"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:543
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "Timeless Games'te benimle oyna! Oyun kodum: %s."
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:579
+msgid "No one is free right now"
+msgstr "Şu anda müsait kimse yok"
+
+#: scenes/play/play_menu.gd:580
+msgid "We can keep looking while you play."
+msgstr "Sen oynarken aramaya devam edebiliriz."
+
+#: scenes/play/play_menu.gd:581
+msgid "Play against the AI while we keep looking"
+msgstr "Biz ararken YZ'ye karşı oyna"
+
+#: scenes/play/play_menu.gd:584
+msgid "Keep searching"
+msgstr "Aramaya devam et"
+
+#: scenes/play/play_menu.gd:585
+msgid "Invite a friend instead"
+msgstr "Bunun yerine arkadaşını davet et"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:605
+msgid "Couldn't start the game"
+msgstr "Oyun başlatılamadı"
+
+#: scenes/play/play_menu.gd:608
+msgid "OK"
+msgstr "Tamam"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:616
+msgid "Leave this game?"
+msgstr "Bu oyundan çıkılsın mı?"
+
+#: scenes/play/play_menu.gd:617
+msgid "It counts as a loss."
+msgstr "Bu yenilgi sayılır."
+
+#: scenes/play/play_menu.gd:618
+msgid "Leave"
+msgstr "Çık"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:624
+msgid "Stay"
+msgstr "Kal"
+
+#: scenes/play/play_menu.gd:640
+msgid "Offer a draw"
+msgstr "Beraberlik teklif et"
+
+#: scenes/play/play_menu.gd:645
+msgid "Ask to undo"
+msgstr "Geri almayı iste"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:665
+msgid "Look"
+msgstr "Görünüm"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:669
+msgid "Quit to main menu"
+msgstr "Ana menüye dön"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:714
+#, c-format
+msgid "Your name: %s"
+msgstr "Adın: %s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:751
+msgid "Waiting"
+msgstr "Bekleniyor"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "Kâtip"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "Gezgin"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "Çömlekçi"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:268
+msgid "Weaver"
+msgstr "Dokumacı"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "Çoban"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "Kayıkçı"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "Bahçıvan"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "Usta"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "Çevrimiçi hizmete ulaşılamıyor. Bağlantını kontrol edip yeniden dene."
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "Bu koda sahip bir oyun yok. Kontrol edip yeniden dene."
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "O oyun çoktan başladı."
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "Diğer cihaza bağlanılamadı."
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "Diğer cihazda oyunun farklı bir sürümü var. İkisini de güncelleyip yeniden dene."
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "Diğer cihaz başka bir oyun oynuyor."
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "Diğer cihaz bu sürümde olmayan kurallar kullanıyor."
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "Bu ağda oyun kurulamadı. Oyunun diğer kopyalarını kapatıp yeniden dene."
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "Yerel oynamak için ağındaki cihazları bulma izni gerekiyor."
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "Bu kod geçerli değil. Kontrol edip yeniden dene."
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "Bu cihaz bir Wi-Fi ağına bağlı değil."
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "Bir sorun oluştu. Lütfen yeniden dene."
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "Pes ettin."
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "Rakibin pes etti."
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "Beraberlikte anlaştınız."
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "Süren üç kez doldu."
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "Rakibinin süresi üç kez doldu."
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "Oyundan ayrıldın."
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "Diğer cihaz izin verilmeyen hamleler gönderdi."
 
 #: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
 msgid "Goats to move"

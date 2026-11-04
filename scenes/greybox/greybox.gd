@@ -1,17 +1,26 @@
 extends Node3D
-## Greybox: every v1 rule set playable in 3D. Hotseat, either side against
-## the AI, or AI vs AI. Builds everything in code from the BoardDef, so it
-## stays correct while the boards and rules evolve. Bagh Chal shows its art
-## styles (titles/bagh_chal/art/); the other titles still use placeholder
-## meshes. The interface is hud.gd; "How to play" is tutorial.gd.
+## Greybox: every v1 rule set playable in 3D. Builds everything in code from
+## the BoardDef, so it stays correct while the boards and rules evolve. Bagh
+## Chal shows its art styles (titles/bagh_chal/art/); the other titles still
+## use placeholder meshes. The interface is hud.gd; "How to play" is
+## tutorial.gd; the play menu and network games are in scenes/play/.
+##
+## Every game is a MatchSession (framework §5): against the AI, pass and play,
+## AI vs AI, nearby and online. The board listens to the session, so a move is
+## animated the same way whether it came from a click, the AI or the other
+## device. Local games are saved after every move (Continue in the menu).
 
-enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI }
+enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI, NETWORK }
 
 const SPACING := 1.0
 const HudScript := preload("res://scenes/greybox/hud.gd")
 const TutorialScript := preload("res://scenes/greybox/tutorial.gd")
 const MarkShader := preload("res://scenes/greybox/mark.gdshader")
+const PlayControllerScript := preload("res://scenes/play/play_controller.gd")
+const PlayMenuScript := preload("res://scenes/play/play_menu.gd")
+const MatchUIScript := preload("res://scenes/play/match_ui.gd")
 const AI_MOVE_DELAY := 0.35
+const SAVE_PATH := "user://match.save"
 
 const PIECE_COLORS := {
 	"bagh_chal": [Color(0.86, 0.48, 0.14), Color(0.93, 0.91, 0.85)],   # tiger, goat
@@ -19,34 +28,73 @@ const PIECE_COLORS := {
 	"komikan": [Color(0.66, 0.55, 0.42), Color(0.5, 0.33, 0.2)],       # puma, dog
 }
 
-var rules: HuntRuleSet
-var state: HuntState
+## The game on the board.
+var session: MatchSession
+## The rules, position and moves of `session`. The walkthrough and the tools
+## read and set these directly.
+var rules: HuntRuleSet:
+	get:
+		return session.rules if session else null
+	set(value):
+		session.rules = value
+var state: HuntState:
+	get:
+		return session.state if session else null
+	set(value):
+		session.state = value
+var history: Array[PackedInt32Array]:
+	get:
+		return session.moves if session else _no_moves
+	set(value):
+		session.moves = value
+## The position `history` starts from (the opening, or a tutorial position).
+var history_start: HuntState:
+	get:
+		return session.start if session else null
+	set(value):
+		session.start = value
+## Who plays which side. Setting it during a local game hands the sides over
+## at once (the tools use HOTSEAT to stop the AI). NETWORK is set by
+## start_network().
+var mode: Mode = Mode.HUMAN_PREY:
+	set(value):
+		mode = value
+		if session and value != Mode.NETWORK and not tutorial_active and not _is_network_kind(session.kind):
+			_apply_mode(session)
 var evaluator: HuntEvaluator
 var personas: Array[AIPersona] = []
-var mode: Mode = Mode.HUMAN_PREY
 var level := 1
 ## Use the title's art where it exists (Bagh Chal); false shows the greybox.
 var use_art := true
 ## The art style picked for each title that has more than one (style id).
 var art_style_ids := {"bagh_chal": "brass"}
-var history: Array[PackedInt32Array] = []
-## The position `history` starts from (the opening, or a tutorial position).
-var history_start: HuntState
 var status: HuntState.Status = HuntState.Status.ONGOING
 ## True while "How to play" drives the board: no AI, no clicks.
 var tutorial_active := false
+## Saves local games after every move (tools turn it off, or save elsewhere).
+var autosave := true
+var save_path := SAVE_PATH
+## Network games: the controller, and the side played on this device.
+var play: Node
+var menu: CanvasLayer
 
 var _rule_set_id := HuntRuleSets.BAGH_CHAL_STANDARD
 var _komikan_dogs_first := false
+var _no_moves: Array[PackedInt32Array] = []
+var _local_mode: Mode = Mode.HUMAN_PREY
+var _net_side := -1
 var _camera: Camera3D
 var _world_env: WorldEnvironment
 var _grey_env: Environment
 var _grey_key: DirectionalLight3D
 var _styles := {}  # title id -> Array[HuntArtStyle]
 var _hud: CanvasLayer
+var _match_ui: CanvasLayer
 var _tutorial: CanvasLayer
-var _saved_game := {}
+var _saved_session: MatchSession
+var _tutorial_from_menu := false
 var _tween: Tween
+var _anim_queue: Array[PackedInt32Array] = []
 var _board_root: Node3D
 var _pieces_root: Node3D
 var _marks_root: Node3D
@@ -56,9 +104,7 @@ var _selected := -1
 var _chain := PackedInt32Array()
 var _pending_click := Vector2.INF
 var _animating := false
-var _ai_task := -1
-var _ai_cancel := false
-var _ai_result := PackedInt32Array()
+var _ai := AIDriver.new()
 var _ai_wait := 0.0
 var _rng := RandomNumberGenerator.new()
 
@@ -66,6 +112,9 @@ var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_rng.seed = 20261102
+	var title := TitleConfig.active()
+	if not title.rule_sets.has(_rule_set_id):
+		_rule_set_id = title.rule_sets[0]
 	L10n.apply_saved_locale()
 	personas = _make_personas()
 	_styles["bagh_chal"] = BaghChalArt.styles()
@@ -73,72 +122,266 @@ func _ready() -> void:
 	for st in _styles["bagh_chal"]:
 		if st.id == saved_look:
 			art_style_ids["bagh_chal"] = saved_look
+	level = clampi(int(L10n.load_setting("ai_level", level)), 0, personas.size() - 1)
 	_build_environment()
+	play = PlayControllerScript.new(self)
+	add_child(play)
 	_hud = HudScript.new(self)
 	add_child(_hud)
+	_match_ui = MatchUIScript.new(self)
+	add_child(_match_ui)
 	_tutorial = TutorialScript.new(self)
 	_tutorial.finished.connect(_on_tutorial_finished)
 	add_child(_tutorial)
-	new_game()
+	menu = PlayMenuScript.new(self)
+	add_child(menu)
+	# A game left unfinished (the app was closed) carries on where it was;
+	# otherwise the main menu, over an empty board.
+	if not continue_saved():
+		_show_idle_board()
+		menu.open()
 
 
 func _make_personas() -> Array[AIPersona]:
 	return HuntPersonas.all()
 
 
+## The rule set for an id; Komikan with the dogs first is
+## "<komikan>+dogs_first" (TitleConfig.DOGS_FIRST).
+static func make_rule_set(id: String) -> HuntRuleSet:
+	var base := id.trim_suffix(TitleConfig.DOGS_FIRST)
+	if base == HuntRuleSets.KOMIKAN:
+		return HuntRuleSets.komikan(HuntRuleSet.PREY if id.ends_with(TitleConfig.DOGS_FIRST) else HuntRuleSet.HUNTER)
+	return HuntRuleSets.by_id(base)
+
+
 # --- Game flow -------------------------------------------------------------
 
+## A new local game with the current mode, rule set and level.
 func new_game() -> void:
+	if tutorial_active or mode == Mode.NETWORK:
+		return
+	if menu:
+		menu.close()
+	var id := _rule_set_id
+	if id == HuntRuleSets.KOMIKAN and _komikan_dogs_first:
+		id += TitleConfig.DOGS_FIRST
+	var s := MatchSession.create(make_rule_set(id), id, MatchSession.Kind.PASS_AND_PLAY,
+		MatchSession.Driver.LOCAL, MatchSession.Driver.LOCAL)
+	_apply_mode(s)
+	_use_session(s)
+	_save()
+
+
+## Starts a local game from the menu.
+func start_local(new_mode: Mode, rule_set_id: String, ai_level := level) -> void:
+	if mode == Mode.NETWORK:
+		play.leave_match()
+		_net_side = -1
+	mode = new_mode
+	_local_mode = new_mode
+	_rule_set_id = rule_set_id.trim_suffix(TitleConfig.DOGS_FIRST)
+	level = ai_level
+	L10n.save_setting("ai_level", level)
+	new_game()
+
+
+## Shows a network game started by the play controller (both devices built
+## the same session; moves arrive through it).
+func start_network(s: MatchSession, side: int) -> void:
+	if tutorial_active:
+		_tutorial.stop(false)
+	if mode != Mode.NETWORK:
+		_local_mode = mode
+	mode = Mode.NETWORK
+	_net_side = side
+	_rule_set_id = s.rule_set_id.trim_suffix(TitleConfig.DOGS_FIRST)
+	if menu:
+		menu.close()
+	_use_session(s)
+
+
+## "Quit to main menu": ends the game on the board (a game against another
+## device counts as lost if it's still going) and opens the main menu over an
+## empty board. A local game's save is dropped; an AI game set aside for an
+## online match stays saved, and the main menu offers to continue it.
+func quit_to_menu(screen := "home") -> void:
 	if tutorial_active:
 		return
 	_stop_ai()
-	if _rule_set_id == HuntRuleSets.KOMIKAN:
-		rules = HuntRuleSets.komikan(HuntRuleSet.PREY if _komikan_dogs_first else HuntRuleSet.HUNTER)
+	if mode == Mode.NETWORK:
+		play.leave_match()
+		_net_side = -1
+		mode = _local_mode
 	else:
-		rules = HuntRuleSets.by_id(_rule_set_id)
-	state = HuntState.create(rules)
-	history_start = state.clone()
-	evaluator = HuntEvaluator.new(HuntRuleSets.weights_for(rules))
-	history.clear()
+		if play.background:
+			play.decline_background()  # stop looking for an online opponent
+		_clear_save()
+	_show_idle_board()
+	menu.open(screen)
+
+
+## An empty board for behind the main menu: no AI, nothing saved.
+func _show_idle_board() -> void:
+	var id := _rule_set_id
+	if id == HuntRuleSets.KOMIKAN and _komikan_dogs_first:
+		id += TitleConfig.DOGS_FIRST
+	_use_session(MatchSession.create(make_rule_set(id), id, MatchSession.Kind.PASS_AND_PLAY,
+		MatchSession.Driver.LOCAL, MatchSession.Driver.LOCAL))
+
+
+func _clear_save() -> void:
+	if autosave and FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
+
+
+## After a network game: back to the local game that was saved, or a new one.
+func leave_network() -> void:
+	if mode != Mode.NETWORK:
+		return
+	_net_side = -1
+	mode = _local_mode
+	if not continue_saved():
+		new_game()
+
+
+func is_network() -> bool:
+	return mode == Mode.NETWORK
+
+
+static func _is_network_kind(k: MatchSession.Kind) -> bool:
+	return k in [MatchSession.Kind.NEARBY, MatchSession.Kind.ONLINE_FRIEND, MatchSession.Kind.QUICK_MATCH]
+
+
+## The side played on this device, or -1 when both or neither are.
+func local_side() -> int:
+	match mode:
+		Mode.HUMAN_PREY:
+			return HuntState.PREY
+		Mode.HUMAN_HUNTER:
+			return HuntState.HUNTER
+		Mode.NETWORK:
+			return _net_side
+	return -1
+
+
+func _apply_mode(s: MatchSession) -> void:
+	var me := MatchSession.Driver.LOCAL
+	var ai := MatchSession.Driver.AI
+	match mode:
+		Mode.HUMAN_PREY:
+			s.kind = MatchSession.Kind.VS_AI
+			s.control = {HuntState.HUNTER: ai, HuntState.PREY: me}
+		Mode.HUMAN_HUNTER:
+			s.kind = MatchSession.Kind.VS_AI
+			s.control = {HuntState.HUNTER: me, HuntState.PREY: ai}
+		Mode.AI_VS_AI:
+			s.kind = MatchSession.Kind.AI_VS_AI
+			s.control = {HuntState.HUNTER: ai, HuntState.PREY: ai}
+		_:
+			s.kind = MatchSession.Kind.PASS_AND_PLAY
+			s.control = {HuntState.HUNTER: me, HuntState.PREY: me}
+	s.ai_level = {HuntState.HUNTER: level, HuntState.PREY: level}
+
+
+func _mode_for(s: MatchSession) -> Mode:
+	var ai := MatchSession.Driver.AI
+	var hunter_ai: bool = s.control[HuntState.HUNTER] == ai
+	var prey_ai: bool = s.control[HuntState.PREY] == ai
+	if hunter_ai and prey_ai:
+		return Mode.AI_VS_AI
+	if hunter_ai:
+		return Mode.HUMAN_PREY
+	if prey_ai:
+		return Mode.HUMAN_HUNTER
+	return Mode.HOTSEAT
+
+
+## Puts a session on the board and listens to it.
+func _use_session(s: MatchSession) -> void:
+	_stop_ai()
+	_stop_tween()
+	_anim_queue.clear()
+	if session and session != s:
+		for pair in [[session.move_committed, _on_move_committed], [session.undone, _on_undone],
+				[session.reset, _on_reset], [session.game_over, _on_game_over]]:
+			if pair[0].is_connected(pair[1]):
+				pair[0].disconnect(pair[1])
+	session = s
+	if not s.move_committed.is_connected(_on_move_committed):
+		s.move_committed.connect(_on_move_committed)
+		s.undone.connect(_on_undone)
+		s.reset.connect(_on_reset)
+		s.game_over.connect(_on_game_over)
+	evaluator = HuntEvaluator.new(HuntRuleSets.weights_for(s.rules))
 	_selected = -1
 	_chain = PackedInt32Array()
 	_build_board()
 	_sync_pieces()
+	_clear_marks()
 	_after_move()
 
 
+## A move from this device (a click or the walkthrough's "play it").
 func commit(move: PackedInt32Array) -> void:
-	if not state.is_legal(move):
-		push_warning("illegal move %s" % state.describe(move))
-		return
-	_selected = -1
-	_chain = PackedInt32Array()
-	_clear_marks()
-	history.append(move)
-	_animate(move)
-	state.make(move)
+	if not session.commit(move, state.side):
+		push_warning("move refused: %s" % state.describe(move))
 
 
 func undo() -> void:
-	if _animating or history.is_empty() or tutorial_active:
+	if _animating or tutorial_active or mode == Mode.NETWORK or history.is_empty():
 		return
 	_stop_ai()
-	var steps := 1
-	if mode == Mode.HUMAN_PREY or mode == Mode.HUMAN_HUNTER:
-		# Back to the human's turn.
-		steps = 2 if _is_ai_side(state.side) == false and history.size() >= 2 else 1
-	for _i in steps:
-		if history.is_empty():
-			break
-		state.unmake(history.pop_back())
+	var n := session.undo_count()
+	if n == 0:
+		n = 1  # AI vs AI: one move back
+	session.undo(n)
+
+
+func can_undo() -> bool:
+	return mode != Mode.NETWORK and not history.is_empty()
+
+
+func _on_move_committed(move: PackedInt32Array, _side: int) -> void:
 	_selected = -1
 	_chain = PackedInt32Array()
+	_clear_marks()
+	_save()
+	if _animating:
+		_anim_queue.append(move)
+		return
+	_animate(move)
+
+
+func _on_undone(_count: int) -> void:
+	_redraw()
+	_save()
+
+
+func _on_reset() -> void:
+	_redraw()
+
+
+func _on_game_over(_status: int, _reason: int) -> void:
+	_save()
+	if not _animating:
+		_after_move()
+
+
+## Redraws the pieces from the position (undo, resync), without animating.
+func _redraw() -> void:
+	_stop_ai()
+	_stop_tween()
+	_anim_queue.clear()
+	_selected = -1
+	_chain = PackedInt32Array()
+	_clear_marks()
 	_sync_pieces()
 	_after_move()
 
 
 func _after_move() -> void:
-	status = state.status()
+	status = session.status()
 	if _has_art():
 		current_style().set_awaken(0.0 if history.is_empty() else 0.6)
 	_refresh_ui()
@@ -148,62 +391,102 @@ func _after_move() -> void:
 
 
 func _is_ai_side(side: int) -> bool:
-	if tutorial_active:
+	if tutorial_active or session == null:
 		return false
-	match mode:
-		Mode.HUMAN_PREY:
-			return side == HuntState.HUNTER
-		Mode.HUMAN_HUNTER:
-			return side == HuntState.PREY
-		Mode.AI_VS_AI:
-			return true
-	return false
+	return session.control.get(side) == MatchSession.Driver.AI
+
+
+## True while the AI is choosing a move.
+func ai_thinking() -> bool:
+	return _ai.is_thinking()
+
+
+## True when a click on the board would play a move now.
+func can_play() -> bool:
+	if tutorial_active or _animating or _ai.is_thinking() or session == null or status != HuntState.Status.ONGOING:
+		return false
+	if session.control.get(state.side) != MatchSession.Driver.LOCAL:
+		return false
+	return mode != Mode.NETWORK or play.can_move()
 
 
 func _process(delta: float) -> void:
-	if _ai_wait > 0.0 and not _animating:
+	# The AI waits while a menu covers the board.
+	if _ai_wait > 0.0 and not _animating and not (menu and menu.is_open()):
 		_ai_wait -= delta
 		if _ai_wait <= 0.0 and _is_ai_side(state.side):
 			_start_ai()
-	if _ai_task >= 0 and WorkerThreadPool.is_task_completed(_ai_task):
-		WorkerThreadPool.wait_for_task_completion(_ai_task)
-		_ai_task = -1
-		if not _ai_cancel and not _ai_result.is_empty():
-			commit(_ai_result)
-		_ai_cancel = false
+	if _ai.is_thinking():
+		var move := _ai.poll()
+		if not _ai.is_thinking():
+			if not move.is_empty() and _is_ai_side(state.side):
+				session.commit(move, state.side)
+			_refresh_ui()
 
 
 func _start_ai() -> void:
-	if _ai_task >= 0 or status != HuntState.Status.ONGOING:
+	if _ai.is_thinking() or status != HuntState.Status.ONGOING:
 		return
-	_ai_cancel = false
-	_ai_result = PackedInt32Array()
-	var snapshot := state.clone()
-	var persona := personas[level]
-	var seed := _rng.randi()
-	_ai_task = WorkerThreadPool.add_task(_ai_work.bind(persona, snapshot, seed), false, "hunt AI")
+	_ai.start(state, personas[level], evaluator, _rng.randi())
 	_refresh_ui()
-
-
-func _ai_work(persona: AIPersona, snapshot: HuntState, seed: int) -> void:
-	var search := persona.make_searcher(evaluator)
-	search.begin(snapshot)
-	while not search.step(4000):
-		if _ai_cancel:
-			search.cancel()
-			return
-	var r := RandomNumberGenerator.new()
-	r.seed = seed
-	_ai_result = persona.pick(search, r)
 
 
 func _stop_ai() -> void:
 	_ai_wait = 0.0
-	if _ai_task >= 0:
-		_ai_cancel = true
-		WorkerThreadPool.wait_for_task_completion(_ai_task)
-		_ai_task = -1
-	_ai_cancel = false
+	_ai.cancel()
+
+
+# --- Saves -----------------------------------------------------------------
+
+## Local games (against the AI, pass and play) are saved after every move.
+func _save() -> void:
+	if not autosave or tutorial_active or session == null:
+		return
+	if session.kind != MatchSession.Kind.VS_AI and session.kind != MatchSession.Kind.PASS_AND_PLAY:
+		return
+	session.ai_level = {HuntState.HUNTER: level, HuntState.PREY: level}
+	var f := FileAccess.open(save_path, FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify(session.to_dict()))
+
+
+func _load_saved() -> MatchSession:
+	if not FileAccess.file_exists(save_path):
+		return null
+	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(save_path))
+	if typeof(v) != TYPE_DICTIONARY:
+		return null
+	var title := TitleConfig.active()
+	var s := MatchSession.from_dict(v, func(id: String) -> HuntRuleSet: return title.resolve_rule_set(id))
+	if s == null or not s.is_ongoing() or s.moves.is_empty():
+		return null
+	return s
+
+
+## True when there's a saved local game to go back to.
+func has_saved_game() -> bool:
+	return _load_saved() != null
+
+
+## Goes back to the saved local game. False if there isn't one.
+func continue_saved() -> bool:
+	if tutorial_active:
+		return false
+	var s := _load_saved()
+	if s == null:
+		return false
+	if mode == Mode.NETWORK:
+		_net_side = -1
+	_rule_set_id = s.rule_set_id.trim_suffix(TitleConfig.DOGS_FIRST)
+	_komikan_dogs_first = s.rule_set_id.ends_with(TitleConfig.DOGS_FIRST)
+	var ai_side := HuntState.HUNTER if s.control[HuntState.HUNTER] == MatchSession.Driver.AI else HuntState.PREY
+	level = clampi(int(s.ai_level.get(ai_side, level)), 0, personas.size() - 1)
+	mode = _mode_for(s)
+	_local_mode = mode
+	_use_session(s)
+	if menu:
+		menu.close()
+	return true
 
 
 # --- Input -----------------------------------------------------------------
@@ -212,7 +495,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			_pending_click = event.position
-		elif event.button_index == MOUSE_BUTTON_RIGHT and _chain.size() > 2:
+		elif event.button_index == MOUSE_BUTTON_RIGHT and _chain.size() > 2 and can_play():
 			commit(_chain)
 
 
@@ -221,7 +504,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	var click := _pending_click
 	_pending_click = Vector2.INF
-	if tutorial_active or _animating or _ai_task >= 0 or status != HuntState.Status.ONGOING or _is_ai_side(state.side):
+	if not can_play():
 		return
 	var origin := _camera.project_ray_origin(click)
 	var query := PhysicsRayQueryParameters3D.create(origin, origin + _camera.project_ray_normal(click) * 200.0)
@@ -309,6 +592,8 @@ func _build_environment() -> void:
 	_camera = Camera3D.new()
 	_camera.fov = 38.0
 	add_child(_camera)
+	get_viewport().size_changed.connect(_fit_orientation)
+	_fit_orientation()
 	_board_root = Node3D.new()
 	add_child(_board_root)
 	_pieces_root = Node3D.new()
@@ -347,9 +632,23 @@ func _build_board() -> void:
 		body.position = to_world(board.positions[i])
 		_board_root.add_child(body)
 	# Prey players sit at the near edge.
-	_board_root.rotation.y = PI if mode == Mode.HUMAN_PREY else 0.0
+	_board_root.rotation.y = PI if local_side() == HuntState.PREY else 0.0
 	_camera.position = Vector3(0, extent * 1.25, extent * 0.95)
 	_camera.look_at(Vector3(0, 0, extent * 0.06), Vector3.UP)
+
+
+## Phones turn both ways (project setting: sensor). In portrait the camera
+## keeps the board's width on screen instead of its height, and the interface
+## uses a portrait base size so text keeps its size.
+func _fit_orientation() -> void:
+	var size := get_viewport().get_visible_rect().size
+	var portrait := size.y > size.x
+	_camera.keep_aspect = Camera3D.KEEP_WIDTH if portrait else Camera3D.KEEP_HEIGHT
+	_camera.fov = 43.0 if portrait else 38.0
+	var win := get_window()
+	var base := Vector2i(900, 1600) if portrait else Vector2i(1600, 900)
+	if win.content_scale_size != base:
+		win.content_scale_size = base
 
 
 func _has_art() -> bool:
@@ -539,6 +838,9 @@ func _animate(move: PackedInt32Array) -> void:
 					tween.tween_callback(victim.queue_free)
 	tween.tween_callback(func() -> void:
 		_animating = false
+		if not _anim_queue.is_empty():
+			_animate(_anim_queue.pop_front())
+			return
 		_after_move())
 
 
@@ -622,13 +924,18 @@ func _show_last_move() -> void:
 # --- How to play -----------------------------------------------------------
 
 func start_tutorial() -> void:
-	if tutorial_active:
+	if tutorial_active or mode == Mode.NETWORK:
 		return
 	_stop_ai()
-	_saved_game = {"state": state.clone(), "history": history.duplicate(), "start": history_start}
+	_tutorial_from_menu = menu != null and menu.is_open()
+	if menu:
+		menu.close()
+	# The walkthrough gets a session of its own; the game comes back after.
+	_saved_session = session
+	var s := MatchSession.create(rules, session.rule_set_id, MatchSession.Kind.PASS_AND_PLAY,
+		MatchSession.Driver.LOCAL, MatchSession.Driver.LOCAL)
 	tutorial_active = true
-	_selected = -1
-	_chain = PackedInt32Array()
+	_use_session(s)
 	_tutorial.start(rules)
 	_refresh_ui()
 
@@ -636,16 +943,16 @@ func start_tutorial() -> void:
 func _on_tutorial_finished(play_now: bool) -> void:
 	_stop_tween()
 	tutorial_active = false
-	if play_now or _saved_game.is_empty():
+	var back := _saved_session
+	_saved_session = null
+	if play_now or back == null:
+		if mode == Mode.NETWORK:
+			mode = _local_mode
 		new_game()
 		return
-	state = _saved_game.state
-	history = _saved_game.history
-	history_start = _saved_game.start
-	_saved_game = {}
-	_clear_marks()
-	_sync_pieces()
-	_after_move()
+	_use_session(back)
+	if _tutorial_from_menu:
+		menu.open()
 
 
 func is_animating() -> bool:
@@ -700,6 +1007,21 @@ func _stop_tween() -> void:
 func _refresh_ui() -> void:
 	if _hud:
 		_hud.refresh()
+	if _match_ui:
+		_match_ui.refresh()
+
+
+## Android's back gesture: closes the walkthrough, steps back through the
+## menus, opens the in-game menu during a game, and leaves the app from the
+## main menu. (project.godot sets quit_on_go_back off.)
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST and menu:
+		if tutorial_active:
+			_tutorial.stop(false)
+		elif menu.is_open():
+			menu.back(true)
+		else:
+			menu.open("pause")
 
 
 static func _mat(color: Color, roughness := 0.6, metallic := 0.0, unshaded := false) -> StandardMaterial3D:

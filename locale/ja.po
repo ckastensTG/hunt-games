@@ -9,150 +9,101 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
-#. Title of the settings panel (this game: rules, players, AI level).
-#: scenes/greybox/hud.gd:188
-msgid "Game"
-msgstr "対局"
+#: scenes/greybox/hud.gd:138
+msgid "Menu"
+msgstr "メニュー"
 
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Hide"
-msgstr "隠す"
-
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Show"
-msgstr "表示"
-
-#. Menu label: which rule set to play.
-#: scenes/greybox/hud.gd:213
-msgid "Rules"
-msgstr "ルール"
-
-#: scenes/greybox/hud.gd:216
-msgid "The dogs move first"
-msgstr "犬が先手"
-
-#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
-#: scenes/greybox/hud.gd:229
-msgid "Players"
-msgstr "プレイヤー"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Novice"
-msgstr "初心者"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Apprentice"
-msgstr "見習い"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Adept"
-msgstr "熟練者"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Master"
-msgstr "名人"
-
-#. Menu label: the computer opponent's strength. Keep it short.
-#: scenes/greybox/hud.gd:239
-msgid "AI"
-msgstr "AI"
-
-#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/greybox/hud.gd:247
-msgid "Look"
-msgstr "見た目"
-
-#: scenes/greybox/hud.gd:256
-msgid "Language"
-msgstr "言語"
-
-#: scenes/greybox/hud.gd:262
-msgid "New game"
-msgstr "新しい対局"
-
-#: scenes/greybox/hud.gd:267
+#: scenes/greybox/hud.gd:162
 msgid "Undo"
 msgstr "一手戻す"
 
-#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
-msgid "How to play"
-msgstr "遊び方"
-
-#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
-#: scenes/greybox/hud.gd:278
-msgid "N new game · U undo · H hide panels · T how to play"
-msgstr "N 新しい対局 · U 一手戻す · H パネルを隠す · T 遊び方"
-
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:304
+#: scenes/greybox/hud.gd:230
 msgid "Stop here"
 msgstr "ここで止める"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:322
+#: scenes/greybox/hud.gd:248
 msgid "Moves"
 msgstr "棋譜"
 
-#: scenes/greybox/hud.gd:371
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:299 scenes/greybox/hud.gd:455
 msgid "Play again"
 msgstr "もう一度"
 
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:309
+msgid "New opponent"
+msgstr "別の相手"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:315
+msgid "Main menu"
+msgstr "メインメニュー"
+
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:376
+#: scenes/greybox/hud.gd:319
 msgid "Look at the board"
 msgstr "盤面を見る"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:419
+#: scenes/greybox/hud.gd:361
 msgid "thinking"
 msgstr "考え中"
 
-#. Two people taking turns on the same device.
-#: scenes/greybox/hud.gd:435
-msgid "Two players (hotseat)"
-msgstr "二人対戦（同じ端末）"
-
-#: scenes/greybox/hud.gd:438
-msgid "Watch the AI play"
-msgstr "AI同士の対局を見る"
-
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
+#: scenes/greybox/hud.gd:394 scenes/greybox/hud.gd:443
 msgid "A draw"
 msgstr "引き分け"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:475
+#: scenes/greybox/hud.gd:401
 #, c-format
 msgid "Captured %d / %d"
 msgstr "取った数 %d / %d"
 
-#: scenes/greybox/hud.gd:503
+#: scenes/greybox/hud.gd:429
 msgid "No moves yet"
 msgstr "まだ手がありません"
 
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:285
+msgid "You won"
+msgstr "あなたの勝ち"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "あなたの負け"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:455 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "再戦"
+
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:530
+#: scenes/greybox/hud.gd:465
 #, c-format
 msgid "place %s"
 msgstr "%s に置く"
 
-#: scenes/greybox/hud.gd:539
+#: scenes/greybox/hud.gd:474
 msgid "Watching the AI play both sides."
 msgstr "AI が両方を指しています。"
 
-#: scenes/greybox/hud.gd:543
+#: scenes/greybox/hud.gd:478
+msgid "Waiting for your opponent's move."
+msgstr "相手の手番を待っています。"
+
+#: scenes/greybox/hud.gd:480
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "連続取り：次の着地点を選ぶか、ここで止めてください。"
 
-#: scenes/greybox/hud.gd:549
+#: scenes/greybox/hud.gd:486
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "行き先を選んでください。切れた輪は取りを表します。"
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:487
 msgid "Pick where it goes."
 msgstr "行き先を選んでください。"
 
@@ -182,6 +133,498 @@ msgstr "対局を始める"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "次へ ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:591
+msgid "Looking for an opponent…"
+msgstr "対戦相手を探しています…"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "探すのをやめる"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "今すぐ対戦"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133
+msgid "Not now"
+msgstr "今はしない"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "再接続中… %d 秒"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "切断されました"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "対戦相手が見つかりました。今すぐ対戦しますか？"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "相手が引き分けを提案しています。"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Accept"
+msgstr "受ける"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Decline"
+msgstr "断る"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent asks to take back their last move."
+msgstr "相手が待ったを求めています。"
+
+#: scenes/play/match_ui.gd:274
+msgid "Allow"
+msgstr "認める"
+
+#: scenes/play/match_ui.gd:274
+msgid "Refuse"
+msgstr "認めない"
+
+#: scenes/play/match_ui.gd:277
+msgid "Your opponent wants a rematch."
+msgstr "相手が再戦を希望しています。"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Resign this game?"
+msgstr "この対局を投了しますか？"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:650
+msgid "Resign"
+msgstr "投了する"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Keep playing"
+msgstr "続ける"
+
+#: scenes/play/play_controller.gd:272
+msgid "We'll let you know when an opponent is ready."
+msgstr "対戦相手が見つかったらお知らせします。"
+
+#: scenes/play/play_controller.gd:306
+msgid "Draw offered. Waiting for an answer."
+msgstr "引き分けを提案しました。返事を待っています。"
+
+#: scenes/play/play_controller.gd:312
+msgid "Asked to take back your last move."
+msgstr "待ったを頼みました。"
+
+#: scenes/play/play_controller.gd:323
+msgid "Rematch offered. Waiting for an answer."
+msgstr "再戦を申し込みました。返事を待っています。"
+
+#: scenes/play/play_controller.gd:325 scenes/play/play_controller.gd:421 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+msgid "Your opponent left the game."
+msgstr "相手が対局を抜けました。"
+
+#: scenes/play/play_controller.gd:418
+msgid "Reconnected."
+msgstr "再接続しました。"
+
+#: scenes/play/play_controller.gd:426 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "相手は引き分けを断りました。"
+
+#: scenes/play/play_controller.gd:428 tools/smoke_multiplayer.gd:237
+msgid "Move taken back."
+msgstr "一手戻しました。"
+
+#: scenes/play/play_controller.gd:428
+msgid "Your opponent said no to taking back the move."
+msgstr "相手は待ったを認めませんでした。"
+
+#: scenes/play/play_controller.gd:429
+msgid "Your opponent declined the rematch."
+msgstr "相手は再戦を断りました。"
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:446
+#, c-format
+msgid "Playing against %s"
+msgstr "対戦相手：%s"
+
+#: scenes/play/play_controller.gd:456
+msgid "The other player didn't connect. Still looking…"
+msgstr "相手が接続しませんでした。引き続き探しています…"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:505
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "時間切れのため、代わりに一手指しました（%d／3 回）。"
+
+#: scenes/play/play_menu.gd:231
+msgid "Back"
+msgstr "戻る"
+
+#: scenes/play/play_menu.gd:286
+msgid "Rules"
+msgstr "ルール"
+
+#: scenes/play/play_menu.gd:305
+msgid "Language"
+msgstr "言語"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:634
+msgid "Continue"
+msgstr "続ける"
+
+#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:345
+msgid "Play against the AI"
+msgstr "AI と対局"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:365
+msgid "Pass and play"
+msgstr "1台で2人対戦"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:374
+msgid "Play local"
+msgstr "ローカル対戦"
+
+#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:477
+msgid "Play online"
+msgstr "オンライン対局"
+
+#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "遊び方"
+
+#: scenes/play/play_menu.gd:349
+msgid "Novice"
+msgstr "初心者"
+
+#: scenes/play/play_menu.gd:349
+msgid "Apprentice"
+msgstr "見習い"
+
+#: scenes/play/play_menu.gd:349
+msgid "Adept"
+msgstr "熟練者"
+
+#: scenes/play/play_menu.gd:349
+msgid "Master"
+msgstr "名人"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:354 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "対戦相手"
+
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:393
+msgid "Start"
+msgstr "開始"
+
+#: scenes/play/play_menu.gd:366
+msgid "Two players share this device and take turns."
+msgstr "2人でこの端末を使い、交互に指します。"
+
+#: scenes/play/play_menu.gd:375
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "2台の端末を同じ Wi-Fi に接続してください。"
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:378 scenes/play/play_menu.gd:389
+msgid "Host a game"
+msgstr "対局を作る"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:421
+msgid "Join a game"
+msgstr "対局に参加"
+
+#: scenes/play/play_menu.gd:389 scenes/play/play_menu.gd:508
+msgid "Create a code"
+msgstr "コードを作る"
+
+#: scenes/play/play_menu.gd:407
+msgid "Waiting for a player"
+msgstr "相手を待っています"
+
+#: scenes/play/play_menu.gd:408
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "もう1台で「ローカル対戦」、続いて「対局に参加」を選んでください。"
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:412
+msgid "If the game doesn't appear there, enter this code"
+msgstr "表示されない場合は、このコードを入力してください"
+
+#: scenes/play/play_menu.gd:417 scenes/play/play_menu.gd:537 scenes/play/play_menu.gd:588 scenes/play/play_menu.gd:595 scenes/play/play_menu.gd:600
+msgid "Cancel"
+msgstr "キャンセル"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:423
+msgid "Looking for games on this Wi-Fi…"
+msgstr "この Wi-Fi で対局を探しています…"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:434
+msgid "Code"
+msgstr "コード"
+
+#: scenes/play/play_menu.gd:442 scenes/play/play_menu.gd:569
+msgid "Join"
+msgstr "参加"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:479
+msgid "Play with someone online"
+msgstr "オンラインの誰かと対局"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:484 scenes/play/play_menu.gd:593
+msgid "Standard rules, about a minute per move"
+msgstr "標準ルール・1手あたり約1分"
+
+#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:505
+msgid "Play with a friend"
+msgstr "友だちと対局"
+
+#: scenes/play/play_menu.gd:506
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "1人がコードを作り、もう1人が入力します。スマホ、タブレット、パソコンの間で遊べます。"
+
+#: scenes/play/play_menu.gd:509 scenes/play/play_menu.gd:553
+msgid "Enter a code"
+msgstr "コードを入力"
+
+#: scenes/play/play_menu.gd:517
+msgid "Your code"
+msgstr "あなたのコード"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:599
+msgid "Connecting…"
+msgstr "接続中…"
+
+#: scenes/play/play_menu.gd:522
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "このコードを友だちに送ってください。入力されると対局が始まります。"
+
+#: scenes/play/play_menu.gd:525
+msgid "Share"
+msgstr "共有"
+
+#: scenes/play/play_menu.gd:527
+msgid "Copy"
+msgstr "コピー"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:530 scenes/play/play_menu.gd:549
+msgid "Copied"
+msgstr "コピーしました"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:543
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "Timeless Games で一緒に遊ぼう！対局コードは %s です。"
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:579
+msgid "No one is free right now"
+msgstr "今は誰も空いていません"
+
+#: scenes/play/play_menu.gd:580
+msgid "We can keep looking while you play."
+msgstr "対局しているあいだも探し続けられます。"
+
+#: scenes/play/play_menu.gd:581
+msgid "Play against the AI while we keep looking"
+msgstr "探しているあいだ AI と対局"
+
+#: scenes/play/play_menu.gd:584
+msgid "Keep searching"
+msgstr "探し続ける"
+
+#: scenes/play/play_menu.gd:585
+msgid "Invite a friend instead"
+msgstr "代わりに友だちを誘う"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:605
+msgid "Couldn't start the game"
+msgstr "対局を始められませんでした"
+
+#: scenes/play/play_menu.gd:608
+msgid "OK"
+msgstr "OK"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:616
+msgid "Leave this game?"
+msgstr "この対局を抜けますか？"
+
+#: scenes/play/play_menu.gd:617
+msgid "It counts as a loss."
+msgstr "負けになります。"
+
+#: scenes/play/play_menu.gd:618
+msgid "Leave"
+msgstr "抜ける"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:624
+msgid "Stay"
+msgstr "残る"
+
+#: scenes/play/play_menu.gd:640
+msgid "Offer a draw"
+msgstr "引き分けを提案"
+
+#: scenes/play/play_menu.gd:645
+msgid "Ask to undo"
+msgstr "待ったを頼む"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:665
+msgid "Look"
+msgstr "見た目"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:669
+msgid "Quit to main menu"
+msgstr "メインメニューに戻る"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:714
+#, c-format
+msgid "Your name: %s"
+msgstr "あなたの名前：%s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:751
+msgid "Waiting"
+msgstr "待機中"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "書記"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "旅人"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "陶工"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:268
+msgid "Weaver"
+msgstr "織り手"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "羊飼い"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "船頭"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "庭師"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "大工"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "オンラインサービスに接続できません。接続を確認して、もう一度お試しください。"
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "そのコードの対局はありません。確認して、もう一度お試しください。"
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "その対局はすでに始まっています。"
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "もう1台の端末に接続できませんでした。"
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "もう1台の端末はゲームのバージョンが違います。両方を更新して、もう一度お試しください。"
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "もう1台の端末は別のゲームを遊んでいます。"
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "もう1台の端末は、このバージョンにないルールを使っています。"
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "このネットワークで対局を作れませんでした。ほかに起動しているゲームを閉じて、もう一度お試しください。"
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "ローカル対戦には、ネットワーク上の端末を探す許可が必要です。"
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "そのコードは無効です。確認して、もう一度お試しください。"
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "この端末は Wi-Fi に接続されていません。"
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "問題が発生しました。もう一度お試しください。"
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "あなたが投了しました。"
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "相手が投了しました。"
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "引き分けに合意しました。"
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "3回時間切れになりました。"
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "相手が3回時間切れになりました。"
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "あなたが対局を抜けました。"
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "もう1台の端末から反則の手が送られてきました。"
 
 #: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
 msgid "Goats to move"

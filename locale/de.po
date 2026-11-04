@@ -9,150 +9,101 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence high (bible §7); native review before release\n"
 
-#. Title of the settings panel (this game: rules, players, AI level).
-#: scenes/greybox/hud.gd:188
-msgid "Game"
-msgstr "Partie"
+#: scenes/greybox/hud.gd:138
+msgid "Menu"
+msgstr "Menü"
 
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Hide"
-msgstr "Ausblenden"
-
-#: scenes/greybox/hud.gd:191 scenes/greybox/hud.gd:392
-msgid "Show"
-msgstr "Einblenden"
-
-#. Menu label: which rule set to play.
-#: scenes/greybox/hud.gd:213
-msgid "Rules"
-msgstr "Regeln"
-
-#: scenes/greybox/hud.gd:216
-msgid "The dogs move first"
-msgstr "Die Hunde ziehen zuerst"
-
-#. Menu label: who plays which side (two people, against the AI, or AI vs AI).
-#: scenes/greybox/hud.gd:229
-msgid "Players"
-msgstr "Spieler"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Novice"
-msgstr "Anfänger"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Apprentice"
-msgstr "Lehrling"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Adept"
-msgstr "Könner"
-
-#. The four AI strength levels, weakest to strongest. Later they become named opponents.
-#: scenes/greybox/hud.gd:233
-msgid "Master"
-msgstr "Meister"
-
-#. Menu label: the computer opponent's strength. Keep it short.
-#: scenes/greybox/hud.gd:239
-msgid "AI"
-msgstr "KI"
-
-#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/greybox/hud.gd:247
-msgid "Look"
-msgstr "Stil"
-
-#: scenes/greybox/hud.gd:256
-msgid "Language"
-msgstr "Sprache"
-
-#: scenes/greybox/hud.gd:262
-msgid "New game"
-msgstr "Neue Partie"
-
-#: scenes/greybox/hud.gd:267
+#: scenes/greybox/hud.gd:162
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: scenes/greybox/hud.gd:274 tests/test_localization.gd:14
-msgid "How to play"
-msgstr "Spielanleitung"
-
-#. Keyboard shortcuts. N, U, H and T are the keys and stay as they are.
-#: scenes/greybox/hud.gd:278
-msgid "N new game · U undo · H hide panels · T how to play"
-msgstr "N neue Partie · U rückgängig · H Felder ausblenden · T Spielanleitung"
-
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:304
+#: scenes/greybox/hud.gd:230
 msgid "Stop here"
 msgstr "Hier aufhören"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:322
+#: scenes/greybox/hud.gd:248
 msgid "Moves"
 msgstr "Züge"
 
-#: scenes/greybox/hud.gd:371
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:299 scenes/greybox/hud.gd:455
 msgid "Play again"
 msgstr "Noch einmal"
 
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:309
+msgid "New opponent"
+msgstr "Neuer Gegner"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:315
+msgid "Main menu"
+msgstr "Hauptmenü"
+
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:376
+#: scenes/greybox/hud.gd:319
 msgid "Look at the board"
 msgstr "Brett ansehen"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:419
+#: scenes/greybox/hud.gd:361
 msgid "thinking"
 msgstr "überlegt"
 
-#. Two people taking turns on the same device.
-#: scenes/greybox/hud.gd:435
-msgid "Two players (hotseat)"
-msgstr "Zwei Spieler (ein Gerät)"
-
-#: scenes/greybox/hud.gd:438
-msgid "Watch the AI play"
-msgstr "Der KI zusehen"
-
-#: scenes/greybox/hud.gd:468 scenes/greybox/hud.gd:517
+#: scenes/greybox/hud.gd:394 scenes/greybox/hud.gd:443
 msgid "A draw"
 msgstr "Unentschieden"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:475
+#: scenes/greybox/hud.gd:401
 #, c-format
 msgid "Captured %d / %d"
 msgstr "Geschlagen %d / %d"
 
-#: scenes/greybox/hud.gd:503
+#: scenes/greybox/hud.gd:429
 msgid "No moves yet"
 msgstr "Noch keine Züge"
 
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:285
+msgid "You won"
+msgstr "Du hast gewonnen"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:449 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "Du hast verloren"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:455 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "Revanche"
+
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:530
+#: scenes/greybox/hud.gd:465
 #, c-format
 msgid "place %s"
 msgstr "setzt auf %s"
 
-#: scenes/greybox/hud.gd:539
+#: scenes/greybox/hud.gd:474
 msgid "Watching the AI play both sides."
 msgstr "Die KI spielt beide Seiten."
 
-#: scenes/greybox/hud.gd:543
+#: scenes/greybox/hud.gd:478
+msgid "Waiting for your opponent's move."
+msgstr "Warte auf den Zug des Gegners."
+
+#: scenes/greybox/hud.gd:480
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Schlagkette: Wähle den nächsten Sprung oder hör hier auf."
 
-#: scenes/greybox/hud.gd:549
+#: scenes/greybox/hud.gd:486
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Wähle das Ziel. Ein unterbrochener Ring zeigt einen Schlag."
 
-#: scenes/greybox/hud.gd:550
+#: scenes/greybox/hud.gd:487
 msgid "Pick where it goes."
 msgstr "Wähle das Ziel."
 
@@ -182,6 +133,498 @@ msgstr "Losspielen"
 #: scenes/greybox/tutorial.gd:162
 msgid "Next ›"
 msgstr "Weiter ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:591
+msgid "Looking for an opponent…"
+msgstr "Suche einen Gegner …"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "Suche beenden"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "Jetzt spielen"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133
+msgid "Not now"
+msgstr "Nicht jetzt"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "Neu verbinden … %d s"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "Verbindung getrennt"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "Gegner bereit – jetzt spielen?"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "Dein Gegner bietet Remis an."
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Accept"
+msgstr "Annehmen"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+msgid "Decline"
+msgstr "Ablehnen"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent asks to take back their last move."
+msgstr "Dein Gegner möchte seinen letzten Zug zurücknehmen."
+
+#: scenes/play/match_ui.gd:274
+msgid "Allow"
+msgstr "Erlauben"
+
+#: scenes/play/match_ui.gd:274
+msgid "Refuse"
+msgstr "Ablehnen"
+
+#: scenes/play/match_ui.gd:277
+msgid "Your opponent wants a rematch."
+msgstr "Dein Gegner möchte eine Revanche."
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Resign this game?"
+msgstr "Diese Partie aufgeben?"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:650
+msgid "Resign"
+msgstr "Aufgeben"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:284
+msgid "Keep playing"
+msgstr "Weiterspielen"
+
+#: scenes/play/play_controller.gd:272
+msgid "We'll let you know when an opponent is ready."
+msgstr "Wir sagen dir Bescheid, sobald ein Gegner bereit ist."
+
+#: scenes/play/play_controller.gd:306
+msgid "Draw offered. Waiting for an answer."
+msgstr "Remis angeboten. Warte auf Antwort."
+
+#: scenes/play/play_controller.gd:312
+msgid "Asked to take back your last move."
+msgstr "Du hast gebeten, deinen letzten Zug zurückzunehmen."
+
+#: scenes/play/play_controller.gd:323
+msgid "Rematch offered. Waiting for an answer."
+msgstr "Revanche angeboten. Warte auf Antwort."
+
+#: scenes/play/play_controller.gd:325 scenes/play/play_controller.gd:421 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+msgid "Your opponent left the game."
+msgstr "Dein Gegner hat die Partie verlassen."
+
+#: scenes/play/play_controller.gd:418
+msgid "Reconnected."
+msgstr "Wieder verbunden."
+
+#: scenes/play/play_controller.gd:426 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "Dein Gegner hat das Remis abgelehnt."
+
+#: scenes/play/play_controller.gd:428 tools/smoke_multiplayer.gd:237
+msgid "Move taken back."
+msgstr "Zug zurückgenommen."
+
+#: scenes/play/play_controller.gd:428
+msgid "Your opponent said no to taking back the move."
+msgstr "Dein Gegner lehnt die Zurücknahme ab."
+
+#: scenes/play/play_controller.gd:429
+msgid "Your opponent declined the rematch."
+msgstr "Dein Gegner hat die Revanche abgelehnt."
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:446
+#, c-format
+msgid "Playing against %s"
+msgstr "Du spielst gegen %s"
+
+#: scenes/play/play_controller.gd:456
+msgid "The other player didn't connect. Still looking…"
+msgstr "Der andere Spieler hat sich nicht verbunden. Wir suchen weiter …"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:505
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "Die Zeit ist abgelaufen, für dich wurde gezogen (%d von 3)."
+
+#: scenes/play/play_menu.gd:231
+msgid "Back"
+msgstr "Zurück"
+
+#: scenes/play/play_menu.gd:286
+msgid "Rules"
+msgstr "Regeln"
+
+#: scenes/play/play_menu.gd:305
+msgid "Language"
+msgstr "Sprache"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:331 scenes/play/play_menu.gd:634
+msgid "Continue"
+msgstr "Weiterspielen"
+
+#: scenes/play/play_menu.gd:332 scenes/play/play_menu.gd:345
+msgid "Play against the AI"
+msgstr "Gegen die KI spielen"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:334 scenes/play/play_menu.gd:365
+msgid "Pass and play"
+msgstr "Zu zweit an einem Gerät"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:336 scenes/play/play_menu.gd:374
+msgid "Play local"
+msgstr "Lokal spielen"
+
+#: scenes/play/play_menu.gd:338 scenes/play/play_menu.gd:477
+msgid "Play online"
+msgstr "Online spielen"
+
+#: scenes/play/play_menu.gd:339 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "Spielanleitung"
+
+#: scenes/play/play_menu.gd:349
+msgid "Novice"
+msgstr "Anfänger"
+
+#: scenes/play/play_menu.gd:349
+msgid "Apprentice"
+msgstr "Lehrling"
+
+#: scenes/play/play_menu.gd:349
+msgid "Adept"
+msgstr "Könner"
+
+#: scenes/play/play_menu.gd:349
+msgid "Master"
+msgstr "Meister"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:354 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "Gegner"
+
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:393
+msgid "Start"
+msgstr "Starten"
+
+#: scenes/play/play_menu.gd:366
+msgid "Two players share this device and take turns."
+msgstr "Zwei Spieler teilen sich dieses Gerät und ziehen abwechselnd."
+
+#: scenes/play/play_menu.gd:375
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "Beide Geräte müssen im selben WLAN sein."
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:378 scenes/play/play_menu.gd:389
+msgid "Host a game"
+msgstr "Partie eröffnen"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:421
+msgid "Join a game"
+msgstr "Partie beitreten"
+
+#: scenes/play/play_menu.gd:389 scenes/play/play_menu.gd:508
+msgid "Create a code"
+msgstr "Code erstellen"
+
+#: scenes/play/play_menu.gd:407
+msgid "Waiting for a player"
+msgstr "Warte auf einen Spieler"
+
+#: scenes/play/play_menu.gd:408
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "Wähle auf dem anderen Gerät „Lokal spielen“ und dann „Partie beitreten“."
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:412
+msgid "If the game doesn't appear there, enter this code"
+msgstr "Falls die Partie dort nicht erscheint, gib diesen Code ein"
+
+#: scenes/play/play_menu.gd:417 scenes/play/play_menu.gd:537 scenes/play/play_menu.gd:588 scenes/play/play_menu.gd:595 scenes/play/play_menu.gd:600
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:423
+msgid "Looking for games on this Wi-Fi…"
+msgstr "Suche Partien in diesem WLAN …"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:434
+msgid "Code"
+msgstr "Code"
+
+#: scenes/play/play_menu.gd:442 scenes/play/play_menu.gd:569
+msgid "Join"
+msgstr "Beitreten"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:479
+msgid "Play with someone online"
+msgstr "Mit jemandem online spielen"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:484 scenes/play/play_menu.gd:593
+msgid "Standard rules, about a minute per move"
+msgstr "Standardregeln, etwa eine Minute pro Zug"
+
+#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:505
+msgid "Play with a friend"
+msgstr "Mit Freunden spielen"
+
+#: scenes/play/play_menu.gd:506
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "Einer erstellt einen Code, der andere gibt ihn ein. Das klappt zwischen Handys, Tablets und Computern."
+
+#: scenes/play/play_menu.gd:509 scenes/play/play_menu.gd:553
+msgid "Enter a code"
+msgstr "Code eingeben"
+
+#: scenes/play/play_menu.gd:517
+msgid "Your code"
+msgstr "Dein Code"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:599
+msgid "Connecting…"
+msgstr "Verbinde …"
+
+#: scenes/play/play_menu.gd:522
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "Schick diesen Code deinem Gegenüber. Die Partie beginnt, sobald der Code eingegeben ist."
+
+#: scenes/play/play_menu.gd:525
+msgid "Share"
+msgstr "Teilen"
+
+#: scenes/play/play_menu.gd:527
+msgid "Copy"
+msgstr "Kopieren"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:530 scenes/play/play_menu.gd:549
+msgid "Copied"
+msgstr "Kopiert"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:543
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "Spiel mit mir in Timeless Games! Mein Spielcode ist %s."
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:579
+msgid "No one is free right now"
+msgstr "Gerade ist niemand frei"
+
+#: scenes/play/play_menu.gd:580
+msgid "We can keep looking while you play."
+msgstr "Wir können weitersuchen, während du spielst."
+
+#: scenes/play/play_menu.gd:581
+msgid "Play against the AI while we keep looking"
+msgstr "Gegen die KI spielen, während wir suchen"
+
+#: scenes/play/play_menu.gd:584
+msgid "Keep searching"
+msgstr "Weitersuchen"
+
+#: scenes/play/play_menu.gd:585
+msgid "Invite a friend instead"
+msgstr "Lieber Freunde einladen"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:605
+msgid "Couldn't start the game"
+msgstr "Partie konnte nicht starten"
+
+#: scenes/play/play_menu.gd:608
+msgid "OK"
+msgstr "OK"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:616
+msgid "Leave this game?"
+msgstr "Diese Partie verlassen?"
+
+#: scenes/play/play_menu.gd:617
+msgid "It counts as a loss."
+msgstr "Das zählt als Niederlage."
+
+#: scenes/play/play_menu.gd:618
+msgid "Leave"
+msgstr "Verlassen"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:624
+msgid "Stay"
+msgstr "Bleiben"
+
+#: scenes/play/play_menu.gd:640
+msgid "Offer a draw"
+msgstr "Remis anbieten"
+
+#: scenes/play/play_menu.gd:645
+msgid "Ask to undo"
+msgstr "Zurücknahme erbitten"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:665
+msgid "Look"
+msgstr "Stil"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:669
+msgid "Quit to main menu"
+msgstr "Zum Hauptmenü"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:714
+#, c-format
+msgid "Your name: %s"
+msgstr "Dein Name: %s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:751
+msgid "Waiting"
+msgstr "Warte"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "Schreiber"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "Wanderer"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "Töpfer"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:268
+msgid "Weaver"
+msgstr "Weber"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "Hirte"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "Fährmann"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "Gärtner"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "Baumeister"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "Der Onlinedienst ist nicht erreichbar. Prüfe deine Verbindung und versuch es noch einmal."
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "Keine Partie hat diesen Code. Prüfe ihn und versuch es noch einmal."
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "Diese Partie hat schon begonnen."
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "Keine Verbindung zum anderen Gerät."
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "Das andere Gerät hat eine andere Version des Spiels. Aktualisiere beide und versuch es noch einmal."
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "Das andere Gerät spielt ein anderes Spiel."
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "Das andere Gerät nutzt Regeln, die diese Version nicht kennt."
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "In diesem Netz konnte keine Partie eröffnet werden. Schließe andere Kopien des Spiels und versuch es noch einmal."
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "Zum lokalen Spielen braucht das Spiel die Erlaubnis, Geräte in deinem Netzwerk zu finden."
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "Dieser Code ist ungültig. Prüfe ihn und versuch es noch einmal."
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "Dieses Gerät ist in keinem WLAN."
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "Etwas ist schiefgelaufen. Bitte versuch es noch einmal."
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "Du hast aufgegeben."
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "Dein Gegner hat aufgegeben."
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "Ihr habt euch auf Remis geeinigt."
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "Deine Zeit ist dreimal abgelaufen."
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "Die Zeit deines Gegners ist dreimal abgelaufen."
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "Du hast die Partie verlassen."
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "Das andere Gerät hat unerlaubte Züge gesendet."
 
 #: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
 msgid "Goats to move"

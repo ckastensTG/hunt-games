@@ -25,6 +25,7 @@ func _initialize() -> void:
 			mode_name = arg.substr(7)  # "ai" (AI vs AI) or "prey" (you play the prey)
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
+	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
 	queue = HuntRuleSets.ALL.duplicate()
 
@@ -47,7 +48,7 @@ func _process(_delta: float) -> bool:
 		game.mode = GreyboxScript.Mode.HOTSEAT  # stop the AI
 		if mode_name == "prey":
 			game._board_root.rotation.y = PI  # as when you play the prey
-		if game._animating or game._ai_task >= 0:
+		if game._animating or game.ai_thinking():
 			return false
 		wait += 1
 		if wait < 10:

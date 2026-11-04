@@ -42,3 +42,7 @@ tools/art/previews/
 Thumbs.db
 .vscode/
 .idea/
+
+# EOS client credentials (config/eos_<title>.cfg); only the example is committed.
+config/eos_*.cfg
+!config/eos_title.example.cfg

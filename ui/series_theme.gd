@@ -24,7 +24,7 @@ const FONTS := "res://ui/fonts/"
 ## The CJK weight that goes with each text role.
 const CJK_WEIGHT := {
 	"display": "Medium", "book": "Regular", "book_italic": "Regular",
-	"ui": "Regular", "ui_medium": "Medium", "ui_bold": "Bold",
+	"ui": "Regular", "ui_medium": "Medium", "ui_bold": "Bold", "code": "Bold",
 }
 
 static var _theme: Theme
@@ -53,6 +53,13 @@ static func font(name: String) -> Font:
 				_fonts[name] = load(FONTS + "AlegreyaSans-Medium.ttf")
 			"ui_bold":
 				_fonts[name] = load(FONTS + "AlegreyaSans-Bold.ttf")
+			"code":
+				# Join codes and clocks: lining, even-width figures, so 0 never
+				# reads as o (Alegreya's default figures are old-style).
+				var v := FontVariation.new()
+				v.base_font = load(FONTS + "AlegreyaSans-Bold.ttf")
+				v.opentype_features = {"lnum": 1, "tnum": 1}
+				_fonts[name] = v
 		(_fonts[name] as Font).fallbacks = _cjk_fallbacks(CJK_WEIGHT[name])
 	return _fonts[name]
 
@@ -190,6 +197,8 @@ static func label(text: String, role := "body", size := 18, color := TEXT) -> La
 			l.add_theme_font_override("font", font("ui_medium"))
 		"bold":
 			l.add_theme_font_override("font", font("ui_bold"))
+		"code":
+			l.add_theme_font_override("font", font("code"))
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
 	return l
