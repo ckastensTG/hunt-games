@@ -214,58 +214,58 @@ msgstr "认输"
 msgid "Keep playing"
 msgstr "继续下棋"
 
-#: scenes/play/play_controller.gd:272
+#: scenes/play/play_controller.gd:281
 msgid "We'll let you know when an opponent is ready."
 msgstr "对手就绪时会通知你。"
 
-#: scenes/play/play_controller.gd:306
+#: scenes/play/play_controller.gd:315
 msgid "Draw offered. Waiting for an answer."
 msgstr "已提议和棋，等待对方回应。"
 
-#: scenes/play/play_controller.gd:312
+#: scenes/play/play_controller.gd:321
 msgid "Asked to take back your last move."
 msgstr "已请求悔棋。"
 
-#: scenes/play/play_controller.gd:323
+#: scenes/play/play_controller.gd:332
 msgid "Rematch offered. Waiting for an answer."
 msgstr "已邀请再战，等待对方回应。"
 
-#: scenes/play/play_controller.gd:325 scenes/play/play_controller.gd:421 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_controller.gd:334 scenes/play/play_controller.gd:433 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
 msgid "Your opponent left the game."
 msgstr "对手已离开对局。"
 
-#: scenes/play/play_controller.gd:418
+#: scenes/play/play_controller.gd:430
 msgid "Reconnected."
 msgstr "已重新连接。"
 
-#: scenes/play/play_controller.gd:426 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:438 tools/smoke_multiplayer.gd:145
 msgid "Your opponent declined the draw."
 msgstr "对手拒绝了和棋。"
 
-#: scenes/play/play_controller.gd:428 tools/smoke_multiplayer.gd:237
+#: scenes/play/play_controller.gd:440 tools/smoke_multiplayer.gd:237
 msgid "Move taken back."
 msgstr "已悔棋。"
 
-#: scenes/play/play_controller.gd:428
+#: scenes/play/play_controller.gd:440
 msgid "Your opponent said no to taking back the move."
 msgstr "对手不同意悔棋。"
 
-#: scenes/play/play_controller.gd:429
+#: scenes/play/play_controller.gd:441
 msgid "Your opponent declined the rematch."
 msgstr "对手拒绝了再战。"
 
 #. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
-#: scenes/play/play_controller.gd:446
+#: scenes/play/play_controller.gd:458
 #, c-format
 msgid "Playing against %s"
 msgstr "对手：%s"
 
-#: scenes/play/play_controller.gd:456
+#: scenes/play/play_controller.gd:468
 msgid "The other player didn't connect. Still looking…"
 msgstr "对方未能连接，继续寻找…"
 
 #. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
-#: scenes/play/play_controller.gd:505
+#: scenes/play/play_controller.gd:517
 #, c-format
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "时间到，已替你走了一步（第 %d 次，共 3 次）。"
@@ -517,19 +517,29 @@ msgstr "请求悔棋"
 msgid "Look"
 msgstr "外观"
 
-#. In-game menu button: end this game and go back to the main menu.
+#. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+#: scenes/play/play_menu.gd:745
+msgid "Sound"
+msgstr "音效"
+
+#. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 #: scenes/play/play_menu.gd:747
+msgid "Music"
+msgstr "音乐"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:751
 msgid "Quit to main menu"
 msgstr "退出到主菜单"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:792
+#: scenes/play/play_menu.gd:839
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:829
+#: scenes/play/play_menu.gd:876
 msgid "Waiting"
 msgstr "等待中"
 
@@ -652,27 +662,27 @@ msgid "%d goat still to place"
 msgid_plural "%d goats still to place"
 msgstr[0] "还剩 %d 只山羊待放"
 
-#: titles/bagh_chal/art/brass_style.gd:38
+#: titles/bagh_chal/art/brass_style.gd:39
 msgid "Temple brass"
 msgstr "寺院黄铜"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "刻纹黄铜棋盘与铸造棋子，黄昏时分的寺院庭院。"
 
-#: titles/bagh_chal/art/modern_style.gd:38
+#: titles/bagh_chal/art/modern_style.gd:39
 msgid "Modern edition"
 msgstr "现代版"
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "当代桌游公司出品：色彩明快的模塑棋盘，塑料虎与羊，置于吊灯之下。"
 
-#: titles/bagh_chal/art/stone_style.gd:38
+#: titles/bagh_chal/art/stone_style.gd:39
 msgid "Stone and pebbles"
 msgstr "石头与卵石"
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "古老的玩法：在石板上刻线并抹上白垩，以河石作虎与羊，置于草席之上。"
 

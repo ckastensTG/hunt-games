@@ -214,58 +214,58 @@ msgstr "Poddaj się"
 msgid "Keep playing"
 msgstr "Graj dalej"
 
-#: scenes/play/play_controller.gd:272
+#: scenes/play/play_controller.gd:281
 msgid "We'll let you know when an opponent is ready."
 msgstr "Damy znać, gdy przeciwnik będzie gotowy."
 
-#: scenes/play/play_controller.gd:306
+#: scenes/play/play_controller.gd:315
 msgid "Draw offered. Waiting for an answer."
 msgstr "Zaproponowano remis. Czekamy na odpowiedź."
 
-#: scenes/play/play_controller.gd:312
+#: scenes/play/play_controller.gd:321
 msgid "Asked to take back your last move."
 msgstr "Wysłano prośbę o cofnięcie ostatniego ruchu."
 
-#: scenes/play/play_controller.gd:323
+#: scenes/play/play_controller.gd:332
 msgid "Rematch offered. Waiting for an answer."
 msgstr "Zaproponowano rewanż. Czekamy na odpowiedź."
 
-#: scenes/play/play_controller.gd:325 scenes/play/play_controller.gd:421 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_controller.gd:334 scenes/play/play_controller.gd:433 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
 msgid "Your opponent left the game."
 msgstr "Przeciwnik opuścił grę."
 
-#: scenes/play/play_controller.gd:418
+#: scenes/play/play_controller.gd:430
 msgid "Reconnected."
 msgstr "Połączono ponownie."
 
-#: scenes/play/play_controller.gd:426 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:438 tools/smoke_multiplayer.gd:145
 msgid "Your opponent declined the draw."
 msgstr "Przeciwnik odrzucił remis."
 
-#: scenes/play/play_controller.gd:428 tools/smoke_multiplayer.gd:237
+#: scenes/play/play_controller.gd:440 tools/smoke_multiplayer.gd:237
 msgid "Move taken back."
 msgstr "Ruch cofnięty."
 
-#: scenes/play/play_controller.gd:428
+#: scenes/play/play_controller.gd:440
 msgid "Your opponent said no to taking back the move."
 msgstr "Przeciwnik nie zgodził się na cofnięcie ruchu."
 
-#: scenes/play/play_controller.gd:429
+#: scenes/play/play_controller.gd:441
 msgid "Your opponent declined the rematch."
 msgstr "Przeciwnik odrzucił rewanż."
 
 #. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
-#: scenes/play/play_controller.gd:446
+#: scenes/play/play_controller.gd:458
 #, c-format
 msgid "Playing against %s"
 msgstr "Twój przeciwnik: %s"
 
-#: scenes/play/play_controller.gd:456
+#: scenes/play/play_controller.gd:468
 msgid "The other player didn't connect. Still looking…"
 msgstr "Drugi gracz się nie połączył. Szukamy dalej…"
 
 #. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
-#: scenes/play/play_controller.gd:505
+#: scenes/play/play_controller.gd:517
 #, c-format
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Czas minął, wykonano ruch za ciebie (%d z 3)."
@@ -517,19 +517,29 @@ msgstr "Poproś o cofnięcie"
 msgid "Look"
 msgstr "Wygląd"
 
-#. In-game menu button: end this game and go back to the main menu.
+#. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+#: scenes/play/play_menu.gd:745
+msgid "Sound"
+msgstr "Dźwięk"
+
+#. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 #: scenes/play/play_menu.gd:747
+msgid "Music"
+msgstr "Muzyka"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:751
 msgid "Quit to main menu"
 msgstr "Wyjdź do menu głównego"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:792
+#: scenes/play/play_menu.gd:839
 #, c-format
 msgid "Your name: %s"
 msgstr "Twoja nazwa: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:829
+#: scenes/play/play_menu.gd:876
 msgid "Waiting"
 msgstr "Czekamy"
 
@@ -654,27 +664,27 @@ msgstr[0] "Kozy do postawienia: %d"
 msgstr[1] "Kozy do postawienia: %d"
 msgstr[2] "Kozy do postawienia: %d"
 
-#: titles/bagh_chal/art/brass_style.gd:38
+#: titles/bagh_chal/art/brass_style.gd:39
 msgid "Temple brass"
 msgstr "Mosiądz świątynny"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Grawerowana mosiężna plansza i odlewane figurki o zmierzchu na dziedzińcu świątyni."
 
-#: titles/bagh_chal/art/modern_style.gd:38
+#: titles/bagh_chal/art/modern_style.gd:39
 msgid "Modern edition"
 msgstr "Edycja nowoczesna"
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "Wydanie współczesnego wydawnictwa gier: barwna plansza z tworzywa, plastikowe tygrysy i kozy pod lampą wiszącą."
 
-#: titles/bagh_chal/art/stone_style.gd:38
+#: titles/bagh_chal/art/stone_style.gd:39
 msgid "Stone and pebbles"
 msgstr "Kamień i kamyki"
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "Po dawnemu: linie wykute w kamieniu i potarte kredą, tygrysy i kozy z rzecznych kamieni, na słomianej macie."
 

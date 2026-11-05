@@ -188,8 +188,44 @@ static func theme() -> Theme:
 		g.bg_color = BRASS_DIM if st == "grabber" else BRASS
 		g.set_corner_radius_all(3)
 		t.set_stylebox(st, "VScrollBar", g)
+
+	# Sliders (the Sound and Music volumes): a dim rail, brass up to a round
+	# parchment knob.
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(BRASS_DIM, 0.28)
+	track.set_corner_radius_all(4)
+	track.content_margin_top = 3
+	track.content_margin_bottom = 3
+	t.set_stylebox("slider", "HSlider", track)
+	var fill := track.duplicate() as StyleBoxFlat
+	fill.bg_color = BRASS
+	t.set_stylebox("grabber_area", "HSlider", fill)
+	var fill_hi := track.duplicate() as StyleBoxFlat
+	fill_hi.bg_color = ACCENT
+	t.set_stylebox("grabber_area_highlight", "HSlider", fill_hi)
+	t.set_icon("grabber", "HSlider", _knob(TEXT))
+	t.set_icon("grabber_highlight", "HSlider", _knob(Color(1, 0.96, 0.88)))
+	t.set_icon("grabber_disabled", "HSlider", _knob(Color(TEXT_DIM, 0.6)))
 	_theme = t
 	return t
+
+
+## A round slider knob with a brass rim, drawn with smooth edges.
+static func _knob(color: Color, size := 30) -> ImageTexture:
+	var img := Image.create_empty(size, size, false, Image.FORMAT_RGBA8)
+	var c := (size - 1) / 2.0
+	var r := size / 2.0 - 2.0
+	for y in size:
+		for x in size:
+			var d := Vector2(x - c, y - c).length()
+			var cover := clampf(r + 0.5 - d, 0.0, 1.0)
+			if cover <= 0.0:
+				continue
+			var rim := clampf(d - (r - 2.0), 0.0, 1.0)
+			var col := color.lerp(BRASS, rim)
+			col.a *= cover
+			img.set_pixel(x, y, col)
+	return ImageTexture.create_from_image(img)
 
 
 ## A label in one of the series' text roles.

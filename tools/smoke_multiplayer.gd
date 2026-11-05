@@ -349,6 +349,8 @@ func _finish() -> void:
 	game.queue_free()
 	await process_frame
 	await process_frame
+	# Sounds that were still playing are let go on the audio thread's next mix.
+	await create_timer(0.3).timeout
 	FakeOnlineBackend.reset_cloud()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE))
 	if failures.is_empty():

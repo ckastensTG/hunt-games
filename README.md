@@ -54,6 +54,8 @@ flow. Local play is real: run two copies on one Wi-Fi.
 | `tools/komikan_tower/` | A small C program that checks whether forward-only dogs (Komikan's rules until 2026-11-03) can ever trap a puma that stays in the tower (they can't). |
 | `tools/l10n/` | Localization tools (Python 3 + fontTools): string extraction, PO merge and checks, termbase lint, glyph check, CJK font subsetting. |
 | `tools/art/` | Python generators for the Claude-made art (brass board and pieces, stone set), plus the board geometry they read. |
+| `tools/audio/` | `make_sounds.py` (each look's piece sounds and the end stings, synthesized) and `make_music.py` (the game's music files from the Stable Audio masters: levelled to -22 LUFS and encoded). |
+| `titles/bagh_chal/audio/` | Each look's piece sounds (`brass/`, `stone/`, `modern/`), the end stings (`stings/`) and each look's music (`music/<look>/track_<n>.ogg`, three tracks per look, made with Stable Audio 3; prompts, seeds and licence in `Claude outputs/session-2026-11-03/renders/music/pass1/README.md`). |
 
 ## Commands
 

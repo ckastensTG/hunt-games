@@ -19,9 +19,10 @@ This repo is a Godot 4 addon. Game projects include it as a git submodule at
 | `ai/ai_driver.gd` | Runs one AI move on a worker thread (start, poll, cancel). |
 | `match/match_session.gd` | `MatchSession`: one game in any mode (AI, pass and play, nearby, online). Validates every move, undo, resign/draw/forfeit endings, saves (setup + moves). |
 | `net/` | Two-device play, protocol v1 (framework §9): `NetProtocol` (checked messages), `NetTransport` with ENet (local Wi-Fi) and loopback (tests), `NetMatch` (handshake, moves with position hash, resync, reconnect window, turn clock, draw/undo/rematch), `JoinCode` (nearby codes), `LanDiscovery` (Wi-Fi beacons). |
-| `online/` | Online play behind `OnlineBackend` (EOS to come; the base class is "unavailable"): `QuickMatch` (search, host, merge rule), `FriendMatch` (TG-XXXX codes), `PlayerNames`, and `FakeOnlineBackend` (in-process, for tests and debug builds). |
-| `testing/` | Headless test runner and `TestCase` base class. |
-| `branding/splash/` | Shared boot splashes (Timeless Games and Galleon Boards; landscape, portrait, square) and white logo lockups. Usage notes in its README. |
+| `online/` | Online play behind `OnlineBackend` (the base class is "unavailable"): `QuickMatch` (search, host, merge rule), `FriendMatch` (TG-XXXX codes), `PlayerNames`, `FakeOnlineBackend` (in-process, for tests and debug builds), and EOS: `EOSOnlineBackend` with `EOSP2PTransport` on an `EOSApi`, implemented for the EOSG plugin by `eosg_api.gd` (loaded only when the plugin is in the project). |
+| `audio/` | `AudioBuses` (the SFX and Music buses, on/off and volume), `SfxPlayer` (sounds by event name, several takes each, never the same take twice in a row, a little pitch variety) and `MusicPlayer` (a set of tracks in a shuffled order with pauses between them, a fade-over when the set changes, a duck under stings, paused while the Music bus is muted). |
+| `plugin.cfg`, `editor/` | The editor plugin: its export step adds the EOS Android library and its AndroidX dependencies to Gradle builds. |
+| `testing/` | Headless test runner, `TestCase` base class, and `FakeEOSApi` (a pretend EOS for tests). |
 | `tests/` | Core unit tests. |
 
 ## Requirements
@@ -38,6 +39,6 @@ godot --headless --path . -s res://addons/timeless_core/testing/test_runner.gd -
   --dir=res://addons/timeless_core/tests
 ```
 
-There is no hosted CI. Run the tests locally before committing.
+CI does the same in a throwaway host project (`.github/workflows/ci.yml`).
 
 Copyright © Time Galleon. All rights reserved.

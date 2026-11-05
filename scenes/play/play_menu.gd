@@ -18,7 +18,7 @@ extends CanvasLayer
 ##               └ Play with a friend ─ Create a code (side, rules → code to
 ##                                     share) · Enter a code
 ##   Pause ─ Continue · (against another device: Offer a draw, Ask to undo,
-##           Resign) · Look · Language · Quit to main menu
+##           Resign) · Look · Sound · Music · Language · Quit to main menu
 ##
 ## "Play online" only shows when an online service is available (bible §5.2:
 ## offline-first). The network work is in play_controller.gd; this only
@@ -741,6 +741,10 @@ func _pause() -> void:
 		look.item_selected.connect(func(i: int) -> void: game.set_art_style(styles[i].id))
 		# TRANSLATORS: Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
 		_row(L10n.t("Look"), look)
+	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+	_sound_row(GameSound.SOUND, L10n.t("Sound"))
+	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
+	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
 	_gap(2)
 	# TRANSLATORS: In-game menu button: end this game and go back to the main menu.
@@ -752,6 +756,49 @@ func _pause() -> void:
 			game.quit_to_menu())
 	quit.flat = true
 	quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+
+
+## Sound or Music: an on/off switch and a volume slider. The volume is heard
+## at once while dragging and saved when let go; Sound plays a piece set down
+## at the new level.
+func _sound_row(kind: String, label_text: String) -> void:
+	var box := HBoxContainer.new()
+	box.add_theme_constant_override("separation", 12)
+	var on := SeriesSwitch.new()
+	on.button_pressed = GameSound.is_on(kind)
+	on.tooltip_text = label_text
+	var slider := HSlider.new()
+	slider.min_value = 0.0
+	slider.max_value = 1.0
+	slider.step = 0.05
+	slider.value = GameSound.volume(kind)
+	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	slider.custom_minimum_size = Vector2(0, 36)
+	slider.editable = on.button_pressed
+	slider.modulate.a = 1.0 if on.button_pressed else 0.45
+	var dragging := [false]
+	var settle := func() -> void:
+		GameSound.set_volume(kind, slider.value)
+		if kind == GameSound.SOUND and game.sfx:
+			game.sfx.play("set_goat")
+	on.toggled.connect(func(pressed: bool) -> void:
+		GameSound.set_on(kind, pressed)
+		slider.editable = pressed
+		slider.modulate.a = 1.0 if pressed else 0.45
+		if pressed and kind == GameSound.SOUND and game.sfx:
+			game.sfx.play("set_goat"))
+	slider.drag_started.connect(func() -> void: dragging[0] = true)
+	slider.drag_ended.connect(func(_changed: bool) -> void:
+		dragging[0] = false
+		settle.call())
+	slider.value_changed.connect(func(v: float) -> void:
+		AudioBuses.apply(GameSound.bus(kind), on.button_pressed, v)
+		if not dragging[0]:
+			settle.call())
+	box.add_child(on)
+	box.add_child(slider)
+	_row(label_text, box)
 
 
 func _small_button(text: String, parent: Control, on_press: Callable) -> Button:

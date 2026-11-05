@@ -15,6 +15,12 @@ var id := ""
 var display_name := ""
 ## One-line description for the style menu (shown through tr()).
 var description := ""
+## The folder with this look's piece sounds (place, slide, set, land,
+## capture; tools/audio/make_sounds.py). Empty: the greybox's wooden ones.
+var sound_dir := ""
+## The folder with this look's music (track_1.ogg, track_2.ogg …;
+## tools/audio/make_music.py), played in turn by MusicPlayer. Empty: none.
+var music_dir := ""
 ## Distance hint for the game camera (the greybox frames 5.4 by default).
 var camera_extent := 5.7
 ## Depth of field: where the game camera starts blurring the surroundings.

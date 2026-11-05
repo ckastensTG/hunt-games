@@ -35,6 +35,8 @@ var board_material: ShaderMaterial
 
 func _init() -> void:
 	id = "brass"
+	sound_dir = "res://titles/bagh_chal/audio/brass"
+	music_dir = "res://titles/bagh_chal/audio/music/brass"
 	display_name = L10n.N_("Temple brass")
 	description = L10n.N_("An engraved brass board and cast figures, at dusk in a temple courtyard.")
 	camera_extent = 5.7

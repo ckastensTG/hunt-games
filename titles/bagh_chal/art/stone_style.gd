@@ -35,6 +35,8 @@ var board_material: ShaderMaterial
 
 func _init() -> void:
 	id = "stone"
+	sound_dir = "res://titles/bagh_chal/audio/stone"
+	music_dir = "res://titles/bagh_chal/audio/music/stone"
 	display_name = L10n.N_("Stone and pebbles")
 	description = L10n.N_("The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat.")
 	camera_extent = 5.9

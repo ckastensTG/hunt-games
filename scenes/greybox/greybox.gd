@@ -22,6 +22,16 @@ const PlayMenuScript := preload("res://scenes/play/play_menu.gd")
 const MatchUIScript := preload("res://scenes/play/match_ui.gd")
 const AI_MOVE_DELAY := 0.35
 const SAVE_PATH := "user://match.save"
+## Piece sounds every look provides (tools/audio/make_sounds.py), and the
+## end-of-game stings each title provides.
+const PIECE_SOUNDS := ["place", "slide_goat", "slide_tiger", "set_goat", "set_tiger", "land", "capture"]
+const STINGS := ["win", "lose", "draw"]
+## The greybox's wooden pieces, and each title's stings.
+const GREYBOX_SOUNDS := "res://titles/common/audio/wood"
+const TITLE_STINGS := {"bagh_chal": "res://titles/bagh_chal/audio/stings"}
+## The music fades out for this long when a sting plays (the longest sting
+## is 3.6 s), then comes back.
+const STING_DUCK := 5.0
 
 const PIECE_COLORS := {
 	"bagh_chal": [Color(0.86, 0.48, 0.14), Color(0.93, 0.91, 0.85)],   # tiger, goat
@@ -78,6 +88,10 @@ var save_path := SAVE_PATH
 ## Network games: the controller, and the side played on this device.
 var play: Node
 var menu: CanvasLayer
+## Piece sounds and stings (on the SFX bus; Sound in the in-game menu).
+var sfx: SfxPlayer
+## The look's music (MusicPlayer, on the Music bus).
+var music: MusicPlayer
 
 var _rule_set_id := HuntRuleSets.BAGH_CHAL_STANDARD
 var _komikan_dogs_first := false
@@ -108,6 +122,8 @@ var _animating := false
 var _ai := AIDriver.new()
 var _ai_wait := 0.0
 var _rng := RandomNumberGenerator.new()
+var _sound_dirs := ["", ""]   # the piece and sting folders loaded
+var _sting_pending := false
 
 
 
@@ -124,6 +140,11 @@ func _ready() -> void:
 		if st.id == saved_look:
 			art_style_ids["bagh_chal"] = saved_look
 	level = clampi(int(L10n.load_setting("ai_level", level)), 0, personas.size() - 1)
+	GameSound.apply_saved()
+	sfx = SfxPlayer.new()
+	add_child(sfx)
+	music = MusicPlayer.new()
+	add_child(music)
 	_build_environment()
 	play = PlayControllerScript.new(self)
 	add_child(play)
@@ -309,6 +330,7 @@ func _use_session(s: MatchSession) -> void:
 			if pair[0].is_connected(pair[1]):
 				pair[0].disconnect(pair[1])
 	session = s
+	_sting_pending = false
 	if not s.move_committed.is_connected(_on_move_committed):
 		s.move_committed.connect(_on_move_committed)
 		s.undone.connect(_on_undone)
@@ -365,7 +387,10 @@ func _on_reset() -> void:
 
 func _on_game_over(_status: int, _reason: int) -> void:
 	_save()
+	# The sting waits for the last move to land.
+	_sting_pending = not tutorial_active
 	if not _animating:
+		_play_sting()
 		_after_move()
 
 
@@ -374,6 +399,7 @@ func _redraw() -> void:
 	_stop_ai()
 	_stop_tween()
 	_anim_queue.clear()
+	_sting_pending = false
 	_selected = -1
 	_chain = PackedInt32Array()
 	_clear_marks()
@@ -621,6 +647,7 @@ func _build_board() -> void:
 		extent = current_style().camera_extent
 	else:
 		_build_grey_board(board, size)
+	_load_sounds()
 	# Points: a pick collider on each (the art and the greybox share these).
 	for i in board.point_count():
 		var body := StaticBody3D.new()
@@ -764,7 +791,9 @@ func _title() -> String:
 
 func _make_piece(kind: int, variant: int) -> Node3D:
 	if _has_art():
-		return current_style().make_piece(kind, variant)
+		var piece := current_style().make_piece(kind, variant)
+		piece.set_meta("kind", kind)
+		return piece
 	var colors: Array = PIECE_COLORS[_title()]
 	var root := Node3D.new()
 	var mi := MeshInstance3D.new()
@@ -784,6 +813,7 @@ func _make_piece(kind: int, variant: int) -> Node3D:
 		mi.position.y = 0.12
 		mi.material_override = _mat(colors[1], 0.6)
 	root.add_child(mi)
+	root.set_meta("kind", kind)
 	return root
 
 
@@ -813,13 +843,17 @@ func _animate(move: PackedInt32Array) -> void:
 			_pieces_root.add_child(node)
 			_piece_nodes[move[1]] = node
 			tween.tween_property(node, "position", target, 0.22).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+			tween.tween_callback(_piece_sound.bind("place", HuntState.PREY))
 		HuntState.Kind.STEP:
 			var node: Node3D = _piece_nodes[move[1]]
 			_piece_nodes.erase(move[1])
 			_piece_nodes[move[2]] = node
 			var to := to_world(board.positions[move[2]])
+			var kind: int = node.get_meta("kind", HuntState.PREY)
 			tween.tween_property(node, "rotation:y", _turn_toward(node.rotation.y, _facing(to, move[2])), 0.12)
+			tween.tween_callback(_piece_sound.bind("slide", kind))
 			tween.tween_property(node, "position", to, 0.25).set_trans(Tween.TRANS_SINE)
+			tween.tween_callback(_piece_sound.bind("set", kind))
 		HuntState.Kind.JUMP:
 			var node: Node3D = _piece_nodes[move[1]]
 			_piece_nodes.erase(move[1])
@@ -828,6 +862,7 @@ func _animate(move: PackedInt32Array) -> void:
 				var mid := (node.position if k == 2 else to_world(board.positions[move[k - 1]])).lerp(land, 0.5) + Vector3(0, 0.55, 0)
 				tween.tween_property(node, "position", mid, 0.14).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 				tween.tween_property(node, "position", land, 0.14).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+				tween.tween_callback(_piece_sound.bind("land", HuntState.HUNTER))
 			_piece_nodes[move[move.size() - 1]] = node
 			var last := to_world(board.positions[move[move.size() - 1]])
 			tween.tween_property(node, "rotation:y", _turn_toward(node.rotation.y, _facing(last, move[move.size() - 1])), 0.15)
@@ -835,6 +870,7 @@ func _animate(move: PackedInt32Array) -> void:
 				var victim: Node3D = _piece_nodes.get(move[k])
 				_piece_nodes.erase(move[k])
 				if victim:
+					tween.tween_callback(_piece_sound.bind("capture", HuntState.PREY))
 					tween.tween_property(victim, "scale", Vector3(0.01, 0.01, 0.01), 0.12)
 					tween.tween_callback(victim.queue_free)
 	tween.tween_callback(func() -> void:
@@ -842,6 +878,7 @@ func _animate(move: PackedInt32Array) -> void:
 		if not _anim_queue.is_empty():
 			_animate(_anim_queue.pop_front())
 			return
+		_play_sting()
 		_after_move())
 
 
@@ -857,6 +894,47 @@ func _facing(at: Vector3, point: int) -> float:
 ## The same yaw, unwrapped so a tween turns the short way round.
 func _turn_toward(from: float, to: float) -> float:
 	return from + wrapf(to - from, -PI, PI)
+
+
+# --- Sound -------------------------------------------------------------------
+
+## The look's piece sounds (the greybox's wooden ones without art), the
+## title's stings and the look's music (switching looks fades the music over
+## to the new look's). Called whenever the board is built.
+func _load_sounds() -> void:
+	var style := current_style()
+	music.play_folder(style.music_dir if style else "")
+	var pieces := style.sound_dir if style and style.sound_dir != "" else GREYBOX_SOUNDS
+	var stings: String = TITLE_STINGS.get(_title(), "")
+	if pieces != _sound_dirs[0]:
+		sfx.load_events(pieces, PIECE_SOUNDS)
+	if stings != _sound_dirs[1]:
+		sfx.load_events(stings, STINGS)
+	_sound_dirs = [pieces, stings]
+
+
+## "slide" and "set" have a take for each piece (the tiger is heavier).
+func _piece_sound(event: String, kind: int) -> void:
+	if event == "slide" or event == "set":
+		event += "_tiger" if kind == HuntState.HUNTER else "_goat"
+	sfx.play(event)
+
+
+## The end of the game: a win or a loss for the player on this device; with
+## both or neither here (pass and play, AI vs AI), the win sting.
+func _play_sting() -> void:
+	if not _sting_pending or session == null:
+		return
+	_sting_pending = false
+	var st := session.status()
+	if st == HuntState.Status.ONGOING:
+		return
+	var event := "draw"
+	if st != HuntState.Status.DRAW:
+		var me := local_side()
+		event = "win" if me < 0 or (st == HuntState.Status.HUNTER_WIN) == (me == HuntState.HUNTER) else "lose"
+	music.duck(STING_DUCK)
+	sfx.play(event, 1.0, 0.0, false)
 
 
 # --- View: marks -----------------------------------------------------------

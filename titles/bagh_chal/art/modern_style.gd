@@ -35,6 +35,8 @@ var board_material: ShaderMaterial
 
 func _init() -> void:
 	id = "modern"
+	sound_dir = "res://titles/bagh_chal/audio/modern"
+	music_dir = "res://titles/bagh_chal/audio/music/modern"
 	display_name = L10n.N_("Modern edition")
 	description = L10n.N_("A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp.")
 	camera_extent = 5.8

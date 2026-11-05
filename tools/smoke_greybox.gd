@@ -8,7 +8,9 @@ extends SceneTree
 ##    played on the board, then the walkthrough closed and the game back.
 ## 4. The interface in every launch language.
 ## Along the way, every Bagh Chal look is built and shows its move marks with
-## the right shader (added light, or ink on pale boards).
+## the right shader (added light, or ink on pale boards) and loads its piece
+## sounds and music; moves, captures and endings play the right sounds, and
+## the music makes way for the end sting.
 ## Exits non-zero on any failure.
 
 const MAX_PLIES := 60
@@ -44,6 +46,11 @@ func _process(_delta: float) -> bool:
 		"finish":
 			if frames > _finish_at:
 				return _done()
+		"quit":
+			# Wall-clock time (frames are fixed-step here): sounds still
+			# playing are let go on the audio thread's next mix.
+			if Time.get_ticks_msec() >= _quit_at:
+				quit(1 if not failures.is_empty() else 0)
 	return false
 
 
@@ -58,17 +65,20 @@ func _clicks() -> bool:
 		0:
 			game.mode = GreyboxScript.Mode.HOTSEAT
 			game.new_game()
+			game.sfx.log_plays = true
 			game._on_point_clicked(b.point_at(Vector2(2, 0)))
 			_click_step = 1
 		1:
 			if game.history.size() != 1:
 				failures.append("goat placement click did not commit")
+			_check_sounds(["place"], "goat placed")
 			game._on_point_clicked(b.point_at(Vector2(0, 0)))
 			game._on_point_clicked(b.point_at(Vector2(1, 1)))
 			_click_step = 2
 		2:
 			if game.history.size() != 2:
 				failures.append("tiger step clicks did not commit")
+			_check_sounds(["slide_tiger", "set_tiger"], "tiger step")
 			game.undo()
 			if game.history.size() != 1:
 				failures.append("hotseat undo")
@@ -97,6 +107,20 @@ func _clicks() -> bool:
 		3:
 			if game.history.size() != 1 or HuntState.captures_in(game.history[0]) != 2:
 				failures.append("chain clicks: expected one 2-capture move, got %s" % [game.history])
+			_check_sounds(["land", "land", "capture", "capture"], "two-jump chain (greybox wood)")
+			# Endings: a loss for the player here, then an agreed draw.
+			game.mode = GreyboxScript.Mode.HUMAN_PREY
+			game._rule_set_id = HuntRuleSets.BAGH_CHAL_STANDARD
+			game.new_game()
+			game.sfx.played.clear()
+			game.session.resign(HuntState.PREY)
+			_check_sounds(["lose"], "resigning against the AI")
+			if not game.music.is_ducked():
+				failures.append("the music didn't make way for the sting")
+			game.new_game()
+			game.sfx.played.clear()
+			game.session.agree_draw()
+			_check_sounds(["draw"], "an agreed draw")
 			_check_lines_follow_points()
 			print("clicks: ok (%d failures so far)" % failures.size())
 			queue = HuntRuleSets.ALL.duplicate()
@@ -104,6 +128,14 @@ func _clicks() -> bool:
 			phase = "ai"
 			_next_game()
 	return false
+
+
+## The sounds played since the last check, in order.
+func _check_sounds(want: Array, what: String) -> void:
+	var got: Array = game.sfx.played.map(func(e: Array) -> String: return e[0])
+	if got != want:
+		failures.append("%s: expected sounds %s, got %s" % [what, want, got])
+	game.sfx.played.clear()
 
 
 ## Every Bagh Chal look builds, and its move marks use that look's shader.
@@ -116,6 +148,11 @@ func _check_looks() -> void:
 		failures.append("expected at least 3 Bagh Chal looks, got %s" % [ids])
 	for id in ids:
 		game.set_art_style(id)
+		for ev in GreyboxScript.PIECE_SOUNDS:
+			if not game.sfx.has_event(ev):
+				failures.append("look %s: no %s sound" % [id, ev])
+		if game.music.set_id() != game.current_style().music_dir or game.music.track_count() < 3:
+			failures.append("look %s: its music isn't playing (%s, %d tracks)" % [id, game.music.set_id(), game.music.track_count()])
 		game._on_point_clicked(b.point_at(Vector2(0, 0)))  # select a tiger
 		var want: Shader = GreyboxScript.MarkInkShader if game.current_style().mark_ink else GreyboxScript.MarkShader
 		var shown := 0
@@ -139,6 +176,7 @@ func _next_game() -> void:
 		queue = HuntRuleSets.ALL.duplicate()
 		return
 	current = queue.pop_front()
+	game.sfx.played.clear()
 	game.mode = GreyboxScript.Mode.AI_VS_AI
 	game.level = 0
 	if current == "komikan_dogs_first":
@@ -156,6 +194,11 @@ func _ai() -> bool:
 			return false
 		var st: HuntState = game.state
 		print("%-28s plies %3d  captured %2d  status %d  reason %d" % [current, game.history.size(), st.captured, game.status, st.last_reason])
+		# Bagh Chal games that end on the board end with a sting.
+		var stings: Array = game.sfx.played.filter(func(e: Array) -> bool: return e[0] in GreyboxScript.STINGS)
+		var want_sting: bool = game._title() == "bagh_chal" and game.status != HuntState.Status.ONGOING
+		if stings.size() != (1 if want_sting else 0):
+			failures.append("%s: expected %d end sting, got %s" % [current, 1 if want_sting else 0, stings])
 		if st.hash_key != st.compute_hash():
 			failures.append("%s: hash drift" % current)
 		_next_game()
@@ -165,6 +208,7 @@ func _ai() -> bool:
 
 
 var _finish_at := 0
+var _quit_at := 0
 var _tut_step := -1
 var _tut_move := 0
 
@@ -229,12 +273,17 @@ func _languages() -> void:
 
 
 func _done() -> bool:
+	if phase == "quit":
+		return false
 	for f in failures:
 		print("FAIL " + f)
 	print("smoke: %s" % ("ok" if failures.is_empty() else "%d failures" % failures.size()))
 	game._stop_ai()
-	quit(1 if not failures.is_empty() else 0)
-	return true
+	game.sfx.stop_all()
+	game.music.stop()
+	phase = "quit"
+	_quit_at = Time.get_ticks_msec() + 300
+	return false
 
 
 ## Regression: the drawn lines must sit on the board's real lines after the
