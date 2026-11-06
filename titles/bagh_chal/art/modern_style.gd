@@ -312,6 +312,7 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	probe.position = Vector3(0, 1.0, 0)
 	probe.box_projection = true
 	probe.update_mode = ReflectionProbe.UPDATE_ONCE
+	hide_at_low(probe)  # the plastic barely shows it, and phones pay ~4 ms for it
 	root.add_child(probe)
 	# The key: a pendant lamp over the table, a little to the side (square to
 	# the camera, as in the other styles, so both views get the same light).
@@ -361,6 +362,7 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	bounce.omni_range = 14.0
 	bounce.omni_attenuation = 1.4
 	bounce.light_volumetric_fog_energy = 0.0
+	hide_at_low(bounce)
 	root.add_child(bounce)
 
 

@@ -518,28 +518,33 @@ msgid "Look"
 msgstr "스타일"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:745
+#: scenes/play/play_menu.gd:746
 msgid "Sound"
 msgstr "효과음"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:747
+#: scenes/play/play_menu.gd:748
 msgid "Music"
 msgstr "음악"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:751
+#: scenes/play/play_menu.gd:752
 msgid "Quit to main menu"
 msgstr "메인 메뉴로 나가기"
 
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:779
+msgid "Graphics"
+msgstr "그래픽"
+
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:839
+#: scenes/play/play_menu.gd:860
 #, c-format
 msgid "Your name: %s"
 msgstr "내 이름: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:876
+#: scenes/play/play_menu.gd:897
 msgid "Waiting"
 msgstr "기다리는 중"
 
@@ -662,27 +667,27 @@ msgid "%d goat still to place"
 msgid_plural "%d goats still to place"
 msgstr[0] "남은 염소: %d"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "Temple brass"
 msgstr "사원의 황동"
 
-#: titles/bagh_chal/art/brass_style.gd:40
+#: titles/bagh_chal/art/brass_style.gd:41
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "새김 장식이 있는 황동 판과 주조한 말, 해 질 녘 사원 안뜰에서."
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "Modern edition"
 msgstr "모던 에디션"
 
-#: titles/bagh_chal/art/modern_style.gd:40
+#: titles/bagh_chal/art/modern_style.gd:41
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "오늘날 보드게임 회사의 에디션: 선명한 색의 성형 보드, 플라스틱 호랑이와 염소, 펜던트 조명 아래에서."
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "Stone and pebbles"
 msgstr "돌과 조약돌"
 
-#: titles/bagh_chal/art/stone_style.gd:40
+#: titles/bagh_chal/art/stone_style.gd:41
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "옛 방식 그대로: 돌에 선을 새겨 분필로 칠하고, 냇돌로 만든 호랑이와 염소를 짚 돗자리 위에."
 
@@ -1126,3 +1131,23 @@ msgstr "복원에 대하여"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "백 년 전에 기록된 설명에서는 개가 앞으로만 갈 수 있는데, 그러면 탑에 머무는 퓨마는 절대 잡히지 않습니다. 여기서는 개의 움직임과 퓨마의 승리 조건을 이 놀이의 현대 마푸체 판인 Trapial-Kuzen을 따릅니다. 탑은 보통의 판으로 다루며, 설정에서 바꾸지 않으면 퓨마가 먼저 둡니다."
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:75
+msgid "Auto"
+msgstr "자동"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:77
+msgid "High"
+msgstr "높음"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:79
+msgid "Medium"
+msgstr "보통"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:81
+msgid "Low"
+msgstr "낮음"

@@ -18,13 +18,13 @@ extends CanvasLayer
 ##               └ Play with a friend ─ Create a code (side, rules → code to
 ##                                     share) · Enter a code
 ##   Pause ─ Continue · (against another device: Offer a draw, Ask to undo,
-##           Resign) · Look · Sound · Music · Language · Quit to main menu
+##           Resign) · Look · Graphics · Sound · Music · Language · Quit to main menu
 ##
 ## "Play online" only shows when an online service is available (bible §5.2:
 ## offline-first). The network work is in play_controller.gd; this only
 ## shows its state and calls it. Rebuilt when the language changes.
 
-const CARD_WIDTH := 600
+const CARD_WIDTH := 640
 const PlayController := preload("res://scenes/play/play_controller.gd")
 
 var game: Node
@@ -227,8 +227,8 @@ func _text(text: String, role := "book", size := 20, color := SeriesTheme.TEXT) 
 func _button(text: String, on_press: Callable, accent := false, parent: Control = null) -> Button:
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(0, 60)
-	b.add_theme_font_size_override("font_size", 22)
+	b.custom_minimum_size = Vector2(0, 64)
+	b.add_theme_font_size_override("font_size", SeriesTheme.fs(22))
 	if accent:
 		b.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	b.pressed.connect(on_press)
@@ -240,7 +240,7 @@ func _button(text: String, on_press: Callable, accent := false, parent: Control 
 func _back_button(text := "") -> void:
 	var b := _button(L10n.t("Back") if text == "" else text, back)
 	b.flat = true
-	b.custom_minimum_size = Vector2(0, 48)
+	b.custom_minimum_size = Vector2(0, 52)
 	b.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
 
 
@@ -254,10 +254,10 @@ func _row(label_text: String, control: Control) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	var l := SeriesTheme.label(label_text, "body", 19, SeriesTheme.TEXT_DIM)
-	l.custom_minimum_size = Vector2(130, 0)
+	l.custom_minimum_size = Vector2(150, 0)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	control.custom_minimum_size.y = 52
+	control.custom_minimum_size.y = 58
 	row.add_child(l)
 	row.add_child(control)
 	_card_box.add_child(row)
@@ -272,8 +272,8 @@ func _side_picker() -> void:
 		b.toggle_mode = true
 		b.button_group = group
 		b.text = HuntText.you_play(title, side == HuntState.HUNTER)
-		b.custom_minimum_size = Vector2(0, 54)
-		b.add_theme_font_size_override("font_size", 20)
+		b.custom_minimum_size = Vector2(0, 62)
+		b.add_theme_font_size_override("font_size", SeriesTheme.fs(20))
 		b.button_pressed = side == _side
 		b.toggled.connect(func(on: bool) -> void:
 			if on:
@@ -288,7 +288,7 @@ func _rules_picker() -> void:
 	if sets.size() < 2:
 		return
 	var pick := OptionButton.new()
-	pick.add_theme_font_size_override("font_size", 19)
+	pick.add_theme_font_size_override("font_size", SeriesTheme.fs(19))
 	for id in sets:
 		pick.add_item(HuntText.rule_set_menu(id))
 	pick.selected = sets.find(_rule_set)
@@ -299,18 +299,18 @@ func _rules_picker() -> void:
 ## The language picker, with a globe so it's found in any language.
 func _language_row() -> void:
 	var lang := OptionButton.new()
-	lang.add_theme_font_size_override("font_size", 17)
+	lang.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
 	for entry in L10n.LANGUAGES:
 		lang.add_item(entry[1])
 	lang.selected = L10n.LANGUAGES.map(func(e: Array) -> String: return e[0]).find(L10n.current_language())
 	lang.item_selected.connect(func(i: int) -> void: L10n.set_language(L10n.LANGUAGES[i][0]))
 	lang.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	lang.custom_minimum_size.y = 52
+	lang.custom_minimum_size.y = 58
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	var label := HBoxContainer.new()
 	label.add_theme_constant_override("separation", 8)
-	label.custom_minimum_size = Vector2(130, 0)
+	label.custom_minimum_size = Vector2(150, 0)
 	label.add_child(SeriesIcon.make("globe", 22))
 	var l := SeriesTheme.label(L10n.t("Language"), "body", 19, SeriesTheme.TEXT_DIM)
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -360,7 +360,7 @@ func _home() -> void:
 			game.play.cancel()
 			get_tree().quit())
 		quit.flat = true
-		quit.custom_minimum_size = Vector2(0, 48)
+		quit.custom_minimum_size = Vector2(0, 52)
 		quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
 
 
@@ -368,7 +368,7 @@ func _vs_ai() -> void:
 	_title(L10n.t("Play against the AI"))
 	_side_picker()
 	var level := OptionButton.new()
-	level.add_theme_font_size_override("font_size", 19)
+	level.add_theme_font_size_override("font_size", SeriesTheme.fs(19))
 	for label in [L10n.t("Novice"), L10n.t("Apprentice"), L10n.t("Adept"), L10n.t("Master")]:
 		level.add_item(label)
 	level.selected = game.level
@@ -456,14 +456,14 @@ func _nearby_join() -> void:
 	# TRANSLATORS: Placeholder in the box for typing a nearby game's code.
 	field.placeholder_text = L10n.t("Code")
 	field.max_length = 9
-	field.custom_minimum_size = Vector2(0, 54)
-	field.add_theme_font_size_override("font_size", 22)
+	field.custom_minimum_size = Vector2(0, 58)
+	field.add_theme_font_size_override("font_size", SeriesTheme.fs(22))
 	field.add_theme_font_override("font", SeriesTheme.font("code"))
 	field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	field.text_changed.connect(func(t: String) -> void: _typed_code = t)
 	var join := Button.new()
 	join.text = L10n.t("Join")
-	join.custom_minimum_size = Vector2(120, 54)
+	join.custom_minimum_size = Vector2(130, 58)
 	join.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	var go := func() -> void:
 		_error_back = "nearby_join"
@@ -485,8 +485,8 @@ func _fill_hosts() -> void:
 	for h in game.play.nearby_hosts():
 		var b := Button.new()
 		b.text = "%s  ·  %s" % [PlayText.player_name(h.name), HuntText.rule_set_name(h.rule_set)]
-		b.custom_minimum_size = Vector2(0, 58)
-		b.add_theme_font_size_override("font_size", 20)
+		b.custom_minimum_size = Vector2(0, 62)
+		b.add_theme_font_size_override("font_size", SeriesTheme.fs(20))
 		b.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 		var ip: String = h.ip
 		b.pressed.connect(func() -> void:
@@ -556,7 +556,7 @@ func _friend_host() -> void:
 		_live_label = _text("", "italic", 18, SeriesTheme.TEXT_DIM)
 		if play.is_simulated():
 			var sim := _button("Simulate a friend joining (test build)", func() -> void: play.simulate_friend_joining())
-			sim.add_theme_font_size_override("font_size", 16)
+			sim.add_theme_font_size_override("font_size", SeriesTheme.fs(16))
 	_back_button(L10n.t("Cancel"))
 
 
@@ -579,8 +579,8 @@ func _friend_join() -> void:
 	field.placeholder_text = "TG-XXXX"
 	field.max_length = 8
 	field.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	field.custom_minimum_size = Vector2(0, 64)
-	field.add_theme_font_size_override("font_size", 30)
+	field.custom_minimum_size = Vector2(0, 68)
+	field.add_theme_font_size_override("font_size", SeriesTheme.fs(30))
 	field.add_theme_font_override("font", SeriesTheme.font("code"))
 	field.text_changed.connect(func(t: String) -> void: _typed_code = t)
 	var go := func() -> void:
@@ -696,8 +696,8 @@ func _rich(bbcode: String, size: int, color: Color) -> RichTextLabel:
 	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	r.add_theme_font_override("normal_font", SeriesTheme.font("book"))
 	r.add_theme_font_override("italics_font", SeriesTheme.font("book_italic"))
-	r.add_theme_font_size_override("normal_font_size", size)
-	r.add_theme_font_size_override("italics_font_size", size)
+	r.add_theme_font_size_override("normal_font_size", SeriesTheme.fs(size))
+	r.add_theme_font_size_override("italics_font_size", SeriesTheme.fs(size))
 	r.add_theme_color_override("default_color", color)
 	r.add_theme_constant_override("line_separation", 3)
 	r.text = bbcode
@@ -733,7 +733,7 @@ func _pause() -> void:
 	var styles: Array = game.art_styles()
 	if styles.size() > 1:
 		var look := OptionButton.new()
-		look.add_theme_font_size_override("font_size", 17)
+		look.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
 		for st in styles:
 			look.add_item(L10n.t(st.display_name))
 			look.set_item_tooltip(look.item_count - 1, L10n.t(st.description))
@@ -741,11 +741,25 @@ func _pause() -> void:
 		look.item_selected.connect(func(i: int) -> void: game.set_art_style(styles[i].id))
 		# TRANSLATORS: Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
 		_row(L10n.t("Look"), look)
+	_graphics_row()
 	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
 	_sound_row(GameSound.SOUND, L10n.t("Sound"))
 	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
+	if OS.is_debug_build() and not game.is_network():
+		# Not translated: test builds only (perf_test.gd). One row: the
+		# performance test and its two follow-ups.
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 8)
+		for suite in ["main", "detail", "candidates"]:
+			var test := _small_button("Perf test" if suite == "main" else suite.capitalize(), row, func() -> void:
+				close()
+				game.start_perf_test(suite))
+			test.flat = true
+			test.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			test.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+		_card_box.add_child(row)
 	_gap(2)
 	# TRANSLATORS: In-game menu button: end this game and go back to the main menu.
 	var quit := _button(L10n.t("Quit to main menu"), func() -> void:
@@ -756,6 +770,26 @@ func _pause() -> void:
 			game.quit_to_menu())
 	quit.flat = true
 	quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+
+
+## Graphics: Auto (showing the tier it chose), High, Medium, Low.
+func _graphics_row() -> void:
+	var pick := OptionButton.new()
+	pick.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
+	for c in GameGraphics.CHOICES:
+		var text := GameGraphics.label(c)
+		if c == GameGraphics.AUTO and GameGraphics.choice() == GameGraphics.AUTO:
+			text += " · " + GameGraphics.label(GameGraphics.tier())
+		pick.add_item(text)
+	pick.selected = GameGraphics.CHOICES.find(GameGraphics.choice())
+	pick.item_selected.connect(func(i: int) -> void:
+		game.set_graphics(GameGraphics.CHOICES[i])
+		if GameGraphics.CHOICES[i] == GameGraphics.AUTO:
+			pick.set_item_text(0, GameGraphics.label(GameGraphics.AUTO) + " · " + GameGraphics.label(GameGraphics.tier()))
+		else:
+			pick.set_item_text(0, GameGraphics.label(GameGraphics.AUTO)))
+	# TRANSLATORS: Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+	_row(L10n.t("Graphics"), pick)
 
 
 ## Sound or Music: an on/off switch and a volume slider. The volume is heard
@@ -774,7 +808,7 @@ func _sound_row(kind: String, label_text: String) -> void:
 	slider.value = GameSound.volume(kind)
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	slider.custom_minimum_size = Vector2(0, 36)
+	slider.custom_minimum_size = Vector2(0, 40)
 	slider.editable = on.button_pressed
 	slider.modulate.a = 1.0 if on.button_pressed else 0.45
 	var dragging := [false]
@@ -804,8 +838,8 @@ func _sound_row(kind: String, label_text: String) -> void:
 func _small_button(text: String, parent: Control, on_press: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(0, 48)
-	b.add_theme_font_size_override("font_size", 17)
+	b.custom_minimum_size = Vector2(0, 52)
+	b.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
 	b.pressed.connect(on_press)
 	parent.add_child(b)
 	return b

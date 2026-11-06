@@ -20,6 +20,7 @@ const MarkInkShader := preload("res://scenes/greybox/mark_ink.gdshader")
 const PlayControllerScript := preload("res://scenes/play/play_controller.gd")
 const PlayMenuScript := preload("res://scenes/play/play_menu.gd")
 const MatchUIScript := preload("res://scenes/play/match_ui.gd")
+const PerfTestScript := preload("res://scenes/greybox/perf_test.gd")
 const AI_MOVE_DELAY := 0.35
 const SAVE_PATH := "user://match.save"
 ## Piece sounds every look provides (tools/audio/make_sounds.py), and the
@@ -92,6 +93,13 @@ var menu: CanvasLayer
 var sfx: SfxPlayer
 ## The look's music (MusicPlayer, on the Music bus).
 var music: MusicPlayer
+## The frame-rate readout for testing (F3 or a three-finger tap).
+var perf: PerfOverlay
+## Auto graphics measures and steps down on devices (not in the editor).
+var graphics_auto := not OS.has_feature("editor")
+var _graphics_auto := GameGraphics.Auto.new()
+## Test builds: the performance test from the in-game menu (perf_test.gd).
+var perf_test: CanvasLayer
 
 var _rule_set_id := HuntRuleSets.BAGH_CHAL_STANDARD
 var _komikan_dogs_first := false
@@ -145,6 +153,9 @@ func _ready() -> void:
 	add_child(sfx)
 	music = MusicPlayer.new()
 	add_child(music)
+	perf = PerfOverlay.new()
+	perf.info = _perf_info
+	add_child(perf)
 	_build_environment()
 	play = PlayControllerScript.new(self)
 	add_child(play)
@@ -438,6 +449,8 @@ func can_play() -> bool:
 
 
 func _process(delta: float) -> void:
+	if graphics_auto and _graphics_auto.step(delta):
+		_apply_graphics()
 	# The AI waits while a menu covers the board.
 	if _ai_wait > 0.0 and not _animating and not (menu and menu.is_open()):
 		_ai_wait -= delta
@@ -663,6 +676,8 @@ func _build_board() -> void:
 	_board_root.rotation.y = PI if local_side() == HuntState.PREY else 0.0
 	_camera.position = Vector3(0, extent * 1.25, extent * 0.95)
 	_camera.look_at(Vector3(0, 0, extent * 0.06), Vector3.UP)
+	_apply_graphics()
+	_graphics_auto.restart()  # building the set stalls a frame or two
 
 
 ## Phones turn both ways (project setting: sensor). In portrait the camera
@@ -677,6 +692,10 @@ func _fit_orientation() -> void:
 	var base := Vector2i(900, 1600) if portrait else Vector2i(1600, 900)
 	if win.content_scale_size != base:
 		win.content_scale_size = base
+	# Low's 3D size depends on the window's pixel count (a desktop window can
+	# be resized).
+	if _board_root:
+		get_viewport().scaling_3d_scale = GameGraphics.render_scale(GameGraphics.tier(), win.size)
 
 
 func _has_art() -> bool:
@@ -711,6 +730,70 @@ func set_art_style(style_id: String) -> void:
 	_clear_marks()
 	_show_last_move()
 	_refresh_ui()
+
+
+# --- Graphics ----------------------------------------------------------------
+
+## Applies the Graphics tier (GameGraphics): MSAA, the 3D render scale (FSR 1
+## below full size on desktop, bilinear on phones), the far blur, glow, dust
+## motes, light shadows, and the lights and reflections a look hides at Low.
+## Glow and shadows only go off where the look had them on.
+func _apply_graphics() -> void:
+	var s := GameGraphics.settings(GameGraphics.tier())
+	var vp := get_viewport()
+	vp.msaa_3d = s.msaa
+	var scale := GameGraphics.render_scale(GameGraphics.tier(), get_window().size)
+	# FSR 1 only exists in the Forward+ renderer (desktop); phones (Mobile)
+	# scale the 3D up bilinearly.
+	var fsr := scale < 1.0 and RenderingServer.get_current_rendering_method() == "forward_plus"
+	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if fsr else Viewport.SCALING_3D_MODE_BILINEAR
+	vp.scaling_3d_scale = scale
+	if _camera.attributes is CameraAttributesPractical:
+		(_camera.attributes as CameraAttributesPractical).dof_blur_far_enabled = s.dof
+	var env := _world_env.environment
+	if env:
+		if not env.has_meta("glow_as_made"):
+			env.set_meta("glow_as_made", env.glow_enabled)
+		env.glow_enabled = env.get_meta("glow_as_made") and s.glow
+	for p: GPUParticles3D in _board_root.find_children("*", "GPUParticles3D", true, false):
+		p.amount_ratio = s.particles
+		p.visible = s.particles > 0.0
+	for l: Light3D in _board_root.find_children("*", "Light3D", true, false):
+		if not l.has_meta("shadow_as_made"):
+			l.set_meta("shadow_as_made", l.shadow_enabled)
+		l.shadow_enabled = l.get_meta("shadow_as_made") and s.shadows
+	# Lights and reflections a look shows only from a tier up
+	# (HuntArtStyle.hide_at_low).
+	var rank := GameGraphics.TIERS.find(GameGraphics.tier())
+	for n: Node in _board_root.find_children("*", "Node3D", true, false):
+		if n.has_meta(HuntArtStyle.GRAPHICS_MIN):
+			(n as Node3D).visible = rank <= GameGraphics.TIERS.find(str(n.get_meta(HuntArtStyle.GRAPHICS_MIN)))
+
+
+## The player changed the Graphics setting in the menu.
+func set_graphics(choice: String) -> void:
+	GameGraphics.set_choice(choice)
+	_apply_graphics()
+	_graphics_auto.restart()
+
+
+## Test builds only (the in-game menu offers it there): measures each look at
+## each tier and with single changes, on this device (perf_test.gd).
+func start_perf_test(suite := "main") -> CanvasLayer:
+	if not OS.is_debug_build() or tutorial_active or is_network() or (perf_test and is_instance_valid(perf_test) and not perf_test.is_queued_for_deletion()):
+		return null
+	perf_test = PerfTestScript.new(self)
+	perf_test.suite = suite
+	add_child(perf_test)
+	return perf_test
+
+
+## The overlay's last line: the tier and what it sets.
+func _perf_info() -> String:
+	var t := GameGraphics.tier()
+	var s := GameGraphics.settings(t)
+	return "graphics %s%s · 3D at %d%% · MSAA %dx" % [t, " (auto)" if GameGraphics.choice() == GameGraphics.AUTO else "",
+		roundi(100.0 * get_viewport().scaling_3d_scale), [1, 2, 4, 8][s.msaa]]
 
 
 func _build_art_set() -> void:
@@ -1092,10 +1175,15 @@ func _refresh_ui() -> void:
 
 ## Android's back gesture: closes the walkthrough, steps back through the
 ## menus, opens the in-game menu during a game, and leaves the app from the
-## main menu. (project.godot sets quit_on_go_back off.)
+## main menu. (project.godot sets quit_on_go_back off.) Coming back to the
+## app, Auto graphics measures afresh.
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_RESUMED or what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		_graphics_auto.restart()
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST and menu:
-		if tutorial_active:
+		if perf_test and is_instance_valid(perf_test):
+			perf_test.stop()
+		elif tutorial_active:
 			_tutorial.stop(false)
 		elif menu.is_open():
 			menu.back(true)

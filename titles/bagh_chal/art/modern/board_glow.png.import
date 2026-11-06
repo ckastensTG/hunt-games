@@ -2,20 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://15eyg15dd0tv"
-path="res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.ctex"
+uid="uid://di22tmjf8wb52"
+path.s3tc="res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.s3tc.ctex"
+path.etc2="res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://titles/bagh_chal/art/modern/board_glow.png"
-dest_files=["res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.ctex"]
+dest_files=["res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.s3tc.ctex", "res://.godot/imported/board_glow.png-6f42e83ba9eac034839653daa06987fb.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +25,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -84,6 +84,19 @@ func _make_environment(_extras: bool) -> Environment:
 
 # --- Helpers for styles ------------------------------------------------------
 
+## Meta key: the lowest Graphics tier a node shows at (greybox
+## `_apply_graphics`).
+const GRAPHICS_MIN := "graphics_min"
+
+
+## Hides a node at the Low tier. For lights and reflections a phone pays for
+## on every pixel but the picture hardly misses (checked in renders; measured
+## on a moto g(20), round 22: Brass's distant lamps and sky fill, Modern's
+## reflection probe and bounce light). The node must be visible as built.
+static func hide_at_low(node: Node3D) -> void:
+	node.set_meta(GRAPHICS_MIN, "medium")
+
+
 func is_compatibility() -> bool:
 	return RenderingServer.get_current_rendering_method() == "gl_compatibility"
 

@@ -41,7 +41,7 @@ flow. Local play is real: run two copies on one Wi-Fi.
 |---|---|
 | `titles/common/hunt_boards.gd` | The three boards (Bagh Chal 25 points, Adugo 31, Komikan/Mátus 38), checked by fixture tests. |
 | `titles/common/hunt_rule_sets.gd` | The four v1 rule sets (rules doc §6) and starting AI weights. |
-| `scenes/greybox/` | The playable greybox: board, pieces and move marks built in code from the board definitions, plus the HUD (`hud.gd`). Every game is a core `MatchSession`; the board animates whatever move it reports. |
+| `scenes/greybox/` | The playable greybox: board, pieces and move marks built in code from the board definitions, plus the HUD (`hud.gd`). Every game is a core `MatchSession`; the board animates whatever move it reports. `perf_test.gd` is the on-device performance test (test builds only: the in-game menu's *Perf test · Detail · Candidates* row), which measures each look at each Graphics tier and with one thing changed at a time (lights, probe, materials per part, interface, 3D size). Results show on screen, in Godot's Output with remote debug, and in `user://perf_test.txt`. |
 | `scenes/play/` | Playing other people: `play_menu.gd` (the menu screens), `play_controller.gd` (nearby, friend codes, quick match with "play the AI while we keep looking"), `match_ui.gd` (opponent strip, turn clock, questions, toasts), `play_text.gd` (names, problems, endings) and `sim_opponent.gd` (debug builds only). |
 | `ui/` | Series UI: `SeriesTheme` (colors, panels, fonts, built in code), the series fonts and CJK fallbacks (`ui/fonts/README.md`), and `L10n` (language helpers and the player's settings file). |
 | `titles/common/hunt_text.gd` | Player-facing sentences that name a side, written out whole per title (no "The %s won" assembled from parts). |
@@ -50,7 +50,7 @@ flow. Local play is real: run two copies on one Wi-Fi.
 | `titles/common/hunt_art_style.gd` | `HuntArtStyle`, the base for a title's looks (environment, set, pieces). The player picks one under **Look** in the settings. |
 | `tests/` | Title tests: board fixtures, rule sets, the Lim & Nievergelt opening result. |
 | `titles/bagh_chal/art/` | Bagh Chal looks, listed by `BaghChalArt.styles()`: **Temple brass** (`brass_style.gd`: brass board, cast tiger and goat, dusk courtyard) and **Stone and pebbles** (`stone_style.gd`, `stone/`: chalk-scratched slab, river stones, straw mat in a rest-house). |
-| `tools/` | Test runner wrapper, search benchmark, AI level ladder, headless smoke test, screenshot and style-frame tools, the Komikan balance test. |
+| `tools/` | Test runner wrapper, search benchmark, AI level ladder, headless smoke test, screenshot and style-frame tools, the Komikan balance test, two performance tools: `perf_probe.gd` (per look: scene counts, draw calls, and what each graphics setting saves in render time) and `graphics_frames.gd` (every look at each Graphics tier), `ui_check.gd` (every screen in every language at one screen shape: fails when anything reaches off screen, is squeezed below its text, or overlaps on the in-game display), and `smoke_perf_test.gd` (a short run of the on-device performance test that checks everything is put back afterwards). |
 | `tools/komikan_tower/` | A small C program that checks whether forward-only dogs (Komikan's rules until 2026-11-03) can ever trap a puma that stays in the tower (they can't). |
 | `tools/l10n/` | Localization tools (Python 3 + fontTools): string extraction, PO merge and checks, termbase lint, glyph check, CJK font subsetting. |
 | `tools/art/` | Python generators for the Claude-made art (brass board and pieces, stone set), plus the board geometry they read. |
@@ -65,6 +65,8 @@ godot --headless --path . -s res://tools/bench_search.gd -- --depth=6
 godot --headless --path . -s res://tools/persona_ladder.gd -- --rules=bagh_chal_standard --pairs=adept:master --games=4
 godot --headless --fixed-fps 60 --path . -s res://tools/smoke_greybox.gd
 godot --headless --path . -s res://tools/smoke_multiplayer.gd   # menu, quick match, friend, nearby
+xvfb-run -a godot --path . --rendering-method mobile --fixed-fps 30 --resolution 540x1200 \
+  -s res://tools/smoke_perf_test.gd                             # the performance test, short
 xvfb-run -s "-screen 0 1600x900x24" godot --path . --rendering-method gl_compatibility \
   -s res://tools/screenshot.gd -- --out=/tmp/shots
 ```

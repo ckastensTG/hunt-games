@@ -39,6 +39,8 @@ var _result_you: Label
 var _again: Button
 var _new_opponent: Button
 var _hint: Label
+var _hint_panel: PanelContainer
+var _turn_panel: PanelContainer
 var _stop: Button
 var _moves_panel: PanelContainer
 var _moves: RichTextLabel
@@ -133,7 +135,7 @@ func _build_title() -> void:
 ## The round button that opens the in-game menu.
 func _build_menu_button() -> void:
 	_menu_button = Button.new()
-	_menu_button.custom_minimum_size = Vector2(56, 56)
+	_menu_button.custom_minimum_size = Vector2(60, 60)
 	_menu_button.focus_mode = Control.FOCUS_NONE
 	_menu_button.tooltip_text = L10n.t("Menu")
 	for st in ["normal", "hover", "pressed"]:
@@ -150,7 +152,7 @@ func _build_menu_button() -> void:
 ## Undo, for games on this device (against the AI, pass and play).
 func _build_undo() -> void:
 	_undo = Button.new()
-	_undo.custom_minimum_size = Vector2(0, 52)
+	_undo.custom_minimum_size = Vector2(0, 56)
 	_undo.focus_mode = Control.FOCUS_NONE
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
@@ -189,11 +191,12 @@ func _build_turn() -> void:
 	panel.add_child(row)
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_CENTER_TOP, 0, 22)
+	_turn_panel = panel
 
 
 func _build_score() -> void:
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(250, 0)
+	panel.custom_minimum_size = Vector2(270, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 6)
 	_captured_label = SeriesTheme.label("", "caps", 16, SeriesTheme.ACCENT)
@@ -224,6 +227,8 @@ func _build_hint() -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	_hint = SeriesTheme.label("", "book", 20, SeriesTheme.TEXT)
+	_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stop = Button.new()
 	# TRANSLATORS: Button: end a chain of captures after the current jump.
 	_stop.text = L10n.t("Stop here")
@@ -236,11 +241,12 @@ func _build_hint() -> void:
 	panel.add_child(row)
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_CENTER_BOTTOM, 0, 22)
+	_hint_panel = panel
 
 
 func _build_moves() -> void:
 	_moves_panel = PanelContainer.new()
-	_moves_panel.custom_minimum_size = Vector2(250, 0)
+	_moves_panel.custom_minimum_size = Vector2(270, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 6)
 	# TRANSLATORS: Title of the list of moves played so far.
@@ -249,9 +255,9 @@ func _build_moves() -> void:
 	_moves.bbcode_enabled = true
 	_moves.fit_content = true
 	_moves.scroll_active = false
-	_moves.custom_minimum_size = Vector2(220, 0)
+	_moves.custom_minimum_size = Vector2(240, 0)
 	_moves.add_theme_font_override("normal_font", SeriesTheme.font("ui"))
-	_moves.add_theme_font_size_override("normal_font_size", 16)
+	_moves.add_theme_font_size_override("normal_font_size", SeriesTheme.fs(16))
 	_moves.add_theme_constant_override("line_separation", 3)
 	box.add_child(_moves)
 	_moves_panel.add_child(box)
@@ -277,7 +283,7 @@ func _build_result() -> void:
 	s.content_margin_top = 30
 	s.content_margin_bottom = 30
 	card.add_theme_stylebox_override("panel", s)
-	card.custom_minimum_size = Vector2(520, 0)
+	card.custom_minimum_size = Vector2(560, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 14)
 	_result_you = SeriesTheme.label("", "caps", 20, SeriesTheme.TEXT_DIM)
@@ -331,11 +337,35 @@ func _build_result() -> void:
 
 ## Portrait (phones held upright) has no room for the title beside the turn
 ## banner; the in-game menu shows the game's name instead.
+## Places what depends on the screen's shape. Landscape: the turn banner at
+## the top and the hint at the bottom, between the corner panels. Portrait
+## (narrow): the turn banner goes under the top corners, and the hint, wrapped
+## to the screen, above the Undo button and the move list.
 func _layout() -> void:
 	if _title_box == null:
 		return
 	var size := get_viewport().get_visible_rect().size
-	_title_box.visible = size.x >= size.y
+	var portrait := size.y > size.x
+	_title_box.visible = not portrait
+	var edge := 28.0
+	var side_w := _score_panel.get_combined_minimum_size().x
+	if portrait:
+		_turn_panel.offset_top = 22.0 + maxf(_score_panel.get_combined_minimum_size().y, _menu_button.custom_minimum_size.y) + 14.0
+	else:
+		_turn_panel.offset_top = 22.0
+	# The hint wraps at the room it has (the panel adds 44 of padding).
+	var room := size.x - 2.0 * edge - 44.0 if portrait else size.x - 2.0 * (edge + side_w + 24.0) - 44.0
+	if _stop.visible:
+		room -= _stop.get_combined_minimum_size().x + 14.0
+	var font := _hint.get_theme_font("font")
+	var one_line := font.get_string_size(_hint.text, HORIZONTAL_ALIGNMENT_LEFT, -1, _hint.get_theme_font_size("font_size")).x
+	_hint.custom_minimum_size.x = minf(ceilf(one_line) + 2.0, maxf(room, 120.0))
+	var bottom := 22.0
+	if portrait:
+		var under := maxf(_undo.get_combined_minimum_size().y if _undo.visible else 0.0,
+			_moves_panel.get_combined_minimum_size().y if _moves_panel.visible else 0.0)
+		bottom += under + 14.0
+	_hint_panel.offset_bottom = -bottom
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -412,7 +442,7 @@ func refresh() -> void:
 	# Hint.
 	_hint.text = "" if teaching else _hint_text(title_id)
 	_stop.visible = game._chain.size() > 2 and not teaching
-	_hint.get_parent().get_parent().visible = _hint.text != "" or _stop.visible
+	_hint_panel.visible = _hint.text != "" or _stop.visible
 
 	# Moves.
 	var lines: PackedStringArray = []
@@ -454,6 +484,8 @@ func refresh() -> void:
 		_again.text = L10n.t("Rematch") if net_game else L10n.t("Play again")
 		_again.disabled = net_game and not game.play.can_rematch()
 		_new_opponent.visible = net_game and session.kind == MatchSession.Kind.QUICK_MATCH
+	# The hint and the move list change size: place them again once laid out.
+	_layout.call_deferred()
 
 
 ## A move for the move list: point names stay as they are ("c3"), the word

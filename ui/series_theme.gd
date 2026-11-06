@@ -114,12 +114,22 @@ static func _button_box(bg: Color, border: Color) -> StyleBoxFlat:
 	return s
 
 
+## Every text size in the game goes through fs(): the size it was designed
+## at plus TEXT_BUMP. Christopher, 2026-11-05: "increase every text in the game
+## by two points" (easier to read and to tap on phones).
+const TEXT_BUMP := 2
+
+
+static func fs(size: int) -> int:
+	return size + TEXT_BUMP
+
+
 static func theme() -> Theme:
 	if _theme:
 		return _theme
 	var t := Theme.new()
 	t.default_font = font("ui")
-	t.default_font_size = 18
+	t.default_font_size = fs(18)
 
 	t.set_stylebox("panel", "PanelContainer", panel_box())
 	t.set_stylebox("panel", "Panel", panel_box())
@@ -132,7 +142,7 @@ static func theme() -> Theme:
 
 	for type in ["Button", "OptionButton", "CheckBox"]:
 		t.set_font("font", type, font("ui_medium"))
-		t.set_font_size("font_size", type, 17)
+		t.set_font_size("font_size", type, fs(17))
 		t.set_color("font_color", type, TEXT)
 		t.set_color("font_hover_color", type, Color(1, 0.96, 0.88))
 		t.set_color("font_pressed_color", type, ACCENT)
@@ -162,13 +172,17 @@ static func theme() -> Theme:
 	hover.set_corner_radius_all(5)
 	t.set_stylebox("hover", "PopupMenu", hover)
 	t.set_font("font", "PopupMenu", font("ui"))
-	t.set_font_size("font_size", "PopupMenu", 17)
+	t.set_font_size("font_size", "PopupMenu", fs(17))
 	t.set_color("font_color", "PopupMenu", TEXT)
 	t.set_color("font_hover_color", "PopupMenu", Color(1, 0.96, 0.88))
-	t.set_constant("v_separation", "PopupMenu", 10)
+	# Roomy rows in drop-down lists, so the right item is easy to tap on a phone.
+	t.set_constant("v_separation", "PopupMenu", 22)
+	t.set_constant("item_start_padding", "PopupMenu", 12)
+	t.set_constant("item_end_padding", "PopupMenu", 12)
 
 	t.set_stylebox("panel", "TooltipPanel", panel_box(Color(0.09, 0.07, 0.055, 0.97), BRASS_DIM, 6))
 	t.set_color("font_color", "TooltipLabel", TEXT)
+	t.set_font_size("font_size", "TooltipLabel", fs(16))
 
 	var sep := StyleBoxLine.new()
 	sep.color = BRASS_DIM
@@ -248,7 +262,7 @@ static func label(text: String, role := "body", size := 18, color := TEXT) -> La
 			l.add_theme_font_override("font", font("ui_bold"))
 		"code":
 			l.add_theme_font_override("font", font("code"))
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", fs(size))
 	l.add_theme_color_override("font_color", color)
 	return l
 

@@ -45,24 +45,38 @@ void fragment() {
 	vec3 w = pow(abs(n_obj), vec3(4.0));
 	w /= (w.x + w.y + w.z);
 
-	vec3 face_alb = texture(albedo_tex, UV).rgb;
-	vec3 face_orm = texture(orm_tex, UV).rgb;
-	vec3 face_n = texture(normal_tex, UV).rgb * 2.0 - 1.0;
-	vec3 side_alb = tri(side_albedo_tex, obj_pos, w).rgb;
-	vec3 side_orm = tri(side_orm_tex, obj_pos, w).rgb;
-
-	// Side normal: the triplanar map's tangent-space normal, turned to the
-	// face it was projected on, in the mesh's space, then to view space.
-	vec3 nx = texture(side_normal_tex, obj_pos.zy / side_span).rgb * 2.0 - 1.0;
-	vec3 nz = texture(side_normal_tex, obj_pos.xy / side_span + vec2(0.37, 0.0)).rgb * 2.0 - 1.0;
-	vec3 ny = texture(side_normal_tex, obj_pos.xz / side_span + vec2(0.0, 0.61)).rgb * 2.0 - 1.0;
-	vec3 bump = vec3(0.0);
-	bump += w.x * vec3(0.0, nx.y, nx.x * sign(n_obj.x));
-	bump += w.z * vec3(nz.x * sign(n_obj.z), nz.y, 0.0);
-	bump += w.y * vec3(ny.x, 0.0, ny.y);
-	vec3 side_n_obj = normalize(n_obj + bump * 1.2);
-	vec3 side_n_view = normalize((VIEW_MATRIX * MODEL_MATRIX * vec4(side_n_obj, 0.0)).xyz);
-	vec3 face_n_view = normalize(TANGENT * face_n.x + BINORMAL * face_n.y + NORMAL * face_n.z);
+	// The face's maps on the top, the sides' triplanar maps on the sides;
+	// each set is only read where it shows (most of the screen is the top),
+	// which saves a phone nine texture reads a pixel.
+	vec3 face_alb = vec3(0.0);
+	vec3 face_orm = vec3(0.0);
+	vec3 face_n_view = NORMAL;
+	if (top > 0.0) {
+		face_alb = texture(albedo_tex, UV).rgb;
+		face_orm = texture(orm_tex, UV).rgb;
+		vec3 face_n = texture(normal_tex, UV).rgb * 2.0 - 1.0;
+		// Rebuilt from x and y: a compressed normal map keeps only those.
+		face_n.z = sqrt(max(0.0, 1.0 - dot(face_n.xy, face_n.xy)));
+		face_n_view = normalize(TANGENT * face_n.x + BINORMAL * face_n.y + NORMAL * face_n.z);
+	}
+	vec3 side_alb = vec3(0.0);
+	vec3 side_orm = vec3(0.0);
+	vec3 side_n_view = NORMAL;
+	if (top < 1.0) {
+		side_alb = tri(side_albedo_tex, obj_pos, w).rgb;
+		side_orm = tri(side_orm_tex, obj_pos, w).rgb;
+		// Side normal: the triplanar map's tangent-space normal, turned to the
+		// face it was projected on, in the mesh's space, then to view space.
+		vec3 nx = texture(side_normal_tex, obj_pos.zy / side_span).rgb * 2.0 - 1.0;
+		vec3 nz = texture(side_normal_tex, obj_pos.xy / side_span + vec2(0.37, 0.0)).rgb * 2.0 - 1.0;
+		vec3 ny = texture(side_normal_tex, obj_pos.xz / side_span + vec2(0.0, 0.61)).rgb * 2.0 - 1.0;
+		vec3 bump = vec3(0.0);
+		bump += w.x * vec3(0.0, nx.y, nx.x * sign(n_obj.x));
+		bump += w.z * vec3(nz.x * sign(n_obj.z), nz.y, 0.0);
+		bump += w.y * vec3(ny.x, 0.0, ny.y);
+		vec3 side_n_obj = normalize(n_obj + bump * 1.2);
+		side_n_view = normalize((VIEW_MATRIX * MODEL_MATRIX * vec4(side_n_obj, 0.0)).xyz);
+	}
 
 	ALBEDO = mix(side_alb, face_alb, top);
 	AO = mix(side_orm.r, face_orm.r, top);
@@ -71,5 +85,5 @@ void fragment() {
 	METALLIC = 0.0;
 	SPECULAR = 0.4;
 	NORMAL = normalize(mix(side_n_view, face_n_view, top));
-	EMISSION = glow_color * texture(glow_tex, UV).r * top * awaken * glow_energy;
+	EMISSION = top > 0.0 ? glow_color * texture(glow_tex, UV).r * top * awaken * glow_energy : vec3(0.0);
 }

@@ -518,28 +518,33 @@ msgid "Look"
 msgstr "Style"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:745
+#: scenes/play/play_menu.gd:746
 msgid "Sound"
 msgstr "Son"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:747
+#: scenes/play/play_menu.gd:748
 msgid "Music"
 msgstr "Musique"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:751
+#: scenes/play/play_menu.gd:752
 msgid "Quit to main menu"
 msgstr "Quitter vers le menu principal"
 
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:779
+msgid "Graphics"
+msgstr "Qualité graphique"
+
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:839
+#: scenes/play/play_menu.gd:860
 #, c-format
 msgid "Your name: %s"
 msgstr "Votre nom : %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:876
+#: scenes/play/play_menu.gd:897
 msgid "Waiting"
 msgstr "En attente"
 
@@ -663,27 +668,27 @@ msgid_plural "%d goats still to place"
 msgstr[0] "%d chèvre reste à poser"
 msgstr[1] "%d chèvres restent à poser"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "Temple brass"
 msgstr "Laiton du temple"
 
-#: titles/bagh_chal/art/brass_style.gd:40
+#: titles/bagh_chal/art/brass_style.gd:41
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Un plateau de laiton gravé et des figurines coulées, au crépuscule dans la cour d'un temple."
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "Modern edition"
 msgstr "Édition moderne"
 
-#: titles/bagh_chal/art/modern_style.gd:40
+#: titles/bagh_chal/art/modern_style.gd:41
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "L'édition d'un éditeur de jeux d'aujourd'hui : un plateau moulé aux couleurs vives, des tigres et des chèvres en plastique, sous une suspension."
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "Stone and pebbles"
 msgstr "Pierre et galets"
 
-#: titles/bagh_chal/art/stone_style.gd:40
+#: titles/bagh_chal/art/stone_style.gd:41
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "À la manière historique : des lignes taillées dans la pierre et passées à la craie, tigres et chèvres en galets de rivière, sur une natte de paille."
 
@@ -1132,3 +1137,23 @@ msgstr "Une reconstitution"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "Dans les récits écrits il y a un siècle, les chiens ne peuvent qu'avancer, et un puma qui reste dans la tour ne peut alors jamais être pris. Ici, les chiens se déplacent et le puma gagne comme dans le Trapial-Kuzen, une version mapuche moderne du jeu. La tour est un plateau ordinaire, et le puma joue en premier, sauf si vous le changez dans les réglages."
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:75
+msgid "Auto"
+msgstr "Automatique"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:77
+msgid "High"
+msgstr "Élevée"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:79
+msgid "Medium"
+msgstr "Moyenne"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:81
+msgid "Low"
+msgstr "Basse"

@@ -94,7 +94,7 @@ func _build_strip() -> void:
 	# TRANSLATORS: Button: stop looking for an online opponent.
 	stop.text = L10n.t("Stop looking")
 	stop.flat = true
-	stop.add_theme_font_size_override("font_size", 15)
+	stop.add_theme_font_size_override("font_size", SeriesTheme.fs(15))
 	stop.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	stop.pressed.connect(func() -> void: game.play.decline_background())
 	_search_row.add_child(_search_label)
@@ -119,7 +119,7 @@ func _build_toast() -> void:
 	row.add_theme_constant_override("separation", 14)
 	_toast_label = SeriesTheme.label("", "book", 19, SeriesTheme.TEXT)
 	_toast_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_toast_label.custom_minimum_size = Vector2(380, 0)  # wrapping labels need a width
+	_toast_label.custom_minimum_size = Vector2(410, 0)  # wrapping labels need a width
 	_toast_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_toast_play = Button.new()
 	# TRANSLATORS: Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
@@ -163,22 +163,22 @@ func _build_dialog() -> void:
 	s.content_margin_top = 26
 	s.content_margin_bottom = 26
 	card.add_theme_stylebox_override("panel", s)
-	card.custom_minimum_size = Vector2(460, 0)
+	card.custom_minimum_size = Vector2(490, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 18)
 	_dialog_text = SeriesTheme.label("", "book", 24, SeriesTheme.TEXT)
 	_dialog_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_dialog_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_dialog_text.custom_minimum_size = Vector2(400, 0)
+	_dialog_text.custom_minimum_size = Vector2(430, 0)
 	var buttons := HBoxContainer.new()
 	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
 	buttons.add_theme_constant_override("separation", 14)
 	_dialog_yes = Button.new()
 	_dialog_yes.add_theme_color_override("font_color", SeriesTheme.ACCENT)
-	_dialog_yes.custom_minimum_size = Vector2(150, 52)
+	_dialog_yes.custom_minimum_size = Vector2(160, 56)
 	_dialog_yes.pressed.connect(func() -> void: _answer(true))
 	_dialog_no = Button.new()
-	_dialog_no.custom_minimum_size = Vector2(150, 52)
+	_dialog_no.custom_minimum_size = Vector2(160, 56)
 	_dialog_no.pressed.connect(func() -> void: _answer(false))
 	buttons.add_child(_dialog_yes)
 	buttons.add_child(_dialog_no)

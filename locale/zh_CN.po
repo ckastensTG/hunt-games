@@ -518,28 +518,33 @@ msgid "Look"
 msgstr "外观"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:745
+#: scenes/play/play_menu.gd:746
 msgid "Sound"
 msgstr "音效"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:747
+#: scenes/play/play_menu.gd:748
 msgid "Music"
 msgstr "音乐"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:751
+#: scenes/play/play_menu.gd:752
 msgid "Quit to main menu"
 msgstr "退出到主菜单"
 
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:779
+msgid "Graphics"
+msgstr "画质"
+
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:839
+#: scenes/play/play_menu.gd:860
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:876
+#: scenes/play/play_menu.gd:897
 msgid "Waiting"
 msgstr "等待中"
 
@@ -662,27 +667,27 @@ msgid "%d goat still to place"
 msgid_plural "%d goats still to place"
 msgstr[0] "还剩 %d 只山羊待放"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "Temple brass"
 msgstr "寺院黄铜"
 
-#: titles/bagh_chal/art/brass_style.gd:40
+#: titles/bagh_chal/art/brass_style.gd:41
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "刻纹黄铜棋盘与铸造棋子，黄昏时分的寺院庭院。"
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "Modern edition"
 msgstr "现代版"
 
-#: titles/bagh_chal/art/modern_style.gd:40
+#: titles/bagh_chal/art/modern_style.gd:41
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "当代桌游公司出品：色彩明快的模塑棋盘，塑料虎与羊，置于吊灯之下。"
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "Stone and pebbles"
 msgstr "石头与卵石"
 
-#: titles/bagh_chal/art/stone_style.gd:40
+#: titles/bagh_chal/art/stone_style.gd:41
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "古老的玩法：在石板上刻线并抹上白垩，以河石作虎与羊，置于草席之上。"
 
@@ -1126,3 +1131,23 @@ msgstr "一种复原"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "在一百年前的记载中，狗只能向前走，这样一来，待在塔里的美洲狮就永远抓不到。这里狗的走法和美洲狮的胜利条件采用 Trapial-Kuzen，这是该游戏的一种现代马普切版本。塔被当作普通棋盘，美洲狮先走，除非你在设置中更改。"
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:75
+msgid "Auto"
+msgstr "自动"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:77
+msgid "High"
+msgstr "高"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:79
+msgid "Medium"
+msgstr "中"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:81
+msgid "Low"
+msgstr "低"

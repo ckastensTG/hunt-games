@@ -37,6 +37,9 @@ func _init(owner_game: Node) -> void:
 
 func _ready() -> void:
 	_build()
+	get_viewport().size_changed.connect(func() -> void:
+		if _card:
+			_place.call_deferred())
 
 
 func _build() -> void:
@@ -55,18 +58,18 @@ func _build() -> void:
 	s.content_margin_top = 20
 	s.content_margin_bottom = 20
 	_card.add_theme_stylebox_override("panel", s)
-	_card.custom_minimum_size = Vector2(400, 0)
+	_card.custom_minimum_size = Vector2(430, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)
 	_counter = SeriesTheme.label("", "caps", 15, SeriesTheme.TEXT_DIM)
 	box.add_child(_counter)
 	_title = SeriesTheme.label("", "display", 28, SeriesTheme.ACCENT)
 	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_title.custom_minimum_size = Vector2(340, 0)
+	_title.custom_minimum_size = Vector2(370, 0)
 	box.add_child(_title)
 	_text = SeriesTheme.label("", "book", 20, SeriesTheme.TEXT)
 	_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_text.custom_minimum_size = Vector2(340, 0)
+	_text.custom_minimum_size = Vector2(370, 0)
 	box.add_child(_text)
 	box.add_child(HSeparator.new())
 	var buttons := HFlowContainer.new()
@@ -93,7 +96,19 @@ func _build() -> void:
 	_card.add_child(box)
 	root.add_child(_card)
 	_card.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT, Control.PRESET_MODE_MINSIZE)
-	_card.position = Vector2(28, 118)
+	_place()
+
+
+## Top left, under the menu button; in portrait, under the turn banner (which
+## sits below the top corners there).
+func _place() -> void:
+	var size := get_viewport().get_visible_rect().size
+	var y := 118.0
+	var hud: Node = game._hud
+	if size.y > size.x and hud and hud._turn_panel:
+		var banner: Control = hud._turn_panel
+		y = banner.offset_top + banner.get_combined_minimum_size().y + 14.0
+	_card.position = Vector2(28, y)
 
 
 func _notification(what: int) -> void:
@@ -152,6 +167,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _fill_card() -> void:
+	_place.call_deferred()
 	var step := _steps[_index]
 	_title.text = L10n.t(step.title)
 	_text.text = L10n.t(step.text)

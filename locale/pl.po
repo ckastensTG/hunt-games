@@ -518,28 +518,33 @@ msgid "Look"
 msgstr "Wygląd"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:745
+#: scenes/play/play_menu.gd:746
 msgid "Sound"
 msgstr "Dźwięk"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:747
+#: scenes/play/play_menu.gd:748
 msgid "Music"
 msgstr "Muzyka"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:751
+#: scenes/play/play_menu.gd:752
 msgid "Quit to main menu"
 msgstr "Wyjdź do menu głównego"
 
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:779
+msgid "Graphics"
+msgstr "Grafika"
+
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:839
+#: scenes/play/play_menu.gd:860
 #, c-format
 msgid "Your name: %s"
 msgstr "Twoja nazwa: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:876
+#: scenes/play/play_menu.gd:897
 msgid "Waiting"
 msgstr "Czekamy"
 
@@ -664,27 +669,27 @@ msgstr[0] "Kozy do postawienia: %d"
 msgstr[1] "Kozy do postawienia: %d"
 msgstr[2] "Kozy do postawienia: %d"
 
-#: titles/bagh_chal/art/brass_style.gd:39
+#: titles/bagh_chal/art/brass_style.gd:40
 msgid "Temple brass"
 msgstr "Mosiądz świątynny"
 
-#: titles/bagh_chal/art/brass_style.gd:40
+#: titles/bagh_chal/art/brass_style.gd:41
 msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
 msgstr "Grawerowana mosiężna plansza i odlewane figurki o zmierzchu na dziedzińcu świątyni."
 
-#: titles/bagh_chal/art/modern_style.gd:39
+#: titles/bagh_chal/art/modern_style.gd:40
 msgid "Modern edition"
 msgstr "Edycja nowoczesna"
 
-#: titles/bagh_chal/art/modern_style.gd:40
+#: titles/bagh_chal/art/modern_style.gd:41
 msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
 msgstr "Wydanie współczesnego wydawnictwa gier: barwna plansza z tworzywa, plastikowe tygrysy i kozy pod lampą wiszącą."
 
-#: titles/bagh_chal/art/stone_style.gd:39
+#: titles/bagh_chal/art/stone_style.gd:40
 msgid "Stone and pebbles"
 msgstr "Kamień i kamyki"
 
-#: titles/bagh_chal/art/stone_style.gd:40
+#: titles/bagh_chal/art/stone_style.gd:41
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "Po dawnemu: linie wykute w kamieniu i potarte kredą, tygrysy i kozy z rzecznych kamieni, na słomianej macie."
 
@@ -1138,3 +1143,23 @@ msgstr "Rekonstrukcja"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "W relacjach spisanych sto lat temu psy mogą iść tylko do przodu, a wtedy puma, która zostaje w wieży, nigdy nie zostanie złapana. Tutaj psy chodzą, a puma wygrywa jak w Trapial-Kuzen, współczesnej mapuczeńskiej wersji gry. Wieża to zwykła część planszy, a pierwsza rusza się puma, chyba że zmienisz to w ustawieniach."
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:75
+msgid "Auto"
+msgstr "Automatyczna"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:77
+msgid "High"
+msgstr "Wysoka"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:79
+msgid "Medium"
+msgstr "Średnia"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:81
+msgid "Low"
+msgstr "Niska"

@@ -564,10 +564,12 @@ func _build() -> String:
 
 # --- Android: local network permission ---------------------------------------
 
-## Android 17 asks before an app can see the local network (targetSdk 37);
-## older versions don't have the permission. Elsewhere this just runs `then`.
+## Android 17 (API 37) asks before an app can see the local network
+## (targetSdk 37); older versions don't have the permission, and asking for it
+## there is refused. Elsewhere this just runs `then`. (The version string is
+## no guide: many phones report their maker's build number; see DeviceInfo.)
 func _with_local_network(then: Callable) -> void:
-	if OS.get_name() != "Android" or _android_major() < 17:
+	if OS.get_name() != "Android" or DeviceInfo.android_api_level() < 37:
 		then.call()
 		return
 	if OS.request_permission(LOCAL_NETWORK_PERMISSION):
@@ -586,6 +588,3 @@ func _on_permission(permission: String, granted: bool) -> void:
 	else:
 		_fail("permission")
 
-
-static func _android_major() -> int:
-	return OS.get_version().get_slice(".", 0).to_int()

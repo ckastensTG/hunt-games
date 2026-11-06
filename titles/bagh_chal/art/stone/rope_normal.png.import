@@ -3,27 +3,29 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4lxxf17tsqf8"
-path="res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.ctex"
+path.s3tc="res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.s3tc.ctex"
+path.etc2="res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://titles/bagh_chal/art/stone/rope_normal.png"
-dest_files=["res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.ctex"]
+dest_files=["res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.s3tc.ctex", "res://.godot/imported/rope_normal.png-65ff12baa13a00ad4abe71d1d383a525.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

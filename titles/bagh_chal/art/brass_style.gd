@@ -162,7 +162,7 @@ func _add_courtyard(root: Node3D) -> void:
 		box(root, "Step", Vector3(70, h, 3.5), Vector3(-6.0, FLOOR_Y + h / 2, z - 1.75), stone if k == 0 else brick_wall)
 	for i in 13:
 		var x := -28.0 + i * 4.4
-		_add_lamp(root, Vector3(x, FLOOR_Y + 5.0, -11.9), float(i) + 2.0, i % 4 == 1)
+		_add_lamp(root, Vector3(x, FLOOR_Y + 5.0, -11.9), float(i) + 2.0, i % 4 == 1, true)
 	var silhouette := plain(Color(0.025, 0.02, 0.018), 0.95)
 	box(root, "FarWall", Vector3(160, 6.5, 2.0), Vector3(0, FLOOR_Y + 3.25, -62), brick_wall)
 	box(root, "TempleBase", Vector3(30, 9, 26), Vector3(-34, FLOOR_Y + 4.5, -112), silhouette)
@@ -182,7 +182,7 @@ func _add_courtyard(root: Node3D) -> void:
 	for j in 6:
 		box(root, "Lattice", Vector3(16.0, 0.35, 0.5), frame_c + Vector3(0, -5.0 + j * 2.0, -0.5), dark_wood)
 	for i in 7:
-		_add_lamp(root, Vector3(-15.0 + i * 5.0, FLOOR_Y + 4.0, 20.5), float(i) + 20.0, i == 3)
+		_add_lamp(root, Vector3(-15.0 + i * 5.0, FLOOR_Y + 4.0, 20.5), float(i) + 20.0, i == 3, true)
 	# Side walls, so the space reads as an enclosed courtyard.
 	for sx in [-1, 1]:
 		box(root, "WallSide", Vector3(2.0, 6.5, 120), Vector3(sx * 52.0, FLOOR_Y + 3.25, -5.0), brick_wall)
@@ -244,6 +244,7 @@ func _add_lights(root: Node3D, extras: bool) -> void:
 	fill.light_color = Color(0.45, 0.55, 0.9)
 	fill.light_energy = 0.07
 	fill.light_volumetric_fog_energy = 0.0
+	hide_at_low(fill)  # barely seen, and a directional light costs every pixel
 	root.add_child(fill)
 
 
@@ -298,7 +299,9 @@ func _add_frame_props(root: Node3D) -> void:
 	prop(bag, "Tie", tie, Vector3(0, 0.58, 0), plain(Color(0.72, 0.52, 0.16), 0.8))
 
 
-func _add_lamp(root: Node3D, at: Vector3, seed: float, with_light: bool) -> void:
+## `far`: a lamp in the courtyard, away from the table. Its light only
+## reaches the background, so it goes at the Low tier.
+func _add_lamp(root: Node3D, at: Vector3, seed: float, with_light: bool, far := false) -> void:
 	var lamp := Node3D.new()
 	lamp.name = "ButterLamp"
 	lamp.position = at
@@ -363,6 +366,8 @@ func _add_lamp(root: Node3D, at: Vector3, seed: float, with_light: bool) -> void
 		light.position.y = 1.35
 		light.shadow_enabled = false
 		light.light_volumetric_fog_energy = 0.3
+		if far:
+			hide_at_low(light)
 		lamp.add_child(light)
 	root.add_child(lamp)
 
