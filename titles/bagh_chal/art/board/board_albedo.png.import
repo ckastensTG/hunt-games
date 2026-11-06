@@ -3,20 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d077mhx3uysbm"
-path="res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.ctex"
+path.bptc="res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.bptc.ctex"
+path.astc="res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.astc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://titles/bagh_chal/art/board/board_albedo.png"
-dest_files=["res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.ctex"]
+dest_files=["res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.bptc.ctex", "res://.godot/imported/board_albedo.png-f01a3676c1f87e0cbc2f69e5b2a147f5.astc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

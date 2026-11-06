@@ -9,6 +9,9 @@ Errors (exit 1):
 - a plural entry has the wrong number of forms for the language
 - a translation is the English source text unchanged (only checked for
   real sentences: names such as "Bagh Chal · Parlett 1976" may stay)
+
+A title-only language (scope.py: Nepali, Bagh Chal's alone) may leave out
+the strings only another title shows.
 """
 from __future__ import annotations
 
@@ -18,6 +21,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import po  # noqa: E402
+import scope  # noqa: E402
 
 LOCALE = pathlib.Path("locale")
 PH = re.compile(r"%[-+ 0#]*\d*(?:\.\d+)?[dsf%]")
@@ -36,7 +40,9 @@ def main() -> int:
         header, entries = po.read(path)
         nplurals = int(re.search(r"nplurals=(\d+)", header.get("Plural-Forms", "")).group(1))
         have = {e.key: e for e in entries}
-        missing = [k for k in keys if k not in have or not have[k].translated()]
+        lang = header.get("Language", path.stem)
+        needed = {t.key for t in template if scope.needed(t, lang)}
+        missing = [k for k in needed if k not in have or not have[k].translated()]
         problems = []
         for e in entries:
             if e.key not in keys:
@@ -62,7 +68,8 @@ def main() -> int:
             print(f"{path}: {p}")
         errors += len(problems)
         if not problems:
-            print(f"{path}: ok ({len(entries)} strings)")
+            left_out = len(keys) - len(needed)
+            print(f"{path}: ok ({len(entries)} strings" + (f", {left_out} for other titles left out)" if left_out else ")"))
     return 1 if errors else 0
 
 

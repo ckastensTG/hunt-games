@@ -22,7 +22,7 @@ signal nearby_hosts_changed
 signal background_match_found
 ## A short message for the player (already translated).
 signal toast(text: String)
-## The opponent asks something: "draw", "undo" or "rematch".
+## The opponent asks something: "draw" or "rematch".
 signal asked(what: String)
 ## The connection state changed (lost, back, opponent gone).
 signal connection_changed
@@ -315,12 +315,6 @@ func offer_draw() -> void:
 		toast.emit(L10n.t("Draw offered. Waiting for an answer."))
 
 
-func request_undo() -> void:
-	if net and net.session and net.session.is_ongoing() and not net.session.moves.is_empty():
-		net.request_undo()
-		toast.emit(L10n.t("Asked to take back your last move."))
-
-
 func resign() -> void:
 	if net:
 		net.resign()
@@ -340,8 +334,6 @@ func answer(what: String, ok: bool) -> void:
 	match what:
 		"draw":
 			net.answer_draw(ok)
-		"undo":
-			net.answer_undo(ok)
 		"rematch":
 			net.answer_rematch(ok)
 
@@ -433,11 +425,11 @@ func _start_net(n: NetMatch, with_deadline: bool) -> void:
 		toast.emit(L10n.t("Your opponent left the game."))
 		connection_changed.emit())
 	n.draw_offered.connect(func() -> void: asked.emit("draw"))
-	n.undo_requested.connect(func() -> void: asked.emit("undo"))
+	# No take-backs against a person (Christopher, 2026-11-06): the protocol
+	# still has them (NetMatch), so a request is turned down without asking.
+	n.undo_requested.connect(n.answer_undo.bind(false))  # bound, not a lambda: no cycle on n
 	n.rematch_requested.connect(func() -> void: asked.emit("rematch"))
 	n.draw_declined.connect(func() -> void: toast.emit(L10n.t("Your opponent declined the draw.")))
-	n.undo_answered.connect(func(ok: bool) -> void:
-		toast.emit(L10n.t("Move taken back.") if ok else L10n.t("Your opponent said no to taking back the move.")))
 	n.rematch_declined.connect(func() -> void: toast.emit(L10n.t("Your opponent declined the rematch.")))
 	n.turn_timed_out.connect(_on_turn_timed_out)
 

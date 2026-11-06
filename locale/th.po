@@ -1,0 +1,1150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Translator: Claude (2026-11-06)\n"
+"X-Review-Status: translation confidence moderate; native-speaker review ESSENTIAL before release (bible §7), Thai first\n"
+
+#: scenes/greybox/hud.gd:140
+msgid "Menu"
+msgstr "เมนู"
+
+#: scenes/greybox/hud.gd:164
+msgid "Undo"
+msgstr "ย้อนตาเดิน"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:235
+msgid "Stop here"
+msgstr "หยุดตรงนี้"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:254
+msgid "Moves"
+msgstr "การเดิน"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
+msgid "Play again"
+msgstr "เล่นอีกครั้ง"
+
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:315
+msgid "New opponent"
+msgstr "คู่แข่งใหม่"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:320
+msgid "Main menu"
+msgstr "เมนูหลัก"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:324
+msgid "Look at the board"
+msgstr "ดูกระดาน"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:390
+msgid "thinking"
+msgstr "กำลังคิด"
+
+#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
+msgid "A draw"
+msgstr "เสมอ"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:430
+#, c-format
+msgid "Captured %d / %d"
+msgstr "กินแล้ว %d / %d"
+
+#: scenes/greybox/hud.gd:458
+msgid "No moves yet"
+msgstr "ยังไม่มีการเดิน"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+msgid "You won"
+msgstr "คุณชนะ"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "คุณแพ้"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "แข่งอีกครั้ง"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:496
+#, c-format
+msgid "place %s"
+msgstr "วางที่ %s"
+
+#: scenes/greybox/hud.gd:505
+msgid "Watching the AI play both sides."
+msgstr "AI กำลังเล่นทั้งสองฝ่าย"
+
+#: scenes/greybox/hud.gd:509
+msgid "Waiting for your opponent's move."
+msgstr "กำลังรอคู่แข่งเดิน"
+
+#: scenes/greybox/hud.gd:511
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "กินต่อเนื่อง: เลือกจุดลงถัดไป หรือหยุดตรงนี้"
+
+#: scenes/greybox/hud.gd:517
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "เลือกจุดที่จะไป วงแหวนที่ขาดหมายถึงการกิน"
+
+#: scenes/greybox/hud.gd:518
+msgid "Pick where it goes."
+msgstr "เลือกจุดที่จะไป"
+
+#: scenes/greybox/tutorial.gd:79
+msgid "Close"
+msgstr "ปิด"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:83
+msgid "Replay"
+msgstr "เล่นซ้ำ"
+
+#: scenes/greybox/tutorial.gd:86
+msgid "‹ Back"
+msgstr "‹ ก่อนหน้า"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:175
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "วิธีเล่น · %d / %d"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Start playing"
+msgstr "เริ่มเล่น"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Next ›"
+msgstr "ถัดไป ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+msgid "Looking for an opponent…"
+msgstr "กำลังหาคู่แข่ง…"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "หยุดหา"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "เล่นเลย"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+msgid "Not now"
+msgstr "ไว้ก่อน"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "กำลังเชื่อมต่อใหม่… %d วินาที"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "ขาดการเชื่อมต่อ"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "คู่แข่งพร้อมแล้ว — เล่นเลยไหม"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "คู่แข่งขอเสมอ"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Accept"
+msgstr "ยอมรับ"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Decline"
+msgstr "ปฏิเสธ"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent wants a rematch."
+msgstr "คู่แข่งอยากแข่งอีกครั้ง"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Resign this game?"
+msgstr "ยอมแพ้เกมนี้ไหม"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+msgid "Resign"
+msgstr "ยอมแพ้"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Keep playing"
+msgstr "เล่นต่อ"
+
+#: scenes/play/play_controller.gd:281
+msgid "We'll let you know when an opponent is ready."
+msgstr "เราจะแจ้งให้ทราบเมื่อคู่แข่งพร้อม"
+
+#: scenes/play/play_controller.gd:315
+msgid "Draw offered. Waiting for an answer."
+msgstr "ขอเสมอแล้ว กำลังรอคำตอบ"
+
+#: scenes/play/play_controller.gd:326
+msgid "Rematch offered. Waiting for an answer."
+msgstr "ขอแข่งอีกครั้งแล้ว กำลังรอคำตอบ"
+
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+msgid "Your opponent left the game."
+msgstr "คู่แข่งออกจากเกมแล้ว"
+
+#: scenes/play/play_controller.gd:422
+msgid "Reconnected."
+msgstr "เชื่อมต่อใหม่แล้ว"
+
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "คู่แข่งปฏิเสธการเสมอ"
+
+#: scenes/play/play_controller.gd:433
+msgid "Your opponent declined the rematch."
+msgstr "คู่แข่งปฏิเสธการแข่งอีกครั้ง"
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:450
+#, c-format
+msgid "Playing against %s"
+msgstr "กำลังเล่นกับ %s"
+
+#: scenes/play/play_controller.gd:460
+msgid "The other player didn't connect. Still looking…"
+msgstr "ผู้เล่นอีกฝ่ายไม่ได้เชื่อมต่อ กำลังหาต่อ…"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:509
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "หมดเวลา จึงเดินแทนคุณหนึ่งตา (ครั้งที่ %d จาก 3)"
+
+#: scenes/play/play_menu.gd:251
+msgid "Back"
+msgstr "กลับ"
+
+#: scenes/play/play_menu.gd:306
+msgid "Rules"
+msgstr "กติกา"
+
+#: scenes/play/play_menu.gd:326
+msgid "Language"
+msgstr "ภาษา"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+msgid "Continue"
+msgstr "เล่นต่อ"
+
+#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+msgid "Play against the AI"
+msgstr "เล่นกับ AI"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+msgid "Pass and play"
+msgstr "สองคนเครื่องเดียว"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+msgid "Play local"
+msgstr "เล่นผ่าน Wi-Fi"
+
+#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+msgid "Play online"
+msgstr "เล่นออนไลน์"
+
+#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "วิธีเล่น"
+
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+msgid "Game origins"
+msgstr "ที่มาของเกม"
+
+#. Main menu button: close the game completely.
+#: scenes/play/play_menu.gd:370
+msgid "Quit game"
+msgstr "ออกจากเกม"
+
+#: scenes/play/play_menu.gd:383
+msgid "Novice"
+msgstr "มือใหม่"
+
+#: scenes/play/play_menu.gd:383
+msgid "Apprentice"
+msgstr "ฝึกหัด"
+
+#: scenes/play/play_menu.gd:383
+msgid "Adept"
+msgstr "ชำนาญ"
+
+#: scenes/play/play_menu.gd:383
+msgid "Master"
+msgstr "เซียน"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "คู่แข่ง"
+
+#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+msgid "Start"
+msgstr "เริ่ม"
+
+#: scenes/play/play_menu.gd:400
+msgid "Two players share this device and take turns."
+msgstr "ผู้เล่นสองคนใช้เครื่องนี้ร่วมกันและผลัดกันเดิน"
+
+#: scenes/play/play_menu.gd:409
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "อุปกรณ์ทั้งสองต้องเชื่อมต่อ Wi-Fi เดียวกัน"
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+msgid "Host a game"
+msgstr "สร้างเกม"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+msgid "Join a game"
+msgstr "เข้าร่วมเกม"
+
+#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+msgid "Create a code"
+msgstr "สร้างรหัส"
+
+#: scenes/play/play_menu.gd:441
+msgid "Waiting for a player"
+msgstr "กำลังรอผู้เล่น"
+
+#: scenes/play/play_menu.gd:442
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "บนอุปกรณ์อีกเครื่อง เลือก “เล่นผ่าน Wi-Fi” แล้วเลือก “เข้าร่วมเกม”"
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:446
+msgid "If the game doesn't appear there, enter this code"
+msgstr "ถ้าเกมไม่ปรากฏที่นั่น ให้ใส่รหัสนี้"
+
+#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:457
+msgid "Looking for games on this Wi-Fi…"
+msgstr "กำลังหาเกมใน Wi-Fi นี้…"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:468
+msgid "Code"
+msgstr "รหัส"
+
+#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+msgid "Join"
+msgstr "เข้าร่วม"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:513
+msgid "Play with someone online"
+msgstr "เล่นกับผู้เล่นออนไลน์"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+msgid "Standard rules, about a minute per move"
+msgstr "กติกามาตรฐาน ตาละประมาณหนึ่งนาที"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+msgid "Play with a friend"
+msgstr "เล่นกับเพื่อน"
+
+#: scenes/play/play_menu.gd:540
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "คนหนึ่งสร้างรหัส อีกคนใส่รหัสนั้น เล่นข้ามกันได้ทั้งโทรศัพท์ แท็บเล็ต และคอมพิวเตอร์"
+
+#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+msgid "Enter a code"
+msgstr "ใส่รหัส"
+
+#: scenes/play/play_menu.gd:551
+msgid "Your code"
+msgstr "รหัสของคุณ"
+
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+msgid "Connecting…"
+msgstr "กำลังเชื่อมต่อ…"
+
+#: scenes/play/play_menu.gd:556
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "ส่งรหัสนี้ให้เพื่อน เกมจะเริ่มเมื่อเพื่อนใส่รหัส"
+
+#: scenes/play/play_menu.gd:559
+msgid "Share"
+msgstr "แชร์"
+
+#: scenes/play/play_menu.gd:561
+msgid "Copy"
+msgstr "คัดลอก"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+msgid "Copied"
+msgstr "คัดลอกแล้ว"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:577
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "มาเล่นกับฉันใน Timeless Games! รหัสเกมของฉันคือ %s"
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:613
+msgid "No one is free right now"
+msgstr "ตอนนี้ยังไม่มีใครว่าง"
+
+#: scenes/play/play_menu.gd:614
+msgid "We can keep looking while you play."
+msgstr "เราหาต่อให้ได้ระหว่างที่คุณเล่น"
+
+#: scenes/play/play_menu.gd:615
+msgid "Play against the AI while we keep looking"
+msgstr "เล่นกับ AI ระหว่างที่เราหาต่อ"
+
+#: scenes/play/play_menu.gd:618
+msgid "Keep searching"
+msgstr "หาต่อ"
+
+#: scenes/play/play_menu.gd:619
+msgid "Invite a friend instead"
+msgstr "ชวนเพื่อนแทน"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:639
+msgid "Couldn't start the game"
+msgstr "เริ่มเกมไม่ได้"
+
+#: scenes/play/play_menu.gd:642
+msgid "OK"
+msgstr "ตกลง"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:650
+msgid "Leave this game?"
+msgstr "ออกจากเกมนี้ไหม"
+
+#: scenes/play/play_menu.gd:651
+msgid "It counts as a loss."
+msgstr "จะนับว่าคุณแพ้"
+
+#: scenes/play/play_menu.gd:652
+msgid "Leave"
+msgstr "ออก"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:658
+msgid "Stay"
+msgstr "อยู่ต่อ"
+
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:683
+msgid "Sources"
+msgstr "แหล่งอ้างอิง"
+
+#: scenes/play/play_menu.gd:729
+msgid "Offer a draw"
+msgstr "ขอเสมอ"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:758
+msgid "Look"
+msgstr "รูปแบบ"
+
+#. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+#: scenes/play/play_menu.gd:761
+msgid "Sound"
+msgstr "เสียง"
+
+#. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
+#: scenes/play/play_menu.gd:763
+msgid "Music"
+msgstr "เพลง"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:767
+msgid "Privacy choices"
+msgstr "ตัวเลือกความเป็นส่วนตัว"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:788
+msgid "Quit to main menu"
+msgstr "กลับเมนูหลัก"
+
+#. Title of the screen offering the other looks (styles of board and pieces) for a short video.
+#: scenes/play/play_menu.gd:802
+msgid "More looks"
+msgstr "รูปแบบอื่น"
+
+#. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+#: scenes/play/play_menu.gd:804
+msgid "Watch a short video to switch looks until you close the game."
+msgstr "ดูวิดีโอสั้น ๆ เพื่อเปลี่ยนรูปแบบได้จนกว่าจะปิดแอป"
+
+#. On the "More looks" screen when no video could be loaded (offline, or none available).
+#: scenes/play/play_menu.gd:808
+msgid "No video is ready right now. Try again in a moment."
+msgstr "ตอนนี้ยังไม่มีวิดีโอ ลองใหม่อีกครั้งในอีกสักครู่"
+
+#. Button: play a short video (an ad) to open the other looks.
+#: scenes/play/play_menu.gd:811
+msgid "Watch a video"
+msgstr "ดูวิดีโอ"
+
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:842
+msgid "Graphics"
+msgstr "กราฟิก"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:923
+#, c-format
+msgid "Your name: %s"
+msgstr "ชื่อของคุณ: %s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:960
+msgid "Waiting"
+msgstr "กำลังรอ"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "อาลักษณ์"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "นักเดินทาง"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "ช่างปั้น"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+msgid "Weaver"
+msgstr "ช่างทอ"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "คนเลี้ยงแกะ"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "คนพายเรือ"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "คนสวน"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "ช่างก่อสร้าง"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "ติดต่อบริการออนไลน์ไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "ไม่มีเกมที่ใช้รหัสนี้ ตรวจสอบแล้วลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "เกมนั้นเริ่มไปแล้ว"
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "เชื่อมต่อกับอุปกรณ์อีกเครื่องไม่ได้"
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "อุปกรณ์อีกเครื่องใช้เกมคนละเวอร์ชัน อัปเดตทั้งสองเครื่องแล้วลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "อุปกรณ์อีกเครื่องกำลังเล่นเกมอื่นอยู่"
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "อุปกรณ์อีกเครื่องใช้กติกาที่เวอร์ชันนี้ไม่มี"
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "เริ่มเกมบนเครือข่ายนี้ไม่ได้ ปิดเกมนี้ที่เปิดซ้อนอยู่แล้วลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "การเล่นผ่าน Wi-Fi ต้องได้รับอนุญาตให้ค้นหาอุปกรณ์ในเครือข่ายของคุณ"
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "รหัสนี้ไม่ถูกต้อง ตรวจสอบแล้วลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "อุปกรณ์นี้ไม่ได้เชื่อมต่อ Wi-Fi"
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "เกิดข้อผิดพลาด โปรดลองอีกครั้ง"
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "คุณยอมแพ้"
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "คู่แข่งยอมแพ้"
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "คุณตกลงเสมอ"
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "คุณหมดเวลาครบสามครั้ง"
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "คู่แข่งหมดเวลาครบสามครั้ง"
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "คุณออกจากเกม"
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "อุปกรณ์อีกเครื่องส่งการเดินที่ผิดกติกามา"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:62
+msgid "Goats to move"
+msgstr "ตาของแพะ"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:117
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "เหลือแพะที่ต้องวางอีก %d ตัว"
+
+#: titles/bagh_chal/art/brass_style.gd:40
+msgid "Temple brass"
+msgstr "ทองเหลืองในวิหาร"
+
+#: titles/bagh_chal/art/brass_style.gd:41
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "กระดานทองเหลืองแกะลายกับตัวหมากโลหะหล่อ ยามพลบค่ำในลานวิหาร"
+
+#: titles/bagh_chal/art/modern_style.gd:40
+msgid "Modern edition"
+msgstr "ฉบับสมัยใหม่"
+
+#: titles/bagh_chal/art/modern_style.gd:41
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "ฉบับของบริษัทบอร์ดเกมยุคนี้: กระดานพลาสติกขึ้นรูปสีสดใส เสือและแพะพลาสติก ใต้โคมไฟห้อย"
+
+#: titles/bagh_chal/art/stone_style.gd:40
+msgid "Stone and pebbles"
+msgstr "หินและกรวด"
+
+#: titles/bagh_chal/art/stone_style.gd:41
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "แบบดั้งเดิม: เส้นสลักบนหินแล้วทาด้วยชอล์ก เสือและแพะทำจากหินแม่น้ำ บนเสื่อฟาง"
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "Bagh Chal มาจากเนปาล ชื่อเกมรวมคำภาษาเนปาลีที่แปลว่า “เสือ” และ “การเดิน” เข้าด้วยกัน เสือสี่ตัวล่าแพะยี่สิบตัวบนกระดานที่มีจุดห้าคูณห้า เสือกินแพะด้วยการกระโดดข้าม ส่วนแพะชนะเมื่อล้อมเสือไว้จนไม่มีเสือตัวใดเดินได้ ในภาษาเนปาลภาษา ภาษาของชาวเนวาร์แห่งหุบเขากาฐมาณฑุ เกมนี้เรียกว่า [i]dhun kasa[/i] แปลว่า “เกมเสือ”"
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "เกมนี้อยู่ในตระกูลใหญ่ของเกมล่าสัตว์ ซึ่งหมากที่แข็งแกร่งไม่กี่ตัวต้องสู้กับหมากที่อ่อนแอจำนวนมาก เกมเสือกับแพะหรือลูกแกะเล่นกันบนกระดานหลากหลายแบบทั่วเอเชียใต้ ตัวอย่างเช่นทางตอนใต้ของอินเดีย เกมใกล้เคียงกันอย่าง [i]aadu puli attam[/i] ก็มีกระดานเป็นของตัวเอง"
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "ไม่มีใครรู้ว่าเกมนี้เก่าแก่แค่ไหน เพราะสืบทอดกันมาด้วยการเล่น ไม่ใช่ด้วยการจดบันทึก ผู้เล่นมักขีดกระดานลงบนพื้นดินหรือบนหิน แล้วใช้ก้อนหินและก้อนกรวดเป็นตัวหมาก ในปี ค.ศ. 1976 เดวิด พาร์เลตต์ นักประวัติศาสตร์เกม พบว่าเกมนี้เป็นที่นิยมในหมู่พระภิกษุในพุทธศาสนา ซึ่งก็เล่นกันแบบนั้นเลย"
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "บันทึกลายลักษณ์อักษรที่เก่าแก่ที่สุดชิ้นหนึ่งมาจากปี ค.ศ. 1933 เมื่อนักสัตววิทยา Sunder Lal Hora บันทึกเกมนี้ไว้ที่หุบเขาแม่น้ำทีสตาในเทือกเขาหิมาลัยตะวันออก ภายใต้ชื่อ Bhagchal, Bhagchakar หรือ Chakrachal โดยมีเสือสี่ตัวและแพะยี่สิบตัว พาร์เลตต์จดกติกาไว้ที่เนปาลในปี ค.ศ. 1976 และยูรี อาเวอร์บัค แกรนด์มาสเตอร์หมากรุกสากล ซึ่งได้เห็นเกมนี้ที่นั่นในปี ค.ศ. 1986 เรียกเกมนี้ว่าเกมประจำชาติที่ได้รับความนิยมพอ ๆ กับหมากรุกสากล"
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "บันทึกเก่า ๆ ไม่ได้จบการล่าไว้ที่จุดเดียวกันทั้งหมด ในบันทึกของ Hora และพาร์เลตต์ เสือต้องล่าแพะจนหมดทุกตัว ขณะที่ผู้เล่นส่วนใหญ่ทุกวันนี้หยุดเมื่อกินได้ห้าตัว เกมนี้มีให้ทั้งสองแบบ คือกติกามาตรฐานที่กินห้าตัว และพาร์เลตต์ 1976 ที่ล่าจนถึงแพะตัวสุดท้าย"
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "ในปี ค.ศ. 2004 นักวิทยาศาสตร์คอมพิวเตอร์ Lim Yew Jin และ Jürg Nievergelt เริ่มคำนวณทุกตำแหน่งของเกมนี้ ต่อมาทั้งสองพิสูจน์ได้ว่า ถ้าทั้งสองฝ่ายเล่นอย่างไม่มีที่ผิด เกมแบบมาตรฐานจะจบลงด้วยการเสมอ ทั้งเสือและแพะไม่มีฝ่ายใดบังคับให้ตัวเองชนะได้"
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "ในหุบเขากาฐมาณฑุ ผู้เล่นสูงวัยยังคงมานั่งล้อมกระดานกันบนแท่นของ pati หรือศาลาพักสาธารณะ และรอบ ๆ วัด ส่วนกระดานโลหะและไม้ก็มีวางขาย ส่วนใหญ่ขายให้นักท่องเที่ยว นักข่าวในกาฐมาณฑุสังเกตว่าทุกวันนี้คนหนุ่มสาวเล่นเกมนี้น้อยลง"
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:35
+msgid "Standard rules"
+msgstr "กติกามาตรฐาน"
+
+#: titles/common/hunt_text.gd:37
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "พาร์เลตต์ 1976: ล่าจนถึงแพะตัวสุดท้าย"
+
+#: titles/common/hunt_text.gd:39
+msgid "Adugo, the Bororo rules"
+msgstr "Adugo กติกาของชาวโบโรโร"
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:42
+msgid "Komikan, a Mapuche reconstruction"
+msgstr "Komikan เกมของชาวมาปูเชที่ฟื้นฟูขึ้นใหม่"
+
+#: titles/common/hunt_text.gd:49
+msgid "Bagh Chal · Standard"
+msgstr "Bagh Chal · มาตรฐาน"
+
+#: titles/common/hunt_text.gd:51
+msgid "Bagh Chal · Parlett 1976"
+msgstr "Bagh Chal · พาร์เลตต์ 1976"
+
+#: titles/common/hunt_text.gd:53
+msgid "Jogo da Onça · Adugo"
+msgstr "Jogo da Onça · Adugo"
+
+#: titles/common/hunt_text.gd:55
+msgid "Jogo da Onça · Komikan"
+msgstr "Jogo da Onça · Komikan"
+
+#: titles/common/hunt_text.gd:62
+msgid "Tigers to move"
+msgstr "ตาของเสือ"
+
+#: titles/common/hunt_text.gd:64
+msgid "Jaguar to move"
+msgstr "ตาของเสือจากัวร์"
+
+#: titles/common/hunt_text.gd:64 titles/common/hunt_text.gd:66
+msgid "Dogs to move"
+msgstr "ตาของสุนัข"
+
+#: titles/common/hunt_text.gd:66
+msgid "Puma to move"
+msgstr "ตาของพูมา"
+
+#: titles/common/hunt_text.gd:73
+msgid "The tigers won"
+msgstr "เสือชนะ"
+
+#: titles/common/hunt_text.gd:73
+msgid "The goats won"
+msgstr "แพะชนะ"
+
+#: titles/common/hunt_text.gd:75
+msgid "The jaguar won"
+msgstr "เสือจากัวร์ชนะ"
+
+#: titles/common/hunt_text.gd:75 titles/common/hunt_text.gd:77
+msgid "The dogs won"
+msgstr "สุนัขชนะ"
+
+#: titles/common/hunt_text.gd:77
+msgid "The puma won"
+msgstr "พูมาชนะ"
+
+#: titles/common/hunt_text.gd:84
+msgid "The tigers win"
+msgstr "เสือชนะ"
+
+#: titles/common/hunt_text.gd:84
+msgid "The goats win"
+msgstr "แพะชนะ"
+
+#: titles/common/hunt_text.gd:86
+msgid "The jaguar wins"
+msgstr "เสือจากัวร์ชนะ"
+
+#: titles/common/hunt_text.gd:86 titles/common/hunt_text.gd:88
+msgid "The dogs win"
+msgstr "สุนัขชนะ"
+
+#: titles/common/hunt_text.gd:88
+msgid "The puma wins"
+msgstr "พูมาชนะ"
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the tigers"
+msgstr "คุณเล่นฝ่ายเสือ"
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the goats"
+msgstr "คุณเล่นฝ่ายแพะ"
+
+#: titles/common/hunt_text.gd:96
+msgid "You play the jaguar"
+msgstr "คุณเล่นฝ่ายเสือจากัวร์"
+
+#: titles/common/hunt_text.gd:96 titles/common/hunt_text.gd:98
+msgid "You play the dogs"
+msgstr "คุณเล่นฝ่ายสุนัข"
+
+#: titles/common/hunt_text.gd:98
+msgid "You play the puma"
+msgstr "คุณเล่นฝ่ายพูมา"
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a tiger to move."
+msgstr "เลือกเสือที่จะเดิน"
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a goat to move."
+msgstr "เลือกแพะที่จะเดิน"
+
+#: titles/common/hunt_text.gd:106
+msgid "Move the jaguar."
+msgstr "เดินเสือจากัวร์"
+
+#: titles/common/hunt_text.gd:106 titles/common/hunt_text.gd:108
+msgid "Choose a dog to move."
+msgstr "เลือกสุนัขที่จะเดิน"
+
+#: titles/common/hunt_text.gd:108
+msgid "Move the puma."
+msgstr "เดินพูมา"
+
+#: titles/common/hunt_text.gd:112
+msgid "Place a goat on any empty point."
+msgstr "วางแพะหนึ่งตัวบนจุดว่างจุดใดก็ได้"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every goat has been captured."
+msgstr "แพะถูกกินหมดทุกตัวแล้ว"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every dog has been eaten."
+msgstr "สุนัขถูกกินหมดทุกตัวแล้ว"
+
+#: titles/common/hunt_text.gd:128
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "กินแพะไปแล้ว %d ตัว"
+
+#: titles/common/hunt_text.gd:129
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] "กินสุนัขไปแล้ว %d ตัว"
+
+#: titles/common/hunt_text.gd:133
+msgid "The tigers are trapped: none of them can move."
+msgstr "เสือถูกล้อมไว้: ไม่มีตัวใดเดินได้"
+
+#: titles/common/hunt_text.gd:135
+msgid "The jaguar is trapped and can't move."
+msgstr "เสือจากัวร์ถูกล้อมไว้และเดินไม่ได้"
+
+#: titles/common/hunt_text.gd:137
+msgid "The puma is trapped and can't move."
+msgstr "พูมาถูกล้อมไว้และเดินไม่ได้"
+
+#: titles/common/hunt_text.gd:139
+msgid "The goats can't move."
+msgstr "แพะเดินไม่ได้"
+
+#: titles/common/hunt_text.gd:139
+msgid "The dogs can't move any more."
+msgstr "สุนัขเดินต่อไม่ได้แล้ว"
+
+#: titles/common/hunt_text.gd:141
+msgid "Every move left would repeat an earlier position."
+msgstr "ทุกตาที่เหลือจะทำให้ตำแหน่งเดิมเกิดซ้ำ"
+
+#: titles/common/hunt_text.gd:143
+msgid "The same position came up three times."
+msgstr "ตำแหน่งเดิมเกิดขึ้นสามครั้ง"
+
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:150
+#, c-format
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "เสือเดิน %d ตาโดยไม่ได้กินเลย"
+
+#: titles/common/hunt_text.gd:152
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "เสือจากัวร์เดิน %d ตาโดยไม่ได้กินเลย"
+
+#: titles/common/hunt_text.gd:154
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "พูมาเดิน %d ตาโดยไม่ได้กินเลย"
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:169
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "ตาที่เสือเดินโดยไม่ได้กิน: %d / %d"
+
+#: titles/common/hunt_text.gd:171
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "ตาที่เสือจากัวร์เดินโดยไม่ได้กิน: %d / %d"
+
+#: titles/common/hunt_text.gd:173
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "ตาที่พูมาเดินโดยไม่ได้กิน: %d / %d"
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "เสือกับแพะ"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "เสือสี่ตัวสู้กับแพะยี่สิบตัว เสือเริ่มที่มุมทั้งสี่ ส่วนแพะเริ่มอยู่ในมือ นอกกระดาน แพะเดินก่อน"
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "การวางแพะ"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "ตราบใดที่ยังมีแพะเหลืออยู่ในมือ ทุกตาของแพะคือการวาง: วางแพะหนึ่งตัวลงบนจุดว่างจุดใดก็ได้ แพะบนกระดานยังเดินไม่ได้จนกว่าจะวางครบยี่สิบตัว ระหว่างนั้นเสือเดินสลับกันไป"
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "เสือเดินอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "เสือเดินไปตามเส้นไปยังจุดว่างถัดไป เส้นทแยงผ่านเฉพาะจุดเว้นจุด จุดบางจุดจึงมีจุดข้างเคียงแปดจุด ส่วนที่เหลือมีสี่จุดหรือน้อยกว่า"
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
+msgid "Capturing"
+msgstr "การกิน"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "เสือกินแพะด้วยการกระโดดข้ามแพะที่อยู่ติดกันบนเส้นเดียวกัน ไปลงที่จุดว่างที่อยู่ถัดไปพอดี แพะตัวนั้นออกจากกระดาน กระโดดหนึ่งครั้งกินได้หนึ่งตัว และไม่มีการบังคับกิน"
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "สามัคคีคือพลัง"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "แพะที่มีแพะอีกตัว หรือขอบกระดาน อยู่ข้างหลังพอดี จะถูกกระโดดข้ามไม่ได้ เพราะเสือต้องมีจุดว่างให้ลง แพะที่อยู่รวมกันจึงปลอดภัย"
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "การเดินแพะ"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "เมื่อแพะลงกระดานครบแล้ว แพะจะเดินไปตามเส้นไปยังจุดว่างถัดไปเหมือนกับเสือ แพะไม่กระโดดและไม่กินเลย"
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "เสือชนะอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "ในฉบับของพาร์เลตต์ เสือต้องกินแพะให้ครบทั้งยี่สิบตัว ส่วนอื่นเหมือนเกมแบบมาตรฐานทุกอย่าง"
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "เสือชนะเมื่อกินแพะได้ห้าตัว"
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "แพะชนะอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "แพะชนะเมื่อไม่มีเสือตัวใดเดินได้: เสือทุกตัวถูกแพะที่กระโดดข้ามไม่ได้ล้อมไว้"
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
+msgid "Draws"
+msgstr "การเสมอ"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "เมื่อวางแพะครบแล้ว ห้ามเดินตาที่ทำให้ตำแหน่งที่เคยเกิดขึ้นแล้วกลับมาอีก เกมจะเสมอถ้าเสือเดินครบ 50 ตาโดยไม่ได้กินเลย หรือถ้าทุกตาที่เหลือจะทำให้ตำแหน่งเกิดซ้ำ"
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr "เสือจากัวร์กับสุนัข"
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr "เสือจากัวร์หนึ่งตัวสู้กับสุนัขสิบสี่ตัว เสือจากัวร์เริ่มที่กลางกระดาน และสุนัขเต็มครึ่งกระดานฝั่งตรงข้าม เสือจากัวร์เดินก่อน"
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr "การเดิน"
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr "แต่ละตา หมากหนึ่งตัวเดินไปตามเส้นไปยังจุดว่างถัดไปในทิศทางใดก็ได้ สามเหลี่ยมเป็นส่วนหนึ่งของกระดาน และทั้งสองฝ่ายเข้าไปได้"
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr "เสือจากัวร์กินสุนัขด้วยการกระโดดข้ามสุนัขที่อยู่ติดกันบนเส้นเดียวกัน ไปลงที่จุดว่างที่อยู่ถัดไปพอดี สุนัขตัวนั้นออกจากกระดาน จะกินหรือไม่ก็ได้"
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr "กินต่อเนื่อง"
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr "หลังจากกินแล้ว เสือจากัวร์กระโดดต่อได้อีกเรื่อย ๆ เปลี่ยนทิศทางได้ตามใจ และหยุดหลังการกระโดดครั้งใดก็ได้ ในตาเดียวกันห้ามกระโดดข้ามสุนัขตัวเดิมสองครั้ง"
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr "เป็นคู่แล้วแข็งแกร่ง"
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr "สุนัขสองตัวที่เรียงกันบนเส้นเดียวกันจะปกป้องกันและกัน เพราะเสือจากัวร์ไม่มีที่ให้ลง"
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr "เสือจากัวร์ชนะอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr "เสือจากัวร์ชนะเมื่อกินสุนัขได้ห้าตัว"
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
+msgid "How the dogs win"
+msgstr "สุนัขชนะอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr "สุนัขชนะเมื่อเสือจากัวร์เดินไม่ได้เลย"
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "ถ้าตำแหน่งเดิมเกิดขึ้นสามครั้ง หรือเสือจากัวร์เดินครบ 50 ตาโดยไม่ได้กินเลย เกมจะเสมอ"
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr "พูมากับสุนัข"
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr "Komikan เป็นเกมล่าสัตว์ของชาวมาปูเช พูมาเริ่มอยู่ในหอคอย ซึ่งก็คือรูปสามเหลี่ยม และสุนัขสิบสองตัวรออยู่ที่ปลายอีกด้าน พูมาเดินก่อน"
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr "พูมา"
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr "พูมาเดินไปตามเส้นใดก็ได้ ในทิศทางใดก็ได้ ทั้งเดินหน้าและถอยหลัง"
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "Moving the dogs"
+msgstr "การเดินสุนัข"
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "สุนัขก็เดินแบบเดียวกัน คือไปตามเส้นใดก็ได้ไปยังจุดว่างถัดไป จะเดินหน้า ไปด้านข้าง หรือถอยหลังก็ได้ มีแต่พูมาที่กระโดดได้"
+
+#: titles/common/hunt_tutorials.gd:300
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr "พูมากินสุนัขที่อยู่ตัวเดียวด้วยการกระโดดข้ามไปลงที่จุดว่างถัดไป กระโดดต่อได้อีกเรื่อย ๆ เปลี่ยนทิศทางได้ และหยุดหลังการกระโดดครั้งใดก็ได้ สุนัขสองตัวที่เรียงกันจะปกป้องกันและกัน"
+
+#: titles/common/hunt_tutorials.gd:307
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr "สุนัขชนะด้วยการล้อมพูมาจนเดินไม่ได้"
+
+#: titles/common/hunt_tutorials.gd:315
+msgid "How the puma wins"
+msgstr "พูมาชนะอย่างไร"
+
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "พูมาชนะทันทีที่กินสุนัขได้สามตัว"
+
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "ถ้าตำแหน่งเดิมเกิดขึ้นสามครั้ง หรือพูมาเดินครบ 50 ตาโดยไม่ได้กินเลย เกมจะเสมอ"
+
+#: titles/common/hunt_tutorials.gd:330
+msgid "A reconstruction"
+msgstr "การฟื้นฟูกติกา"
+
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "ในบันทึกที่เขียนไว้เมื่อร้อยปีก่อน สุนัขเดินได้แค่ไปข้างหน้า และพูมาที่อยู่ในหอคอยก็จะไม่มีวันถูกจับได้ ในเกมนี้ การเดินของสุนัขและการชนะของพูมาเป็นไปตาม Trapial-Kuzen ซึ่งเป็นฉบับสมัยใหม่ของชาวมาปูเช หอคอยนับเป็นกระดานธรรมดา และพูมาเดินก่อน เว้นแต่คุณจะเปลี่ยนในการตั้งค่า"
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:96
+msgid "Auto"
+msgstr "อัตโนมัติ"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:98
+msgid "High"
+msgstr "สูง"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:100
+msgid "Medium"
+msgstr "กลาง"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:102
+msgid "Low"
+msgstr "ต่ำ"

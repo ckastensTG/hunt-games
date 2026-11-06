@@ -1,0 +1,1156 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translator: Claude (2026-11-06)\n"
+"X-Review-Status: first pass, translation confidence moderate; NEEDS native-speaker review before release (bible §7). Bagh Chal only: the Jogo da Onça strings are left out (tools/l10n/scope.py)\n"
+
+#: scenes/greybox/hud.gd:140
+msgid "Menu"
+msgstr "मेनु"
+
+#: scenes/greybox/hud.gd:164
+msgid "Undo"
+msgstr "चाल फिर्ता"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:235
+msgid "Stop here"
+msgstr "यहीँ रोक्नुहोस्"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:254
+msgid "Moves"
+msgstr "चालहरू"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
+msgid "Play again"
+msgstr "फेरि खेल्नुहोस्"
+
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:315
+msgid "New opponent"
+msgstr "नयाँ प्रतिद्वन्द्वी"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:320
+msgid "Main menu"
+msgstr "मुख्य मेनु"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:324
+msgid "Look at the board"
+msgstr "बोर्ड हेर्नुहोस्"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:390
+msgid "thinking"
+msgstr "सोच्दै"
+
+#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
+msgid "A draw"
+msgstr "बराबरी"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:430
+#, c-format
+msgid "Captured %d / %d"
+msgstr "मारिएका: %d / %d"
+
+#: scenes/greybox/hud.gd:458
+msgid "No moves yet"
+msgstr "अहिलेसम्म कुनै चाल छैन"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+msgid "You won"
+msgstr "तपाईंले जित्नुभयो"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "तपाईं हार्नुभयो"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "पुनः खेल"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:496
+#, c-format
+msgid "place %s"
+msgstr "%s मा राखियो"
+
+#: scenes/greybox/hud.gd:505
+msgid "Watching the AI play both sides."
+msgstr "कम्प्युटर दुवै पक्षबाट खेल्दैछ।"
+
+#: scenes/greybox/hud.gd:509
+msgid "Waiting for your opponent's move."
+msgstr "प्रतिद्वन्द्वीको चाल पर्खँदै।"
+
+#: scenes/greybox/hud.gd:511
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "लगातार मार्दै: अर्को झर्ने बिन्दु छान्नुहोस्, वा यहीँ रोक्नुहोस्।"
+
+#: scenes/greybox/hud.gd:517
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "कहाँ जाने हो, छान्नुहोस्। टुटेको घेराले मार्ने चाल देखाउँछ।"
+
+#: scenes/greybox/hud.gd:518
+msgid "Pick where it goes."
+msgstr "कहाँ जाने हो, छान्नुहोस्।"
+
+#: scenes/greybox/tutorial.gd:79
+msgid "Close"
+msgstr "बन्द गर्नुहोस्"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:83
+msgid "Replay"
+msgstr "फेरि हेर्नुहोस्"
+
+#: scenes/greybox/tutorial.gd:86
+msgid "‹ Back"
+msgstr "‹ पछाडि"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:175
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "कसरी खेल्ने · %d / %d"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Start playing"
+msgstr "खेल्न सुरु गर्नुहोस्"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Next ›"
+msgstr "अर्को ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+msgid "Looking for an opponent…"
+msgstr "प्रतिद्वन्द्वी खोज्दै…"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "खोज्न छाड्नुहोस्"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "अहिले खेल्नुहोस्"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+msgid "Not now"
+msgstr "अहिले होइन"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "फेरि जोड्दै… %d सेकेन्ड"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "सम्पर्क टुट्यो"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "प्रतिद्वन्द्वी तयार — अहिले खेल्ने?"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "प्रतिद्वन्द्वीले बराबरीको प्रस्ताव गर्नुभयो।"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Accept"
+msgstr "स्वीकार्नुहोस्"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Decline"
+msgstr "अस्वीकार्नुहोस्"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent wants a rematch."
+msgstr "प्रतिद्वन्द्वी फेरि खेल्न चाहनुहुन्छ।"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Resign this game?"
+msgstr "यो खेलमा हार मान्ने?"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+msgid "Resign"
+msgstr "हार मान्नुहोस्"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Keep playing"
+msgstr "खेलिरहनुहोस्"
+
+#: scenes/play/play_controller.gd:281
+msgid "We'll let you know when an opponent is ready."
+msgstr "प्रतिद्वन्द्वी तयार भएपछि हामी तपाईंलाई खबर गर्नेछौँ।"
+
+#: scenes/play/play_controller.gd:315
+msgid "Draw offered. Waiting for an answer."
+msgstr "बराबरीको प्रस्ताव पठाइयो। जवाफ पर्खँदै।"
+
+#: scenes/play/play_controller.gd:326
+msgid "Rematch offered. Waiting for an answer."
+msgstr "फेरि खेल्ने प्रस्ताव पठाइयो। जवाफ पर्खँदै।"
+
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+msgid "Your opponent left the game."
+msgstr "प्रतिद्वन्द्वीले खेल छाड्नुभयो।"
+
+#: scenes/play/play_controller.gd:422
+msgid "Reconnected."
+msgstr "फेरि जोडियो।"
+
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "प्रतिद्वन्द्वीले बराबरी अस्वीकार गर्नुभयो।"
+
+#: scenes/play/play_controller.gd:433
+msgid "Your opponent declined the rematch."
+msgstr "प्रतिद्वन्द्वीले फेरि खेल्न अस्वीकार गर्नुभयो।"
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:450
+#, c-format
+msgid "Playing against %s"
+msgstr "%sसँग खेल्दै"
+
+#: scenes/play/play_controller.gd:460
+msgid "The other player didn't connect. Still looking…"
+msgstr "अर्को खेलाडी जोडिनुभएन। अझै खोज्दै…"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:509
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "समय सकियो, त्यसैले तपाईंको सट्टा एउटा चाल खेलियो (3 मध्ये %d)।"
+
+#: scenes/play/play_menu.gd:251
+msgid "Back"
+msgstr "पछाडि"
+
+#: scenes/play/play_menu.gd:306
+msgid "Rules"
+msgstr "नियम"
+
+#: scenes/play/play_menu.gd:326
+msgid "Language"
+msgstr "भाषा"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+msgid "Continue"
+msgstr "जारी राख्नुहोस्"
+
+#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+msgid "Play against the AI"
+msgstr "कम्प्युटरसँग खेल्नुहोस्"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+msgid "Pass and play"
+msgstr "पालैपालो खेल्नुहोस्"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+msgid "Play local"
+msgstr "वाइफाइमा खेल्नुहोस्"
+
+#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+msgid "Play online"
+msgstr "अनलाइन खेल्नुहोस्"
+
+#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "कसरी खेल्ने"
+
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+msgid "Game origins"
+msgstr "खेलको इतिहास"
+
+#. Main menu button: close the game completely.
+#: scenes/play/play_menu.gd:370
+msgid "Quit game"
+msgstr "खेल बन्द गर्नुहोस्"
+
+#: scenes/play/play_menu.gd:383
+msgid "Novice"
+msgstr "सुरुवाती"
+
+#: scenes/play/play_menu.gd:383
+msgid "Apprentice"
+msgstr "सिकारु"
+
+#: scenes/play/play_menu.gd:383
+msgid "Adept"
+msgstr "निपुण"
+
+#: scenes/play/play_menu.gd:383
+msgid "Master"
+msgstr "उस्ताद"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "प्रतिद्वन्द्वी"
+
+#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+msgid "Start"
+msgstr "सुरु गर्नुहोस्"
+
+#: scenes/play/play_menu.gd:400
+msgid "Two players share this device and take turns."
+msgstr "दुई जना खेलाडी एउटै डिभाइसमा पालैपालो खेल्छन्।"
+
+#: scenes/play/play_menu.gd:409
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "दुवै डिभाइस एउटै वाइफाइमा हुनुपर्छ।"
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+msgid "Host a game"
+msgstr "खेल बनाउनुहोस्"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+msgid "Join a game"
+msgstr "खेलमा सामेल हुनुहोस्"
+
+#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+msgid "Create a code"
+msgstr "कोड बनाउनुहोस्"
+
+#: scenes/play/play_menu.gd:441
+msgid "Waiting for a player"
+msgstr "खेलाडी पर्खँदै"
+
+#: scenes/play/play_menu.gd:442
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "अर्को डिभाइसमा “वाइफाइमा खेल्नुहोस्”, अनि “खेलमा सामेल हुनुहोस्” छान्नुहोस्।"
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:446
+msgid "If the game doesn't appear there, enter this code"
+msgstr "खेल त्यहाँ देखिएन भने यो कोड हाल्नुहोस्"
+
+#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+msgid "Cancel"
+msgstr "रद्द गर्नुहोस्"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:457
+msgid "Looking for games on this Wi-Fi…"
+msgstr "यो वाइफाइमा खेलहरू खोज्दै…"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:468
+msgid "Code"
+msgstr "कोड"
+
+#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+msgid "Join"
+msgstr "सामेल हुनुहोस्"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:513
+msgid "Play with someone online"
+msgstr "अनलाइन कसैसँग खेल्नुहोस्"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+msgid "Standard rules, about a minute per move"
+msgstr "मानक नियम, हरेक चालका लागि करिब एक मिनेट"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+msgid "Play with a friend"
+msgstr "साथीसँग खेल्नुहोस्"
+
+#: scenes/play/play_menu.gd:540
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "एक जनाले कोड बनाउनुहोस्, अर्कोले त्यो हाल्नुहोस्। यो फोन, ट्याब्लेट र कम्प्युटरबीच चल्छ।"
+
+#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+msgid "Enter a code"
+msgstr "कोड हाल्नुहोस्"
+
+#: scenes/play/play_menu.gd:551
+msgid "Your code"
+msgstr "तपाईंको कोड"
+
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+msgid "Connecting…"
+msgstr "जोड्दै…"
+
+#: scenes/play/play_menu.gd:556
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "यो कोड आफ्नो साथीलाई पठाउनुहोस्। उहाँले कोड हालेपछि खेल सुरु हुन्छ।"
+
+#: scenes/play/play_menu.gd:559
+msgid "Share"
+msgstr "सेयर गर्नुहोस्"
+
+#: scenes/play/play_menu.gd:561
+msgid "Copy"
+msgstr "कपी गर्नुहोस्"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+msgid "Copied"
+msgstr "कपी भयो"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:577
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "Timeless Games मा मसँग खेल्नुहोस्! मेरो खेल कोड %s हो।"
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:613
+msgid "No one is free right now"
+msgstr "अहिले कोही उपलब्ध हुनुहुन्न"
+
+#: scenes/play/play_menu.gd:614
+msgid "We can keep looking while you play."
+msgstr "तपाईं खेल्दै गर्दा हामी खोजिरहन सक्छौँ।"
+
+#: scenes/play/play_menu.gd:615
+msgid "Play against the AI while we keep looking"
+msgstr "हामी खोज्दै गर्दा कम्प्युटरसँग खेल्नुहोस्"
+
+#: scenes/play/play_menu.gd:618
+msgid "Keep searching"
+msgstr "खोजिरहनुहोस्"
+
+#: scenes/play/play_menu.gd:619
+msgid "Invite a friend instead"
+msgstr "बरु साथीलाई बोलाउनुहोस्"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:639
+msgid "Couldn't start the game"
+msgstr "खेल सुरु हुन सकेन"
+
+#: scenes/play/play_menu.gd:642
+msgid "OK"
+msgstr "ठीक छ"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:650
+msgid "Leave this game?"
+msgstr "यो खेल छाड्ने?"
+
+#: scenes/play/play_menu.gd:651
+msgid "It counts as a loss."
+msgstr "यसलाई हार मानिन्छ।"
+
+#: scenes/play/play_menu.gd:652
+msgid "Leave"
+msgstr "छाड्नुहोस्"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:658
+msgid "Stay"
+msgstr "खेलमै रहनुहोस्"
+
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:683
+msgid "Sources"
+msgstr "स्रोतहरू"
+
+#: scenes/play/play_menu.gd:729
+msgid "Offer a draw"
+msgstr "बराबरीको प्रस्ताव गर्नुहोस्"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:758
+msgid "Look"
+msgstr "शैली"
+
+#. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+#: scenes/play/play_menu.gd:761
+msgid "Sound"
+msgstr "आवाज"
+
+#. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
+#: scenes/play/play_menu.gd:763
+msgid "Music"
+msgstr "सङ्गीत"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:767
+msgid "Privacy choices"
+msgstr "गोपनीयता विकल्पहरू"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:788
+msgid "Quit to main menu"
+msgstr "मुख्य मेनुमा फर्कनुहोस्"
+
+#. Title of the screen offering the other looks (styles of board and pieces) for a short video.
+#: scenes/play/play_menu.gd:802
+msgid "More looks"
+msgstr "अन्य शैलीहरू"
+
+#. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+#: scenes/play/play_menu.gd:804
+msgid "Watch a short video to switch looks until you close the game."
+msgstr "एप बन्द नगरेसम्म शैली बदल्न एउटा छोटो भिडियो हेर्नुहोस्।"
+
+#. On the "More looks" screen when no video could be loaded (offline, or none available).
+#: scenes/play/play_menu.gd:808
+msgid "No video is ready right now. Try again in a moment."
+msgstr "अहिले कुनै भिडियो तयार छैन। केही बेरपछि फेरि प्रयास गर्नुहोस्।"
+
+#. Button: play a short video (an ad) to open the other looks.
+#: scenes/play/play_menu.gd:811
+msgid "Watch a video"
+msgstr "भिडियो हेर्नुहोस्"
+
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:842
+msgid "Graphics"
+msgstr "ग्राफिक्स"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:923
+#, c-format
+msgid "Your name: %s"
+msgstr "तपाईंको नाम: %s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:960
+msgid "Waiting"
+msgstr "पर्खँदै"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "लेखक"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "यात्री"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "शिल्पी"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+msgid "Weaver"
+msgstr "बुनकर"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "गोठालो"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "नाविक"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "किसान"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "कालिगढ"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "अनलाइन सेवामा पुग्न सकिएन। इन्टरनेट जडान जाँचेर फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "त्यो कोडको कुनै खेल छैन। कोड जाँचेर फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "त्यो खेल सुरु भइसकेको छ।"
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "अर्को डिभाइससँग जोडिन सकिएन।"
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "अर्को डिभाइसमा खेलको फरक संस्करण छ। दुवैमा अपडेट गरेर फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "अर्को डिभाइसमा फरक खेल चलिरहेको छ।"
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "अर्को डिभाइसले यो संस्करणमा नभएका नियम प्रयोग गर्छ।"
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "यो नेटवर्कमा खेल सुरु गर्न सकिएन। खेलको अर्को प्रति खुला छ भने बन्द गरेर फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "वाइफाइमा खेल्न तपाईंको नेटवर्कमा भएका डिभाइसहरू खोज्ने अनुमति चाहिन्छ।"
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "त्यो कोड मान्य छैन। जाँचेर फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "यो डिभाइस वाइफाइमा जोडिएको छैन।"
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "केही गडबड भयो। कृपया फेरि प्रयास गर्नुहोस्।"
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "तपाईंले हार मान्नुभयो।"
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "प्रतिद्वन्द्वीले हार मान्नुभयो।"
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "तपाईं बराबरीमा सहमत हुनुभयो।"
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "तपाईंको समय तीन पटक सकियो।"
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "प्रतिद्वन्द्वीको समय तीन पटक सकियो।"
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "तपाईंले खेल छाड्नुभयो।"
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "अर्को डिभाइसले नियमविपरीत चाल पठायो।"
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:62
+msgid "Goats to move"
+msgstr "बाख्राको पालो"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:117
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "राख्न बाँकी बाख्रा: %d"
+msgstr[1] "राख्न बाँकी बाख्रा: %d"
+
+#: titles/bagh_chal/art/brass_style.gd:40
+msgid "Temple brass"
+msgstr "मन्दिरको पित्तल"
+
+#: titles/bagh_chal/art/brass_style.gd:41
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "कुँदिएको पित्तलको बोर्ड र ढलौटका आकृतिहरू, साँझपख मन्दिरको आँगनमा।"
+
+#: titles/bagh_chal/art/modern_style.gd:40
+msgid "Modern edition"
+msgstr "आधुनिक संस्करण"
+
+#: titles/bagh_chal/art/modern_style.gd:41
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "आजको कुनै बोर्ड-खेल कम्पनीको संस्करण: चम्किलो, साँचोमा ढालिएको बोर्ड, प्लास्टिकका बाघ र बाख्रा, झुन्डिएको बत्तीमुनि।"
+
+#: titles/bagh_chal/art/stone_style.gd:40
+msgid "Stone and pebbles"
+msgstr "ढुङ्गा र गिर्खा"
+
+#: titles/bagh_chal/art/stone_style.gd:41
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "परम्परागत तरिका: ढुङ्गामा कोरेर चकले भरिएका रेखा, खोलाको ढुङ्गाका बाघ र बाख्रा, परालको गुन्द्रीमाथि।"
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "बाघचाल नेपालको खेल हो। यसको नाम नेपाली शब्द “बाघ” र “चाल” जोडेर बनेको हो। पाँच गुणा पाँच बिन्दुको बोर्डमा चार बाघले बीस बाख्राको सिकार गर्छन्: बाघले बाख्रालाई नाघेर मार्छ, र बाख्राले कुनै पनि बाघ चल्न नसक्ने गरी बाघहरूलाई घेरेर जित्छ। काठमाडौँ उपत्यकाका नेवारहरूको भाषा नेपाल भाषामा यो खेललाई [i]dhun kasa[/i], अर्थात् “बाघको खेल”, भनिन्छ।"
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "यो सिकार खेलहरूको ठूलो परिवारमा पर्छ, जसमा थोरै बलिया गोटीले धेरै कमजोर गोटीको सामना गर्छन्। बाघविरुद्ध बाख्रा वा थुमाका खेलहरू दक्षिण एसियाभरि धेरै किसिमका बोर्डमा खेलिन्छन्; उदाहरणका लागि, दक्षिण भारतमा यससँग मिल्दोजुल्दो [i]aadu puli attam[/i] को आफ्नै छुट्टै बोर्ड छ।"
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "यो खेल कति पुरानो हो, कसैलाई थाहा छैन: यो लेखेर होइन, खेलेरै पुस्तौँदेखि सर्दै आएको हो। खेलाडीहरू प्रायः भुइँ वा ढुङ्गामा बोर्ड कोरेर ढुङ्गा र गिर्खाले खेल्थे। सन् 1976 मा खेल-इतिहासकार डेभिड पार्लेटले यो खेल बौद्ध भिक्षुहरूमाझ लोकप्रिय भएको पाए, जसले ठीक त्यसरी नै खेल्थे।"
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "यसको सबैभन्दा पुराना लिखित विवरणमध्ये एउटा सन् 1933 को हो, जब प्राणीशास्त्री सुन्दरलाल होराले पूर्वी हिमालयको तिस्ता उपत्यकामा चार बाघ र बीस बाख्राको यो खेललाई Bhagchal, Bhagchakar वा Chakrachal नामले टिपोट गरे। पार्लेटले सन् 1976 मा नेपालमा यसका नियम लेखे, र सन् 1986 मा नेपालमै यो खेल देखेका चेस ग्रान्डमास्टर युरी आभेरबाखले यसलाई चेसजत्तिकै लोकप्रिय राष्ट्रिय खेल भने।"
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "पुराना विवरणहरूमा बाघको सिकार सधैँ एउटै ठाउँमा टुङ्गिँदैन। होरा र पार्लेटका अनुसार बाघले सबै बाख्रा मार्नुपर्छ, तर आजकल धेरैजसो खेलाडी पाँच बाख्रा मारेपछि नै खेल टुङ्ग्याउँछन्। यो खेलमा दुवै छन्: पाँच बाख्रासम्मको मानक नियम, र अन्तिम बाख्रासम्मको सिकार, पार्लेट 1976।"
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "सन् 2004 मा कम्प्युटर वैज्ञानिकहरू लिम यु जिन र युर्ग नीभरगेल्टले यो खेलका सबै सम्भावित स्थिति गणना गर्ने काम सुरु गरे। पछि उनीहरूले दुवै पक्षले पूर्ण रूपमा सही खेले मानक खेल बराबरीमा टुङ्गिन्छ भनी प्रमाणित गरे: न बाघले जित निश्चित गर्न सक्छ, न बाख्राले।"
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "काठमाडौँ उपत्यकामा पाका खेलाडीहरू अझै पनि पाटीपौवा र मन्दिर वरपर बोर्ड वरिपरि जम्मा हुन्छन्, र धातु तथा काठका बोर्ड बिक्छन्, धेरैजसो पर्यटकलाई। काठमाडौँका पत्रकारहरूका अनुसार आजकल यो खेल खेल्ने युवा घट्दै गएका छन्।"
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:35
+msgid "Standard rules"
+msgstr "मानक नियम"
+
+#: titles/common/hunt_text.gd:37
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "पार्लेट 1976: अन्तिम बाख्रासम्मको सिकार"
+
+#: titles/common/hunt_text.gd:39
+msgid "Adugo, the Bororo rules"
+msgstr ""
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:42
+msgid "Komikan, a Mapuche reconstruction"
+msgstr ""
+
+#: titles/common/hunt_text.gd:49
+msgid "Bagh Chal · Standard"
+msgstr "बाघचाल · मानक"
+
+#: titles/common/hunt_text.gd:51
+msgid "Bagh Chal · Parlett 1976"
+msgstr "बाघचाल · पार्लेट 1976"
+
+#: titles/common/hunt_text.gd:53
+msgid "Jogo da Onça · Adugo"
+msgstr ""
+
+#: titles/common/hunt_text.gd:55
+msgid "Jogo da Onça · Komikan"
+msgstr ""
+
+#: titles/common/hunt_text.gd:62
+msgid "Tigers to move"
+msgstr "बाघको पालो"
+
+#: titles/common/hunt_text.gd:64
+msgid "Jaguar to move"
+msgstr ""
+
+#: titles/common/hunt_text.gd:64 titles/common/hunt_text.gd:66
+msgid "Dogs to move"
+msgstr ""
+
+#: titles/common/hunt_text.gd:66
+msgid "Puma to move"
+msgstr ""
+
+#: titles/common/hunt_text.gd:73
+msgid "The tigers won"
+msgstr "बाघ जिते"
+
+#: titles/common/hunt_text.gd:73
+msgid "The goats won"
+msgstr "बाख्रा जिते"
+
+#: titles/common/hunt_text.gd:75
+msgid "The jaguar won"
+msgstr ""
+
+#: titles/common/hunt_text.gd:75 titles/common/hunt_text.gd:77
+msgid "The dogs won"
+msgstr ""
+
+#: titles/common/hunt_text.gd:77
+msgid "The puma won"
+msgstr ""
+
+#: titles/common/hunt_text.gd:84
+msgid "The tigers win"
+msgstr "बाघको जित"
+
+#: titles/common/hunt_text.gd:84
+msgid "The goats win"
+msgstr "बाख्राको जित"
+
+#: titles/common/hunt_text.gd:86
+msgid "The jaguar wins"
+msgstr ""
+
+#: titles/common/hunt_text.gd:86 titles/common/hunt_text.gd:88
+msgid "The dogs win"
+msgstr ""
+
+#: titles/common/hunt_text.gd:88
+msgid "The puma wins"
+msgstr ""
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the tigers"
+msgstr "तपाईं बाघ हुनुहुन्छ"
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the goats"
+msgstr "तपाईं बाख्रा हुनुहुन्छ"
+
+#: titles/common/hunt_text.gd:96
+msgid "You play the jaguar"
+msgstr ""
+
+#: titles/common/hunt_text.gd:96 titles/common/hunt_text.gd:98
+msgid "You play the dogs"
+msgstr ""
+
+#: titles/common/hunt_text.gd:98
+msgid "You play the puma"
+msgstr ""
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a tiger to move."
+msgstr "चलाउन एउटा बाघ छान्नुहोस्।"
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a goat to move."
+msgstr "चलाउन एउटा बाख्रा छान्नुहोस्।"
+
+#: titles/common/hunt_text.gd:106
+msgid "Move the jaguar."
+msgstr ""
+
+#: titles/common/hunt_text.gd:106 titles/common/hunt_text.gd:108
+msgid "Choose a dog to move."
+msgstr ""
+
+#: titles/common/hunt_text.gd:108
+msgid "Move the puma."
+msgstr ""
+
+#: titles/common/hunt_text.gd:112
+msgid "Place a goat on any empty point."
+msgstr "कुनै पनि खाली बिन्दुमा एउटा बाख्रा राख्नुहोस्।"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every goat has been captured."
+msgstr "सबै बाख्रा मारिए।"
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every dog has been eaten."
+msgstr ""
+
+#: titles/common/hunt_text.gd:128
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "%d वटा बाख्रा मारियो।"
+msgstr[1] "%d वटा बाख्रा मारिए।"
+
+#: titles/common/hunt_text.gd:129
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] ""
+msgstr[1] ""
+
+#: titles/common/hunt_text.gd:133
+msgid "The tigers are trapped: none of them can move."
+msgstr "बाघहरू घेरिए: कुनै पनि बाघ चल्न सक्दैन।"
+
+#: titles/common/hunt_text.gd:135
+msgid "The jaguar is trapped and can't move."
+msgstr ""
+
+#: titles/common/hunt_text.gd:137
+msgid "The puma is trapped and can't move."
+msgstr ""
+
+#: titles/common/hunt_text.gd:139
+msgid "The goats can't move."
+msgstr "बाख्राहरू चल्न सक्दैनन्।"
+
+#: titles/common/hunt_text.gd:139
+msgid "The dogs can't move any more."
+msgstr ""
+
+#: titles/common/hunt_text.gd:141
+msgid "Every move left would repeat an earlier position."
+msgstr "बाँकी हरेक चालले पहिलेकै स्थिति दोहोर्याउँछ।"
+
+#: titles/common/hunt_text.gd:143
+msgid "The same position came up three times."
+msgstr "एउटै स्थिति तीन पटक आयो।"
+
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:150
+#, c-format
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "बाघहरूले %d चालसम्म कुनै बाख्रा मारेनन्।"
+msgstr[1] "बाघहरूले %d चालसम्म कुनै बाख्रा मारेनन्।"
+
+#: titles/common/hunt_text.gd:152
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] ""
+msgstr[1] ""
+
+#: titles/common/hunt_text.gd:154
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] ""
+msgstr[1] ""
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:169
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "नमारी बाघका चाल: %d / %d"
+
+#: titles/common/hunt_text.gd:171
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr ""
+
+#: titles/common/hunt_text.gd:173
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "बाघ र बाख्रा"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "बीस बाख्राविरुद्ध चार बाघ। सुरुमा बाघहरू चार कुनामा हुन्छन्; बाख्राहरू हातमै, बोर्डबाहिर हुन्छन्। पहिलो चाल बाख्राको हुन्छ।"
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "बाख्रा राख्ने"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "हातमा बाख्रा बाँकी रहुन्जेल बाख्राको हरेक पालोमा एउटा बाख्रा कुनै खाली बिन्दुमा राखिन्छ। बीसै बाख्रा नराखिएसम्म बोर्डमा भएका बाख्रा चल्न सक्दैनन्। बीचबीचमा बाघले आफ्नो चाल चल्छ।"
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "बाघ कसरी चल्छ"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "बाघ रेखाको बाटो छेउको खाली बिन्दुमा सर्छ। छड्के रेखा हरेक बिन्दुबाट होइन, एउटा बिराएर मात्र जान्छन्, त्यसैले केही बिन्दुका आठ छिमेकी हुन्छन् भने बाँकीका चार वा त्योभन्दा कम।"
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
+msgid "Capturing"
+msgstr "मार्ने तरिका"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "बाघले रेखामा आफ्नो छेउको बाख्रालाई नाघेर ठीक त्यसपछिको खाली बिन्दुमा उफ्रेर मार्छ। मारिएको बाख्रा बोर्डबाट हट्छ। एक उफाइमा एउटा बाख्रा मात्र, र मार्नैपर्ने कुनै बाध्यता हुँदैन।"
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "एकतामा बल"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "जुन बाख्राको ठीक पछाडि अर्को बाख्रा वा बोर्डको किनारा छ, त्यसलाई नाघ्न सकिँदैन: बाघलाई झर्न खाली बिन्दु चाहिन्छ। सँगसँगै बस्ने बाख्रा सुरक्षित रहन्छन्।"
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "बाख्रा चलाउने"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "सबै बाख्रा बोर्डमा आइसकेपछि बाख्रा पनि बाघ जस्तै रेखाको बाटो छेउको खाली बिन्दुमा सर्छ। बाख्रा कहिल्यै उफ्रँदैन र कहिल्यै मार्दैन।"
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "बाघ कसरी जित्छ"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "पार्लेटको संस्करणमा बाघले बीसै बाख्रा मार्नुपर्छ। बाँकी सबै मानक खेलकै जस्तो हुन्छ।"
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "पाँच बाख्रा मारेपछि बाघ जित्छ।"
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "बाख्रा कसरी जित्छ"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "कुनै पनि बाघ चल्न नसकेपछि बाख्रा जित्छ: हरेक बाघ नाघ्न नसकिने गरी बाख्राले घेरिएको हुन्छ।"
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
+msgid "Draws"
+msgstr "बराबरी"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "सबै बाख्रा राखिसकेपछि पहिले आइसकेको स्थिति फेरि ल्याउने चाल चल्न पाइँदैन। बाघले 50 चालसम्म कुनै बाख्रा मारेन भने, वा बाँकी हरेक चालले स्थिति दोहोर्याउँछ भने खेल बराबरी हुन्छ।"
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
+msgid "How the dogs win"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr ""
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "Moving the dogs"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:300
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:307
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:315
+msgid "How the puma wins"
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr ""
+
+#: titles/common/hunt_tutorials.gd:330
+msgid "A reconstruction"
+msgstr ""
+
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr ""
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:96
+msgid "Auto"
+msgstr "स्वतः"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:98
+msgid "High"
+msgstr "उच्च"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:100
+msgid "Medium"
+msgstr "मध्यम"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:102
+msgid "Low"
+msgstr "न्यून"

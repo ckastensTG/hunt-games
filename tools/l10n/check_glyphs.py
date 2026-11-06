@@ -5,8 +5,10 @@ Run from the hunt-games root:  python3 tools/l10n/check_glyphs.py
 
 For each locale/<lang>.po, every character of every translation must be in
 each interface font (Alegreya SC, Alegreya, Alegreya Sans) or, for Chinese,
-Japanese and Korean, in that language's Noto subset (ui/fonts/cjk/). Run
-tools/l10n/subset_cjk_fonts.py when a CJK translation adds characters.
+Japanese and Korean, in that language's Noto subset (ui/fonts/cjk/), or, for
+Thai and Nepali, in Noto Sans Thai or Devanagari (ui/fonts/thai/,
+ui/fonts/devanagari/: whole fonts). Run tools/l10n/subset_cjk_fonts.py when
+a CJK translation adds characters.
 Also checks the language names shown in the Language menu.
 """
 from __future__ import annotations
@@ -23,7 +25,9 @@ import po  # noqa: E402
 FONTS = pathlib.Path("ui/fonts")
 LATIN = ["AlegreyaSC-Medium.ttf", "Alegreya-Variable.ttf", "AlegreyaSans-Regular.ttf",
          "AlegreyaSans-Medium.ttf", "AlegreyaSans-Bold.ttf"]
-CJK = {"zh_CN": "SC", "ja": "JP", "ko": "KR"}
+CJK = {"zh_CN": "SC", "zh_TW": "TC", "ja": "JP", "ko": "KR"}
+# Languages drawn by a whole fallback font: language -> ui/fonts/<folder>
+WHOLE = {"th": "thai", "ne": "devanagari"}
 IGNORE = set("\n\t")
 
 
@@ -39,6 +43,12 @@ def main() -> int:
         for f in (FONTS / "cjk").glob(f"NotoSans{script}-*.subset.ttf"):
             cover |= cmap(f)
         cjk[script] = cover
+    whole = {}
+    for lang, folder in WHOLE.items():
+        cover = set()
+        for f in (FONTS / folder).glob("*.ttf"):
+            cover |= cmap(f)
+        whole[lang] = cover
     errors = 0
     texts = {}
     for path in sorted(pathlib.Path("locale").glob("*.po")):
@@ -51,8 +61,10 @@ def main() -> int:
         extra = set()
         if lang in CJK:
             extra = cjk[CJK[lang]]
+        elif lang in WHOLE:
+            extra = whole[lang]
         elif lang == "(language menu)":
-            extra = set().union(*cjk.values())
+            extra = set().union(*cjk.values(), *whole.values())
         missing = {}
         for ch in set(text) - IGNORE:
             for name, cover in latin.items():

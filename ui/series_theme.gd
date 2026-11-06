@@ -3,9 +3,13 @@ extends RefCounted
 ## The Timeless Games interface look: dark lacquered panels with a thin brass
 ## edge, parchment text, Alegreya for display and book text, Alegreya Sans for
 ## the interface (the series fonts, decided 2026-11-03; ui/fonts/README.md).
-## Chinese, Japanese and Korean fall back to Noto Sans SC, JP and KR, subset
-## to the characters the translations use (ui/fonts/cjk/), with the current
-## language's font first so shared Han characters take its regional forms.
+## Chinese (Simplified and Traditional), Japanese and Korean fall back to Noto
+## Sans SC, TC, JP and KR, subset to the characters the translations use
+## (ui/fonts/cjk/), with the current language's font first so shared Han
+## characters take its regional forms. Thai falls back to Noto Sans Thai
+## (ui/fonts/thai/) and Nepali (Bagh Chal) to Noto Sans Devanagari
+## (ui/fonts/devanagari/): whole fonts, since their vowel signs and conjuncts
+## come from a few characters, and the files are small.
 ## Built in code so it stays in step with the palette below; later it moves
 ## to timeless-core's shell (framework §7).
 
@@ -21,7 +25,7 @@ const BUTTON_HOVER := Color(0.24, 0.18, 0.12, 0.95)
 const BUTTON_PRESSED := Color(0.11, 0.08, 0.06, 0.95)
 
 const FONTS := "res://ui/fonts/"
-## The CJK weight that goes with each text role.
+## The CJK, Thai and Devanagari weight that goes with each text role.
 const CJK_WEIGHT := {
 	"display": "Medium", "book": "Regular", "book_italic": "Regular",
 	"ui": "Regular", "ui_medium": "Medium", "ui_bold": "Bold", "code": "Bold",
@@ -60,26 +64,41 @@ static func font(name: String) -> Font:
 				v.base_font = load(FONTS + "AlegreyaSans-Bold.ttf")
 				v.opentype_features = {"lnum": 1, "tnum": 1}
 				_fonts[name] = v
-		(_fonts[name] as Font).fallbacks = _cjk_fallbacks(CJK_WEIGHT[name])
+		(_fonts[name] as Font).fallbacks = _fallbacks(CJK_WEIGHT[name])
 	return _fonts[name]
 
 
-## Call after changing the language: puts that language's CJK font first.
+## Call after changing the language: puts that language's fallback font first.
 static func apply_locale() -> void:
 	for name in _fonts:
-		(_fonts[name] as Font).fallbacks = _cjk_fallbacks(CJK_WEIGHT[name])
+		(_fonts[name] as Font).fallbacks = _fallbacks(CJK_WEIGHT[name])
 
 
-static func _cjk_fallbacks(weight: String) -> Array[Font]:
-	var order := ["SC", "JP", "KR"]
-	match TranslationServer.get_locale().substr(0, 2):
+static func _fallbacks(weight: String) -> Array[Font]:
+	var order := ["SC", "TC", "JP", "KR"]
+	var lang := L10n.best_locale(TranslationServer.get_locale())
+	match lang:
+		"zh_TW":
+			order = ["TC", "SC", "JP", "KR"]
 		"ja":
-			order = ["JP", "SC", "KR"]
+			order = ["JP", "SC", "TC", "KR"]
 		"ko":
-			order = ["KR", "SC", "JP"]
+			order = ["KR", "SC", "TC", "JP"]
 	var out: Array[Font] = []
 	for script in order:
 		out.append(load(FONTS + "cjk/NotoSans%s-%s.subset.ttf" % [script, weight]))
+	# The current language's own script first; the others stay for the
+	# language names in the Language menu.
+	var thai: Font = load(FONTS + "thai/NotoSansThai-%s.ttf" % weight)
+	var devanagari: Font = load(FONTS + "devanagari/NotoSansDevanagari-%s.ttf" % weight)
+	for f: Font in [thai, devanagari]:
+		out.append(f)
+	if lang == "th":
+		out.erase(thai)
+		out.push_front(thai)
+	elif lang == "ne":
+		out.erase(devanagari)
+		out.push_front(devanagari)
 	return out
 
 

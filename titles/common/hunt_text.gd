@@ -14,9 +14,18 @@ const TITLE_NAMES := {
 }
 
 
+## A title's name in its own language's script, used when the interface is
+## in that language (termbase, "Bagh Chal": बाघचाल in Nepali).
+const NATIVE_TITLE_NAMES := {
+	"bagh_chal": {"ne": "बाघचाल"},
+}
+
+
 static func title_name(title: String) -> String:
-	# Proper names: the same in every language (termbase: do not translate).
-	return TITLE_NAMES[title]
+	# Proper names: the same in every language (termbase: do not translate),
+	# except in the game's own language, where it's written in its own script.
+	var native: Dictionary = NATIVE_TITLE_NAMES.get(title, {})
+	return native.get(L10n.current_language(), TITLE_NAMES[title])
 
 
 static func rule_set_name(id: String) -> String:

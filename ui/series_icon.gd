@@ -2,7 +2,9 @@ class_name SeriesIcon
 extends Control
 ## Small line icons drawn in code in the series brass, so they stay crisp at
 ## any size and need no image files: "globe" (language), "menu" (the in-game
-## menu button) and "undo".
+## menu button), "undo" and "lock" (a look that needs a video first).
+## texture() renders one into an image, for controls that take a texture
+## (an OptionButton's items).
 
 var kind := "globe"
 var color := SeriesTheme.BRASS
@@ -44,6 +46,46 @@ func _draw() -> void:
 			var tip := c + Vector2(0, r * 0.15) + Vector2.from_angle(deg_to_rad(200)) * r * 0.72
 			draw_colored_polygon(PackedVector2Array([tip + Vector2(-r * 0.32, -r * 0.05), tip + Vector2(r * 0.12, -r * 0.42),
 				tip + Vector2(r * 0.2, r * 0.18)]), color)
+		"lock":
+			# A padlock: the shackle's arch over a solid body with a keyhole.
+			var top := c + Vector2(0, -r * 0.1)
+			draw_arc(top, r * 0.42, PI, TAU, 24, color, line * 1.3, true)
+			for x in [-0.42, 0.42]:
+				draw_line(top + Vector2(x * r, 0), top + Vector2(x * r, r * 0.25), color, line * 1.3, true)
+			draw_rect(Rect2(c + Vector2(-r * 0.7, r * 0.05), Vector2(r * 1.4, r * 0.9)), color)
+			draw_circle(c + Vector2(0, r * 0.42), r * 0.14, Color(0, 0, 0, 0.55))
+
+
+## An icon as a texture (size × size pixels), drawn with smooth edges.
+## Only "lock" so far.
+static func texture(icon_kind: String, size := 22, tint := SeriesTheme.BRASS) -> ImageTexture:
+	var img := Image.create_empty(size, size, false, Image.FORMAT_RGBA8)
+	for y in size:
+		for x in size:
+			var p := (Vector2(x, y) + Vector2(0.5, 0.5)) / float(size)
+			var d := _lock_distance(p) if icon_kind == "lock" else 1.0
+			var a := clampf(0.5 - d * size, 0.0, 1.0)
+			img.set_pixel(x, y, Color(tint, tint.a * a))
+	return ImageTexture.create_from_image(img)
+
+
+## Signed distance (in icon widths) to a padlock in the unit square:
+## negative inside.
+static func _lock_distance(p: Vector2) -> float:
+	# Body: a rounded box, with a round keyhole cut out.
+	var q := (p - Vector2(0.5, 0.7)).abs() - Vector2(0.32, 0.22) + Vector2(0.06, 0.06)
+	var body := Vector2(maxf(q.x, 0.0), maxf(q.y, 0.0)).length() + minf(maxf(q.x, q.y), 0.0) - 0.06
+	body = maxf(body, 0.065 - p.distance_to(Vector2(0.5, 0.68)))
+	# Shackle: an arch of radius 0.2 over the body, 0.08 thick.
+	var c := Vector2(0.5, 0.36)
+	var arch: float
+	if p.y <= c.y:
+		arch = absf(p.distance_to(c) - 0.2)
+	else:
+		arch = minf(Vector2(absf(p.x - 0.3), maxf(0.0, p.y - 0.5)).length(),
+			Vector2(absf(p.x - 0.7), maxf(0.0, p.y - 0.5)).length())
+	arch -= 0.045
+	return minf(body, arch)
 
 
 func _ellipse(center: Vector2, rx: float, ry: float, col: Color, width: float) -> void:

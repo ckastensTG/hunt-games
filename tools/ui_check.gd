@@ -16,7 +16,7 @@ extends SceneTree
 const GreyboxScript := preload("res://scenes/greybox/greybox.gd")
 const MENU_SCREENS := ["home", "vs_ai", "pass", "nearby", "nearby_host", "nearby_wait", "nearby_join",
 	"online", "friend", "friend_setup", "friend_join", "quick", "connecting", "error", "confirm_leave",
-	"origins", "pause"]
+	"origins", "pause", "looks"]
 
 var game: Node3D
 var langs: Array = []
@@ -46,7 +46,7 @@ func _initialize() -> void:
 		elif arg.begins_with("--screens="):
 			only_screens = Array(arg.substr(10).split(","))
 	if langs.is_empty():
-		for entry in L10n.LANGUAGES:
+		for entry in L10n.languages():
 			langs.append(entry[0])
 	if shots_dir != "":
 		DirAccess.make_dir_recursive_absolute(shots_dir)
@@ -59,7 +59,7 @@ func _screens() -> Array:
 	var list: Array = []
 	for s in MENU_SCREENS:
 		list.append("menu:" + s)
-	list.append_array(["hud", "result", "dialog:draw", "dialog:undo", "dialog:resign", "toast"])
+	list.append_array(["hud", "result", "dialog:draw", "dialog:resign", "toast"])
 	var steps := HuntTutorials.build(game.rules) if game.rules else []
 	for i in steps.size():
 		list.append("tutorial:%d" % i)
@@ -79,6 +79,10 @@ func _process(_delta: float) -> bool:
 			_play_some_moves()
 			# The interface is what's checked: hide the 3D board so frames are quick.
 			game._board_root.visible = false
+			# Ads on the test stand-in with nothing loaded: the looks are
+			# locked and More looks shows its longest text.
+			if game.ads.backend is SimAdBackend:
+				(game.ads.backend as SimAdBackend).fill = false
 			for lang in langs:
 				for screen in _screens():
 					if only_screens.is_empty() or screen.get_slice(":", 0) in only_screens or screen in only_screens:

@@ -1,0 +1,1150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timeless Games: hunt-games\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Translator: Claude (2026-11-06)\n"
+"X-Review-Status: translation confidence high; native-speaker review before release (bible §7)\n"
+
+#: scenes/greybox/hud.gd:140
+msgid "Menu"
+msgstr "Menu"
+
+#: scenes/greybox/hud.gd:164
+msgid "Undo"
+msgstr "Urungkan"
+
+#. Button: end a chain of captures after the current jump.
+#: scenes/greybox/hud.gd:235
+msgid "Stop here"
+msgstr "Berhenti di sini"
+
+#. Title of the list of moves played so far.
+#: scenes/greybox/hud.gd:254
+msgid "Moves"
+msgstr "Langkah"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
+msgid "Play again"
+msgstr "Main lagi"
+
+#. Button after an online quick match: look for someone else to play.
+#: scenes/greybox/hud.gd:315
+msgid "New opponent"
+msgstr "Lawan baru"
+
+#. Button on the game-over card: back to the main menu.
+#: scenes/greybox/hud.gd:320
+msgid "Main menu"
+msgstr "Menu utama"
+
+#. Button on the game-over card: close it to look at the final position.
+#: scenes/greybox/hud.gd:324
+msgid "Look at the board"
+msgstr "Lihat papan"
+
+#. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
+#: scenes/greybox/hud.gd:390
+msgid "thinking"
+msgstr "berpikir"
+
+#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
+msgid "A draw"
+msgstr "Seri"
+
+#. Pieces captured so far / captures needed to win.
+#: scenes/greybox/hud.gd:430
+#, c-format
+msgid "Captured %d / %d"
+msgstr "Dimakan %d / %d"
+
+#: scenes/greybox/hud.gd:458
+msgid "No moves yet"
+msgstr "Belum ada langkah"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+msgid "You won"
+msgstr "Anda menang"
+
+#. Small line above the result when one player is on this device.
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+msgid "You lost"
+msgstr "Anda kalah"
+
+#. Button after a game against another player: play them again (sides swap).
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+msgid "Rematch"
+msgstr "Tanding ulang"
+
+#. Move list entry for putting a goat on the board. %s is a point name such as c3.
+#: scenes/greybox/hud.gd:496
+#, c-format
+msgid "place %s"
+msgstr "taruh di %s"
+
+#: scenes/greybox/hud.gd:505
+msgid "Watching the AI play both sides."
+msgstr "AI memainkan kedua pihak."
+
+#: scenes/greybox/hud.gd:509
+msgid "Waiting for your opponent's move."
+msgstr "Menunggu langkah lawan."
+
+#: scenes/greybox/hud.gd:511
+msgid "Capture chain: pick the next landing, or stop here."
+msgstr "Rantai makan: pilih tempat mendarat berikutnya, atau berhenti di sini."
+
+#: scenes/greybox/hud.gd:517
+msgid "Pick where it goes. A broken ring marks a capture."
+msgstr "Pilih tujuannya. Cincin terputus menandai langkah makan."
+
+#: scenes/greybox/hud.gd:518
+msgid "Pick where it goes."
+msgstr "Pilih tujuannya."
+
+#: scenes/greybox/tutorial.gd:79
+msgid "Close"
+msgstr "Tutup"
+
+#. Button: play this step of the walkthrough again.
+#: scenes/greybox/tutorial.gd:83
+msgid "Replay"
+msgstr "Putar ulang"
+
+#: scenes/greybox/tutorial.gd:86
+msgid "‹ Back"
+msgstr "‹ Kembali"
+
+#. Step counter in the walkthrough: step number and number of steps.
+#: scenes/greybox/tutorial.gd:175
+#, c-format
+msgid "How to play · %d of %d"
+msgstr "Cara bermain · %d dari %d"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Start playing"
+msgstr "Mulai bermain"
+
+#: scenes/greybox/tutorial.gd:178
+msgid "Next ›"
+msgstr "Lanjut ›"
+
+#. A small line over the board while the game keeps looking for an online opponent in the background.
+#. Quick match is searching for an online opponent.
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+msgid "Looking for an opponent…"
+msgstr "Mencari lawan…"
+
+#. Button: stop looking for an online opponent.
+#: scenes/play/match_ui.gd:95
+msgid "Stop looking"
+msgstr "Berhenti mencari"
+
+#. Button on "Opponent ready — play now?": leave the AI game (it's saved) and start the online game.
+#: scenes/play/match_ui.gd:126
+msgid "Play now"
+msgstr "Main sekarang"
+
+#. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+msgid "Not now"
+msgstr "Nanti saja"
+
+#. The connection to the other player dropped. %d is the seconds left before the game is given up.
+#: scenes/play/match_ui.gd:229
+#, c-format
+msgid "Reconnecting… %d s"
+msgstr "Menyambung ulang… %d detik"
+
+#. The other player's device can no longer be reached.
+#: scenes/play/match_ui.gd:233
+msgid "Disconnected"
+msgstr "Terputus"
+
+#. A quick-match opponent was found while the player plays the AI. Short: it sits over the board with two buttons.
+#: scenes/play/match_ui.gd:261
+msgid "Opponent ready — play now?"
+msgstr "Lawan siap — main sekarang?"
+
+#: scenes/play/match_ui.gd:271
+msgid "Your opponent offers a draw."
+msgstr "Lawan menawarkan seri."
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Accept"
+msgstr "Terima"
+
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
+msgid "Decline"
+msgstr "Tolak"
+
+#: scenes/play/match_ui.gd:274
+msgid "Your opponent wants a rematch."
+msgstr "Lawan ingin tanding ulang."
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Resign this game?"
+msgstr "Menyerah dalam permainan ini?"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+msgid "Resign"
+msgstr "Menyerah"
+
+#. Confirmation before giving up a game against another player.
+#: scenes/play/match_ui.gd:281
+msgid "Keep playing"
+msgstr "Lanjut bermain"
+
+#: scenes/play/play_controller.gd:281
+msgid "We'll let you know when an opponent is ready."
+msgstr "Kami akan memberi tahu Anda saat lawan siap."
+
+#: scenes/play/play_controller.gd:315
+msgid "Draw offered. Waiting for an answer."
+msgstr "Seri ditawarkan. Menunggu jawaban."
+
+#: scenes/play/play_controller.gd:326
+msgid "Rematch offered. Waiting for an answer."
+msgstr "Tanding ulang ditawarkan. Menunggu jawaban."
+
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+msgid "Your opponent left the game."
+msgstr "Lawan meninggalkan permainan."
+
+#: scenes/play/play_controller.gd:422
+msgid "Reconnected."
+msgstr "Tersambung kembali."
+
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+msgid "Your opponent declined the draw."
+msgstr "Lawan menolak tawaran seri."
+
+#: scenes/play/play_controller.gd:433
+msgid "Your opponent declined the rematch."
+msgstr "Lawan menolak tanding ulang."
+
+#. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
+#: scenes/play/play_controller.gd:450
+#, c-format
+msgid "Playing against %s"
+msgstr "Bermain melawan %s"
+
+#: scenes/play/play_controller.gd:460
+msgid "The other player didn't connect. Still looking…"
+msgstr "Pemain lain tidak tersambung. Masih mencari…"
+
+#. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
+#: scenes/play/play_controller.gd:509
+#, c-format
+msgid "Time ran out, so a move was played for you (%d of 3)."
+msgstr "Waktu habis, jadi satu langkah dimainkan untuk Anda (%d dari 3)."
+
+#: scenes/play/play_menu.gd:251
+msgid "Back"
+msgstr "Kembali"
+
+#: scenes/play/play_menu.gd:306
+msgid "Rules"
+msgstr "Aturan"
+
+#: scenes/play/play_menu.gd:326
+msgid "Language"
+msgstr "Bahasa"
+
+#. Menu button: go back to the game that was set aside.
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+msgid "Continue"
+msgstr "Lanjutkan"
+
+#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+msgid "Play against the AI"
+msgstr "Main melawan AI"
+
+#. Menu button: two people share this device and take turns.
+#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+msgid "Pass and play"
+msgstr "Main berdua"
+
+#. Menu button: play with someone on the same Wi-Fi network (each on their own device).
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+msgid "Play local"
+msgstr "Main via Wi-Fi"
+
+#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+msgid "Play online"
+msgstr "Main online"
+
+#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+msgid "How to play"
+msgstr "Cara bermain"
+
+#. Main menu button: opens a short history of the game, with its sources.
+#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+msgid "Game origins"
+msgstr "Asal-usul permainan"
+
+#. Main menu button: close the game completely.
+#: scenes/play/play_menu.gd:370
+msgid "Quit game"
+msgstr "Keluar dari permainan"
+
+#: scenes/play/play_menu.gd:383
+msgid "Novice"
+msgstr "Pemula"
+
+#: scenes/play/play_menu.gd:383
+msgid "Apprentice"
+msgstr "Pelajar"
+
+#: scenes/play/play_menu.gd:383
+msgid "Adept"
+msgstr "Mahir"
+
+#: scenes/play/play_menu.gd:383
+msgid "Master"
+msgstr "Master"
+
+#. Menu label: how strong the computer opponent is.
+#. Shown instead of a player's name when it can't be read.
+#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+msgid "Opponent"
+msgstr "Lawan"
+
+#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+msgid "Start"
+msgstr "Mulai"
+
+#: scenes/play/play_menu.gd:400
+msgid "Two players share this device and take turns."
+msgstr "Dua pemain berbagi perangkat ini dan bergiliran."
+
+#: scenes/play/play_menu.gd:409
+msgid "Both devices need to be on the same Wi-Fi."
+msgstr "Kedua perangkat harus terhubung ke Wi-Fi yang sama."
+
+#. Menu button: start a game that another device on the same Wi-Fi can join.
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+msgid "Host a game"
+msgstr "Buat permainan"
+
+#. Menu button: join a game another device on the same Wi-Fi is hosting.
+#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+msgid "Join a game"
+msgstr "Gabung permainan"
+
+#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+msgid "Create a code"
+msgstr "Buat kode"
+
+#: scenes/play/play_menu.gd:441
+msgid "Waiting for a player"
+msgstr "Menunggu pemain"
+
+#: scenes/play/play_menu.gd:442
+msgid "On the other device, choose Play local, then Join a game."
+msgstr "Di perangkat lain, pilih “Main via Wi-Fi”, lalu “Gabung permainan”."
+
+#. Above a code like 7KQ-2M4P that the other player can type to join.
+#: scenes/play/play_menu.gd:446
+msgid "If the game doesn't appear there, enter this code"
+msgstr "Jika permainan tidak muncul di sana, masukkan kode ini"
+
+#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+msgid "Cancel"
+msgstr "Batal"
+
+#. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
+#: scenes/play/play_menu.gd:457
+msgid "Looking for games on this Wi-Fi…"
+msgstr "Mencari permainan di Wi-Fi ini…"
+
+#. Placeholder in the box for typing a nearby game's code.
+#: scenes/play/play_menu.gd:468
+msgid "Code"
+msgstr "Kode"
+
+#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+msgid "Join"
+msgstr "Gabung"
+
+#. Menu button: quick match against a random online player.
+#: scenes/play/play_menu.gd:513
+msgid "Play with someone online"
+msgstr "Main dengan pemain online"
+
+#. Small print under "Play with someone online".
+#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+msgid "Standard rules, about a minute per move"
+msgstr "Aturan standar, sekitar satu menit per langkah"
+
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+msgid "Play with a friend"
+msgstr "Main dengan teman"
+
+#: scenes/play/play_menu.gd:540
+msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
+msgstr "Satu orang membuat kode, yang lain memasukkannya. Bisa dimainkan antara ponsel, tablet, dan komputer."
+
+#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+msgid "Enter a code"
+msgstr "Masukkan kode"
+
+#: scenes/play/play_menu.gd:551
+msgid "Your code"
+msgstr "Kode Anda"
+
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+msgid "Connecting…"
+msgstr "Menyambungkan…"
+
+#: scenes/play/play_menu.gd:556
+msgid "Send this code to your friend. The game starts when they enter it."
+msgstr "Kirim kode ini ke teman Anda. Permainan dimulai saat mereka memasukkannya."
+
+#: scenes/play/play_menu.gd:559
+msgid "Share"
+msgstr "Bagikan"
+
+#: scenes/play/play_menu.gd:561
+msgid "Copy"
+msgstr "Salin"
+
+#. Toast after copying the game code.
+#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+msgid "Copied"
+msgstr "Disalin"
+
+#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
+#: scenes/play/play_menu.gd:577
+#, c-format
+msgid "Play with me in Timeless Games! My game code is %s."
+msgstr "Ayo main bersama di Timeless Games! Kode permainan saya %s."
+
+#. Quick match found no one after about a minute.
+#: scenes/play/play_menu.gd:613
+msgid "No one is free right now"
+msgstr "Belum ada pemain yang tersedia"
+
+#: scenes/play/play_menu.gd:614
+msgid "We can keep looking while you play."
+msgstr "Kami bisa terus mencari selagi Anda bermain."
+
+#: scenes/play/play_menu.gd:615
+msgid "Play against the AI while we keep looking"
+msgstr "Main melawan AI sambil kami terus mencari"
+
+#: scenes/play/play_menu.gd:618
+msgid "Keep searching"
+msgstr "Terus mencari"
+
+#: scenes/play/play_menu.gd:619
+msgid "Invite a friend instead"
+msgstr "Undang teman saja"
+
+#. Title over a message saying why a game with another player couldn't start.
+#: scenes/play/play_menu.gd:639
+msgid "Couldn't start the game"
+msgstr "Permainan tidak dapat dimulai"
+
+#: scenes/play/play_menu.gd:642
+msgid "OK"
+msgstr "OK"
+
+#. Asked before leaving a game against another player that's still going.
+#: scenes/play/play_menu.gd:650
+msgid "Leave this game?"
+msgstr "Tinggalkan permainan ini?"
+
+#: scenes/play/play_menu.gd:651
+msgid "It counts as a loss."
+msgstr "Ini dihitung sebagai kekalahan."
+
+#: scenes/play/play_menu.gd:652
+msgid "Leave"
+msgstr "Tinggalkan"
+
+#. Button: don't leave the game against another player.
+#: scenes/play/play_menu.gd:658
+msgid "Stay"
+msgstr "Tetap di sini"
+
+#. Heading over the list of books and articles at the end of "Game origins".
+#: scenes/play/play_menu.gd:683
+msgid "Sources"
+msgstr "Sumber"
+
+#: scenes/play/play_menu.gd:729
+msgid "Offer a draw"
+msgstr "Tawarkan seri"
+
+#. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
+#: scenes/play/play_menu.gd:758
+msgid "Look"
+msgstr "Tampilan"
+
+#. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
+#: scenes/play/play_menu.gd:761
+msgid "Sound"
+msgstr "Suara"
+
+#. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
+#: scenes/play/play_menu.gd:763
+msgid "Music"
+msgstr "Musik"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:767
+msgid "Privacy choices"
+msgstr "Pilihan privasi"
+
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:788
+msgid "Quit to main menu"
+msgstr "Keluar ke menu utama"
+
+#. Title of the screen offering the other looks (styles of board and pieces) for a short video.
+#: scenes/play/play_menu.gd:802
+msgid "More looks"
+msgstr "Tampilan lain"
+
+#. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+#: scenes/play/play_menu.gd:804
+msgid "Watch a short video to switch looks until you close the game."
+msgstr "Tonton video singkat untuk mengganti tampilan sampai Anda menutup aplikasi."
+
+#. On the "More looks" screen when no video could be loaded (offline, or none available).
+#: scenes/play/play_menu.gd:808
+msgid "No video is ready right now. Try again in a moment."
+msgstr "Belum ada video yang siap saat ini. Coba lagi sebentar lagi."
+
+#. Button: play a short video (an ad) to open the other looks.
+#: scenes/play/play_menu.gd:811
+msgid "Watch a video"
+msgstr "Tonton video"
+
+#. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
+#: scenes/play/play_menu.gd:842
+msgid "Graphics"
+msgstr "Grafis"
+
+#. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
+#: scenes/play/play_menu.gd:923
+#, c-format
+msgid "Your name: %s"
+msgstr "Nama Anda: %s"
+
+#. Shown, with animated dots, while waiting for the other player to join.
+#: scenes/play/play_menu.gd:960
+msgid "Waiting"
+msgstr "Menunggu"
+
+#: scenes/play/play_text.gd:24
+msgid "Scribe"
+msgstr "Juru tulis"
+
+#: scenes/play/play_text.gd:26
+msgid "Traveller"
+msgstr "Pengelana"
+
+#: scenes/play/play_text.gd:28
+msgid "Potter"
+msgstr "Perajin"
+
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+msgid "Weaver"
+msgstr "Penenun"
+
+#: scenes/play/play_text.gd:32
+msgid "Shepherd"
+msgstr "Gembala"
+
+#: scenes/play/play_text.gd:34
+msgid "Boatman"
+msgstr "Pendayung"
+
+#: scenes/play/play_text.gd:36
+msgid "Gardener"
+msgstr "Pekebun"
+
+#: scenes/play/play_text.gd:38
+msgid "Builder"
+msgstr "Pembangun"
+
+#: scenes/play/play_text.gd:46
+msgid "Can't reach the online service. Check your connection and try again."
+msgstr "Tidak dapat menjangkau layanan online. Periksa koneksi Anda dan coba lagi."
+
+#: scenes/play/play_text.gd:48
+msgid "No game has that code. Check it and try again."
+msgstr "Tidak ada permainan dengan kode itu. Periksa lalu coba lagi."
+
+#: scenes/play/play_text.gd:50
+msgid "That game has already started."
+msgstr "Permainan itu sudah dimulai."
+
+#: scenes/play/play_text.gd:52
+msgid "Couldn't connect to the other device."
+msgstr "Tidak dapat tersambung ke perangkat lain."
+
+#: scenes/play/play_text.gd:54
+msgid "The other device has a different version of the game. Update both and try again."
+msgstr "Perangkat lain memakai versi permainan yang berbeda. Perbarui keduanya lalu coba lagi."
+
+#: scenes/play/play_text.gd:56
+msgid "The other device is playing a different game."
+msgstr "Perangkat lain sedang memainkan permainan lain."
+
+#: scenes/play/play_text.gd:58
+msgid "The other device uses rules this version doesn't have."
+msgstr "Perangkat lain memakai aturan yang tidak ada di versi ini."
+
+#: scenes/play/play_text.gd:60
+msgid "Couldn't start a game on this network. Close any other copy of the game and try again."
+msgstr "Tidak dapat memulai permainan di jaringan ini. Tutup salinan permainan lain yang sedang terbuka, lalu coba lagi."
+
+#: scenes/play/play_text.gd:62
+msgid "Local play needs permission to find devices on your network."
+msgstr "Main via Wi-Fi memerlukan izin untuk menemukan perangkat di jaringan Anda."
+
+#: scenes/play/play_text.gd:64
+msgid "That code isn't valid. Check it and try again."
+msgstr "Kode itu tidak valid. Periksa lalu coba lagi."
+
+#: scenes/play/play_text.gd:66
+msgid "This device isn't on a Wi-Fi network."
+msgstr "Perangkat ini tidak terhubung ke jaringan Wi-Fi."
+
+#: scenes/play/play_text.gd:67
+msgid "Something went wrong. Please try again."
+msgstr "Terjadi kesalahan. Silakan coba lagi."
+
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+msgid "You resigned."
+msgstr "Anda menyerah."
+
+#: scenes/play/play_text.gd:75
+msgid "Your opponent resigned."
+msgstr "Lawan menyerah."
+
+#: scenes/play/play_text.gd:77
+msgid "You agreed to a draw."
+msgstr "Anda menyetujui hasil seri."
+
+#: scenes/play/play_text.gd:79
+msgid "You ran out of time three times."
+msgstr "Waktu Anda habis tiga kali."
+
+#: scenes/play/play_text.gd:79
+msgid "Your opponent ran out of time three times."
+msgstr "Waktu lawan habis tiga kali."
+
+#: scenes/play/play_text.gd:81
+msgid "You left the game."
+msgstr "Anda meninggalkan permainan."
+
+#: scenes/play/play_text.gd:83
+msgid "The other device sent moves that aren't allowed."
+msgstr "Perangkat lain mengirim langkah yang tidak diizinkan."
+
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:62
+msgid "Goats to move"
+msgstr "Giliran kambing"
+
+#. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:117
+#, c-format
+msgid "%d goat still to place"
+msgid_plural "%d goats still to place"
+msgstr[0] "%d kambing lagi untuk ditaruh"
+
+#: titles/bagh_chal/art/brass_style.gd:40
+msgid "Temple brass"
+msgstr "Kuningan kuil"
+
+#: titles/bagh_chal/art/brass_style.gd:41
+msgid "An engraved brass board and cast figures, at dusk in a temple courtyard."
+msgstr "Papan kuningan berukir dan bidak cor, saat senja di pelataran kuil."
+
+#: titles/bagh_chal/art/modern_style.gd:40
+msgid "Modern edition"
+msgstr "Edisi modern"
+
+#: titles/bagh_chal/art/modern_style.gd:41
+msgid "A board game company's edition of today: a bright molded board, plastic tigers and goats, under a pendant lamp."
+msgstr "Edisi buatan perusahaan permainan papan masa kini: papan cetak yang cerah, harimau dan kambing plastik, di bawah lampu gantung."
+
+#: titles/bagh_chal/art/stone_style.gd:40
+msgid "Stone and pebbles"
+msgstr "Batu dan kerikil"
+
+#: titles/bagh_chal/art/stone_style.gd:41
+msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
+msgstr "Cara bersejarah: garis dipahat di batu dan diberi kapur, harimau dan kambing dari batu sungai, di atas tikar jerami."
+
+#. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
+#: titles/common/hunt_origins.gd:24
+msgid "Bagh Chal comes from Nepal. Its name joins the Nepali words for “tiger” and “move”. Four tigers hunt twenty goats on a board of five by five points: the tigers capture goats by jumping over them, and the goats win by hemming the tigers in until none of them can move. In Nepal Bhasa, the language of the Newars of the Kathmandu Valley, the game is called [i]dhun kasa[/i], “the tiger game”."
+msgstr "Bagh Chal berasal dari Nepal. Namanya menggabungkan kata bahasa Nepal untuk “harimau” dan “langkah”. Empat harimau memburu dua puluh kambing di papan lima kali lima titik: harimau memakan kambing dengan melompatinya, dan kambing menang jika mengepung harimau sampai tidak ada satu pun yang bisa bergerak. Dalam bahasa Nepal Bhasa, bahasa orang Newar di Lembah Kathmandu, permainan ini disebut [i]dhun kasa[/i], “permainan harimau”."
+
+#. "Game origins" text for Bagh Chal, paragraph 2 of 7. "Hunt games" is the board-game historians' name for this family. Keep [i]aadu puli attam[/i] as it is.
+#: titles/common/hunt_origins.gd:26
+msgid "It belongs to a large family of hunt games, in which a few strong pieces face many weak ones. Games of tigers against goats or lambs are played on many different boards across South Asia; in southern India, for example, the related [i]aadu puli attam[/i] has a board of its own."
+msgstr "Permainan ini termasuk keluarga besar permainan berburu, tempat beberapa bidak kuat menghadapi banyak bidak lemah. Permainan harimau melawan kambing atau domba dimainkan di berbagai papan di seluruh Asia Selatan; di India selatan, misalnya, permainan sejenis bernama [i]aadu puli attam[/i] memiliki papannya sendiri."
+
+#. "Game origins" text for Bagh Chal, paragraph 3 of 7. Parlett: David Parlett, a British games historian; write his name as in the termbase.
+#: titles/common/hunt_origins.gd:28
+msgid "No one knows how old the game is: it was handed down by playing, not in writing. Players often scratched the board into the ground or into stone and played with stones and pebbles. In 1976 the games historian David Parlett found it popular with Buddhist monks, who played it just that way."
+msgstr "Tidak ada yang tahu seberapa tua permainan ini: ia diwariskan lewat bermain, bukan lewat tulisan. Para pemain sering menggores papannya di tanah atau di batu dan bermain dengan batu dan kerikil. Pada 1976, sejarawan permainan David Parlett mendapati permainan ini populer di kalangan biksu Buddha, yang memainkannya persis seperti itu."
+
+#. "Game origins" text for Bagh Chal, paragraph 4 of 7. Bhagchal, Bhagchakar and Chakrachal are the names Hora recorded: keep them as they are. Averbakh: Yuri Averbakh, a Russian chess grandmaster.
+#: titles/common/hunt_origins.gd:30
+msgid "One of the earliest written descriptions dates from 1933, when the zoologist Sunder Lal Hora recorded the game in the Teesta valley of the eastern Himalayas as Bhagchal, Bhagchakar or Chakrachal, with four tigers and twenty goats. Parlett set down its rules in Nepal in 1976, and the chess grandmaster Yuri Averbakh, who saw it there in 1986, called it a national game, about as popular as chess."
+msgstr "Salah satu uraian tertulis paling awal berasal dari 1933, ketika ahli zoologi Sunder Lal Hora mencatat permainan ini di lembah Teesta di Himalaya timur dengan nama Bhagchal, Bhagchakar, atau Chakrachal, dengan empat harimau dan dua puluh kambing. Parlett mencatat aturannya di Nepal pada 1976, dan grandmaster catur Yuri Averbakh, yang melihatnya di sana pada 1986, menyebutnya permainan nasional yang hampir sepopuler catur."
+
+#. "Game origins" text for Bagh Chal, paragraph 5 of 7. "Standard" and "Parlett 1976" are the names of this game's two rule sets: use the same words as in the rules menu.
+#: titles/common/hunt_origins.gd:32
+msgid "The old accounts don't all end the hunt at the same point. Hora and Parlett have the tigers hunt down every goat, while most players today stop at five captures. This game offers both: the Standard rules, with five, and Parlett 1976, the hunt to the last goat."
+msgstr "Catatan-catatan lama tidak semuanya mengakhiri perburuan pada titik yang sama. Menurut Hora dan Parlett, harimau harus memburu setiap kambing, sedangkan kebanyakan pemain sekarang berhenti setelah lima kambing dimakan. Permainan ini menyediakan keduanya: aturan Standar, dengan lima, dan Parlett 1976, perburuan sampai kambing terakhir."
+
+#. "Game origins" text for Bagh Chal, paragraph 6 of 7. Lim Yew Jin and Jürg Nievergelt are computer scientists; "a draw" is a game with no winner.
+#: titles/common/hunt_origins.gd:34
+msgid "In 2004 the computer scientists Lim Yew Jin and Jürg Nievergelt set out to compute every position of the game. They later proved that with perfect play on both sides the standard game ends in a draw: neither the tigers nor the goats can force a win."
+msgstr "Pada 2004, ilmuwan komputer Lim Yew Jin dan Jürg Nievergelt mulai menghitung setiap posisi dalam permainan ini. Belakangan mereka membuktikan bahwa jika kedua pihak bermain sempurna, permainan standar berakhir seri: baik harimau maupun kambing tidak dapat memaksakan kemenangan."
+
+#. "Game origins" text for Bagh Chal, paragraph 7 of 7. A pati is a public rest-house in Nepal: keep the word, as the text explains it.
+#: titles/common/hunt_origins.gd:36
+msgid "In the Kathmandu Valley, older players still meet over the board on the platforms of the patis, the public rest-houses, and around temples, and metal and wooden boards are sold, mostly to visitors. Reporters in Kathmandu note that fewer young people play it today."
+msgstr "Di Lembah Kathmandu, para pemain yang lebih tua masih berkumpul di depan papan di pelataran pati, yaitu balai istirahat umum, dan di sekitar kuil, sementara papan dari logam dan kayu dijual, kebanyakan kepada wisatawan. Para wartawan di Kathmandu mencatat bahwa makin sedikit anak muda yang memainkannya sekarang."
+
+#. Subtitle under the game name: which rule set is being played.
+#: titles/common/hunt_text.gd:35
+msgid "Standard rules"
+msgstr "Aturan standar"
+
+#: titles/common/hunt_text.gd:37
+msgid "Parlett 1976: hunt to the last goat"
+msgstr "Parlett 1976: berburu sampai kambing terakhir"
+
+#: titles/common/hunt_text.gd:39
+msgid "Adugo, the Bororo rules"
+msgstr "Adugo, aturan suku Bororo"
+
+#. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
+#: titles/common/hunt_text.gd:42
+msgid "Komikan, a Mapuche reconstruction"
+msgstr "Komikan, rekonstruksi permainan Mapuche"
+
+#: titles/common/hunt_text.gd:49
+msgid "Bagh Chal · Standard"
+msgstr "Bagh Chal · Standar"
+
+#: titles/common/hunt_text.gd:51
+msgid "Bagh Chal · Parlett 1976"
+msgstr "Bagh Chal · Parlett 1976"
+
+#: titles/common/hunt_text.gd:53
+msgid "Jogo da Onça · Adugo"
+msgstr "Jogo da Onça · Adugo"
+
+#: titles/common/hunt_text.gd:55
+msgid "Jogo da Onça · Komikan"
+msgstr "Jogo da Onça · Komikan"
+
+#: titles/common/hunt_text.gd:62
+msgid "Tigers to move"
+msgstr "Giliran harimau"
+
+#: titles/common/hunt_text.gd:64
+msgid "Jaguar to move"
+msgstr "Giliran jaguar"
+
+#: titles/common/hunt_text.gd:64 titles/common/hunt_text.gd:66
+msgid "Dogs to move"
+msgstr "Giliran anjing"
+
+#: titles/common/hunt_text.gd:66
+msgid "Puma to move"
+msgstr "Giliran puma"
+
+#: titles/common/hunt_text.gd:73
+msgid "The tigers won"
+msgstr "Harimau menang"
+
+#: titles/common/hunt_text.gd:73
+msgid "The goats won"
+msgstr "Kambing menang"
+
+#: titles/common/hunt_text.gd:75
+msgid "The jaguar won"
+msgstr "Jaguar menang"
+
+#: titles/common/hunt_text.gd:75 titles/common/hunt_text.gd:77
+msgid "The dogs won"
+msgstr "Anjing menang"
+
+#: titles/common/hunt_text.gd:77
+msgid "The puma won"
+msgstr "Puma menang"
+
+#: titles/common/hunt_text.gd:84
+msgid "The tigers win"
+msgstr "Harimau menang"
+
+#: titles/common/hunt_text.gd:84
+msgid "The goats win"
+msgstr "Kambing menang"
+
+#: titles/common/hunt_text.gd:86
+msgid "The jaguar wins"
+msgstr "Jaguar menang"
+
+#: titles/common/hunt_text.gd:86 titles/common/hunt_text.gd:88
+msgid "The dogs win"
+msgstr "Anjing menang"
+
+#: titles/common/hunt_text.gd:88
+msgid "The puma wins"
+msgstr "Puma menang"
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the tigers"
+msgstr "Anda memainkan harimau"
+
+#: titles/common/hunt_text.gd:94
+msgid "You play the goats"
+msgstr "Anda memainkan kambing"
+
+#: titles/common/hunt_text.gd:96
+msgid "You play the jaguar"
+msgstr "Anda memainkan jaguar"
+
+#: titles/common/hunt_text.gd:96 titles/common/hunt_text.gd:98
+msgid "You play the dogs"
+msgstr "Anda memainkan anjing"
+
+#: titles/common/hunt_text.gd:98
+msgid "You play the puma"
+msgstr "Anda memainkan puma"
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a tiger to move."
+msgstr "Pilih harimau yang akan digerakkan."
+
+#: titles/common/hunt_text.gd:104
+msgid "Choose a goat to move."
+msgstr "Pilih kambing yang akan digerakkan."
+
+#: titles/common/hunt_text.gd:106
+msgid "Move the jaguar."
+msgstr "Gerakkan jaguar."
+
+#: titles/common/hunt_text.gd:106 titles/common/hunt_text.gd:108
+msgid "Choose a dog to move."
+msgstr "Pilih anjing yang akan digerakkan."
+
+#: titles/common/hunt_text.gd:108
+msgid "Move the puma."
+msgstr "Gerakkan puma."
+
+#: titles/common/hunt_text.gd:112
+msgid "Place a goat on any empty point."
+msgstr "Taruh seekor kambing di titik kosong mana saja."
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every goat has been captured."
+msgstr "Semua kambing sudah dimakan."
+
+#. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
+#: titles/common/hunt_text.gd:127
+msgid "Every dog has been eaten."
+msgstr "Semua anjing sudah dimakan."
+
+#: titles/common/hunt_text.gd:128
+#, c-format
+msgid "%d goat captured."
+msgid_plural "%d goats captured."
+msgstr[0] "%d kambing dimakan."
+
+#: titles/common/hunt_text.gd:129
+#, c-format
+msgid "%d dog captured."
+msgid_plural "%d dogs captured."
+msgstr[0] "%d anjing dimakan."
+
+#: titles/common/hunt_text.gd:133
+msgid "The tigers are trapped: none of them can move."
+msgstr "Harimau terkepung: tidak ada yang bisa bergerak."
+
+#: titles/common/hunt_text.gd:135
+msgid "The jaguar is trapped and can't move."
+msgstr "Jaguar terkepung dan tidak bisa bergerak."
+
+#: titles/common/hunt_text.gd:137
+msgid "The puma is trapped and can't move."
+msgstr "Puma terkepung dan tidak bisa bergerak."
+
+#: titles/common/hunt_text.gd:139
+msgid "The goats can't move."
+msgstr "Kambing tidak bisa bergerak."
+
+#: titles/common/hunt_text.gd:139
+msgid "The dogs can't move any more."
+msgstr "Anjing tidak bisa bergerak lagi."
+
+#: titles/common/hunt_text.gd:141
+msgid "Every move left would repeat an earlier position."
+msgstr "Setiap langkah yang tersisa akan mengulang posisi sebelumnya."
+
+#: titles/common/hunt_text.gd:143
+msgid "The same position came up three times."
+msgstr "Posisi yang sama muncul tiga kali."
+
+#. Reason for a draw: the tigers made this many moves in a row without a capture.
+#: titles/common/hunt_text.gd:150
+#, c-format
+msgid "The tigers went %d move without capturing."
+msgid_plural "The tigers went %d moves without capturing."
+msgstr[0] "Harimau melangkah %d kali tanpa memakan."
+
+#: titles/common/hunt_text.gd:152
+#, c-format
+msgid "The jaguar went %d move without capturing."
+msgid_plural "The jaguar went %d moves without capturing."
+msgstr[0] "Jaguar melangkah %d kali tanpa memakan."
+
+#: titles/common/hunt_text.gd:154
+#, c-format
+msgid "The puma went %d move without capturing."
+msgid_plural "The puma went %d moves without capturing."
+msgstr[0] "Puma melangkah %d kali tanpa memakan."
+
+#. Count toward the draw rule: tiger moves since the last capture / the limit.
+#: titles/common/hunt_text.gd:169
+#, c-format
+msgid "Tiger moves without capturing: %d / %d"
+msgstr "Langkah harimau tanpa memakan: %d / %d"
+
+#: titles/common/hunt_text.gd:171
+#, c-format
+msgid "Jaguar moves without capturing: %d / %d"
+msgstr "Langkah jaguar tanpa memakan: %d / %d"
+
+#: titles/common/hunt_text.gd:173
+#, c-format
+msgid "Puma moves without capturing: %d / %d"
+msgstr "Langkah puma tanpa memakan: %d / %d"
+
+#: titles/common/hunt_tutorials.gd:134
+msgid "Tigers and goats"
+msgstr "Harimau dan kambing"
+
+#: titles/common/hunt_tutorials.gd:135
+msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
+msgstr "Empat harimau melawan dua puluh kambing. Harimau mulai di keempat sudut; kambing mulai di tangan, di luar papan. Kambing jalan lebih dulu."
+
+#: titles/common/hunt_tutorials.gd:140
+msgid "Placing the goats"
+msgstr "Menaruh kambing"
+
+#: titles/common/hunt_tutorials.gd:141
+msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
+msgstr "Selama masih ada kambing di tangan, setiap giliran kambing adalah penempatan: satu kambing ke titik kosong mana saja. Kambing di papan tidak boleh bergerak sebelum kedua puluh kambing ditaruh. Harimau bergerak di sela-selanya."
+
+#: titles/common/hunt_tutorials.gd:145
+msgid "How a tiger moves"
+msgstr "Cara harimau bergerak"
+
+#: titles/common/hunt_tutorials.gd:146
+msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
+msgstr "Harimau melangkah di sepanjang garis ke titik kosong berikutnya. Garis diagonal hanya melewati titik secara berselang-seling, jadi sebagian titik punya delapan tetangga dan sisanya empat atau kurang."
+
+#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
+msgid "Capturing"
+msgstr "Memakan"
+
+#: titles/common/hunt_tutorials.gd:154
+msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
+msgstr "Harimau memakan kambing yang bersebelahan dengannya di satu garis dengan melompatinya, lalu mendarat di titik kosong tepat di baliknya. Kambing itu keluar dari papan. Satu kambing per lompatan, dan memakan tidak pernah wajib."
+
+#: titles/common/hunt_tutorials.gd:160
+msgid "Safety in numbers"
+msgstr "Bersatu kita teguh"
+
+#: titles/common/hunt_tutorials.gd:161
+msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
+msgstr "Kambing yang tepat di belakangnya ada kambing lain, atau tepi papan, tidak bisa dilompati: harimau butuh titik kosong untuk mendarat. Kambing yang tetap berkumpul aman."
+
+#: titles/common/hunt_tutorials.gd:166
+msgid "Moving the goats"
+msgstr "Menggerakkan kambing"
+
+#: titles/common/hunt_tutorials.gd:167
+msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
+msgstr "Setelah semua kambing masuk permainan, kambing melangkah di sepanjang garis ke titik kosong berikutnya, sama seperti harimau. Kambing tidak pernah melompat dan tidak pernah memakan."
+
+#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+msgid "How the tigers win"
+msgstr "Cara harimau menang"
+
+#: titles/common/hunt_tutorials.gd:178
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "Dalam versi Parlett, harimau harus memakan kedua puluh kambing. Selebihnya sama seperti permainan standar."
+
+#: titles/common/hunt_tutorials.gd:187
+msgid "The tigers win by capturing five goats."
+msgstr "Harimau menang dengan memakan lima kambing."
+
+#: titles/common/hunt_tutorials.gd:195
+msgid "How the goats win"
+msgstr "Cara kambing menang"
+
+#: titles/common/hunt_tutorials.gd:196
+msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
+msgstr "Kambing menang jika tidak ada harimau yang bisa bergerak: setiap harimau terkepung kambing yang tidak bisa dilompatinya."
+
+#. Walkthrough step title: the rules for a drawn game.
+#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
+msgid "Draws"
+msgstr "Seri"
+
+#: titles/common/hunt_tutorials.gd:205
+msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
+msgstr "Setelah semua kambing ditaruh, tidak boleh ada langkah yang mengembalikan posisi yang sudah pernah terjadi. Permainan berakhir seri jika harimau melangkah 50 kali tanpa memakan, atau jika setiap langkah yang tersisa akan mengulang posisi."
+
+#: titles/common/hunt_tutorials.gd:218
+msgid "The jaguar and the dogs"
+msgstr "Jaguar dan anjing"
+
+#: titles/common/hunt_tutorials.gd:219
+msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
+msgstr "Satu jaguar melawan empat belas anjing. Jaguar mulai di tengah papan dan anjing memenuhi separuh papan di seberang. Jaguar jalan lebih dulu."
+
+#: titles/common/hunt_tutorials.gd:224
+msgid "Moving"
+msgstr "Bergerak"
+
+#: titles/common/hunt_tutorials.gd:225
+msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
+msgstr "Setiap giliran, satu bidak melangkah di sepanjang garis ke titik kosong berikutnya, ke arah mana pun. Segitiga termasuk bagian papan, dan kedua pihak boleh masuk ke sana."
+
+#: titles/common/hunt_tutorials.gd:231
+msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
+msgstr "Jaguar memakan anjing yang bersebelahan dengannya di satu garis dengan melompatinya, lalu mendarat di titik kosong tepat di baliknya. Anjing itu keluar dari papan. Memakan tidak wajib."
+
+#: titles/common/hunt_tutorials.gd:237
+msgid "Chains of captures"
+msgstr "Rantai makan"
+
+#: titles/common/hunt_tutorials.gd:238
+msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
+msgstr "Setelah memakan, jaguar boleh melompat lagi dan lagi, berganti arah sesukanya, dan boleh berhenti setelah lompatan mana pun. Tidak ada anjing yang boleh dilompati dua kali dalam satu giliran."
+
+#: titles/common/hunt_tutorials.gd:244
+msgid "Strength in pairs"
+msgstr "Kuat berpasangan"
+
+#: titles/common/hunt_tutorials.gd:245
+msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
+msgstr "Dua anjing yang berderet di satu garis saling melindungi: jaguar tidak punya tempat untuk mendarat."
+
+#: titles/common/hunt_tutorials.gd:250
+msgid "How the jaguar wins"
+msgstr "Cara jaguar menang"
+
+#: titles/common/hunt_tutorials.gd:251
+msgid "The jaguar wins by capturing five dogs."
+msgstr "Jaguar menang dengan memakan lima anjing."
+
+#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
+msgid "How the dogs win"
+msgstr "Cara anjing menang"
+
+#: titles/common/hunt_tutorials.gd:259
+msgid "The dogs win when the jaguar can't move at all."
+msgstr "Anjing menang jika jaguar sama sekali tidak bisa bergerak."
+
+#: titles/common/hunt_tutorials.gd:267
+msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
+msgstr "Jika posisi yang sama muncul tiga kali, atau jaguar melangkah 50 kali tanpa memakan, permainan berakhir seri."
+
+#: titles/common/hunt_tutorials.gd:278
+msgid "The puma and the dogs"
+msgstr "Puma dan anjing"
+
+#. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
+#: titles/common/hunt_tutorials.gd:280
+msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
+msgstr "Komikan adalah permainan berburu suku Mapuche. Puma mulai di dalam menara, yaitu segitiga, dan dua belas anjing menunggu di ujung seberang. Puma jalan lebih dulu."
+
+#: titles/common/hunt_tutorials.gd:285
+msgid "The puma"
+msgstr "Puma"
+
+#: titles/common/hunt_tutorials.gd:286
+msgid "The puma steps along any line, in any direction, forward or back."
+msgstr "Puma melangkah di sepanjang garis mana pun, ke arah mana pun, maju atau mundur."
+
+#: titles/common/hunt_tutorials.gd:291
+msgid "Moving the dogs"
+msgstr "Menggerakkan anjing"
+
+#: titles/common/hunt_tutorials.gd:292
+msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
+msgstr "Anjing melangkah dengan cara yang sama: di sepanjang garis mana pun ke titik kosong berikutnya, maju, ke samping, atau mundur. Hanya puma yang bisa melompat."
+
+#: titles/common/hunt_tutorials.gd:300
+msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
+msgstr "Puma memakan anjing yang sendirian dengan melompatinya ke titik kosong di baliknya. Ia boleh melompat lagi dan lagi, berganti arah, dan berhenti setelah lompatan mana pun. Dua anjing yang berderet saling melindungi."
+
+#: titles/common/hunt_tutorials.gd:307
+msgid "The dogs win by hemming the puma in so that it can't move."
+msgstr "Anjing menang dengan mengepung puma sampai tidak bisa bergerak."
+
+#: titles/common/hunt_tutorials.gd:315
+msgid "How the puma wins"
+msgstr "Cara puma menang"
+
+#: titles/common/hunt_tutorials.gd:316
+msgid "The puma wins as soon as it has eaten three dogs."
+msgstr "Puma menang begitu sudah memakan tiga anjing."
+
+#: titles/common/hunt_tutorials.gd:326
+msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
+msgstr "Jika posisi yang sama muncul tiga kali, atau puma melangkah 50 kali tanpa memakan, permainan berakhir seri."
+
+#: titles/common/hunt_tutorials.gd:330
+msgid "A reconstruction"
+msgstr "Sebuah rekonstruksi"
+
+#. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
+#: titles/common/hunt_tutorials.gd:332
+msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
+msgstr "Dalam catatan yang ditulis seabad lalu, anjing hanya boleh maju, sehingga puma yang tetap di menara tidak akan pernah tertangkap. Di sini gerak anjing dan kemenangan puma mengikuti Trapial-Kuzen, versi Mapuche modern dari permainan ini. Menara dianggap bagian papan biasa, dan puma jalan lebih dulu kecuali Anda mengubahnya di pengaturan."
+
+#. Graphics setting: the game picks the quality for this device. Keep it short.
+#: ui/game_graphics.gd:96
+msgid "Auto"
+msgstr "Otomatis"
+
+#. Graphics setting: the best-looking quality. Keep it short.
+#: ui/game_graphics.gd:98
+msgid "High"
+msgstr "Tinggi"
+
+#. Graphics setting: medium quality. Keep it short.
+#: ui/game_graphics.gd:100
+msgid "Medium"
+msgstr "Sedang"
+
+#. Graphics setting: the lightest quality, for slower phones. Keep it short.
+#: ui/game_graphics.gd:102
+msgid "Low"
+msgstr "Rendah"

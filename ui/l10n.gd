@@ -14,7 +14,9 @@ extends RefCounted
 ## with a side name): word order, case and gender differ by language. A %d
 ## inside a sentence is fine; use tn() for anything that counts.
 
-## The launch languages (bible §7), each named in its own language.
+## The launch languages (bible §7: 15 since 2026-11-06, when Christopher added
+## Traditional Chinese, Indonesian and Thai), each named in its own language.
+## Use languages() for what a build offers: it adds the title's own.
 const LANGUAGES := [
 	["en", "English"],
 	["pt_BR", "Português (Brasil)"],
@@ -26,8 +28,18 @@ const LANGUAGES := [
 	["pl", "Polski"],
 	["tr", "Türkçe"],
 	["zh_CN", "简体中文"],
+	["zh_TW", "繁體中文"],
 	["ja", "日本語"],
 	["ko", "한국어"],
+	["id", "Bahasa Indonesia"],
+	["th", "ไทย"],
+]
+
+## Languages only some titles offer (TitleConfig "languages"), each named in
+## its own language. They go right after English in the Language menu.
+## Nepali: Bagh Chal only (Christopher, 2026-11-06).
+const TITLE_LANGUAGES := [
+	["ne", "नेपाली"],
 ]
 
 const SETTINGS_PATH := "user://settings.cfg"
@@ -45,13 +57,40 @@ static func tn(singular: String, plural: String, n: int, context := "") -> Strin
 	return TranslationServer.translate_plural(singular, plural, n, context)
 
 
-## The launch language closest to the system's, or English.
-static func best_locale(system_locale: String) -> String:
-	var lang := system_locale.split("_")[0]
-	for entry in LANGUAGES:
-		if entry[0] == system_locale:
+## The languages this build offers, as [code, name in its own language]:
+## the launch languages plus the title's own (TitleConfig.languages).
+static func languages(config: TitleConfig = null) -> Array:
+	if config == null:
+		config = TitleConfig.active()
+	var out := LANGUAGES.duplicate()
+	var at := 1
+	for entry in TITLE_LANGUAGES:
+		if entry[0] in config.languages:
+			out.insert(at, entry)
+			at += 1
+	return out
+
+
+## The offered language closest to the system's, or English.
+## Chinese goes by script: Traditional (zh_TW) for Taiwan, Hong Kong and Macau
+## or the Hant script, Simplified (zh_CN) otherwise. Android may still report
+## Indonesian with its old code "in".
+static func best_locale(system_locale: String, config: TitleConfig = null) -> String:
+	var parts := system_locale.replace("-", "_").split("_")
+	var lang := parts[0]
+	if lang == "in":
+		lang = "id"
+	if lang == "zh":
+		for p in parts.slice(1):
+			if p in ["Hant", "TW", "HK", "MO"]:
+				return "zh_TW"
+		return "zh_CN"
+	var code := lang + ("_" + parts[-1] if parts.size() > 1 else "")
+	var offered := languages(config)
+	for entry in offered:
+		if entry[0] == code:
 			return entry[0]
-	for entry in LANGUAGES:
+	for entry in offered:
 		if entry[0].split("_")[0] == lang:
 			return entry[0]
 	return "en"
@@ -60,7 +99,7 @@ static func best_locale(system_locale: String) -> String:
 ## Applies the saved language, or the system's on first run.
 static func apply_saved_locale() -> void:
 	var saved := str(load_setting("language", ""))
-	TranslationServer.set_locale(saved if saved != "" else best_locale(OS.get_locale()))
+	TranslationServer.set_locale(best_locale(saved) if saved != "" else best_locale(OS.get_locale()))
 	SeriesTheme.apply_locale()
 
 

@@ -1,7 +1,7 @@
-term,definition,context,dnt,en,pt_BR,es,fr,de,it,ru,pl,tr,zh_CN,ja,ko
-Bagh Chal,"The game and the title: Nepali bāgh cāl, ""tiger moves"".",Title. Proper name in every language.,yes,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal
-tiger,"The hunting side: four tigers (bagh).",Pieces. Plural in most strings.,no,tiger,tigre,tigre,tigre,Tiger,tigr,тигр,tygrys,kaplan,虎,虎,호랑이
-goat,"The hunted side: twenty goats (bakhri).",Pieces. Plural in most strings.,no,goat,cabra,cabra,chèvre,Ziege,capr,коз,koz|kóz,keçi,羊,山羊,염소
-capture,"Taking a piece by jumping over it.",Rules.,no,captur,captur,captur,pri|pren,schlag|schläg|geschlagen,cattur,взя|бер,bi|zbi|zbij,al,吃,取,잡
-draw,"A game with no winner.",Rules and results.,no,draw,empat,empate,nul,unentschieden|remis,patt,нич,remis,beraber,和棋,引き分け,무승부
-Parlett,"David Parlett, who published the 1976 variant.",Rule-set name.,no,Parlett,Parlett,Parlett,Parlett,Parlett,Parlett,Парлетт,Parlett,Parlett,帕利特,パーレット,팔렛
+term,definition,context,dnt,en,pt_BR,es,fr,de,it,ru,pl,tr,zh_CN,zh_TW,ja,ko,id,th,ne
+Bagh Chal,"The game and the title: Nepali bāgh cāl, ""tiger moves"".",Title. Proper name in every language.,yes,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,Bagh Chal,बाघचाल
+tiger,"The hunting side: four tigers (bagh).",Pieces. Plural in most strings.,no,tiger,tigre,tigre,tigre,Tiger,tigr,тигр,tygrys,kaplan,虎,虎,虎,호랑이,harimau,เสือ,बाघ
+goat,"The hunted side: twenty goats (bakhri).",Pieces. Plural in most strings.,no,goat,cabra,cabra,chèvre,Ziege,capr,коз,koz|kóz,keçi,羊,羊,山羊,염소,kambing,แพะ,बाख्रा
+capture,"Taking a piece by jumping over it.",Rules.,no,captur,captur,captur,pri|pren,schlag|schläg|geschlagen,cattur,взя|бер,bi|zbi|zbij,al,吃,吃,取,잡,makan,กิน,मार
+draw,"A game with no winner.",Rules and results.,no,draw,empat,empate,nul,unentschieden|remis,patt,нич,remis,beraber,和棋,和局|和棋,引き分け,무승부,seri,เสมอ,बराबरी
+Parlett,"David Parlett, who published the 1976 variant.",Rule-set name.,no,Parlett,Parlett,Parlett,Parlett,Parlett,Parlett,Парлетт,Parlett,Parlett,帕利特,帕利特,パーレット,팔렛,Parlett,พาร์เลตต์,पार्लेट

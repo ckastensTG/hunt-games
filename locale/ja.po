@@ -9,134 +9,134 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
-#: scenes/greybox/hud.gd:138
+#: scenes/greybox/hud.gd:140
 msgid "Menu"
 msgstr "メニュー"
 
-#: scenes/greybox/hud.gd:161
+#: scenes/greybox/hud.gd:164
 msgid "Undo"
 msgstr "一手戻す"
 
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:229
+#: scenes/greybox/hud.gd:235
 msgid "Stop here"
 msgstr "ここで止める"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:247
+#: scenes/greybox/hud.gd:254
 msgid "Moves"
 msgstr "棋譜"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:298 scenes/greybox/hud.gd:454
+#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
 msgid "Play again"
 msgstr "もう一度"
 
 #. Button after an online quick match: look for someone else to play.
-#: scenes/greybox/hud.gd:308
+#: scenes/greybox/hud.gd:315
 msgid "New opponent"
 msgstr "別の相手"
 
 #. Button on the game-over card: back to the main menu.
-#: scenes/greybox/hud.gd:314
+#: scenes/greybox/hud.gd:320
 msgid "Main menu"
 msgstr "メインメニュー"
 
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:318
+#: scenes/greybox/hud.gd:324
 msgid "Look at the board"
 msgstr "盤面を見る"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:360
+#: scenes/greybox/hud.gd:390
 msgid "thinking"
 msgstr "考え中"
 
-#: scenes/greybox/hud.gd:393 scenes/greybox/hud.gd:442
+#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
 msgid "A draw"
 msgstr "引き分け"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:400
+#: scenes/greybox/hud.gd:430
 #, c-format
 msgid "Captured %d / %d"
 msgstr "取った数 %d / %d"
 
-#: scenes/greybox/hud.gd:428
+#: scenes/greybox/hud.gd:458
 msgid "No moves yet"
 msgstr "まだ手がありません"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:285
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
 msgid "You won"
 msgstr "あなたの勝ち"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
 msgid "You lost"
 msgstr "あなたの負け"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:454 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
 msgid "Rematch"
 msgstr "再戦"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:464
+#: scenes/greybox/hud.gd:496
 #, c-format
 msgid "place %s"
 msgstr "%s に置く"
 
-#: scenes/greybox/hud.gd:473
+#: scenes/greybox/hud.gd:505
 msgid "Watching the AI play both sides."
 msgstr "AI が両方を指しています。"
 
-#: scenes/greybox/hud.gd:477
+#: scenes/greybox/hud.gd:509
 msgid "Waiting for your opponent's move."
 msgstr "相手の手番を待っています。"
 
-#: scenes/greybox/hud.gd:479
+#: scenes/greybox/hud.gd:511
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "連続取り：次の着地点を選ぶか、ここで止めてください。"
 
-#: scenes/greybox/hud.gd:485
+#: scenes/greybox/hud.gd:517
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "行き先を選んでください。切れた輪は取りを表します。"
 
-#: scenes/greybox/hud.gd:486
+#: scenes/greybox/hud.gd:518
 msgid "Pick where it goes."
 msgstr "行き先を選んでください。"
 
-#: scenes/greybox/tutorial.gd:76
+#: scenes/greybox/tutorial.gd:79
 msgid "Close"
 msgstr "閉じる"
 
 #. Button: play this step of the walkthrough again.
-#: scenes/greybox/tutorial.gd:80
+#: scenes/greybox/tutorial.gd:83
 msgid "Replay"
 msgstr "もう一度見る"
 
-#: scenes/greybox/tutorial.gd:83
+#: scenes/greybox/tutorial.gd:86
 msgid "‹ Back"
 msgstr "‹ 戻る"
 
 #. Step counter in the walkthrough: step number and number of steps.
-#: scenes/greybox/tutorial.gd:159
+#: scenes/greybox/tutorial.gd:175
 #, c-format
 msgid "How to play · %d of %d"
 msgstr "遊び方 · %d / %d"
 
-#: scenes/greybox/tutorial.gd:162
+#: scenes/greybox/tutorial.gd:178
 msgid "Start playing"
 msgstr "対局を始める"
 
-#: scenes/greybox/tutorial.gd:162
+#: scenes/greybox/tutorial.gd:178
 msgid "Next ›"
 msgstr "次へ ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:614
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
 msgid "Looking for an opponent…"
 msgstr "対戦相手を探しています…"
 
@@ -151,7 +151,7 @@ msgid "Play now"
 msgstr "今すぐ対戦"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
 msgid "Not now"
 msgstr "今はしない"
 
@@ -175,42 +175,30 @@ msgstr "対戦相手が見つかりました。今すぐ対戦しますか？"
 msgid "Your opponent offers a draw."
 msgstr "相手が引き分けを提案しています。"
 
-#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
 msgid "Accept"
 msgstr "受ける"
 
-#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
 msgid "Decline"
 msgstr "断る"
 
 #: scenes/play/match_ui.gd:274
-msgid "Your opponent asks to take back their last move."
-msgstr "相手が待ったを求めています。"
-
-#: scenes/play/match_ui.gd:274
-msgid "Allow"
-msgstr "認める"
-
-#: scenes/play/match_ui.gd:274
-msgid "Refuse"
-msgstr "認めない"
-
-#: scenes/play/match_ui.gd:277
 msgid "Your opponent wants a rematch."
 msgstr "相手が再戦を希望しています。"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284
+#: scenes/play/match_ui.gd:281
 msgid "Resign this game?"
 msgstr "この対局を投了しますか？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:728
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
 msgid "Resign"
 msgstr "投了する"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284
+#: scenes/play/match_ui.gd:281
 msgid "Keep playing"
 msgstr "続ける"
 
@@ -222,329 +210,338 @@ msgstr "対戦相手が見つかったらお知らせします。"
 msgid "Draw offered. Waiting for an answer."
 msgstr "引き分けを提案しました。返事を待っています。"
 
-#: scenes/play/play_controller.gd:321
-msgid "Asked to take back your last move."
-msgstr "待ったを頼みました。"
-
-#: scenes/play/play_controller.gd:332
+#: scenes/play/play_controller.gd:326
 msgid "Rematch offered. Waiting for an answer."
 msgstr "再戦を申し込みました。返事を待っています。"
 
-#: scenes/play/play_controller.gd:334 scenes/play/play_controller.gd:433 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
 msgid "Your opponent left the game."
 msgstr "相手が対局を抜けました。"
 
-#: scenes/play/play_controller.gd:430
+#: scenes/play/play_controller.gd:422
 msgid "Reconnected."
 msgstr "再接続しました。"
 
-#: scenes/play/play_controller.gd:438 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
 msgid "Your opponent declined the draw."
 msgstr "相手は引き分けを断りました。"
 
-#: scenes/play/play_controller.gd:440 tools/smoke_multiplayer.gd:237
-msgid "Move taken back."
-msgstr "一手戻しました。"
-
-#: scenes/play/play_controller.gd:440
-msgid "Your opponent said no to taking back the move."
-msgstr "相手は待ったを認めませんでした。"
-
-#: scenes/play/play_controller.gd:441
+#: scenes/play/play_controller.gd:433
 msgid "Your opponent declined the rematch."
 msgstr "相手は再戦を断りました。"
 
 #. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
-#: scenes/play/play_controller.gd:458
+#: scenes/play/play_controller.gd:450
 #, c-format
 msgid "Playing against %s"
 msgstr "対戦相手：%s"
 
-#: scenes/play/play_controller.gd:468
+#: scenes/play/play_controller.gd:460
 msgid "The other player didn't connect. Still looking…"
 msgstr "相手が接続しませんでした。引き続き探しています…"
 
 #. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
-#: scenes/play/play_controller.gd:517
+#: scenes/play/play_controller.gd:509
 #, c-format
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "時間切れのため、代わりに一手指しました（%d／3 回）。"
 
-#: scenes/play/play_menu.gd:241
+#: scenes/play/play_menu.gd:251
 msgid "Back"
 msgstr "戻る"
 
-#: scenes/play/play_menu.gd:296
+#: scenes/play/play_menu.gd:306
 msgid "Rules"
 msgstr "ルール"
 
-#: scenes/play/play_menu.gd:315
+#: scenes/play/play_menu.gd:326
 msgid "Language"
 msgstr "言語"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:341 scenes/play/play_menu.gd:712
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
 msgid "Continue"
 msgstr "続ける"
 
-#: scenes/play/play_menu.gd:342 scenes/play/play_menu.gd:368
+#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
 msgid "Play against the AI"
 msgstr "AI と対局"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:344 scenes/play/play_menu.gd:388
+#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
 msgid "Pass and play"
 msgstr "1台で2人対戦"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:346 scenes/play/play_menu.gd:397
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
 msgid "Play local"
 msgstr "ローカル対戦"
 
-#: scenes/play/play_menu.gd:348 scenes/play/play_menu.gd:500
+#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
 msgid "Play online"
 msgstr "オンライン対局"
 
-#: scenes/play/play_menu.gd:349 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "遊び方"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:657
+#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
 msgid "Game origins"
 msgstr "ゲームの由来"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:370
 msgid "Quit game"
 msgstr "ゲームを終了"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Novice"
 msgstr "初心者"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Apprentice"
 msgstr "見習い"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Adept"
 msgstr "熟練者"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Master"
 msgstr "名人"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:377 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "対戦相手"
 
-#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:392 scenes/play/play_menu.gd:416
+#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
 msgid "Start"
 msgstr "開始"
 
-#: scenes/play/play_menu.gd:389
+#: scenes/play/play_menu.gd:400
 msgid "Two players share this device and take turns."
 msgstr "2人でこの端末を使い、交互に指します。"
 
-#: scenes/play/play_menu.gd:398
+#: scenes/play/play_menu.gd:409
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "2台の端末を同じ Wi-Fi に接続してください。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:412
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
 msgid "Host a game"
 msgstr "対局を作る"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:444
+#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
 msgid "Join a game"
 msgstr "対局に参加"
 
-#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:531
+#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
 msgid "Create a code"
 msgstr "コードを作る"
 
-#: scenes/play/play_menu.gd:430
+#: scenes/play/play_menu.gd:441
 msgid "Waiting for a player"
 msgstr "相手を待っています"
 
-#: scenes/play/play_menu.gd:431
+#: scenes/play/play_menu.gd:442
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "もう1台で「ローカル対戦」、続いて「対局に参加」を選んでください。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:435
+#: scenes/play/play_menu.gd:446
 msgid "If the game doesn't appear there, enter this code"
 msgstr "表示されない場合は、このコードを入力してください"
 
-#: scenes/play/play_menu.gd:440 scenes/play/play_menu.gd:560 scenes/play/play_menu.gd:611 scenes/play/play_menu.gd:618 scenes/play/play_menu.gd:623
+#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
 msgid "Cancel"
 msgstr "キャンセル"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:446
+#: scenes/play/play_menu.gd:457
 msgid "Looking for games on this Wi-Fi…"
 msgstr "この Wi-Fi で対局を探しています…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:468
 msgid "Code"
 msgstr "コード"
 
-#: scenes/play/play_menu.gd:465 scenes/play/play_menu.gd:592
+#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
 msgid "Join"
 msgstr "参加"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:502
+#: scenes/play/play_menu.gd:513
 msgid "Play with someone online"
 msgstr "オンラインの誰かと対局"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:507 scenes/play/play_menu.gd:616
+#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
 msgid "Standard rules, about a minute per move"
 msgstr "標準ルール・1手あたり約1分"
 
-#: scenes/play/play_menu.gd:508 scenes/play/play_menu.gd:528
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
 msgid "Play with a friend"
 msgstr "友だちと対局"
 
-#: scenes/play/play_menu.gd:529
+#: scenes/play/play_menu.gd:540
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "1人がコードを作り、もう1人が入力します。スマホ、タブレット、パソコンの間で遊べます。"
 
-#: scenes/play/play_menu.gd:532 scenes/play/play_menu.gd:576
+#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
 msgid "Enter a code"
 msgstr "コードを入力"
 
-#: scenes/play/play_menu.gd:540
+#: scenes/play/play_menu.gd:551
 msgid "Your code"
 msgstr "あなたのコード"
 
-#: scenes/play/play_menu.gd:542 scenes/play/play_menu.gd:622
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
 msgid "Connecting…"
 msgstr "接続中…"
 
-#: scenes/play/play_menu.gd:545
+#: scenes/play/play_menu.gd:556
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "このコードを友だちに送ってください。入力されると対局が始まります。"
 
-#: scenes/play/play_menu.gd:548
+#: scenes/play/play_menu.gd:559
 msgid "Share"
 msgstr "共有"
 
-#: scenes/play/play_menu.gd:550
+#: scenes/play/play_menu.gd:561
 msgid "Copy"
 msgstr "コピー"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:572
+#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
 msgid "Copied"
 msgstr "コピーしました"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:566
+#: scenes/play/play_menu.gd:577
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games で一緒に遊ぼう！対局コードは %s です。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:602
+#: scenes/play/play_menu.gd:613
 msgid "No one is free right now"
 msgstr "今は誰も空いていません"
 
-#: scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:614
 msgid "We can keep looking while you play."
 msgstr "対局しているあいだも探し続けられます。"
 
-#: scenes/play/play_menu.gd:604
+#: scenes/play/play_menu.gd:615
 msgid "Play against the AI while we keep looking"
 msgstr "探しているあいだ AI と対局"
 
-#: scenes/play/play_menu.gd:607
+#: scenes/play/play_menu.gd:618
 msgid "Keep searching"
 msgstr "探し続ける"
 
-#: scenes/play/play_menu.gd:608
+#: scenes/play/play_menu.gd:619
 msgid "Invite a friend instead"
 msgstr "代わりに友だちを誘う"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:628
+#: scenes/play/play_menu.gd:639
 msgid "Couldn't start the game"
 msgstr "対局を始められませんでした"
 
-#: scenes/play/play_menu.gd:631
+#: scenes/play/play_menu.gd:642
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:650
 msgid "Leave this game?"
 msgstr "この対局を抜けますか？"
 
-#: scenes/play/play_menu.gd:640
+#: scenes/play/play_menu.gd:651
 msgid "It counts as a loss."
 msgstr "負けになります。"
 
-#: scenes/play/play_menu.gd:641
+#: scenes/play/play_menu.gd:652
 msgid "Leave"
 msgstr "抜ける"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:647
+#: scenes/play/play_menu.gd:658
 msgid "Stay"
 msgstr "残る"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:672
+#: scenes/play/play_menu.gd:683
 msgid "Sources"
 msgstr "参考文献"
 
-#: scenes/play/play_menu.gd:718
+#: scenes/play/play_menu.gd:729
 msgid "Offer a draw"
 msgstr "引き分けを提案"
 
-#: scenes/play/play_menu.gd:723
-msgid "Ask to undo"
-msgstr "待ったを頼む"
-
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:743
+#: scenes/play/play_menu.gd:758
 msgid "Look"
 msgstr "見た目"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:746
+#: scenes/play/play_menu.gd:761
 msgid "Sound"
 msgstr "効果音"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:748
+#: scenes/play/play_menu.gd:763
 msgid "Music"
 msgstr "音楽"
 
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:767
+msgid "Privacy choices"
+msgstr "プライバシーの設定"
+
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:752
+#: scenes/play/play_menu.gd:788
 msgid "Quit to main menu"
 msgstr "メインメニューに戻る"
 
+#. Title of the screen offering the other looks (styles of board and pieces) for a short video.
+#: scenes/play/play_menu.gd:802
+msgid "More looks"
+msgstr "ほかの見た目"
+
+#. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+#: scenes/play/play_menu.gd:804
+msgid "Watch a short video to switch looks until you close the game."
+msgstr "短い動画を見ると、ゲームを閉じるまで見た目を自由に切り替えられます。"
+
+#. On the "More looks" screen when no video could be loaded (offline, or none available).
+#: scenes/play/play_menu.gd:808
+msgid "No video is ready right now. Try again in a moment."
+msgstr "いまは再生できる動画がありません。少し待ってからもう一度お試しください。"
+
+#. Button: play a short video (an ad) to open the other looks.
+#: scenes/play/play_menu.gd:811
+msgid "Watch a video"
+msgstr "動画を見る"
+
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:779
+#: scenes/play/play_menu.gd:842
 msgid "Graphics"
 msgstr "画質"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:860
+#: scenes/play/play_menu.gd:923
 #, c-format
 msgid "Your name: %s"
 msgstr "あなたの名前：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:897
+#: scenes/play/play_menu.gd:960
 msgid "Waiting"
 msgstr "待機中"
 
@@ -560,7 +557,7 @@ msgstr "旅人"
 msgid "Potter"
 msgstr "陶工"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:268
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
 msgid "Weaver"
 msgstr "織り手"
 
@@ -656,12 +653,12 @@ msgstr "あなたが対局を抜けました。"
 msgid "The other device sent moves that aren't allowed."
 msgstr "もう1台の端末から反則の手が送られてきました。"
 
-#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:62
 msgid "Goats to move"
 msgstr "山羊の番"
 
 #. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:117
 #, c-format
 msgid "%d goat still to place"
 msgid_plural "%d goats still to place"
@@ -727,220 +724,220 @@ msgid "In the Kathmandu Valley, older players still meet over the board on the p
 msgstr "カトマンズ盆地では今も、年配の人たちがパティ（公共の休憩所）の基壇や寺院のまわりで盤を囲んでいます。金属や木の盤も売られていますが、買うのはおもに旅行者です。カトマンズの記者たちは、今ではこのゲームを遊ぶ若者が少なくなったと伝えています。"
 
 #. Subtitle under the game name: which rule set is being played.
-#: titles/common/hunt_text.gd:26
+#: titles/common/hunt_text.gd:35
 msgid "Standard rules"
 msgstr "標準ルール"
 
-#: titles/common/hunt_text.gd:28
+#: titles/common/hunt_text.gd:37
 msgid "Parlett 1976: hunt to the last goat"
 msgstr "パーレット 1976：最後の山羊まで狩る"
 
-#: titles/common/hunt_text.gd:30
+#: titles/common/hunt_text.gd:39
 msgid "Adugo, the Bororo rules"
 msgstr "Adugo、ボロロ族のルール"
 
 #. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
-#: titles/common/hunt_text.gd:33
+#: titles/common/hunt_text.gd:42
 msgid "Komikan, a Mapuche reconstruction"
 msgstr "Komikan、マプチェ族の遊びの復元"
 
-#: titles/common/hunt_text.gd:40
+#: titles/common/hunt_text.gd:49
 msgid "Bagh Chal · Standard"
 msgstr "Bagh Chal · 標準"
 
-#: titles/common/hunt_text.gd:42
+#: titles/common/hunt_text.gd:51
 msgid "Bagh Chal · Parlett 1976"
 msgstr "Bagh Chal · パーレット 1976"
 
-#: titles/common/hunt_text.gd:44
+#: titles/common/hunt_text.gd:53
 msgid "Jogo da Onça · Adugo"
 msgstr "Jogo da Onça · Adugo"
 
-#: titles/common/hunt_text.gd:46
+#: titles/common/hunt_text.gd:55
 msgid "Jogo da Onça · Komikan"
 msgstr "Jogo da Onça · Komikan"
 
-#: titles/common/hunt_text.gd:53
+#: titles/common/hunt_text.gd:62
 msgid "Tigers to move"
 msgstr "虎の番"
 
-#: titles/common/hunt_text.gd:55
+#: titles/common/hunt_text.gd:64
 msgid "Jaguar to move"
 msgstr "ジャガーの番"
 
-#: titles/common/hunt_text.gd:55 titles/common/hunt_text.gd:57
+#: titles/common/hunt_text.gd:64 titles/common/hunt_text.gd:66
 msgid "Dogs to move"
 msgstr "犬の番"
 
-#: titles/common/hunt_text.gd:57
+#: titles/common/hunt_text.gd:66
 msgid "Puma to move"
 msgstr "ピューマの番"
 
-#: titles/common/hunt_text.gd:64
+#: titles/common/hunt_text.gd:73
 msgid "The tigers won"
 msgstr "虎の勝ち"
 
-#: titles/common/hunt_text.gd:64
+#: titles/common/hunt_text.gd:73
 msgid "The goats won"
 msgstr "山羊の勝ち"
 
-#: titles/common/hunt_text.gd:66
+#: titles/common/hunt_text.gd:75
 msgid "The jaguar won"
 msgstr "ジャガーの勝ち"
 
-#: titles/common/hunt_text.gd:66 titles/common/hunt_text.gd:68
+#: titles/common/hunt_text.gd:75 titles/common/hunt_text.gd:77
 msgid "The dogs won"
 msgstr "犬の勝ち"
 
-#: titles/common/hunt_text.gd:68
+#: titles/common/hunt_text.gd:77
 msgid "The puma won"
 msgstr "ピューマの勝ち"
 
-#: titles/common/hunt_text.gd:75
+#: titles/common/hunt_text.gd:84
 msgid "The tigers win"
 msgstr "虎の勝利"
 
-#: titles/common/hunt_text.gd:75
+#: titles/common/hunt_text.gd:84
 msgid "The goats win"
 msgstr "山羊の勝利"
 
-#: titles/common/hunt_text.gd:77
+#: titles/common/hunt_text.gd:86
 msgid "The jaguar wins"
 msgstr "ジャガーの勝利"
 
-#: titles/common/hunt_text.gd:77 titles/common/hunt_text.gd:79
+#: titles/common/hunt_text.gd:86 titles/common/hunt_text.gd:88
 msgid "The dogs win"
 msgstr "犬の勝利"
 
-#: titles/common/hunt_text.gd:79
+#: titles/common/hunt_text.gd:88
 msgid "The puma wins"
 msgstr "ピューマの勝利"
 
-#: titles/common/hunt_text.gd:85
+#: titles/common/hunt_text.gd:94
 msgid "You play the tigers"
 msgstr "あなたは虎"
 
-#: titles/common/hunt_text.gd:85
+#: titles/common/hunt_text.gd:94
 msgid "You play the goats"
 msgstr "あなたは山羊"
 
-#: titles/common/hunt_text.gd:87
+#: titles/common/hunt_text.gd:96
 msgid "You play the jaguar"
 msgstr "あなたはジャガー"
 
-#: titles/common/hunt_text.gd:87 titles/common/hunt_text.gd:89
+#: titles/common/hunt_text.gd:96 titles/common/hunt_text.gd:98
 msgid "You play the dogs"
 msgstr "あなたは犬"
 
-#: titles/common/hunt_text.gd:89
+#: titles/common/hunt_text.gd:98
 msgid "You play the puma"
 msgstr "あなたはピューマ"
 
-#: titles/common/hunt_text.gd:95
+#: titles/common/hunt_text.gd:104
 msgid "Choose a tiger to move."
 msgstr "動かす虎を選んでください。"
 
-#: titles/common/hunt_text.gd:95
+#: titles/common/hunt_text.gd:104
 msgid "Choose a goat to move."
 msgstr "動かす山羊を選んでください。"
 
-#: titles/common/hunt_text.gd:97
+#: titles/common/hunt_text.gd:106
 msgid "Move the jaguar."
 msgstr "ジャガーを動かしてください。"
 
-#: titles/common/hunt_text.gd:97 titles/common/hunt_text.gd:99
+#: titles/common/hunt_text.gd:106 titles/common/hunt_text.gd:108
 msgid "Choose a dog to move."
 msgstr "動かす犬を選んでください。"
 
-#: titles/common/hunt_text.gd:99
+#: titles/common/hunt_text.gd:108
 msgid "Move the puma."
 msgstr "ピューマを動かしてください。"
 
-#: titles/common/hunt_text.gd:103
+#: titles/common/hunt_text.gd:112
 msgid "Place a goat on any empty point."
 msgstr "空いている点に山羊を1頭置いてください。"
 
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
-#: titles/common/hunt_text.gd:118
+#: titles/common/hunt_text.gd:127
 msgid "Every goat has been captured."
 msgstr "山羊はすべて取られました。"
 
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
-#: titles/common/hunt_text.gd:118
+#: titles/common/hunt_text.gd:127
 msgid "Every dog has been eaten."
 msgstr "犬はすべて食べられました。"
 
-#: titles/common/hunt_text.gd:119
+#: titles/common/hunt_text.gd:128
 #, c-format
 msgid "%d goat captured."
 msgid_plural "%d goats captured."
 msgstr[0] "取られた山羊：%d。"
 
-#: titles/common/hunt_text.gd:120
+#: titles/common/hunt_text.gd:129
 #, c-format
 msgid "%d dog captured."
 msgid_plural "%d dogs captured."
 msgstr[0] "取られた犬：%d。"
 
-#: titles/common/hunt_text.gd:124
+#: titles/common/hunt_text.gd:133
 msgid "The tigers are trapped: none of them can move."
 msgstr "虎は閉じ込められました：どの虎も動けません。"
 
-#: titles/common/hunt_text.gd:126
+#: titles/common/hunt_text.gd:135
 msgid "The jaguar is trapped and can't move."
 msgstr "ジャガーは閉じ込められ、動けません。"
 
-#: titles/common/hunt_text.gd:128
+#: titles/common/hunt_text.gd:137
 msgid "The puma is trapped and can't move."
 msgstr "ピューマは閉じ込められ、動けません。"
 
-#: titles/common/hunt_text.gd:130
+#: titles/common/hunt_text.gd:139
 msgid "The goats can't move."
 msgstr "山羊は動けません。"
 
-#: titles/common/hunt_text.gd:130
+#: titles/common/hunt_text.gd:139
 msgid "The dogs can't move any more."
 msgstr "犬はもう動けません。"
 
-#: titles/common/hunt_text.gd:132
+#: titles/common/hunt_text.gd:141
 msgid "Every move left would repeat an earlier position."
 msgstr "残りのどの手も、以前の局面を繰り返すことになります。"
 
-#: titles/common/hunt_text.gd:134
+#: titles/common/hunt_text.gd:143
 msgid "The same position came up three times."
 msgstr "同じ局面が3回現れました。"
 
 #. Reason for a draw: the tigers made this many moves in a row without a capture.
-#: titles/common/hunt_text.gd:141
+#: titles/common/hunt_text.gd:150
 #, c-format
 msgid "The tigers went %d move without capturing."
 msgid_plural "The tigers went %d moves without capturing."
 msgstr[0] "虎は %d 手のあいだ取りがありませんでした。"
 
-#: titles/common/hunt_text.gd:143
+#: titles/common/hunt_text.gd:152
 #, c-format
 msgid "The jaguar went %d move without capturing."
 msgid_plural "The jaguar went %d moves without capturing."
 msgstr[0] "ジャガーは %d 手のあいだ取りがありませんでした。"
 
-#: titles/common/hunt_text.gd:145
+#: titles/common/hunt_text.gd:154
 #, c-format
 msgid "The puma went %d move without capturing."
 msgid_plural "The puma went %d moves without capturing."
 msgstr[0] "ピューマは %d 手のあいだ取りがありませんでした。"
 
 #. Count toward the draw rule: tiger moves since the last capture / the limit.
-#: titles/common/hunt_text.gd:160
+#: titles/common/hunt_text.gd:169
 #, c-format
 msgid "Tiger moves without capturing: %d / %d"
 msgstr "虎が取らずに指した手数：%d / %d"
 
-#: titles/common/hunt_text.gd:162
+#: titles/common/hunt_text.gd:171
 #, c-format
 msgid "Jaguar moves without capturing: %d / %d"
 msgstr "ジャガーが取らずに指した手数：%d / %d"
 
-#: titles/common/hunt_text.gd:164
+#: titles/common/hunt_text.gd:173
 #, c-format
 msgid "Puma moves without capturing: %d / %d"
 msgstr "ピューマが取らずに指した手数：%d / %d"
@@ -1133,21 +1130,21 @@ msgid "In the accounts written down a century ago, the dogs may only go forward,
 msgstr "100年前の記録では犬は前にしか進めず、それでは塔にとどまるピューマを決して捕まえられません。ここでは犬の動きとピューマの勝ち方を、この遊びの現代のマプチェ版である Trapial-Kuzen に合わせています。塔は普通の盤として扱い、設定で変えない限りピューマが先手です。"
 
 #. Graphics setting: the game picks the quality for this device. Keep it short.
-#: ui/game_graphics.gd:75
+#: ui/game_graphics.gd:96
 msgid "Auto"
 msgstr "自動"
 
 #. Graphics setting: the best-looking quality. Keep it short.
-#: ui/game_graphics.gd:77
+#: ui/game_graphics.gd:98
 msgid "High"
 msgstr "高"
 
 #. Graphics setting: medium quality. Keep it short.
-#: ui/game_graphics.gd:79
+#: ui/game_graphics.gd:100
 msgid "Medium"
 msgstr "中"
 
 #. Graphics setting: the lightest quality, for slower phones. Keep it short.
-#: ui/game_graphics.gd:81
+#: ui/game_graphics.gd:102
 msgid "Low"
 msgstr "低"

@@ -12,7 +12,9 @@ extends RefCounted
 ##
 ## AdMob: the App IDs and ad unit IDs aren't secret either (they ship in the
 ## app). Debug builds use Google's demo ad units (ad_unit()), so testing never
-## shows or clicks a live ad on the account.
+## shows or clicks a live ad on the account. The Android App ID also sits in
+## res://addons/AdmobPlugin/android_export.cfg, which the AdMob plugin writes
+## into the manifest (tests/test_ads_setup.gd checks they match).
 
 const DEV := "dev"
 const BAGH_CHAL := "bagh_chal"
@@ -26,6 +28,13 @@ const TITLES := {
 		# Games", bible §2) is set in the store consoles.
 		"short_name": "Bagh Chal",
 		"rule_sets": [HuntRuleSets.BAGH_CHAL_STANDARD, HuntRuleSets.BAGH_CHAL_PARLETT],
+		# Languages this title offers on top of the launch languages
+		# (L10n.TITLE_LANGUAGES): Nepali, the game's home language
+		# (Christopher, 2026-11-06).
+		"languages": ["ne"],
+		# The look every player has. The others open for the session after a
+		# rewarded video, or for good with Remove ads (Christopher, 2026-11-06).
+		"free_look": "brass",
 		# Confirmed by Christopher 2026-11-03; permanent once published.
 		"package": "com.timegalleon.baghchal",
 		"eos": {
@@ -51,6 +60,8 @@ const TITLES := {
 	JOGO_DA_ONCA: {
 		"short_name": "Jogo da Onça",
 		"rule_sets": [HuntRuleSets.ADUGO, HuntRuleSets.KOMIKAN],
+		"languages": [],
+		"free_look": "",  # one look so far
 		"package": "",  # M3
 		"eos": {},  # its own EOS product, M3 (bible §5.2)
 		"admob": {},  # its own AdMob apps, M3
@@ -73,6 +84,8 @@ const ADMOB_DEMO_UNITS := {
 var id: String
 var short_name: String
 var rule_sets: Array
+## Title-only languages offered on top of the launch languages, e.g. ["ne"].
+var languages: Array
 var package: String
 var eos: Dictionary
 ## {"android": {app_id, interstitial, rewarded}, "ios": {...}}, or {}.
@@ -103,12 +116,18 @@ static func for_id(title: String) -> TitleConfig:
 		var t: Dictionary = TITLES[title]
 		c.short_name = t.short_name
 		c.rule_sets = t.rule_sets.duplicate()
+		c.languages = t.languages.duplicate()
 		c.package = t.package
 		c.eos = t.eos.duplicate()
 		c.admob = t.admob.duplicate(true)
 	else:
 		c.short_name = "Hunt Games (dev)"
 		c.rule_sets = HuntRuleSets.ALL.duplicate()
+		c.languages = []
+		for t in TITLES.values():
+			for code in t.languages:
+				if not code in c.languages:
+					c.languages.append(code)
 		c.package = ""
 		c.eos = TITLES[BAGH_CHAL].eos.duplicate()
 		c.admob = TITLES[BAGH_CHAL].admob.duplicate(true)
@@ -141,6 +160,22 @@ func ad_unit(kind: String, platform := ad_platform(), demo := OS.is_debug_build(
 	if demo:
 		return str(ADMOB_DEMO_UNITS.get(platform, {}).get(kind, ""))
 	return str(admob.get(platform, {}).get(kind, ""))
+
+
+## What AdService.start() needs: this build's ad units (demo units in debug
+## builds) and whether it's a test build.
+func ad_setup() -> Dictionary:
+	return {
+		"interstitial": ad_unit("interstitial"),
+		"rewarded": ad_unit("rewarded"),
+		"debug": OS.is_debug_build(),
+	}
+
+
+## The look a title gives every player ("" when it has only one look). The
+## others need a rewarded video (for the session) or Remove ads.
+static func free_look(title: String) -> String:
+	return str(TITLES.get(title, {}).get("free_look", ""))
 
 
 ## The EOS client for this title from res://config/eos_<title>.cfg:

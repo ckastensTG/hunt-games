@@ -17,8 +17,11 @@ extends CanvasLayer
 ##               │ searching / invite a friend)
 ##               └ Play with a friend ─ Create a code (side, rules → code to
 ##                                     share) · Enter a code
-##   Pause ─ Continue · (against another device: Offer a draw, Ask to undo,
-##           Resign) · Look · Graphics · Sound · Music · Language · Quit to main menu
+##   Pause ─ Continue · (against another device: Offer a draw, Resign) · Look
+##           · Graphics · Sound · Music · Language · Privacy choices (where
+##           ad consent applies) · Quit to main menu
+##   More looks ─ a locked look was picked: watch a video to open every look
+##                until the app closes (AdService), or not now
 ##
 ## "Play online" only shows when an online service is available (bible §5.2:
 ## offline-first). The network work is in play_controller.gd; this only
@@ -40,6 +43,8 @@ var _hosts_box: VBoxContainer
 var _live_label: Label
 var _error_back := "home"
 var _after_confirm: Callable
+## The locked look the player picked (More looks switches to it after the video).
+var _wanted_look := ""
 
 
 func _init(owner_game: Node) -> void:
@@ -53,6 +58,9 @@ func _ready() -> void:
 	var play: Node = game.play
 	play.changed.connect(_on_play_changed)
 	play.nearby_hosts_changed.connect(_fill_hosts)
+	game.ads.changed.connect(func() -> void:
+		if visible and _screen in ["looks", "pause"]:
+			_render())
 	get_viewport().size_changed.connect(_on_resized)
 	_build()
 
@@ -198,6 +206,8 @@ func _render() -> void:
 			_confirm_leave()
 		"pause":
 			_pause()
+		"looks":
+			_looks()
 		"origins":
 			_origins()
 
@@ -300,10 +310,11 @@ func _rules_picker() -> void:
 func _language_row() -> void:
 	var lang := OptionButton.new()
 	lang.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
-	for entry in L10n.LANGUAGES:
+	var offered := L10n.languages()
+	for entry in offered:
 		lang.add_item(entry[1])
-	lang.selected = L10n.LANGUAGES.map(func(e: Array) -> String: return e[0]).find(L10n.current_language())
-	lang.item_selected.connect(func(i: int) -> void: L10n.set_language(L10n.LANGUAGES[i][0]))
+	lang.selected = offered.map(func(e: Array) -> String: return e[0]).find(L10n.current_language())
+	lang.item_selected.connect(func(i: int) -> void: L10n.set_language(offered[i][0]))
 	lang.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lang.custom_minimum_size.y = 58
 	var row := HBoxContainer.new()
@@ -719,12 +730,6 @@ func _pause() -> void:
 			close()
 			game.play.offer_draw())
 		draw.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		if s.kind != MatchSession.Kind.QUICK_MATCH:
-			var undo := _small_button(L10n.t("Ask to undo"), row, func() -> void:
-				close()
-				game.play.request_undo())
-			undo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			undo.disabled = s.moves.is_empty()
 		var resign := _small_button(L10n.t("Resign"), row, func() -> void:
 			close()
 			game._match_ui.ask_resign())
@@ -732,13 +737,23 @@ func _pause() -> void:
 		_card_box.add_child(row)
 	var styles: Array = game.art_styles()
 	if styles.size() > 1:
+		# Locked looks carry a padlock; picking one opens More looks.
 		var look := OptionButton.new()
 		look.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
+		var lock := SeriesIcon.texture("lock", SeriesTheme.fs(17))
 		for st in styles:
-			look.add_item(L10n.t(st.display_name))
+			if game.look_locked(st.id):
+				look.add_icon_item(lock, L10n.t(st.display_name))
+			else:
+				look.add_item(L10n.t(st.display_name))
 			look.set_item_tooltip(look.item_count - 1, L10n.t(st.description))
 		look.selected = maxi(0, styles.find(game.current_style()))
-		look.item_selected.connect(func(i: int) -> void: game.set_art_style(styles[i].id))
+		look.item_selected.connect(func(i: int) -> void:
+			if game.choose_look(styles[i].id):
+				return
+			look.selected = maxi(0, styles.find(game.current_style()))
+			_wanted_look = styles[i].id
+			_go("looks"))
 		# TRANSLATORS: Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
 		_row(L10n.t("Look"), look)
 	_graphics_row()
@@ -747,6 +762,14 @@ func _pause() -> void:
 	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
+	if game.ads.privacy_options_available():
+		# TRANSLATORS: In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+		var privacy := _button(L10n.t("Privacy choices"), func() -> void:
+			close()
+			game.ads.show_privacy_options())
+		privacy.flat = true
+		privacy.custom_minimum_size = Vector2(0, 52)
+		privacy.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
 	if OS.is_debug_build() and not game.is_network():
 		# Not translated: test builds only (perf_test.gd). One row: the
 		# performance test and its two follow-ups.
@@ -770,6 +793,33 @@ func _pause() -> void:
 			game.quit_to_menu())
 	quit.flat = true
 	quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+
+
+## More looks: the look picked is locked. A rewarded video opens every look
+## until the app closes (Remove ads opens them for good: IAP, next round).
+func _looks() -> void:
+	# TRANSLATORS: Title of the screen offering the other looks (styles of board and pieces) for a short video.
+	_title(L10n.t("More looks"), 38)
+	# TRANSLATORS: On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+	_text(L10n.t("Watch a short video to switch looks until you close the game."), "book", 21)
+	var ready: bool = game.ads.rewarded_ready()
+	if not ready:
+		# TRANSLATORS: On the "More looks" screen when no video could be loaded (offline, or none available).
+		_text(L10n.t("No video is ready right now. Try again in a moment."), "italic", 18, SeriesTheme.TEXT_DIM)
+	_gap(2)
+	# TRANSLATORS: Button: play a short video (an ad) to open the other looks.
+	var watch := _button(L10n.t("Watch a video"), func() -> void:
+		game.ads.show_rewarded(func(result: int) -> void:
+			if result != AdService.Reward.EARNED:
+				_render()
+				return
+			game.ads.unlock_extras_for_session()
+			if _wanted_look != "":
+				game.choose_look(_wanted_look)
+			_wanted_look = ""
+			back()), true)
+	watch.disabled = not ready
+	_back_button(L10n.t("Not now"))
 
 
 ## Graphics: Auto (showing the tier it chose), High, Medium, Low.

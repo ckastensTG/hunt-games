@@ -7,6 +7,9 @@ extends SceneTree
 ## 3. "How to play" for every rule set: every step shown and its moves
 ##    played on the board, then the walkthrough closed and the game back.
 ## 4. The interface in every launch language.
+## Ads run on the test stand-in (instant): no ad after the first finished
+## game, one at the break after the second; one look free, the others after
+## a rewarded video. Undo only against the AI.
 ## Along the way, every Bagh Chal look is built and shows its move marks with
 ## the right shader (added light, or ink on pale boards) and loads its piece
 ## sounds and music; moves, captures and endings play the right sounds, and
@@ -25,6 +28,7 @@ var failures: Array[String] = []
 
 
 func _initialize() -> void:
+	AdService.backend_override = "sim"
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
@@ -63,6 +67,8 @@ func _clicks() -> bool:
 	var b: BoardDef = game.rules.board
 	match _click_step:
 		0:
+			AdService.backend_override = ""
+			(game.ads.backend as SimAdBackend).instant = true
 			game.mode = GreyboxScript.Mode.HOTSEAT
 			game.new_game()
 			game.sfx.log_plays = true
@@ -80,8 +86,9 @@ func _clicks() -> bool:
 				failures.append("tiger step clicks did not commit")
 			_check_sounds(["slide_tiger", "set_tiger"], "tiger step")
 			game.undo()
-			if game.history.size() != 1:
-				failures.append("hotseat undo")
+			if game.history.size() != 2 or game.can_undo() or game._hud._undo.visible:
+				failures.append("pass and play: no undo (history %d)" % game.history.size())
+			game.session.undo(1)  # back to the tiger's turn for the checks below
 			_check_looks()
 			# A two-jump chain on the Adugo board: c3 x c4 -> c5 (apex) x c6 -> c7.
 			var adugo := HuntRuleSets.adugo()
@@ -121,6 +128,8 @@ func _clicks() -> bool:
 			game.sfx.played.clear()
 			game.session.agree_draw()
 			_check_sounds(["draw"], "an agreed draw")
+			_check_undo_against_ai()
+			_check_ads()
 			_check_lines_follow_points()
 			print("clicks: ok (%d failures so far)" % failures.size())
 			queue = HuntRuleSets.ALL.duplicate()
@@ -128,6 +137,58 @@ func _clicks() -> bool:
 			phase = "ai"
 			_next_game()
 	return false
+
+
+## Undo works against the AI: a goat placed, then taken back.
+func _check_undo_against_ai() -> void:
+	game.mode = GreyboxScript.Mode.HUMAN_PREY
+	game._rule_set_id = HuntRuleSets.BAGH_CHAL_STANDARD
+	game.new_game()
+	game.commit(game.state.legal_moves(false)[0])
+	game._hud.refresh()
+	if not game.can_undo() or not game._hud._undo.visible:
+		failures.append("against the AI: Undo should be there")
+	game._animating = false
+	game.undo()
+	if game.history.size() != 0:
+		failures.append("against the AI: undo took back %d moves" % (1 - game.history.size()))
+
+
+## Ads on the test stand-in: the cap (every 2nd finished game) at the Play
+## again break, and the look unlock.
+func _check_ads() -> void:
+	var ads: AdService = game.ads
+	var sim := ads.backend as SimAdBackend
+	ads.policy = AdPolicy.new(Time.get_ticks_msec() - AdPolicy.MIN_GAP_MS - 1)
+	var shown := sim.interstitials_shown
+	game.mode = GreyboxScript.Mode.HUMAN_PREY
+	game.new_game()
+	game.session.resign(HuntState.PREY)
+	game.session.resign(HuntState.PREY)  # the same game ending again doesn't count twice
+	game.play_again()
+	if sim.interstitials_shown != shown or game.status != HuntState.Status.ONGOING:
+		failures.append("ads: no ad after the first game, straight into the next")
+	game.session.resign(HuntState.PREY)
+	game.play_again()
+	if sim.interstitials_shown != shown + 1 or game.status != HuntState.Status.ONGOING:
+		failures.append("ads: an ad after the second game, then the next game (%d shown)" % (sim.interstitials_shown - shown))
+	game.mode = GreyboxScript.Mode.AI_VS_AI
+	game.new_game()
+	game.session.resign(HuntState.PREY)
+	if ads.policy.games_since_ad != 0:
+		failures.append("ads: AI vs AI games don't count")
+	# Looks: one free, the rest after a video, for the session.
+	var free := TitleConfig.free_look("bagh_chal")
+	if game.look_locked(free) or not game.look_locked("stone") or game.choose_look("stone"):
+		failures.append("looks: only %s is free" % free)
+	ads.show_rewarded(func(r: int) -> void:
+		if r == AdService.Reward.EARNED:
+			ads.unlock_extras_for_session())
+	if not game.choose_look("stone") or game.current_style().id != "stone":
+		failures.append("looks: open after the video")
+	game.set_art_style(free)
+	game.mode = GreyboxScript.Mode.HOTSEAT
+	print("ads: ok")
 
 
 ## The sounds played since the last check, in order.
@@ -260,16 +321,16 @@ func _tutorial() -> bool:
 	return false
 
 
-## Switches the interface through every launch language: the rebuild must
-## not error, and the turn banner must say something.
+## Switches the interface through every language this build offers: the
+## rebuild must not error, and the turn banner must say something.
 func _languages() -> void:
-	for entry in L10n.LANGUAGES:
+	for entry in L10n.languages():
 		TranslationServer.set_locale(entry[0])
 		game._hud._build()
 		if game._hud._turn.text.strip_edges() == "":
 			failures.append("%s: empty turn banner" % entry[0])
 	TranslationServer.set_locale("en")
-	print("languages: %d checked" % L10n.LANGUAGES.size())
+	print("languages: %d checked" % L10n.languages().size())
 
 
 func _done() -> bool:

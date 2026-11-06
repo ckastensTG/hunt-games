@@ -1,7 +1,7 @@
 extends CanvasLayer
 ## Over the board during games with other people: who the opponent is, the
-## connection and the turn clock; the opponent's questions (draw, take back,
-## rematch) and our own "resign?"; short messages (toasts), including
+## connection and the turn clock; the opponent's questions (draw, rematch)
+## and our own "resign?"; short messages (toasts), including
 ## "Opponent ready — play now?" while a quick match is searching in the
 ## background. Reads the greybox and its play controller; styled by
 ## SeriesTheme and rebuilt when the language changes.
@@ -270,9 +270,6 @@ func _on_asked(what: String) -> void:
 		"draw":
 			_ask(L10n.t("Your opponent offers a draw."), L10n.t("Accept"), L10n.t("Decline"),
 				func(ok: bool) -> void: game.play.answer("draw", ok))
-		"undo":
-			_ask(L10n.t("Your opponent asks to take back their last move."), L10n.t("Allow"), L10n.t("Refuse"),
-				func(ok: bool) -> void: game.play.answer("undo", ok))
 		"rematch":
 			_ask(L10n.t("Your opponent wants a rematch."), L10n.t("Accept"), L10n.t("Decline"),
 				func(ok: bool) -> void: game.play.answer("rematch", ok))

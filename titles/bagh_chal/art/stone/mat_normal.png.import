@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pxepww1yrf17"
-path.s3tc="res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.s3tc.ctex"
-path.etc2="res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.etc2.ctex"
+path.bptc="res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.bptc.ctex"
+path.astc="res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.astc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -13,12 +13,12 @@ metadata={
 [deps]
 
 source_file="res://titles/bagh_chal/art/stone/mat_normal.png"
-dest_files=["res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.s3tc.ctex", "res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.etc2.ctex"]
+dest_files=["res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.bptc.ctex", "res://.godot/imported/mat_normal.png-f46e44da61b46be3e1e1fdfa8684f7d4.astc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

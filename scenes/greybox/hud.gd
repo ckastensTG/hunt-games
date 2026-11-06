@@ -1,6 +1,6 @@
 extends CanvasLayer
 ## The in-game interface: the menu button, title, whose turn it is, the
-## score, a contextual hint, Undo (local games), the move list and the
+## score, a contextual hint, Undo (against the AI), the move list and the
 ## game-over card. Game choices live in the menus (scenes/play/play_menu.gd):
 ## the main menu sets up a game, and the menu button opens the in-game menu
 ## (Continue, Look, Language, Quit to main menu). It reads the greybox's
@@ -149,7 +149,8 @@ func _build_menu_button() -> void:
 	_margin(_menu_button, Control.PRESET_TOP_LEFT, 28, 22)
 
 
-## Undo, for games on this device (against the AI, pass and play).
+## Undo, for games against the AI only: never against a person, on this
+## device or another (Christopher, 2026-11-06).
 func _build_undo() -> void:
 	_undo = Button.new()
 	_undo.custom_minimum_size = Vector2(0, 56)
@@ -305,16 +306,15 @@ func _build_result() -> void:
 	again.add_theme_color_override("font_color", SeriesTheme.ACCENT)
 	again.pressed.connect(func() -> void:
 		if game.is_network():
-			game.play.request_rematch()
+			game.play.request_rematch()  # never an ad: the other player waits
 		else:
-			game.new_game())
+			game.play_again())
 	_again = again
 	_new_opponent = Button.new()
 	# TRANSLATORS: Button after an online quick match: look for someone else to play.
 	_new_opponent.text = L10n.t("New opponent")
 	_new_opponent.pressed.connect(func() -> void:
-		game.quit_to_menu("quick")
-		game.play.quick_start())
+		game.quit_to_menu("quick", func() -> void: game.play.quick_start()))
 	var to_menu := Button.new()
 	# TRANSLATORS: Button on the game-over card: back to the main menu.
 	to_menu.text = L10n.t("Main menu")
@@ -404,7 +404,7 @@ func refresh() -> void:
 	var shown: bool = not teaching
 	_root.visible = game.menu == null or not game.menu.is_open()
 	_menu_button.visible = shown
-	_undo.visible = shown and not net_game and game.mode != game.Mode.AI_VS_AI
+	_undo.visible = shown and game.mode in [game.Mode.HUMAN_PREY, game.Mode.HUMAN_HUNTER]
 	_undo.disabled = not game.can_undo()
 	_moves_panel.visible = shown
 

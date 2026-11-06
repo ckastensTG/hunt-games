@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4g2lrxb575vn"
-path.s3tc="res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.s3tc.ctex"
-path.etc2="res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.etc2.ctex"
+path.bptc="res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.bptc.ctex"
+path.astc="res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.astc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -13,12 +13,12 @@ metadata={
 [deps]
 
 source_file="res://titles/bagh_chal/art/stone/mat_albedo.png"
-dest_files=["res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.s3tc.ctex", "res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.etc2.ctex"]
+dest_files=["res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.bptc.ctex", "res://.godot/imported/mat_albedo.png-9790625458fdb3b123ce4240af27e90c.astc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

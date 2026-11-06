@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """Builds the Chinese, Japanese and Korean fallback fonts in ui/fonts/cjk/:
-Noto Sans SC, JP and KR (SIL OFL), cut down to the characters the game's
-translations use, so they cost a few hundred KB instead of ~25 MB.
+Noto Sans SC, TC, JP and KR (SIL OFL), cut down to the characters the game's
+translations use, so they cost a few hundred KB instead of ~35 MB.
+(Thai and Devanagari ship as whole fonts: they're small.)
 
     python3 tools/l10n/subset_cjk_fonts.py --src=DIR
 
 DIR holds the full static fonts, named as in the @expo-google-fonts npm
 packages (NotoSansSC_400Regular.ttf, ..._500Medium.ttf, ..._700Bold.ttf, and
-the same for JP and KR). Any copy of Noto Sans SC/JP/KR works if renamed.
-Get them with:  npm pack @expo-google-fonts/noto-sans-sc  (and -jp, -kr)
+the same for TC, JP and KR). Any copy of Noto Sans SC/TC/JP/KR works if
+renamed. Get them with:  npm pack @expo-google-fonts/noto-sans-sc  (and -tc,
+-jp, -kr)
 
-Run it again whenever the zh_CN, ja or ko translations change: the glyph
-check (tools/l10n/check_glyphs.py) fails when a translated character is
-missing from these files. Every subset also carries the three language
+Run it again whenever the zh_CN, zh_TW, ja or ko translations change: the
+glyph check (tools/l10n/check_glyphs.py) fails when a translated character
+is missing from these files. Every subset also carries the four CJK language
 names from the Language menu, so they show in every language.
 """
 from __future__ import annotations
@@ -28,12 +30,12 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import po  # noqa: E402
 
 OUT = pathlib.Path("ui/fonts/cjk")
-SCRIPTS = {"SC": "zh_CN", "JP": "ja", "KR": "ko"}
+SCRIPTS = {"SC": "zh_CN", "TC": "zh_TW", "JP": "ja", "KR": "ko"}
 WEIGHTS = {"Regular": "400Regular", "Medium": "500Medium", "Bold": "700Bold"}
 # Always in: ASCII, the Language menu's names, and punctuation the
 # translations or the interface use.
 EXTRA = (" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-         "简体中文日本語한국어·…‹›—–“”‘’、。，：；！？（）「」『』《》〈〉・ー〜％")
+         "简体中文繁體中文日本語한국어·…‹›—–“”‘’、。，：；！？（）「」『』《》〈〉・ー〜％")
 
 
 def language_chars(code: str) -> set[str]:

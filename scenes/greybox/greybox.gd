@@ -9,6 +9,13 @@ extends Node3D
 ## AI vs AI, nearby and online. The board listens to the session, so a move is
 ## animated the same way whether it came from a click, the AI or the other
 ## device. Local games are saved after every move (Continue in the menu).
+##
+## Ads (AdService, bible §3.1): an interstitial may show at a break after a
+## finished game (Play again on this device, Main menu, New opponent), never
+## on a rematch against another player. One look is free; the others open
+## for the session after a rewarded video, or for good with Remove ads.
+## Undo is for games against the AI only, never against a person
+## (Christopher, 2026-11-06).
 
 enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI, NETWORK }
 
@@ -95,6 +102,8 @@ var sfx: SfxPlayer
 var music: MusicPlayer
 ## The frame-rate readout for testing (F3 or a three-finger tap).
 var perf: PerfOverlay
+## Ads, the look unlock and Remove ads (one AdService for the app).
+var ads: AdService
 ## Auto graphics measures and steps down on devices (not in the editor).
 var graphics_auto := not OS.has_feature("editor")
 var _graphics_auto := GameGraphics.Auto.new()
@@ -115,6 +124,9 @@ var _hud: CanvasLayer
 var _match_ui: CanvasLayer
 var _tutorial: CanvasLayer
 var _saved_session: MatchSession
+## The last game counted for the ad cap (undoing past the end and finishing
+## again doesn't count twice).
+var _counted_session: MatchSession
 var _tutorial_from_menu := false
 var _tween: Tween
 var _anim_queue: Array[PackedInt32Array] = []
@@ -136,17 +148,23 @@ var _sting_pending := false
 
 
 func _ready() -> void:
+	_boot_mark("main scene: _ready")
 	_rng.seed = 20261102
 	var title := TitleConfig.active()
 	if not title.rule_sets.has(_rule_set_id):
 		_rule_set_id = title.rule_sets[0]
 	L10n.apply_saved_locale()
 	personas = _make_personas()
+	ads = AdService.instance()
+	ads.start(title.ad_setup())
 	_styles["bagh_chal"] = BaghChalArt.styles()
+	# The saved look, unless it's locked again (it was opened by a video in
+	# an earlier session): then the free one.
 	var saved_look := str(L10n.load_setting("look_bagh_chal", ""))
+	var free_look := TitleConfig.free_look("bagh_chal")
 	for st in _styles["bagh_chal"]:
 		if st.id == saved_look:
-			art_style_ids["bagh_chal"] = saved_look
+			art_style_ids["bagh_chal"] = saved_look if not _look_locked("bagh_chal", saved_look) else free_look
 	level = clampi(int(L10n.load_setting("ai_level", level)), 0, personas.size() - 1)
 	GameSound.apply_saved()
 	sfx = SfxPlayer.new()
@@ -156,9 +174,12 @@ func _ready() -> void:
 	perf = PerfOverlay.new()
 	perf.info = _perf_info
 	add_child(perf)
+	_boot_mark("settings, ads, sound and music players")
 	_build_environment()
+	_boot_mark("environment and camera")
 	play = PlayControllerScript.new(self)
 	add_child(play)
+	_boot_mark("play controller (online service)")
 	_hud = HudScript.new(self)
 	add_child(_hud)
 	_match_ui = MatchUIScript.new(self)
@@ -168,11 +189,61 @@ func _ready() -> void:
 	add_child(_tutorial)
 	menu = PlayMenuScript.new(self)
 	add_child(menu)
+	_boot_mark("display, menus")
 	# A game left unfinished (the app was closed) carries on where it was;
 	# otherwise the main menu, over an empty board.
 	if not continue_saved():
 		_show_idle_board()
 		menu.open()
+	_boot_mark("board and look built")
+	if OS.is_debug_build():
+		get_tree().process_frame.connect(func() -> void: _boot_mark("first frame: game logic"), CONNECT_ONE_SHOT)
+		RenderingServer.frame_pre_draw.connect(func() -> void: _boot_mark("first frame: drawing starts"), CONNECT_ONE_SHOT)
+		RenderingServer.frame_post_draw.connect(func() -> void:
+			_boot_mark("first frame drawn")
+			_boot_mark.call_deferred("caches: " + _cache_report()), CONNECT_ONE_SHOT)
+
+
+## What Godot has cached on this device from earlier runs (compiled shaders,
+## GPU pipelines), in user://.
+func _cache_report() -> String:
+	var parts: Array[String] = []
+	var dirs := ["user://shader_cache", "user://vulkan", OS.get_user_data_dir()]
+	if OS.get_name() == "Android":
+		dirs.append(OS.get_cache_dir())
+	for dir_path in dirs:
+		parts.append("%s %s" % [dir_path, _dir_size(dir_path)])
+	return ", ".join(parts)
+
+
+func _dir_size(path: String) -> String:
+	var d := DirAccess.open(path)
+	if d == null:
+		return "(none)"
+	var total := 0
+	var files := 0
+	var stack: Array[String] = [path]
+	while not stack.is_empty() and files < 5000:
+		var p: String = stack.pop_back()
+		var dd := DirAccess.open(p)
+		if dd == null:
+			continue
+		for f in dd.get_files():
+			var fa := FileAccess.open(p.path_join(f), FileAccess.READ)
+			if fa:
+				total += fa.get_length()
+				files += 1
+		for sub in dd.get_directories():
+			stack.append(p.path_join(sub))
+	return "%d files, %.1f MB" % [files, total / 1048576.0]
+
+
+## Test builds: how long start-up takes, step by step ("[boot]" lines in
+## Godot's Output with remote debug, and logcat). The time counts from the
+## engine's start.
+func _boot_mark(what: String) -> void:
+	if OS.is_debug_build():
+		print("[boot] %6d ms  %s" % [Time.get_ticks_msec(), what])
 
 
 func _make_personas() -> Array[AIPersona]:
@@ -238,9 +309,13 @@ func start_network(s: MatchSession, side: int) -> void:
 ## device counts as lost if it's still going) and opens the main menu over an
 ## empty board. A local game's save is dropped; an AI game set aside for an
 ## online match stays saved, and the main menu offers to continue it.
-func quit_to_menu(screen := "home") -> void:
+## After a finished game this is a break for an ad (after_game_break), shown
+## over the menu once the other player has been told we left; `then` runs
+## after it (New opponent starts its search then).
+func quit_to_menu(screen := "home", then := Callable()) -> void:
 	if tutorial_active:
 		return
+	var after_game := _finished_game()
 	_stop_ai()
 	if mode == Mode.NETWORK:
 		play.leave_match()
@@ -252,6 +327,34 @@ func quit_to_menu(screen := "home") -> void:
 		_clear_save()
 	_show_idle_board()
 	menu.open(screen)
+	if after_game:
+		after_game_break(then)
+	elif then.is_valid():
+		then.call()
+
+
+## "Play again" after a game on this device: a break for an ad, then a new
+## game. (Against another device it's a rematch: hud.gd asks for one, and a
+## rematch never shows an ad, for either player.)
+func play_again() -> void:
+	after_game_break(new_game)
+
+
+## A break after a finished game: AdService shows an interstitial if one is
+## due, then runs `then`. Not while an online search runs in the background
+## (an opponent may turn up any moment).
+func after_game_break(then := Callable()) -> void:
+	if play.background:
+		if then.is_valid():
+			then.call()
+		return
+	ads.after_game(then)
+
+
+## True when the game on the board was played to the end by a person (not
+## the walkthrough, not AI vs AI).
+func _finished_game() -> bool:
+	return session != null and session == _counted_session and not session.is_ongoing()
 
 
 ## An empty board for behind the main menu: no AI, nothing saved.
@@ -362,8 +465,9 @@ func commit(move: PackedInt32Array) -> void:
 		push_warning("move refused: %s" % state.describe(move))
 
 
+## Undo: against the AI (and AI vs AI), never against a person.
 func undo() -> void:
-	if _animating or tutorial_active or mode == Mode.NETWORK or history.is_empty():
+	if _animating or tutorial_active or not can_undo():
 		return
 	_stop_ai()
 	var n := session.undo_count()
@@ -373,7 +477,7 @@ func undo() -> void:
 
 
 func can_undo() -> bool:
-	return mode != Mode.NETWORK and not history.is_empty()
+	return mode in [Mode.HUMAN_PREY, Mode.HUMAN_HUNTER, Mode.AI_VS_AI] and not history.is_empty()
 
 
 func _on_move_committed(move: PackedInt32Array, _side: int) -> void:
@@ -398,6 +502,9 @@ func _on_reset() -> void:
 
 func _on_game_over(_status: int, _reason: int) -> void:
 	_save()
+	if not tutorial_active and session.kind != MatchSession.Kind.AI_VS_AI and session != _counted_session:
+		_counted_session = session
+		ads.game_finished()
 	# The sting waits for the last move to land.
 	_sting_pending = not tutorial_active
 	if not _animating:
@@ -721,7 +828,27 @@ func current_style() -> HuntArtStyle:
 	return list[0]
 
 
-## Switch the look without touching the game in progress.
+## True when a look needs a rewarded video (or Remove ads) first.
+func look_locked(style_id: String) -> bool:
+	return _look_locked(_title(), style_id)
+
+
+func _look_locked(title: String, style_id: String) -> bool:
+	var free := TitleConfig.free_look(title)
+	return free != "" and style_id != free and not ads.extras_unlocked()
+
+
+## The look the player picked in the menu. False when it's locked: the menu
+## then offers the video.
+func choose_look(style_id: String) -> bool:
+	if look_locked(style_id):
+		return false
+	set_art_style(style_id)
+	return true
+
+
+## Switch the look without touching the game in progress (tools and tests
+## call this directly; the menu goes through choose_look).
 func set_art_style(style_id: String) -> void:
 	L10n.save_setting("look_" + _title(), style_id)
 	art_style_ids[_title()] = style_id

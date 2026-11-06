@@ -3,20 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b51qw4avn3vrp"
-path="res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.ctex"
+path.bptc="res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.bptc.ctex"
+path.astc="res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.astc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://titles/bagh_chal/art/board/board_glow.png"
-dest_files=["res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.ctex"]
+dest_files=["res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.bptc.ctex", "res://.godot/imported/board_glow.png-b01632b1989cb9c70a94ffd93d28819d.astc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

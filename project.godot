@@ -20,6 +20,7 @@ boot_splash/image="res://addons/timeless_core/branding/splash/TEX_Splash_Timeles
 config/icon="res://titles/bagh_chal/art/icon_placeholder.png"
 config/name.title_bagh_chal="Bagh Chal"
 config/name.title_jogo_da_onca="Jogo da Onça"
+boot_splash/show_image.android=true
 
 [autoload]
 
@@ -35,11 +36,11 @@ window/handheld/orientation=6
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/timeless_core/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/timeless_core/plugin.cfg")
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locale/de.po", "res://locale/es.po", "res://locale/fr.po", "res://locale/it.po", "res://locale/ja.po", "res://locale/ko.po", "res://locale/pl.po", "res://locale/pt_BR.po", "res://locale/ru.po", "res://locale/tr.po", "res://locale/zh_CN.po")
+locale/translations=PackedStringArray("res://locale/de.po", "res://locale/es.po", "res://locale/fr.po", "res://locale/it.po", "res://locale/ja.po", "res://locale/ko.po", "res://locale/pl.po", "res://locale/pt_BR.po", "res://locale/ru.po", "res://locale/tr.po", "res://locale/zh_CN.po", "res://locale/id.po", "res://locale/ne.po", "res://locale/th.po", "res://locale/zh_TW.po")
 locale/include_text_server_data=true
 
 [rendering]

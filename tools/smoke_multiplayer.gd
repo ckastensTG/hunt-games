@@ -14,7 +14,8 @@ extends SceneTree
 ## 3. Quick match with no one around: the three choices after a minute, the
 ##    AI game, "Opponent ready — play now?", Play now, and the AI game saved
 ##    for later (Continue).
-## 4. A friend game by code, with a move taken back.
+## 4. A friend game by code: no take-backs (no Undo, none in the in-game menu,
+##    and a request from the other side is turned down without asking).
 ## 5. Nearby: hosting on this machine's address; a second device joins by the
 ##    code over ENet, moves go both ways, then it leaves.
 ## With --out (and a display) it also saves a picture of each screen.
@@ -227,19 +228,35 @@ func _friend_game() -> void:
 	_check(game.local_side() == HuntState.PREY, "the host's side")
 	_check(play.net.seconds_left() < 0, "no turn clock with friends")
 	await _play_plies(4)
-	# Take back: right after our move.
+	# No take-backs against a person: no Undo button, nothing in the in-game
+	# menu, and a request from the other side is turned down unasked.
 	await _until(func() -> bool: return game.can_play(), 10.0, "our turn")
-	var before: int = game.history.size()
-	_play_one()
+	_check(not game.can_undo(), "no undo against a person")
+	_check(not game._hud._undo.visible, "no Undo button against a person")
+	game.menu.open("pause")
 	await _frames(1)
-	_toasts.clear()
-	play.request_undo()
-	if await _until(func() -> bool: return _toasts.has(L10n.t("Move taken back.")), 5.0, "undo allowed"):
-		_check(game.history.size() == before, "the move was taken back (%d, %d)" % [game.history.size(), before])
-		_check(game.state.side == HuntState.PREY, "our turn again")
+	_check(not _menu_has_text("Ask to undo"), "no Ask to undo in the in-game menu")
+	game.menu.close()
+	var answers: Array = []
+	play._sim.net.undo_answered.connect(func(ok: bool) -> void: answers.append(ok))
+	play._sim.net.request_undo()
+	if await _until(func() -> bool: return not answers.is_empty(), 5.0, "the undo request answered"):
+		_check(answers == [false], "an undo request is turned down")
+		_check(not game._match_ui.dialog_open(), "without asking the player")
 	play.leave_match()
 	game.leave_network()
 	await _frames(2)
+
+
+## True when a visible button in the menu shows this text.
+func _menu_has_text(text: String) -> bool:
+	var stack: Array[Node] = [game.menu]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is Button and (n as Button).text == text and (n as Button).is_visible_in_tree():
+			return true
+		stack.append_array(n.get_children())
+	return false
 
 
 # --- 5. Nearby ---------------------------------------------------------------------

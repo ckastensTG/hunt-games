@@ -9,134 +9,134 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
-#: scenes/greybox/hud.gd:138
+#: scenes/greybox/hud.gd:140
 msgid "Menu"
 msgstr "Меню"
 
-#: scenes/greybox/hud.gd:161
+#: scenes/greybox/hud.gd:164
 msgid "Undo"
 msgstr "Отменить ход"
 
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:229
+#: scenes/greybox/hud.gd:235
 msgid "Stop here"
 msgstr "Остановиться"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:247
+#: scenes/greybox/hud.gd:254
 msgid "Moves"
 msgstr "Ходы"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:298 scenes/greybox/hud.gd:454
+#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
 msgid "Play again"
 msgstr "Сыграть ещё"
 
 #. Button after an online quick match: look for someone else to play.
-#: scenes/greybox/hud.gd:308
+#: scenes/greybox/hud.gd:315
 msgid "New opponent"
 msgstr "Новый соперник"
 
 #. Button on the game-over card: back to the main menu.
-#: scenes/greybox/hud.gd:314
+#: scenes/greybox/hud.gd:320
 msgid "Main menu"
 msgstr "Главное меню"
 
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:318
+#: scenes/greybox/hud.gd:324
 msgid "Look at the board"
 msgstr "Посмотреть на доску"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:360
+#: scenes/greybox/hud.gd:390
 msgid "thinking"
 msgstr "думает"
 
-#: scenes/greybox/hud.gd:393 scenes/greybox/hud.gd:442
+#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
 msgid "A draw"
 msgstr "Ничья"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:400
+#: scenes/greybox/hud.gd:430
 #, c-format
 msgid "Captured %d / %d"
 msgstr "Взято: %d / %d"
 
-#: scenes/greybox/hud.gd:428
+#: scenes/greybox/hud.gd:458
 msgid "No moves yet"
 msgstr "Ходов пока нет"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:285
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
 msgid "You won"
 msgstr "Вы победили"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:448 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
 msgid "You lost"
 msgstr "Вы проиграли"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:454 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
 msgid "Rematch"
 msgstr "Реванш"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:464
+#: scenes/greybox/hud.gd:496
 #, c-format
 msgid "place %s"
 msgstr "постановка на %s"
 
-#: scenes/greybox/hud.gd:473
+#: scenes/greybox/hud.gd:505
 msgid "Watching the AI play both sides."
 msgstr "ИИ играет за обе стороны."
 
-#: scenes/greybox/hud.gd:477
+#: scenes/greybox/hud.gd:509
 msgid "Waiting for your opponent's move."
 msgstr "Ждём хода соперника."
 
-#: scenes/greybox/hud.gd:479
+#: scenes/greybox/hud.gd:511
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Серия взятий: выберите следующий прыжок или остановитесь."
 
-#: scenes/greybox/hud.gd:485
+#: scenes/greybox/hud.gd:517
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Выберите, куда пойти. Разорванное кольцо отмечает взятие."
 
-#: scenes/greybox/hud.gd:486
+#: scenes/greybox/hud.gd:518
 msgid "Pick where it goes."
 msgstr "Выберите, куда пойти."
 
-#: scenes/greybox/tutorial.gd:76
+#: scenes/greybox/tutorial.gd:79
 msgid "Close"
 msgstr "Закрыть"
 
 #. Button: play this step of the walkthrough again.
-#: scenes/greybox/tutorial.gd:80
+#: scenes/greybox/tutorial.gd:83
 msgid "Replay"
 msgstr "Повторить"
 
-#: scenes/greybox/tutorial.gd:83
+#: scenes/greybox/tutorial.gd:86
 msgid "‹ Back"
 msgstr "‹ Назад"
 
 #. Step counter in the walkthrough: step number and number of steps.
-#: scenes/greybox/tutorial.gd:159
+#: scenes/greybox/tutorial.gd:175
 #, c-format
 msgid "How to play · %d of %d"
 msgstr "Как играть · %d из %d"
 
-#: scenes/greybox/tutorial.gd:162
+#: scenes/greybox/tutorial.gd:178
 msgid "Start playing"
 msgstr "Начать игру"
 
-#: scenes/greybox/tutorial.gd:162
+#: scenes/greybox/tutorial.gd:178
 msgid "Next ›"
 msgstr "Далее ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:614
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
 msgid "Looking for an opponent…"
 msgstr "Ищем соперника…"
 
@@ -151,7 +151,7 @@ msgid "Play now"
 msgstr "Играть"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
 msgid "Not now"
 msgstr "Не сейчас"
 
@@ -175,42 +175,30 @@ msgstr "Соперник найден — играть сейчас?"
 msgid "Your opponent offers a draw."
 msgstr "Соперник предлагает ничью."
 
-#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
 msgid "Accept"
 msgstr "Принять"
 
-#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:277
+#: scenes/play/match_ui.gd:271 scenes/play/match_ui.gd:274
 msgid "Decline"
 msgstr "Отклонить"
 
 #: scenes/play/match_ui.gd:274
-msgid "Your opponent asks to take back their last move."
-msgstr "Соперник просит отменить свой последний ход."
-
-#: scenes/play/match_ui.gd:274
-msgid "Allow"
-msgstr "Разрешить"
-
-#: scenes/play/match_ui.gd:274
-msgid "Refuse"
-msgstr "Отказать"
-
-#: scenes/play/match_ui.gd:277
 msgid "Your opponent wants a rematch."
 msgstr "Соперник предлагает реванш."
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284
+#: scenes/play/match_ui.gd:281
 msgid "Resign this game?"
 msgstr "Сдаться в этой партии?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284 scenes/play/play_menu.gd:728
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
 msgid "Resign"
 msgstr "Сдаться"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:284
+#: scenes/play/match_ui.gd:281
 msgid "Keep playing"
 msgstr "Продолжить"
 
@@ -222,329 +210,338 @@ msgstr "Мы сообщим, когда найдётся соперник."
 msgid "Draw offered. Waiting for an answer."
 msgstr "Ничья предложена. Ждём ответа."
 
-#: scenes/play/play_controller.gd:321
-msgid "Asked to take back your last move."
-msgstr "Вы попросили отменить последний ход."
-
-#: scenes/play/play_controller.gd:332
+#: scenes/play/play_controller.gd:326
 msgid "Rematch offered. Waiting for an answer."
 msgstr "Реванш предложен. Ждём ответа."
 
-#: scenes/play/play_controller.gd:334 scenes/play/play_controller.gd:433 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
 msgid "Your opponent left the game."
 msgstr "Соперник покинул игру."
 
-#: scenes/play/play_controller.gd:430
+#: scenes/play/play_controller.gd:422
 msgid "Reconnected."
 msgstr "Связь восстановлена."
 
-#: scenes/play/play_controller.gd:438 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
 msgid "Your opponent declined the draw."
 msgstr "Соперник отклонил ничью."
 
-#: scenes/play/play_controller.gd:440 tools/smoke_multiplayer.gd:237
-msgid "Move taken back."
-msgstr "Ход отменён."
-
-#: scenes/play/play_controller.gd:440
-msgid "Your opponent said no to taking back the move."
-msgstr "Соперник не разрешил отменить ход."
-
-#: scenes/play/play_controller.gd:441
+#: scenes/play/play_controller.gd:433
 msgid "Your opponent declined the rematch."
 msgstr "Соперник отказался от реванша."
 
 #. Shown when a game with another player starts. %s is their name, e.g. "Scribe 4821".
-#: scenes/play/play_controller.gd:458
+#: scenes/play/play_controller.gd:450
 #, c-format
 msgid "Playing against %s"
 msgstr "Ваш соперник: %s"
 
-#: scenes/play/play_controller.gd:468
+#: scenes/play/play_controller.gd:460
 msgid "The other player didn't connect. Still looking…"
 msgstr "Другой игрок не подключился. Ищем дальше…"
 
 #. The turn clock in online quick match ran out. %d is 1 or 2; at 3 the game is lost.
-#: scenes/play/play_controller.gd:517
+#: scenes/play/play_controller.gd:509
 #, c-format
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Время вышло, за вас сделан ход (%d из 3)."
 
-#: scenes/play/play_menu.gd:241
+#: scenes/play/play_menu.gd:251
 msgid "Back"
 msgstr "Назад"
 
-#: scenes/play/play_menu.gd:296
+#: scenes/play/play_menu.gd:306
 msgid "Rules"
 msgstr "Правила"
 
-#: scenes/play/play_menu.gd:315
+#: scenes/play/play_menu.gd:326
 msgid "Language"
 msgstr "Язык"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:341 scenes/play/play_menu.gd:712
+#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
 msgid "Continue"
 msgstr "Продолжить"
 
-#: scenes/play/play_menu.gd:342 scenes/play/play_menu.gd:368
+#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
 msgid "Play against the AI"
 msgstr "Играть против ИИ"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:344 scenes/play/play_menu.gd:388
+#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
 msgid "Pass and play"
 msgstr "Вдвоём на одном устройстве"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:346 scenes/play/play_menu.gd:397
+#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
 msgid "Play local"
 msgstr "Локальная игра"
 
-#: scenes/play/play_menu.gd:348 scenes/play/play_menu.gd:500
+#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
 msgid "Play online"
 msgstr "Играть онлайн"
 
-#: scenes/play/play_menu.gd:349 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Как играть"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:657
+#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
 msgid "Game origins"
 msgstr "История игры"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:359
+#: scenes/play/play_menu.gd:370
 msgid "Quit game"
 msgstr "Выйти из игры"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Novice"
 msgstr "Новичок"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Apprentice"
 msgstr "Ученик"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Adept"
 msgstr "Знаток"
 
-#: scenes/play/play_menu.gd:372
+#: scenes/play/play_menu.gd:383
 msgid "Master"
 msgstr "Мастер"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:377 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "Соперник"
 
-#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:392 scenes/play/play_menu.gd:416
+#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
 msgid "Start"
 msgstr "Начать"
 
-#: scenes/play/play_menu.gd:389
+#: scenes/play/play_menu.gd:400
 msgid "Two players share this device and take turns."
 msgstr "Двое играют на этом устройстве по очереди."
 
-#: scenes/play/play_menu.gd:398
+#: scenes/play/play_menu.gd:409
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "Оба устройства должны быть в одной сети Wi-Fi."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:412
+#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
 msgid "Host a game"
 msgstr "Создать игру"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:444
+#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
 msgid "Join a game"
 msgstr "Присоединиться"
 
-#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:531
+#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
 msgid "Create a code"
 msgstr "Создать код"
 
-#: scenes/play/play_menu.gd:430
+#: scenes/play/play_menu.gd:441
 msgid "Waiting for a player"
 msgstr "Ждём игрока"
 
-#: scenes/play/play_menu.gd:431
+#: scenes/play/play_menu.gd:442
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "На другом устройстве выберите «Локальная игра», затем «Присоединиться»."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:435
+#: scenes/play/play_menu.gd:446
 msgid "If the game doesn't appear there, enter this code"
 msgstr "Если игра там не появилась, введите этот код"
 
-#: scenes/play/play_menu.gd:440 scenes/play/play_menu.gd:560 scenes/play/play_menu.gd:611 scenes/play/play_menu.gd:618 scenes/play/play_menu.gd:623
+#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
 msgid "Cancel"
 msgstr "Отмена"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:446
+#: scenes/play/play_menu.gd:457
 msgid "Looking for games on this Wi-Fi…"
 msgstr "Ищем игры в этой сети Wi-Fi…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:468
 msgid "Code"
 msgstr "Код"
 
-#: scenes/play/play_menu.gd:465 scenes/play/play_menu.gd:592
+#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
 msgid "Join"
 msgstr "Войти"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:502
+#: scenes/play/play_menu.gd:513
 msgid "Play with someone online"
 msgstr "Играть со случайным соперником"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:507 scenes/play/play_menu.gd:616
+#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
 msgid "Standard rules, about a minute per move"
 msgstr "Стандартные правила, около минуты на ход"
 
-#: scenes/play/play_menu.gd:508 scenes/play/play_menu.gd:528
+#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
 msgid "Play with a friend"
 msgstr "Играть с другом"
 
-#: scenes/play/play_menu.gd:529
+#: scenes/play/play_menu.gd:540
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "Один создаёт код, другой вводит его. Работает между телефонами, планшетами и компьютерами."
 
-#: scenes/play/play_menu.gd:532 scenes/play/play_menu.gd:576
+#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
 msgid "Enter a code"
 msgstr "Ввести код"
 
-#: scenes/play/play_menu.gd:540
+#: scenes/play/play_menu.gd:551
 msgid "Your code"
 msgstr "Ваш код"
 
-#: scenes/play/play_menu.gd:542 scenes/play/play_menu.gd:622
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
 msgid "Connecting…"
 msgstr "Подключение…"
 
-#: scenes/play/play_menu.gd:545
+#: scenes/play/play_menu.gd:556
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "Отправьте этот код другу. Игра начнётся, когда он его введёт."
 
-#: scenes/play/play_menu.gd:548
+#: scenes/play/play_menu.gd:559
 msgid "Share"
 msgstr "Поделиться"
 
-#: scenes/play/play_menu.gd:550
+#: scenes/play/play_menu.gd:561
 msgid "Copy"
 msgstr "Копировать"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:572
+#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
 msgid "Copied"
 msgstr "Скопировано"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:566
+#: scenes/play/play_menu.gd:577
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Сыграй со мной в Timeless Games! Код игры: %s."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:602
+#: scenes/play/play_menu.gd:613
 msgid "No one is free right now"
 msgstr "Сейчас никого нет"
 
-#: scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:614
 msgid "We can keep looking while you play."
 msgstr "Мы продолжим поиск, пока вы играете."
 
-#: scenes/play/play_menu.gd:604
+#: scenes/play/play_menu.gd:615
 msgid "Play against the AI while we keep looking"
 msgstr "Играть против ИИ, пока идёт поиск"
 
-#: scenes/play/play_menu.gd:607
+#: scenes/play/play_menu.gd:618
 msgid "Keep searching"
 msgstr "Искать дальше"
 
-#: scenes/play/play_menu.gd:608
+#: scenes/play/play_menu.gd:619
 msgid "Invite a friend instead"
 msgstr "Позвать друга"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:628
+#: scenes/play/play_menu.gd:639
 msgid "Couldn't start the game"
 msgstr "Не удалось начать игру"
 
-#: scenes/play/play_menu.gd:631
+#: scenes/play/play_menu.gd:642
 msgid "OK"
 msgstr "ОК"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:650
 msgid "Leave this game?"
 msgstr "Покинуть игру?"
 
-#: scenes/play/play_menu.gd:640
+#: scenes/play/play_menu.gd:651
 msgid "It counts as a loss."
 msgstr "Это засчитается как поражение."
 
-#: scenes/play/play_menu.gd:641
+#: scenes/play/play_menu.gd:652
 msgid "Leave"
 msgstr "Покинуть"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:647
+#: scenes/play/play_menu.gd:658
 msgid "Stay"
 msgstr "Остаться"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:672
+#: scenes/play/play_menu.gd:683
 msgid "Sources"
 msgstr "Источники"
 
-#: scenes/play/play_menu.gd:718
+#: scenes/play/play_menu.gd:729
 msgid "Offer a draw"
 msgstr "Предложить ничью"
 
-#: scenes/play/play_menu.gd:723
-msgid "Ask to undo"
-msgstr "Попросить отмену"
-
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:743
+#: scenes/play/play_menu.gd:758
 msgid "Look"
 msgstr "Вид"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:746
+#: scenes/play/play_menu.gd:761
 msgid "Sound"
 msgstr "Звук"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:748
+#: scenes/play/play_menu.gd:763
 msgid "Music"
 msgstr "Музыка"
 
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:767
+msgid "Privacy choices"
+msgstr "Настройки конфиденциальности"
+
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:752
+#: scenes/play/play_menu.gd:788
 msgid "Quit to main menu"
 msgstr "Выйти в главное меню"
 
+#. Title of the screen offering the other looks (styles of board and pieces) for a short video.
+#: scenes/play/play_menu.gd:802
+msgid "More looks"
+msgstr "Другое оформление"
+
+#. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
+#: scenes/play/play_menu.gd:804
+msgid "Watch a short video to switch looks until you close the game."
+msgstr "Посмотрите короткое видео, чтобы менять оформление до закрытия приложения."
+
+#. On the "More looks" screen when no video could be loaded (offline, or none available).
+#: scenes/play/play_menu.gd:808
+msgid "No video is ready right now. Try again in a moment."
+msgstr "Сейчас видео недоступно. Попробуйте чуть позже."
+
+#. Button: play a short video (an ad) to open the other looks.
+#: scenes/play/play_menu.gd:811
+msgid "Watch a video"
+msgstr "Смотреть видео"
+
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:779
+#: scenes/play/play_menu.gd:842
 msgid "Graphics"
 msgstr "Графика"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:860
+#: scenes/play/play_menu.gd:923
 #, c-format
 msgid "Your name: %s"
 msgstr "Ваше имя: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:897
+#: scenes/play/play_menu.gd:960
 msgid "Waiting"
 msgstr "Ожидание"
 
@@ -560,7 +557,7 @@ msgstr "Странник"
 msgid "Potter"
 msgstr "Гончар"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:268
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
 msgid "Weaver"
 msgstr "Ткач"
 
@@ -656,12 +653,12 @@ msgstr "Вы покинули игру."
 msgid "The other device sent moves that aren't allowed."
 msgstr "Другое устройство прислало недопустимые ходы."
 
-#: tests/test_localization.gd:13 titles/common/hunt_text.gd:53
+#: tests/test_localization.gd:13 titles/common/hunt_text.gd:62
 msgid "Goats to move"
 msgstr "Ход коз"
 
 #. Goats not yet put on the board. A "Remaining: %d" style is fine where it reads better.
-#: tests/test_localization.gd:15 titles/common/hunt_text.gd:108
+#: tests/test_localization.gd:15 titles/common/hunt_text.gd:117
 #, c-format
 msgid "%d goat still to place"
 msgid_plural "%d goats still to place"
@@ -729,150 +726,150 @@ msgid "In the Kathmandu Valley, older players still meet over the board on the p
 msgstr "В долине Катманду пожилые игроки по-прежнему собираются за доской на помостах пати — общественных мест отдыха — и у храмов, а металлические и деревянные доски продают в основном приезжим. Журналисты в Катманду отмечают, что молодёжь сегодня играет в неё всё реже."
 
 #. Subtitle under the game name: which rule set is being played.
-#: titles/common/hunt_text.gd:26
+#: titles/common/hunt_text.gd:35
 msgid "Standard rules"
 msgstr "Стандартные правила"
 
-#: titles/common/hunt_text.gd:28
+#: titles/common/hunt_text.gd:37
 msgid "Parlett 1976: hunt to the last goat"
 msgstr "Парлетт, 1976: охота до последней козы"
 
-#: titles/common/hunt_text.gd:30
+#: titles/common/hunt_text.gd:39
 msgid "Adugo, the Bororo rules"
 msgstr "Адуго, правила бороро"
 
 #. Komikan is a game of the Mapuche people (Chile, Argentina); our rules are a reconstruction from old written accounts.
-#: titles/common/hunt_text.gd:33
+#: titles/common/hunt_text.gd:42
 msgid "Komikan, a Mapuche reconstruction"
 msgstr "Комикан, реконструкция игры мапуче"
 
-#: titles/common/hunt_text.gd:40
+#: titles/common/hunt_text.gd:49
 msgid "Bagh Chal · Standard"
 msgstr "Bagh Chal · Стандарт"
 
-#: titles/common/hunt_text.gd:42
+#: titles/common/hunt_text.gd:51
 msgid "Bagh Chal · Parlett 1976"
 msgstr "Bagh Chal · Парлетт 1976"
 
-#: titles/common/hunt_text.gd:44
+#: titles/common/hunt_text.gd:53
 msgid "Jogo da Onça · Adugo"
 msgstr "Jogo da Onça · Adugo"
 
-#: titles/common/hunt_text.gd:46
+#: titles/common/hunt_text.gd:55
 msgid "Jogo da Onça · Komikan"
 msgstr "Jogo da Onça · Komikan"
 
-#: titles/common/hunt_text.gd:53
+#: titles/common/hunt_text.gd:62
 msgid "Tigers to move"
 msgstr "Ход тигров"
 
-#: titles/common/hunt_text.gd:55
+#: titles/common/hunt_text.gd:64
 msgid "Jaguar to move"
 msgstr "Ход ягуара"
 
-#: titles/common/hunt_text.gd:55 titles/common/hunt_text.gd:57
+#: titles/common/hunt_text.gd:64 titles/common/hunt_text.gd:66
 msgid "Dogs to move"
 msgstr "Ход собак"
 
-#: titles/common/hunt_text.gd:57
+#: titles/common/hunt_text.gd:66
 msgid "Puma to move"
 msgstr "Ход пумы"
 
-#: titles/common/hunt_text.gd:64
+#: titles/common/hunt_text.gd:73
 msgid "The tigers won"
 msgstr "Тигры победили"
 
-#: titles/common/hunt_text.gd:64
+#: titles/common/hunt_text.gd:73
 msgid "The goats won"
 msgstr "Козы победили"
 
-#: titles/common/hunt_text.gd:66
+#: titles/common/hunt_text.gd:75
 msgid "The jaguar won"
 msgstr "Ягуар победил"
 
-#: titles/common/hunt_text.gd:66 titles/common/hunt_text.gd:68
+#: titles/common/hunt_text.gd:75 titles/common/hunt_text.gd:77
 msgid "The dogs won"
 msgstr "Собаки победили"
 
-#: titles/common/hunt_text.gd:68
+#: titles/common/hunt_text.gd:77
 msgid "The puma won"
 msgstr "Пума победила"
 
-#: titles/common/hunt_text.gd:75
+#: titles/common/hunt_text.gd:84
 msgid "The tigers win"
 msgstr "Победа тигров"
 
-#: titles/common/hunt_text.gd:75
+#: titles/common/hunt_text.gd:84
 msgid "The goats win"
 msgstr "Победа коз"
 
-#: titles/common/hunt_text.gd:77
+#: titles/common/hunt_text.gd:86
 msgid "The jaguar wins"
 msgstr "Победа ягуара"
 
-#: titles/common/hunt_text.gd:77 titles/common/hunt_text.gd:79
+#: titles/common/hunt_text.gd:86 titles/common/hunt_text.gd:88
 msgid "The dogs win"
 msgstr "Победа собак"
 
-#: titles/common/hunt_text.gd:79
+#: titles/common/hunt_text.gd:88
 msgid "The puma wins"
 msgstr "Победа пумы"
 
-#: titles/common/hunt_text.gd:85
+#: titles/common/hunt_text.gd:94
 msgid "You play the tigers"
 msgstr "Вы играете за тигров"
 
-#: titles/common/hunt_text.gd:85
+#: titles/common/hunt_text.gd:94
 msgid "You play the goats"
 msgstr "Вы играете за коз"
 
-#: titles/common/hunt_text.gd:87
+#: titles/common/hunt_text.gd:96
 msgid "You play the jaguar"
 msgstr "Вы играете за ягуара"
 
-#: titles/common/hunt_text.gd:87 titles/common/hunt_text.gd:89
+#: titles/common/hunt_text.gd:96 titles/common/hunt_text.gd:98
 msgid "You play the dogs"
 msgstr "Вы играете за собак"
 
-#: titles/common/hunt_text.gd:89
+#: titles/common/hunt_text.gd:98
 msgid "You play the puma"
 msgstr "Вы играете за пуму"
 
-#: titles/common/hunt_text.gd:95
+#: titles/common/hunt_text.gd:104
 msgid "Choose a tiger to move."
 msgstr "Выберите тигра для хода."
 
-#: titles/common/hunt_text.gd:95
+#: titles/common/hunt_text.gd:104
 msgid "Choose a goat to move."
 msgstr "Выберите козу для хода."
 
-#: titles/common/hunt_text.gd:97
+#: titles/common/hunt_text.gd:106
 msgid "Move the jaguar."
 msgstr "Ходите ягуаром."
 
-#: titles/common/hunt_text.gd:97 titles/common/hunt_text.gd:99
+#: titles/common/hunt_text.gd:106 titles/common/hunt_text.gd:108
 msgid "Choose a dog to move."
 msgstr "Выберите собаку для хода."
 
-#: titles/common/hunt_text.gd:99
+#: titles/common/hunt_text.gd:108
 msgid "Move the puma."
 msgstr "Ходите пумой."
 
-#: titles/common/hunt_text.gd:103
+#: titles/common/hunt_text.gd:112
 msgid "Place a goat on any empty point."
 msgstr "Поставьте козу на любую свободную точку."
 
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
-#: titles/common/hunt_text.gd:118
+#: titles/common/hunt_text.gd:127
 msgid "Every goat has been captured."
 msgstr "Все козы взяты."
 
 #. Reason for the hunter's win when it must take every piece. "Eaten" fits Komikan, whose puma "eats everything".
-#: titles/common/hunt_text.gd:118
+#: titles/common/hunt_text.gd:127
 msgid "Every dog has been eaten."
 msgstr "Все собаки съедены."
 
-#: titles/common/hunt_text.gd:119
+#: titles/common/hunt_text.gd:128
 #, c-format
 msgid "%d goat captured."
 msgid_plural "%d goats captured."
@@ -880,7 +877,7 @@ msgstr[0] "Взято коз: %d."
 msgstr[1] "Взято коз: %d."
 msgstr[2] "Взято коз: %d."
 
-#: titles/common/hunt_text.gd:120
+#: titles/common/hunt_text.gd:129
 #, c-format
 msgid "%d dog captured."
 msgid_plural "%d dogs captured."
@@ -888,36 +885,36 @@ msgstr[0] "Взято собак: %d."
 msgstr[1] "Взято собак: %d."
 msgstr[2] "Взято собак: %d."
 
-#: titles/common/hunt_text.gd:124
+#: titles/common/hunt_text.gd:133
 msgid "The tigers are trapped: none of them can move."
 msgstr "Тигры заперты: ни один не может сходить."
 
-#: titles/common/hunt_text.gd:126
+#: titles/common/hunt_text.gd:135
 msgid "The jaguar is trapped and can't move."
 msgstr "Ягуар заперт и не может сходить."
 
-#: titles/common/hunt_text.gd:128
+#: titles/common/hunt_text.gd:137
 msgid "The puma is trapped and can't move."
 msgstr "Пума заперта и не может сходить."
 
-#: titles/common/hunt_text.gd:130
+#: titles/common/hunt_text.gd:139
 msgid "The goats can't move."
 msgstr "Козам некуда ходить."
 
-#: titles/common/hunt_text.gd:130
+#: titles/common/hunt_text.gd:139
 msgid "The dogs can't move any more."
 msgstr "Собакам больше некуда ходить."
 
-#: titles/common/hunt_text.gd:132
+#: titles/common/hunt_text.gd:141
 msgid "Every move left would repeat an earlier position."
 msgstr "Любой оставшийся ход повторил бы прежнюю позицию."
 
-#: titles/common/hunt_text.gd:134
+#: titles/common/hunt_text.gd:143
 msgid "The same position came up three times."
 msgstr "Одна и та же позиция возникла трижды."
 
 #. Reason for a draw: the tigers made this many moves in a row without a capture.
-#: titles/common/hunt_text.gd:141
+#: titles/common/hunt_text.gd:150
 #, c-format
 msgid "The tigers went %d move without capturing."
 msgid_plural "The tigers went %d moves without capturing."
@@ -925,7 +922,7 @@ msgstr[0] "Тигры сделали %d ход без взятия."
 msgstr[1] "Тигры сделали %d хода без взятия."
 msgstr[2] "Тигры сделали %d ходов без взятия."
 
-#: titles/common/hunt_text.gd:143
+#: titles/common/hunt_text.gd:152
 #, c-format
 msgid "The jaguar went %d move without capturing."
 msgid_plural "The jaguar went %d moves without capturing."
@@ -933,7 +930,7 @@ msgstr[0] "Ягуар сделал %d ход без взятия."
 msgstr[1] "Ягуар сделал %d хода без взятия."
 msgstr[2] "Ягуар сделал %d ходов без взятия."
 
-#: titles/common/hunt_text.gd:145
+#: titles/common/hunt_text.gd:154
 #, c-format
 msgid "The puma went %d move without capturing."
 msgid_plural "The puma went %d moves without capturing."
@@ -942,17 +939,17 @@ msgstr[1] "Пума сделала %d хода без взятия."
 msgstr[2] "Пума сделала %d ходов без взятия."
 
 #. Count toward the draw rule: tiger moves since the last capture / the limit.
-#: titles/common/hunt_text.gd:160
+#: titles/common/hunt_text.gd:169
 #, c-format
 msgid "Tiger moves without capturing: %d / %d"
 msgstr "Ходов тигров без взятия: %d / %d"
 
-#: titles/common/hunt_text.gd:162
+#: titles/common/hunt_text.gd:171
 #, c-format
 msgid "Jaguar moves without capturing: %d / %d"
 msgstr "Ходов ягуара без взятия: %d / %d"
 
-#: titles/common/hunt_text.gd:164
+#: titles/common/hunt_text.gd:173
 #, c-format
 msgid "Puma moves without capturing: %d / %d"
 msgstr "Ходов пумы без взятия: %d / %d"
@@ -1145,21 +1142,21 @@ msgid "In the accounts written down a century ago, the dogs may only go forward,
 msgstr "В описаниях столетней давности собаки ходят только вперёд, и тогда пуму, которая остаётся в башне, поймать невозможно. Здесь собаки ходят, а пума побеждает, как в Trapial-Kuzen — современной версии игры у мапуче. Башня — обычная часть доски, а первой ходит пума, если вы не измените это в настройках."
 
 #. Graphics setting: the game picks the quality for this device. Keep it short.
-#: ui/game_graphics.gd:75
+#: ui/game_graphics.gd:96
 msgid "Auto"
 msgstr "Авто"
 
 #. Graphics setting: the best-looking quality. Keep it short.
-#: ui/game_graphics.gd:77
+#: ui/game_graphics.gd:98
 msgid "High"
 msgstr "Высокая"
 
 #. Graphics setting: medium quality. Keep it short.
-#: ui/game_graphics.gd:79
+#: ui/game_graphics.gd:100
 msgid "Medium"
 msgstr "Средняя"
 
 #. Graphics setting: the lightest quality, for slower phones. Keep it short.
-#: ui/game_graphics.gd:81
+#: ui/game_graphics.gd:102
 msgid "Low"
 msgstr "Низкая"

@@ -9,7 +9,8 @@ stems separated by "|" (a stem matches any inflected form that starts with
 it). For every string whose English text uses a term, the translation must
 use the approved word.
 - Do-not-translate terms (dnt = yes, e.g. the titles) must appear exactly:
-  always an error.
+  always an error. A language may give its own spelling in its column, used
+  instead (Bagh Chal is बाघचाल in Nepali, the game's own script).
 - Other terms: a warning, or an error with --strict. Some misses are fine
   (a pronoun instead of the noun), so a human looks at the warnings.
 """
@@ -56,8 +57,9 @@ def main() -> int:
                 for f in forms:
                     low = f.lower()
                     if t["dnt"].strip() == "yes":
-                        if t["term"] not in f:
-                            print(f"ERROR {path}: \"{t['term']}\" must stay as it is: {f[:70]!r}")
+                        exact = (t.get(lang) or "").strip() or t["term"]
+                        if exact not in f:
+                            print(f"ERROR {path}: \"{exact}\" must stay as it is: {f[:70]!r}")
                             errors += 1
                     elif not any(s in low for s in want):
                         print(f"{'ERROR' if strict else 'warn '} {path}: \"{t['term']}\" should be {'/'.join(want)}: {f[:70]!r}")
