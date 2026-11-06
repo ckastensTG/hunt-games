@@ -9,6 +9,11 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
+#. Shown while the board and pieces of another look are prepared (it can take a few seconds).
+#: scenes/greybox/greybox.gd:915
+msgid "Loading…"
+msgstr "正在加载…"
+
 #: scenes/greybox/hud.gd:140
 msgid "Menu"
 msgstr "菜单"
@@ -67,17 +72,17 @@ msgid "No moves yet"
 msgstr "尚无着法"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:302
 msgid "You won"
 msgstr "你赢了"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:155
 msgid "You lost"
 msgstr "你输了"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:157
 msgid "Rematch"
 msgstr "再战一局"
 
@@ -151,7 +156,7 @@ msgid "Play now"
 msgstr "现在开始"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
 msgid "Not now"
 msgstr "暂不"
 
@@ -214,7 +219,7 @@ msgstr "已提议和棋，等待对方回应。"
 msgid "Rematch offered. Waiting for an answer."
 msgstr "已邀请再战，等待对方回应。"
 
-#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:301
 msgid "Your opponent left the game."
 msgstr "对手已离开对局。"
 
@@ -222,7 +227,7 @@ msgstr "对手已离开对局。"
 msgid "Reconnected."
 msgstr "已重新连接。"
 
-#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:146
 msgid "Your opponent declined the draw."
 msgstr "对手拒绝了和棋。"
 
@@ -505,43 +510,43 @@ msgid "Privacy choices"
 msgstr "隐私选项"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:788
+#: scenes/play/play_menu.gd:796
 msgid "Quit to main menu"
 msgstr "退出到主菜单"
 
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:802
+#: scenes/play/play_menu.gd:810
 msgid "More looks"
 msgstr "更多外观"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:804
+#: scenes/play/play_menu.gd:812
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "观看一段短视频，即可在关闭游戏前随意切换外观。"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:808
+#: scenes/play/play_menu.gd:816
 msgid "No video is ready right now. Try again in a moment."
 msgstr "暂时没有可播放的视频，请稍后再试。"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:811
+#: scenes/play/play_menu.gd:819
 msgid "Watch a video"
 msgstr "观看视频"
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:842
+#: scenes/play/play_menu.gd:851
 msgid "Graphics"
 msgstr "画质"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:923
+#: scenes/play/play_menu.gd:932
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:960
+#: scenes/play/play_menu.gd:969
 msgid "Waiting"
 msgstr "等待中"
 
@@ -557,7 +562,7 @@ msgstr "旅人"
 msgid "Potter"
 msgstr "陶匠"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:285
 msgid "Weaver"
 msgstr "织工"
 
@@ -625,7 +630,7 @@ msgstr "此设备未连接 Wi-Fi。"
 msgid "Something went wrong. Please try again."
 msgstr "出了点问题，请重试。"
 
-#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:156
 msgid "You resigned."
 msgstr "你认输了。"
 

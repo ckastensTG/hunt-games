@@ -122,6 +122,10 @@ var _grey_key: DirectionalLight3D
 var _styles := {}  # title id -> Array[HuntArtStyle]
 var _hud: CanvasLayer
 var _match_ui: CanvasLayer
+## "Loading…" over everything while a look picked in the menu is built.
+var _loading: CanvasLayer
+## The look being built behind the loading screen, or "".
+var _look_pending := ""
 var _tutorial: CanvasLayer
 var _saved_session: MatchSession
 ## The last game counted for the ad cap (undoing past the end and finishing
@@ -839,12 +843,85 @@ func _look_locked(title: String, style_id: String) -> bool:
 
 
 ## The look the player picked in the menu. False when it's locked: the menu
-## then offers the video.
+## then offers the video. The switch happens behind a loading screen
+## (switch_look).
 func choose_look(style_id: String) -> bool:
 	if look_locked(style_id):
 		return false
-	set_art_style(style_id)
+	var current := current_style()
+	if _look_pending == "" and current and current.id == style_id:
+		return true
+	switch_look(style_id)
 	return true
+
+
+## True while a look picked in the menu is being built.
+func look_loading() -> bool:
+	return _look_pending != ""
+
+
+## Builds a look behind a loading screen: a look built for the first time
+## takes several seconds on a phone (meshes, textures, then its shaders on
+## the first frame), and the game can't draw meanwhile. The screen goes up
+## and is drawn first, the look is built, and the screen comes down once the
+## new set has been drawn (Christopher, 2026-11-06).
+func switch_look(style_id: String) -> void:
+	_look_pending = style_id
+	_show_loading(style_id)
+	# Two frames: the loading screen is on the display before the build
+	# holds the game up.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	set_art_style(style_id)
+	# The new set's first frames (its shaders are built while drawing them).
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_look_pending = ""
+	_hide_loading()
+
+
+## The loading screen: the look's name and "Loading…" over a dark veil that
+## takes every tap.
+func _show_loading(style_id: String) -> void:
+	_hide_loading()
+	_loading = CanvasLayer.new()
+	_loading.layer = 50  # over the menus and match overlay (3, 4), under the perf test (60)
+	var root := Control.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.theme = SeriesTheme.theme()
+	root.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	_loading.add_child(root)
+	var shade := ColorRect.new()
+	shade.color = Color(0.02, 0.015, 0.01, 0.97)
+	shade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	shade.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.add_child(shade)
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(center)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 10)
+	center.add_child(box)
+	var look_name := ""
+	for st: HuntArtStyle in art_styles():
+		if st.id == style_id:
+			look_name = L10n.t(st.display_name)
+	if look_name != "":
+		var title := SeriesTheme.label(look_name, "display", 40, SeriesTheme.ACCENT)
+		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		box.add_child(title)
+	# TRANSLATORS: Shown while the board and pieces of another look are prepared (it can take a few seconds).
+	var text := SeriesTheme.label(L10n.t("Loading…"), "italic", 22, SeriesTheme.TEXT_DIM)
+	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(text)
+	add_child(_loading)
+
+
+func _hide_loading() -> void:
+	if _loading:
+		_loading.queue_free()
+		_loading = null
 
 
 ## Switch the look without touching the game in progress (tools and tests

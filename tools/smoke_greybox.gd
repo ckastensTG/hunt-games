@@ -9,7 +9,7 @@ extends SceneTree
 ## 4. The interface in every launch language.
 ## Ads run on the test stand-in (instant): no ad after the first finished
 ## game, one at the break after the second; one look free, the others after
-## a rewarded video. Undo only against the AI.
+## a rewarded video, built behind the loading screen. Undo only against the AI.
 ## Along the way, every Bagh Chal look is built and shows its move marks with
 ## the right shader (added light, or ink on pale boards) and loads its piece
 ## sounds and music; moves, captures and endings play the right sounds, and
@@ -130,6 +130,19 @@ func _clicks() -> bool:
 			_check_sounds(["draw"], "an agreed draw")
 			_check_undo_against_ai()
 			_check_ads()
+			_click_step = 4
+		4:
+			# The look picked after the video is built behind the loading
+			# screen, which comes down once it's drawn.
+			if game.look_loading():
+				if game._loading == null:
+					failures.append("looks: no loading screen while the look is built")
+					game._look_pending = ""
+				return false
+			if game.current_style().id != "stone" or game._loading != null:
+				failures.append("looks: stone after loading, and the loading screen gone")
+			game.set_art_style(TitleConfig.free_look("bagh_chal"))
+			game.mode = GreyboxScript.Mode.HOTSEAT
 			_check_lines_follow_points()
 			print("clicks: ok (%d failures so far)" % failures.size())
 			queue = HuntRuleSets.ALL.duplicate()
@@ -184,10 +197,8 @@ func _check_ads() -> void:
 	ads.show_rewarded(func(r: int) -> void:
 		if r == AdService.Reward.EARNED:
 			ads.unlock_extras_for_session())
-	if not game.choose_look("stone") or game.current_style().id != "stone":
-		failures.append("looks: open after the video")
-	game.set_art_style(free)
-	game.mode = GreyboxScript.Mode.HOTSEAT
+	if not game.choose_look("stone") or not game.look_loading() or game._loading == null:
+		failures.append("looks: open after the video, behind the loading screen")
 	print("ads: ok")
 
 

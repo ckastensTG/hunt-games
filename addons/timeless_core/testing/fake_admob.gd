@@ -19,6 +19,8 @@ signal consent_form_dismissed(error_data: Variant)
 signal consent_form_failed_to_load(error_data: Variant)
 signal consent_info_updated
 signal consent_info_update_failed(error_data: Variant)
+signal tracking_authorization_granted
+signal tracking_authorization_denied
 
 class FakeAdInfo:
 	extends RefCounted
@@ -83,6 +85,10 @@ func reset_consent_info() -> void:
 
 func initialize() -> void:
 	calls.append("initialize")
+
+
+func request_tracking_authorization() -> void:
+	calls.append("request_tracking_authorization")
 
 
 func load_interstitial_ad(_request: Variant = null) -> void:

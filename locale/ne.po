@@ -9,6 +9,11 @@ msgstr ""
 "X-Translator: Claude (2026-11-06)\n"
 "X-Review-Status: first pass, translation confidence moderate; NEEDS native-speaker review before release (bible §7). Bagh Chal only: the Jogo da Onça strings are left out (tools/l10n/scope.py)\n"
 
+#. Shown while the board and pieces of another look are prepared (it can take a few seconds).
+#: scenes/greybox/greybox.gd:915
+msgid "Loading…"
+msgstr "लोड हुँदैछ…"
+
 #: scenes/greybox/hud.gd:140
 msgid "Menu"
 msgstr "मेनु"
@@ -67,17 +72,17 @@ msgid "No moves yet"
 msgstr "अहिलेसम्म कुनै चाल छैन"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:302
 msgid "You won"
 msgstr "तपाईंले जित्नुभयो"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:155
 msgid "You lost"
 msgstr "तपाईं हार्नुभयो"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:157
 msgid "Rematch"
 msgstr "पुनः खेल"
 
@@ -151,7 +156,7 @@ msgid "Play now"
 msgstr "अहिले खेल्नुहोस्"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
 msgid "Not now"
 msgstr "अहिले होइन"
 
@@ -214,7 +219,7 @@ msgstr "बराबरीको प्रस्ताव पठाइयो। 
 msgid "Rematch offered. Waiting for an answer."
 msgstr "फेरि खेल्ने प्रस्ताव पठाइयो। जवाफ पर्खँदै।"
 
-#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:301
 msgid "Your opponent left the game."
 msgstr "प्रतिद्वन्द्वीले खेल छाड्नुभयो।"
 
@@ -222,7 +227,7 @@ msgstr "प्रतिद्वन्द्वीले खेल छाड्�
 msgid "Reconnected."
 msgstr "फेरि जोडियो।"
 
-#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:146
 msgid "Your opponent declined the draw."
 msgstr "प्रतिद्वन्द्वीले बराबरी अस्वीकार गर्नुभयो।"
 
@@ -505,43 +510,43 @@ msgid "Privacy choices"
 msgstr "गोपनीयता विकल्पहरू"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:788
+#: scenes/play/play_menu.gd:796
 msgid "Quit to main menu"
 msgstr "मुख्य मेनुमा फर्कनुहोस्"
 
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:802
+#: scenes/play/play_menu.gd:810
 msgid "More looks"
 msgstr "अन्य शैलीहरू"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:804
+#: scenes/play/play_menu.gd:812
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "एप बन्द नगरेसम्म शैली बदल्न एउटा छोटो भिडियो हेर्नुहोस्।"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:808
+#: scenes/play/play_menu.gd:816
 msgid "No video is ready right now. Try again in a moment."
 msgstr "अहिले कुनै भिडियो तयार छैन। केही बेरपछि फेरि प्रयास गर्नुहोस्।"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:811
+#: scenes/play/play_menu.gd:819
 msgid "Watch a video"
 msgstr "भिडियो हेर्नुहोस्"
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:842
+#: scenes/play/play_menu.gd:851
 msgid "Graphics"
 msgstr "ग्राफिक्स"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:923
+#: scenes/play/play_menu.gd:932
 #, c-format
 msgid "Your name: %s"
 msgstr "तपाईंको नाम: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:960
+#: scenes/play/play_menu.gd:969
 msgid "Waiting"
 msgstr "पर्खँदै"
 
@@ -557,7 +562,7 @@ msgstr "यात्री"
 msgid "Potter"
 msgstr "शिल्पी"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:285
 msgid "Weaver"
 msgstr "बुनकर"
 
@@ -625,7 +630,7 @@ msgstr "यो डिभाइस वाइफाइमा जोडिएको
 msgid "Something went wrong. Please try again."
 msgstr "केही गडबड भयो। कृपया फेरि प्रयास गर्नुहोस्।"
 
-#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:156
 msgid "You resigned."
 msgstr "तपाईंले हार मान्नुभयो।"
 

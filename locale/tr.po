@@ -9,6 +9,11 @@ msgstr ""
 "X-Translator: Claude (2026-11-03)\n"
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
+#. Shown while the board and pieces of another look are prepared (it can take a few seconds).
+#: scenes/greybox/greybox.gd:915
+msgid "Loading…"
+msgstr "Yükleniyor…"
+
 #: scenes/greybox/hud.gd:140
 msgid "Menu"
 msgstr "Menü"
@@ -67,17 +72,17 @@ msgid "No moves yet"
 msgstr "Henüz hamle yok"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:301
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:302
 msgid "You won"
 msgstr "Kazandın"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:154
+#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:155
 msgid "You lost"
 msgstr "Kaybettin"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:156
+#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:157
 msgid "Rematch"
 msgstr "Rövanş"
 
@@ -151,7 +156,7 @@ msgid "Play now"
 msgstr "Şimdi oyna"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:822
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
 msgid "Not now"
 msgstr "Şimdi değil"
 
@@ -214,7 +219,7 @@ msgstr "Beraberlik teklif edildi. Yanıt bekleniyor."
 msgid "Rematch offered. Waiting for an answer."
 msgstr "Rövanş teklif edildi. Yanıt bekleniyor."
 
-#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:300
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:301
 msgid "Your opponent left the game."
 msgstr "Rakibin oyundan ayrıldı."
 
@@ -222,7 +227,7 @@ msgstr "Rakibin oyundan ayrıldı."
 msgid "Reconnected."
 msgstr "Yeniden bağlandı."
 
-#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:145
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:146
 msgid "Your opponent declined the draw."
 msgstr "Rakibin beraberliği reddetti."
 
@@ -505,43 +510,43 @@ msgid "Privacy choices"
 msgstr "Gizlilik tercihleri"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:788
+#: scenes/play/play_menu.gd:796
 msgid "Quit to main menu"
 msgstr "Ana menüye dön"
 
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:802
+#: scenes/play/play_menu.gd:810
 msgid "More looks"
 msgstr "Diğer görünümler"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:804
+#: scenes/play/play_menu.gd:812
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "Uygulamayı kapatana kadar görünümü değiştirmek için kısa bir video izle."
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:808
+#: scenes/play/play_menu.gd:816
 msgid "No video is ready right now. Try again in a moment."
 msgstr "Şu anda hazır bir video yok. Birazdan tekrar dene."
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:811
+#: scenes/play/play_menu.gd:819
 msgid "Watch a video"
 msgstr "Video izle"
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:842
+#: scenes/play/play_menu.gd:851
 msgid "Graphics"
 msgstr "Grafik"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:923
+#: scenes/play/play_menu.gd:932
 #, c-format
 msgid "Your name: %s"
 msgstr "Adın: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:960
+#: scenes/play/play_menu.gd:969
 msgid "Waiting"
 msgstr "Bekleniyor"
 
@@ -557,7 +562,7 @@ msgstr "Gezgin"
 msgid "Potter"
 msgstr "Çömlekçi"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:284
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:285
 msgid "Weaver"
 msgstr "Dokumacı"
 
@@ -625,7 +630,7 @@ msgstr "Bu cihaz bir Wi-Fi ağına bağlı değil."
 msgid "Something went wrong. Please try again."
 msgstr "Bir sorun oluştu. Lütfen yeniden dene."
 
-#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:155
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:156
 msgid "You resigned."
 msgstr "Pes ettin."
 

@@ -1,9 +1,12 @@
 extends TestCase
-## Bagh Chal's ad setup: the App ID the AdMob plugin writes into the Android
-## manifest matches TitleConfig, debug builds use Google's demo units, and
-## the free look is one of the title's looks.
+## Bagh Chal's ad setup: the App IDs the AdMob plugin writes into the Android
+## manifest and the iOS Info.plist match TitleConfig, the iOS preset has the
+## tracking prompt's text once, debug builds use Google's demo units, and the
+## free look is one of the title's looks.
 
 const ANDROID_EXPORT := "res://addons/AdmobPlugin/android_export.cfg"
+const IOS_EXPORT := "res://addons/AdmobPlugin/ios_export.cfg"
+const PRESETS := "res://export_presets.cfg"
 
 
 func test_android_manifest_app_id_matches_title_config() -> void:
@@ -14,6 +17,27 @@ func test_android_manifest_app_id_matches_title_config() -> void:
 	check_eq(cfg.get_value("General", "is_real", false), true, "the real App ID in every build")
 	check_eq(cfg.get_value("Release", "app_id", ""), app_id, "release App ID")
 	check_eq(cfg.get_value("Debug", "app_id", ""), app_id, "debug App ID (unused while is_real)")
+
+
+func test_ios_info_plist_app_id_and_tracking_text() -> void:
+	var cfg := ConfigFile.new()
+	check_eq(cfg.load(IOS_EXPORT), OK, "ios_export.cfg reads")
+	var app_id := TitleConfig.for_id(TitleConfig.BAGH_CHAL).admob_app_id("ios")
+	check(app_id.begins_with("ca-app-pub-8333290579862415~"), "Bagh Chal's iOS App ID")
+	check_eq(cfg.get_value("General", "is_real", false), true, "the real App ID in every build")
+	check_eq(cfg.get_value("Release", "app_id", ""), app_id, "release App ID")
+	check_eq(cfg.get_value("Debug", "app_id", ""), app_id, "debug App ID (unused while is_real)")
+	check_eq(cfg.get_value("ATT", "att_enabled", true), false, "the plugin doesn't add the tracking text a second time")
+	# The tracking prompt's text is in the iOS preset, exactly once.
+	var presets := ConfigFile.new()
+	check_eq(presets.load(PRESETS), OK, "export_presets.cfg reads")
+	var found := 0
+	for section in presets.get_sections():
+		if section.ends_with(".options") and presets.get_value(section.trim_suffix(".options"), "platform", "") == "iOS":
+			var plist := str(presets.get_value(section, "application/additional_plist_content", ""))
+			found += 1
+			check_eq(plist.count("<key>NSUserTrackingUsageDescription</key>"), 1, "%s: the tracking prompt's text" % section)
+	check(found >= 1, "an iOS preset")
 
 
 func test_debug_builds_use_demo_units() -> void:

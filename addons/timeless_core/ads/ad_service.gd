@@ -33,10 +33,16 @@ signal changed
 const NODE_NAME := "Ads"
 const SAVE_PATH := "user://ads.cfg"
 ## Our own phones and tablets, registered as test devices: hashed device IDs
-## as the device log prints them when the app asks for consent ("Use new
-## ConsentDebugSettings.Builder().addTestDeviceHashedId(...)"). Debug builds
-## only; they let the EEA consent form show on these devices.
-const TEST_DEVICES: Array[String] = []
+## as the device log prints them when the app asks for consent (Android:
+## "Use new ConsentDebugSettings.Builder().addTestDeviceHashedId(...)", in
+## logcat; iOS: "<UMP SDK> To enable debug mode for this device, set:
+## UMPDebugSettings.testDeviceIdentifiers = ...", in the Mac's Console app
+## with the device selected). Debug builds only; they let the EEA consent
+## form show on these devices. The moto g(20) got the form without being
+## listed (2026-11-06).
+const TEST_DEVICES: Array[String] = [
+	"29607432-B2E1-4062-8822-CE5030555326",  # Christopher's iPad Air 3 (2026-11-06)
+]
 
 ## Tests and tools: "none" or "sim" instead of the platform's choice.
 static var backend_override := ""

@@ -1,7 +1,8 @@
 extends SceneTree
 ## Checks the interface in every language at one screen shape (run it once
 ## per shape, with --resolution and --shape=name): each menu screen,
-## the in-game display, the result card, the questions and toast, and every
+## the in-game display, the result card, the questions and toast, the loading
+## screen (a look being built), and every
 ## How to play step. A check fails when a visible control reaches outside the
 ## screen (or, inside a scrolling area, outside it sideways), or is squeezed
 ## below the size its text needs.
@@ -59,7 +60,7 @@ func _screens() -> Array:
 	var list: Array = []
 	for s in MENU_SCREENS:
 		list.append("menu:" + s)
-	list.append_array(["hud", "result", "dialog:draw", "dialog:resign", "toast"])
+	list.append_array(["hud", "result", "dialog:draw", "dialog:resign", "toast", "loading"])
 	var steps := HuntTutorials.build(game.rules) if game.rules else []
 	for i in steps.size():
 		list.append("tutorial:%d" % i)
@@ -151,6 +152,9 @@ func _setup(screen: String) -> void:
 	elif screen == "toast":
 		game.menu.close()
 		game._match_ui._on_background_found()
+	elif screen == "loading":
+		game.menu.open("pause")
+		game._show_loading("stone")
 	elif screen.begins_with("tutorial:"):
 		game.menu.close()
 		var i := int(screen.substr(9))
@@ -169,6 +173,9 @@ func _teardown(screen: String) -> void:
 		game._match_ui._dialog.visible = false
 	elif screen == "toast":
 		game._match_ui._hide_toast()
+	elif screen == "loading":
+		game._hide_loading()
+		game.menu.close()
 	elif screen.begins_with("tutorial:"):
 		if int(screen.substr(9)) == HuntTutorials.build(game.rules).size() - 1 or jobs.is_empty() or not str(jobs[0][3]).begins_with("tutorial:"):
 			game._tutorial.stop(false)
@@ -182,10 +189,12 @@ func _play_some_moves_again() -> void:
 
 func _check(label: String) -> void:
 	checked += 1
-	if not label.ends_with("/result") and not label.contains("/menu:") and not label.contains("/dialog:"):
+	if not label.ends_with("/result") and not label.ends_with("/loading") and not label.contains("/menu:") and not label.contains("/dialog:"):
 		_check_hud_overlap(label)
 	var view := root.get_visible_rect()
-	for layer in [game.menu, game._hud, game._match_ui, game._tutorial]:
+	for layer in [game.menu, game._hud, game._match_ui, game._tutorial, game._loading]:
+		if layer == null:
+			continue
 		for c: Control in layer.find_children("*", "Control", true, false):
 			if not c.is_visible_in_tree() or c.size.x < 1.0 or c.size.y < 1.0:
 				continue

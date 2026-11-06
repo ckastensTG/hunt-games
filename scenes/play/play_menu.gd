@@ -772,13 +772,21 @@ func _pause() -> void:
 		privacy.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
 	if OS.is_debug_build() and not game.is_network():
 		# Not translated: test builds only (perf_test.gd). One row: the
-		# performance test and its two follow-ups.
+		# performance test and its two follow-ups, and "Ad break", which
+		# makes an interstitial due and takes the break after a game, so the
+		# ad can be checked on a device without finishing two games.
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 8)
-		for suite in ["main", "detail", "candidates"]:
-			var test := _small_button("Perf test" if suite == "main" else suite.capitalize(), row, func() -> void:
+		for suite in ["main", "detail", "candidates", "ad"]:
+			var label: String = "Perf test" if suite == "main" else ("Ad break" if suite == "ad" else suite.capitalize())
+			var test := _small_button(label, row, func() -> void:
 				close()
-				game.start_perf_test(suite))
+				if suite == "ad":
+					game.ads.policy.games_since_ad = AdPolicy.MIN_GAMES
+					game.ads.policy.last_ad_ms = Time.get_ticks_msec() - AdPolicy.MIN_GAP_MS
+					game.after_game_break()
+				else:
+					game.start_perf_test(suite))
 			test.flat = true
 			test.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			test.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
@@ -814,10 +822,11 @@ func _looks() -> void:
 				_render()
 				return
 			game.ads.unlock_extras_for_session()
-			if _wanted_look != "":
-				game.choose_look(_wanted_look)
+			var wanted := _wanted_look
 			_wanted_look = ""
-			back()), true)
+			back()  # More looks goes; the look is built behind the loading screen
+			if wanted != "":
+				game.choose_look(wanted)), true)
 	watch.disabled = not ready
 	_back_button(L10n.t("Not now"))
 

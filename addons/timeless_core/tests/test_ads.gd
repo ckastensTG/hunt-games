@@ -175,9 +175,10 @@ const FAKE_ADMOB := "res://addons/timeless_core/testing/fake_admob.gd"
 enum { UNKNOWN, NOT_REQUIRED, REQUIRED, OBTAINED }
 
 
-func _admob(consent: int, debug := true) -> AdmobAdBackend:
+func _admob(consent: int, debug := true, ios := false) -> AdmobAdBackend:
 	var b := AdmobAdBackend.new()
 	b.script_path = FAKE_ADMOB
+	b.ios = ios
 	b.start({"interstitial": "unit/i", "rewarded": "unit/r", "debug": debug, "test_devices": ["ABC"]})
 	b._admob.consent = consent
 	b._ask_consent()  # in the game: when the node is ready
@@ -229,13 +230,17 @@ func test_admob_consent_not_required_or_unknown() -> void:
 	check_eq(b._admob.count("initialize"), 1, "SDK straight away")
 	check(not b.privacy_options_available(), "nothing to change")
 	b.free()
-	var offline := _admob(UNKNOWN)
+	var offline := _admob(UNKNOWN, false)
 	offline._admob.consent_info_update_failed.emit(null)
-	check_eq(offline._admob.count("initialize"), 0, "no consent known: no SDK yet")
+	check_eq(offline._admob.count("initialize"), 0, "release, no consent known: no SDK yet")
 	offline._consent_retry_at = 0
 	offline._process(0.0)
 	check_eq(offline._admob.count("update_consent_info"), 2, "asked again later")
 	offline.free()
+	var test_build := _admob(UNKNOWN, true)
+	test_build._admob.consent_info_update_failed.emit(null)
+	check_eq(test_build._admob.count("initialize"), 1, "test build: SDK anyway, for demo ads")
+	test_build.free()
 
 
 func test_admob_show_reload_retry_and_expiry() -> void:
@@ -299,3 +304,29 @@ func test_admob_rewarded() -> void:
 	b.show_rewarded()
 	check_eq(f.count("show_rewarded_ad"), 2, "nothing loaded: not shown")
 	b.free()
+
+
+func test_admob_ios_asks_for_tracking_before_the_sdk() -> void:
+	var b := _admob(NOT_REQUIRED, true, true)
+	var f: Node = b._admob
+	f.consent_info_updated.emit()
+	check_eq(f.count("request_tracking_authorization"), 1, "Apple's tracking prompt after consent")
+	check_eq(f.count("initialize"), 0, "the SDK waits for the answer")
+	f.tracking_authorization_denied.emit()
+	check_eq(f.count("initialize"), 1, "then starts, whatever the answer")
+	f.tracking_authorization_granted.emit()
+	check_eq(f.count("initialize"), 1, "only once")
+	b.free()
+	# No answer at all: the SDK starts after a while.
+	var silent := _admob(NOT_REQUIRED, true, true)
+	silent._admob.consent_info_updated.emit()
+	silent._att_asked_at = Time.get_ticks_msec() - AdmobAdBackend.ATT_WAIT_MS
+	silent._process(0.0)
+	check_eq(silent._admob.count("initialize"), 1, "starts without an answer")
+	silent.free()
+	# Android: no prompt.
+	var android := _admob(NOT_REQUIRED)
+	android._admob.consent_info_updated.emit()
+	check_eq(android._admob.count("request_tracking_authorization"), 0, "no prompt on Android")
+	check_eq(android._admob.count("initialize"), 1, "SDK straight away")
+	android.free()
