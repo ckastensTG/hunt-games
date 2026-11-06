@@ -7,6 +7,7 @@ extends TestCase
 const ANDROID_EXPORT := "res://addons/AdmobPlugin/android_export.cfg"
 const IOS_EXPORT := "res://addons/AdmobPlugin/ios_export.cfg"
 const PRESETS := "res://export_presets.cfg"
+const IOSPlistStrings := preload("res://addons/timeless_core/editor/ios_plist_strings.gd")
 
 
 func test_android_manifest_app_id_matches_title_config() -> void:
@@ -37,7 +38,25 @@ func test_ios_info_plist_app_id_and_tracking_text() -> void:
 			var plist := str(presets.get_value(section, "application/additional_plist_content", ""))
 			found += 1
 			check_eq(plist.count("<key>NSUserTrackingUsageDescription</key>"), 1, "%s: the tracking prompt's text" % section)
+			# The prompts' English texts are TitleConfig's, so the export step
+			# finds their translations (editor/ios_plist_strings.gd).
+			var texts := IOSPlistStrings.usage_texts(plist)
+			var usage := TitleConfig.ios_usage(TitleConfig.BAGH_CHAL)
+			for key in usage:
+				check_eq(texts.get(key, ""), usage[key], "%s: %s matches TitleConfig" % [section, key])
 	check(found >= 1, "an iOS preset")
+
+
+## Every translation has the prompts' texts, so iOS shows them in the
+## player's language.
+func test_ios_prompt_texts_are_translated() -> void:
+	var usage := TitleConfig.ios_usage(TitleConfig.BAGH_CHAL)
+	check_eq(usage.size(), 2, "tracking and local network")
+	for tr_path in ProjectSettings.get_setting("internationalization/locale/translations", PackedStringArray()):
+		var t: Translation = load(tr_path)
+		for key in usage:
+			var text := str(t.get_message(usage[key]))
+			check(text != "" and text != usage[key], "%s: %s translated" % [t.locale, key])
 
 
 func test_debug_builds_use_demo_units() -> void:

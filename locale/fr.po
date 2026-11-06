@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: translation confidence high (bible §7); native review before release\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:915
+#: scenes/greybox/greybox.gd:931
 msgid "Loading…"
 msgstr "Chargement…"
 
@@ -141,7 +141,7 @@ msgstr "Suivant ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:645
 msgid "Looking for an opponent…"
 msgstr "Recherche d'un adversaire…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "Jouer maintenant"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:874
 msgid "Not now"
 msgstr "Pas maintenant"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "Abandonner cette partie ?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:753
 msgid "Resign"
 msgstr "Abandonner"
 
@@ -251,302 +251,353 @@ msgstr "L'autre joueur ne s'est pas connecté. Recherche toujours en cours…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Temps écoulé : un coup a été joué pour vous (%d sur 3)."
 
-#: scenes/play/play_menu.gd:251
+#: scenes/play/play_menu.gd:268
 msgid "Back"
 msgstr "Retour"
 
-#: scenes/play/play_menu.gd:306
+#: scenes/play/play_menu.gd:323
 msgid "Rules"
 msgstr "Règles"
 
-#: scenes/play/play_menu.gd:326
+#: scenes/play/play_menu.gd:343
 msgid "Language"
 msgstr "Langue"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+#: scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:743
 msgid "Continue"
 msgstr "Continuer"
 
-#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+#: scenes/play/play_menu.gd:370 scenes/play/play_menu.gd:399
 msgid "Play against the AI"
 msgstr "Jouer contre l'IA"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:372 scenes/play/play_menu.gd:419
 msgid "Pass and play"
 msgstr "À deux sur un appareil"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+#: scenes/play/play_menu.gd:374 scenes/play/play_menu.gd:428
 msgid "Play local"
 msgstr "Jouer en local"
 
-#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+#: scenes/play/play_menu.gd:376 scenes/play/play_menu.gd:531
 msgid "Play online"
 msgstr "Jouer en ligne"
 
-#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:377 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Comment jouer"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:688
 msgid "Game origins"
 msgstr "Origines du jeu"
 
+#. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
+#: scenes/play/play_menu.gd:382 scenes/play/play_menu.gd:802
+msgid "Settings"
+msgstr "Paramètres"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:370
+#: scenes/play/play_menu.gd:390
 msgid "Quit game"
 msgstr "Quitter le jeu"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Novice"
 msgstr "Novice"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Apprentice"
 msgstr "Apprenti"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Adept"
 msgstr "Adepte"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Master"
 msgstr "Maître"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:408 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "Adversaire"
 
-#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:447
 msgid "Start"
 msgstr "Commencer"
 
-#: scenes/play/play_menu.gd:400
+#: scenes/play/play_menu.gd:420
 msgid "Two players share this device and take turns."
 msgstr "Deux joueurs partagent cet appareil et jouent à tour de rôle."
 
-#: scenes/play/play_menu.gd:409
+#: scenes/play/play_menu.gd:429
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "Les deux appareils doivent être sur le même Wi-Fi."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:443
 msgid "Host a game"
 msgstr "Créer une partie"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+#: scenes/play/play_menu.gd:434 scenes/play/play_menu.gd:475
 msgid "Join a game"
 msgstr "Rejoindre une partie"
 
-#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:562
 msgid "Create a code"
 msgstr "Créer un code"
 
-#: scenes/play/play_menu.gd:441
+#: scenes/play/play_menu.gd:461
 msgid "Waiting for a player"
 msgstr "En attente d'un joueur"
 
-#: scenes/play/play_menu.gd:442
+#: scenes/play/play_menu.gd:462
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "Sur l'autre appareil, choisissez Jouer en local, puis Rejoindre une partie."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:446
+#: scenes/play/play_menu.gd:466
 msgid "If the game doesn't appear there, enter this code"
 msgstr "Si la partie n'y apparaît pas, saisissez ce code"
 
-#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:471 scenes/play/play_menu.gd:591 scenes/play/play_menu.gd:642 scenes/play/play_menu.gd:649 scenes/play/play_menu.gd:654
 msgid "Cancel"
 msgstr "Annuler"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:477
 msgid "Looking for games on this Wi-Fi…"
 msgstr "Recherche de parties sur ce Wi-Fi…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:468
+#: scenes/play/play_menu.gd:488
 msgid "Code"
 msgstr "Code"
 
-#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:496 scenes/play/play_menu.gd:623
 msgid "Join"
 msgstr "Rejoindre"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:513
+#: scenes/play/play_menu.gd:533
 msgid "Play with someone online"
 msgstr "Jouer avec quelqu'un en ligne"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:538 scenes/play/play_menu.gd:647
 msgid "Standard rules, about a minute per move"
 msgstr "Règles standard, environ une minute par coup"
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+#: scenes/play/play_menu.gd:539 scenes/play/play_menu.gd:559
 msgid "Play with a friend"
 msgstr "Jouer avec un ami"
 
-#: scenes/play/play_menu.gd:540
+#: scenes/play/play_menu.gd:560
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "L'un crée un code, l'autre le saisit. Cela fonctionne entre téléphones, tablettes et ordinateurs."
 
-#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+#: scenes/play/play_menu.gd:563 scenes/play/play_menu.gd:607
 msgid "Enter a code"
 msgstr "Saisir un code"
 
-#: scenes/play/play_menu.gd:551
+#: scenes/play/play_menu.gd:571
 msgid "Your code"
 msgstr "Votre code"
 
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+#: scenes/play/play_menu.gd:573 scenes/play/play_menu.gd:653
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: scenes/play/play_menu.gd:556
+#: scenes/play/play_menu.gd:576
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "Envoyez ce code à votre ami. La partie commence dès qu'il le saisit."
 
-#: scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:579
 msgid "Share"
 msgstr "Partager"
 
-#: scenes/play/play_menu.gd:561
+#: scenes/play/play_menu.gd:581
 msgid "Copy"
 msgstr "Copier"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+#: scenes/play/play_menu.gd:584 scenes/play/play_menu.gd:603
 msgid "Copied"
 msgstr "Copié"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:577
+#: scenes/play/play_menu.gd:597
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Jouez avec moi dans Timeless Games ! Mon code de partie est %s."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:613
+#: scenes/play/play_menu.gd:633
 msgid "No one is free right now"
 msgstr "Personne n'est libre pour l'instant"
 
-#: scenes/play/play_menu.gd:614
+#: scenes/play/play_menu.gd:634
 msgid "We can keep looking while you play."
 msgstr "Nous pouvons continuer à chercher pendant que vous jouez."
 
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:635
 msgid "Play against the AI while we keep looking"
 msgstr "Jouer contre l'IA pendant la recherche"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:638
 msgid "Keep searching"
 msgstr "Continuer à chercher"
 
-#: scenes/play/play_menu.gd:619
+#: scenes/play/play_menu.gd:639
 msgid "Invite a friend instead"
 msgstr "Inviter un ami"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:659
 msgid "Couldn't start the game"
 msgstr "Impossible de lancer la partie"
 
-#: scenes/play/play_menu.gd:642
+#: scenes/play/play_menu.gd:662
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:650
+#: scenes/play/play_menu.gd:670
 msgid "Leave this game?"
 msgstr "Quitter cette partie ?"
 
-#: scenes/play/play_menu.gd:651
+#: scenes/play/play_menu.gd:671
 msgid "It counts as a loss."
 msgstr "Cela compte comme une défaite."
 
-#: scenes/play/play_menu.gd:652
+#: scenes/play/play_menu.gd:672
 msgid "Leave"
 msgstr "Quitter"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:658
+#: scenes/play/play_menu.gd:678
 msgid "Stay"
 msgstr "Rester"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:683
+#: scenes/play/play_menu.gd:703
 msgid "Sources"
 msgstr "Sources"
 
-#: scenes/play/play_menu.gd:729
+#: scenes/play/play_menu.gd:749
 msgid "Offer a draw"
 msgstr "Proposer la nulle"
 
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:789
+msgid "Quit to main menu"
+msgstr "Quitter vers le menu principal"
+
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:758
+#: scenes/play/play_menu.gd:831
 msgid "Look"
 msgstr "Style"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:834
 msgid "Sound"
 msgstr "Son"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:763
+#: scenes/play/play_menu.gd:836
 msgid "Music"
 msgstr "Musique"
 
-#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:767
-msgid "Privacy choices"
-msgstr "Choix de confidentialité"
-
-#. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:796
-msgid "Quit to main menu"
-msgstr "Quitter vers le menu principal"
-
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:810
+#: scenes/play/play_menu.gd:846
 msgid "More looks"
 msgstr "Plus de styles"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:812
+#: scenes/play/play_menu.gd:848
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "Regardez une courte vidéo pour changer de style jusqu'à la fermeture du jeu."
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:816
+#: scenes/play/play_menu.gd:852
 msgid "No video is ready right now. Try again in a moment."
 msgstr "Aucune vidéo n'est prête pour le moment. Réessayez dans un instant."
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:819
+#: scenes/play/play_menu.gd:855
 msgid "Watch a video"
 msgstr "Regarder une vidéo"
 
+#. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
+#: scenes/play/play_menu.gd:871
+msgid "Or remove ads to keep every look for good."
+msgstr "Ou supprimez les pubs pour garder tous les styles pour de bon."
+
+#. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
+#: scenes/play/play_menu.gd:872 scenes/play/play_menu.gd:886 tools/smoke_greybox.gd:217
+#, c-format
+msgid "Remove ads · %s"
+msgstr "Supprimer les pubs · %s"
+
+#. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
+#: scenes/play/play_menu.gd:892 tools/smoke_greybox.gd:226
+msgid "Restore purchases"
+msgstr "Restaurer les achats"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:896
+msgid "Privacy choices"
+msgstr "Choix de confidentialité"
+
+#. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
+#: scenes/play/play_menu.gd:915
+msgid "Thank you! Ads are off and every look is yours."
+msgstr "Merci ! Les pubs sont désactivées et tous les styles sont à vous."
+
+#. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
+#: scenes/play/play_menu.gd:925
+msgid "Your payment is pending. Ads will turn off as soon as it goes through."
+msgstr "Votre paiement est en attente. Les pubs seront désactivées dès qu'il sera validé."
+
+#. Message when buying "Remove ads" failed (not when the player cancelled).
+#: scenes/play/play_menu.gd:928
+msgid "The purchase didn't go through. Please try again later."
+msgstr "L'achat n'a pas abouti. Réessayez plus tard."
+
+#. Message after "Restore purchases" found Remove ads.
+#: scenes/play/play_menu.gd:938
+msgid "Your purchase is restored."
+msgstr "Votre achat a été restauré."
+
+#. Message after "Restore purchases" found nothing bought with this store account.
+#: scenes/play/play_menu.gd:941
+msgid "No purchase to restore on this account."
+msgstr "Aucun achat à restaurer sur ce compte."
+
+#. Message when the store (Google Play, the App Store) can't be reached.
+#: scenes/play/play_menu.gd:944
+msgid "The store isn't available right now."
+msgstr "La boutique n'est pas disponible pour le moment."
+
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:851
+#: scenes/play/play_menu.gd:966
 msgid "Graphics"
 msgstr "Qualité graphique"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:932
+#: scenes/play/play_menu.gd:1047
 #, c-format
 msgid "Your name: %s"
 msgstr "Votre nom : %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:969
+#: scenes/play/play_menu.gd:1084
 msgid "Waiting"
 msgstr "En attente"
 
@@ -1139,6 +1190,16 @@ msgstr "Une reconstitution"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "Dans les récits écrits il y a un siècle, les chiens ne peuvent qu'avancer, et un puma qui reste dans la tour ne peut alors jamais être pris. Ici, les chiens se déplacent et le puma gagne comme dans le Trapial-Kuzen, une version mapuche moderne du jeu. La tour est un plateau ordinaire, et le puma joue en premier, sauf si vous le changez dans les réglages."
+
+#. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
+#: titles/common/title_config.gd:202
+msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
+msgstr "Cela nous permet de vous montrer des publicités plus pertinentes. Bagh Chal est gratuit grâce aux publicités."
+
+#. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
+#: titles/common/title_config.gd:204
+msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
+msgstr "Bagh Chal recherche des parties sur votre réseau Wi-Fi pour que vous puissiez jouer avec quelqu'un à proximité."
 
 #. Graphics setting: the game picks the quality for this device. Keep it short.
 #: ui/game_graphics.gd:96

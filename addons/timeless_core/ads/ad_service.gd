@@ -21,8 +21,9 @@ extends Node
 ##                         on this platform.
 ##
 ## "Remove ads" (remove_ads, US$1.99; bible §3.1) sets ads_removed through
-## set_ads_removed(), saved in user://ads.cfg. The store purchase and
-## restore come with IAPService (next round); until then nothing sets it.
+## set_ads_removed(), saved in user://ads.cfg. The title calls it when
+## IAPService says the player owns the purchase (bought, restored, or found
+## at start).
 ##
 ## While an ad is on screen the game's sound is muted.
 

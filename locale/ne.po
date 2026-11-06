@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: first pass, translation confidence moderate; NEEDS native-speaker review before release (bible §7). Bagh Chal only: the Jogo da Onça strings are left out (tools/l10n/scope.py)\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:915
+#: scenes/greybox/greybox.gd:931
 msgid "Loading…"
 msgstr "लोड हुँदैछ…"
 
@@ -141,7 +141,7 @@ msgstr "अर्को ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:645
 msgid "Looking for an opponent…"
 msgstr "प्रतिद्वन्द्वी खोज्दै…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "अहिले खेल्नुहोस्"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:874
 msgid "Not now"
 msgstr "अहिले होइन"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "यो खेलमा हार मान्ने?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:753
 msgid "Resign"
 msgstr "हार मान्नुहोस्"
 
@@ -251,302 +251,353 @@ msgstr "अर्को खेलाडी जोडिनुभएन। अझ
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "समय सकियो, त्यसैले तपाईंको सट्टा एउटा चाल खेलियो (3 मध्ये %d)।"
 
-#: scenes/play/play_menu.gd:251
+#: scenes/play/play_menu.gd:268
 msgid "Back"
 msgstr "पछाडि"
 
-#: scenes/play/play_menu.gd:306
+#: scenes/play/play_menu.gd:323
 msgid "Rules"
 msgstr "नियम"
 
-#: scenes/play/play_menu.gd:326
+#: scenes/play/play_menu.gd:343
 msgid "Language"
 msgstr "भाषा"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+#: scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:743
 msgid "Continue"
 msgstr "जारी राख्नुहोस्"
 
-#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+#: scenes/play/play_menu.gd:370 scenes/play/play_menu.gd:399
 msgid "Play against the AI"
 msgstr "कम्प्युटरसँग खेल्नुहोस्"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:372 scenes/play/play_menu.gd:419
 msgid "Pass and play"
 msgstr "पालैपालो खेल्नुहोस्"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+#: scenes/play/play_menu.gd:374 scenes/play/play_menu.gd:428
 msgid "Play local"
 msgstr "वाइफाइमा खेल्नुहोस्"
 
-#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+#: scenes/play/play_menu.gd:376 scenes/play/play_menu.gd:531
 msgid "Play online"
 msgstr "अनलाइन खेल्नुहोस्"
 
-#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:377 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "कसरी खेल्ने"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:688
 msgid "Game origins"
 msgstr "खेलको इतिहास"
 
+#. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
+#: scenes/play/play_menu.gd:382 scenes/play/play_menu.gd:802
+msgid "Settings"
+msgstr "सेटिङहरू"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:370
+#: scenes/play/play_menu.gd:390
 msgid "Quit game"
 msgstr "खेल बन्द गर्नुहोस्"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Novice"
 msgstr "सुरुवाती"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Apprentice"
 msgstr "सिकारु"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Adept"
 msgstr "निपुण"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Master"
 msgstr "उस्ताद"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:408 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "प्रतिद्वन्द्वी"
 
-#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:447
 msgid "Start"
 msgstr "सुरु गर्नुहोस्"
 
-#: scenes/play/play_menu.gd:400
+#: scenes/play/play_menu.gd:420
 msgid "Two players share this device and take turns."
 msgstr "दुई जना खेलाडी एउटै डिभाइसमा पालैपालो खेल्छन्।"
 
-#: scenes/play/play_menu.gd:409
+#: scenes/play/play_menu.gd:429
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "दुवै डिभाइस एउटै वाइफाइमा हुनुपर्छ।"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:443
 msgid "Host a game"
 msgstr "खेल बनाउनुहोस्"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+#: scenes/play/play_menu.gd:434 scenes/play/play_menu.gd:475
 msgid "Join a game"
 msgstr "खेलमा सामेल हुनुहोस्"
 
-#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:562
 msgid "Create a code"
 msgstr "कोड बनाउनुहोस्"
 
-#: scenes/play/play_menu.gd:441
+#: scenes/play/play_menu.gd:461
 msgid "Waiting for a player"
 msgstr "खेलाडी पर्खँदै"
 
-#: scenes/play/play_menu.gd:442
+#: scenes/play/play_menu.gd:462
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "अर्को डिभाइसमा “वाइफाइमा खेल्नुहोस्”, अनि “खेलमा सामेल हुनुहोस्” छान्नुहोस्।"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:446
+#: scenes/play/play_menu.gd:466
 msgid "If the game doesn't appear there, enter this code"
 msgstr "खेल त्यहाँ देखिएन भने यो कोड हाल्नुहोस्"
 
-#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:471 scenes/play/play_menu.gd:591 scenes/play/play_menu.gd:642 scenes/play/play_menu.gd:649 scenes/play/play_menu.gd:654
 msgid "Cancel"
 msgstr "रद्द गर्नुहोस्"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:477
 msgid "Looking for games on this Wi-Fi…"
 msgstr "यो वाइफाइमा खेलहरू खोज्दै…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:468
+#: scenes/play/play_menu.gd:488
 msgid "Code"
 msgstr "कोड"
 
-#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:496 scenes/play/play_menu.gd:623
 msgid "Join"
 msgstr "सामेल हुनुहोस्"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:513
+#: scenes/play/play_menu.gd:533
 msgid "Play with someone online"
 msgstr "अनलाइन कसैसँग खेल्नुहोस्"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:538 scenes/play/play_menu.gd:647
 msgid "Standard rules, about a minute per move"
 msgstr "मानक नियम, हरेक चालका लागि करिब एक मिनेट"
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+#: scenes/play/play_menu.gd:539 scenes/play/play_menu.gd:559
 msgid "Play with a friend"
 msgstr "साथीसँग खेल्नुहोस्"
 
-#: scenes/play/play_menu.gd:540
+#: scenes/play/play_menu.gd:560
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "एक जनाले कोड बनाउनुहोस्, अर्कोले त्यो हाल्नुहोस्। यो फोन, ट्याब्लेट र कम्प्युटरबीच चल्छ।"
 
-#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+#: scenes/play/play_menu.gd:563 scenes/play/play_menu.gd:607
 msgid "Enter a code"
 msgstr "कोड हाल्नुहोस्"
 
-#: scenes/play/play_menu.gd:551
+#: scenes/play/play_menu.gd:571
 msgid "Your code"
 msgstr "तपाईंको कोड"
 
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+#: scenes/play/play_menu.gd:573 scenes/play/play_menu.gd:653
 msgid "Connecting…"
 msgstr "जोड्दै…"
 
-#: scenes/play/play_menu.gd:556
+#: scenes/play/play_menu.gd:576
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "यो कोड आफ्नो साथीलाई पठाउनुहोस्। उहाँले कोड हालेपछि खेल सुरु हुन्छ।"
 
-#: scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:579
 msgid "Share"
 msgstr "सेयर गर्नुहोस्"
 
-#: scenes/play/play_menu.gd:561
+#: scenes/play/play_menu.gd:581
 msgid "Copy"
 msgstr "कपी गर्नुहोस्"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+#: scenes/play/play_menu.gd:584 scenes/play/play_menu.gd:603
 msgid "Copied"
 msgstr "कपी भयो"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:577
+#: scenes/play/play_menu.gd:597
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games मा मसँग खेल्नुहोस्! मेरो खेल कोड %s हो।"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:613
+#: scenes/play/play_menu.gd:633
 msgid "No one is free right now"
 msgstr "अहिले कोही उपलब्ध हुनुहुन्न"
 
-#: scenes/play/play_menu.gd:614
+#: scenes/play/play_menu.gd:634
 msgid "We can keep looking while you play."
 msgstr "तपाईं खेल्दै गर्दा हामी खोजिरहन सक्छौँ।"
 
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:635
 msgid "Play against the AI while we keep looking"
 msgstr "हामी खोज्दै गर्दा कम्प्युटरसँग खेल्नुहोस्"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:638
 msgid "Keep searching"
 msgstr "खोजिरहनुहोस्"
 
-#: scenes/play/play_menu.gd:619
+#: scenes/play/play_menu.gd:639
 msgid "Invite a friend instead"
 msgstr "बरु साथीलाई बोलाउनुहोस्"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:659
 msgid "Couldn't start the game"
 msgstr "खेल सुरु हुन सकेन"
 
-#: scenes/play/play_menu.gd:642
+#: scenes/play/play_menu.gd:662
 msgid "OK"
 msgstr "ठीक छ"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:650
+#: scenes/play/play_menu.gd:670
 msgid "Leave this game?"
 msgstr "यो खेल छाड्ने?"
 
-#: scenes/play/play_menu.gd:651
+#: scenes/play/play_menu.gd:671
 msgid "It counts as a loss."
 msgstr "यसलाई हार मानिन्छ।"
 
-#: scenes/play/play_menu.gd:652
+#: scenes/play/play_menu.gd:672
 msgid "Leave"
 msgstr "छाड्नुहोस्"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:658
+#: scenes/play/play_menu.gd:678
 msgid "Stay"
 msgstr "खेलमै रहनुहोस्"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:683
+#: scenes/play/play_menu.gd:703
 msgid "Sources"
 msgstr "स्रोतहरू"
 
-#: scenes/play/play_menu.gd:729
+#: scenes/play/play_menu.gd:749
 msgid "Offer a draw"
 msgstr "बराबरीको प्रस्ताव गर्नुहोस्"
 
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:789
+msgid "Quit to main menu"
+msgstr "मुख्य मेनुमा फर्कनुहोस्"
+
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:758
+#: scenes/play/play_menu.gd:831
 msgid "Look"
 msgstr "शैली"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:834
 msgid "Sound"
 msgstr "आवाज"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:763
+#: scenes/play/play_menu.gd:836
 msgid "Music"
 msgstr "सङ्गीत"
 
-#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:767
-msgid "Privacy choices"
-msgstr "गोपनीयता विकल्पहरू"
-
-#. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:796
-msgid "Quit to main menu"
-msgstr "मुख्य मेनुमा फर्कनुहोस्"
-
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:810
+#: scenes/play/play_menu.gd:846
 msgid "More looks"
 msgstr "अन्य शैलीहरू"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:812
+#: scenes/play/play_menu.gd:848
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "एप बन्द नगरेसम्म शैली बदल्न एउटा छोटो भिडियो हेर्नुहोस्।"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:816
+#: scenes/play/play_menu.gd:852
 msgid "No video is ready right now. Try again in a moment."
 msgstr "अहिले कुनै भिडियो तयार छैन। केही बेरपछि फेरि प्रयास गर्नुहोस्।"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:819
+#: scenes/play/play_menu.gd:855
 msgid "Watch a video"
 msgstr "भिडियो हेर्नुहोस्"
 
+#. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
+#: scenes/play/play_menu.gd:871
+msgid "Or remove ads to keep every look for good."
+msgstr "वा विज्ञापन हटाएर सबै शैलीहरू सधैँका लागि आफ्नो बनाउनुहोस्।"
+
+#. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
+#: scenes/play/play_menu.gd:872 scenes/play/play_menu.gd:886 tools/smoke_greybox.gd:217
+#, c-format
+msgid "Remove ads · %s"
+msgstr "विज्ञापन हटाउनुहोस् · %s"
+
+#. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
+#: scenes/play/play_menu.gd:892 tools/smoke_greybox.gd:226
+msgid "Restore purchases"
+msgstr "खरिद पुनर्स्थापना गर्नुहोस्"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:896
+msgid "Privacy choices"
+msgstr "गोपनीयता विकल्पहरू"
+
+#. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
+#: scenes/play/play_menu.gd:915
+msgid "Thank you! Ads are off and every look is yours."
+msgstr "धन्यवाद! विज्ञापन बन्द भयो र सबै शैलीहरू अब तपाईंका हुन्।"
+
+#. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
+#: scenes/play/play_menu.gd:925
+msgid "Your payment is pending. Ads will turn off as soon as it goes through."
+msgstr "तपाईंको भुक्तानी प्रक्रियामा छ। भुक्तानी पूरा हुनेबित्तिकै विज्ञापन बन्द हुनेछ।"
+
+#. Message when buying "Remove ads" failed (not when the player cancelled).
+#: scenes/play/play_menu.gd:928
+msgid "The purchase didn't go through. Please try again later."
+msgstr "खरिद पूरा भएन। कृपया पछि फेरि प्रयास गर्नुहोस्।"
+
+#. Message after "Restore purchases" found Remove ads.
+#: scenes/play/play_menu.gd:938
+msgid "Your purchase is restored."
+msgstr "तपाईंको खरिद पुनर्स्थापना भयो।"
+
+#. Message after "Restore purchases" found nothing bought with this store account.
+#: scenes/play/play_menu.gd:941
+msgid "No purchase to restore on this account."
+msgstr "यो खातामा पुनर्स्थापना गर्नुपर्ने कुनै खरिद छैन।"
+
+#. Message when the store (Google Play, the App Store) can't be reached.
+#: scenes/play/play_menu.gd:944
+msgid "The store isn't available right now."
+msgstr "स्टोर अहिले उपलब्ध छैन।"
+
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:851
+#: scenes/play/play_menu.gd:966
 msgid "Graphics"
 msgstr "ग्राफिक्स"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:932
+#: scenes/play/play_menu.gd:1047
 #, c-format
 msgid "Your name: %s"
 msgstr "तपाईंको नाम: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:969
+#: scenes/play/play_menu.gd:1084
 msgid "Waiting"
 msgstr "पर्खँदै"
 
@@ -1139,6 +1190,16 @@ msgstr ""
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr ""
+
+#. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
+#: titles/common/title_config.gd:202
+msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
+msgstr "यसले हामीलाई तपाईंका लागि बढी सान्दर्भिक विज्ञापन देखाउन मद्दत गर्छ। बाघचाल विज्ञापनका कारण निःशुल्क छ।"
+
+#. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
+#: titles/common/title_config.gd:204
+msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
+msgstr "नजिकैको कसैसँग खेल्न सकियोस् भनेर बाघचालले तपाईंको Wi-Fi नेटवर्कमा खेलहरू खोज्छ।"
 
 #. Graphics setting: the game picks the quality for this device. Keep it short.
 #: ui/game_graphics.gd:96

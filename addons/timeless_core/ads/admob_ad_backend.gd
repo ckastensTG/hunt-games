@@ -12,7 +12,10 @@ extends AdBackend
 ##      stored yet, load and show Google's consent form.
 ##   2. Start the SDK once ads may be requested (consent obtained or not
 ##      required). Offline at first launch: try again every few minutes and
-##      when the app comes back to the front.
+##      when the app comes back to the front. iPhone and iPad: the plugin
+##      loads the consent form only once its SDK is started ("AdmobPlugin
+##      has not been initialized", seen on the iPad 2026-11-06), so there the
+##      SDK starts before the form; no ad is requested until consent.
 ##   3. Keep one ad of each kind loaded. A failed load waits longer each time
 ##      (30 s up to 5 min); a loaded ad older than 55 min is dropped (Google
 ##      lets them expire after an hour).
@@ -34,8 +37,12 @@ extends AdBackend
 ## iPhone and iPad: after consent and before the SDK starts, Apple's tracking
 ## prompt (App Tracking Transparency), so the first ad request can already
 ## use the advertising identifier where the player allows it. iOS shows the
-## prompt once; later asks answer at once with the stored choice. Its text is
-## NSUserTrackingUsageDescription in the iOS export preset's
+## prompt once; later asks answer at once with the stored choice. iOS also
+## answers "no" at once, without a prompt, when the app isn't active (another
+## system alert is up, such as the local-network one a test build's debugger
+## brings at first launch). So a "no" that comes back at once is asked again,
+## once, the next time the app is active; the SDK doesn't wait for it. Its
+## text is NSUserTrackingUsageDescription in the iOS export preset's
 ## additional_plist_content. The App ID for iOS comes from
 ## res://addons/AdmobPlugin/ios_export.cfg.
 
@@ -47,6 +54,9 @@ const CONSENT_RETRY_MS := 120_000
 ## iOS: if the tracking prompt gives no answer in this time (the plugin can't
 ## ask, or the player leaves it up), the SDK starts anyway.
 const ATT_WAIT_MS := 60_000
+## iOS: a "no" faster than this can't be the player's (the prompt takes
+## longer to come up); it's asked again once when the app is next active.
+const ATT_AT_ONCE_MS := 1_000
 ## The plugin's UserConsent.Status.
 enum Consent { UNKNOWN, NOT_REQUIRED, REQUIRED, OBTAINED }
 ## AdmobConfig.ContentRating: G, PG, T, MA. PG suits a strategy game rated
@@ -61,7 +71,13 @@ const REWARDED := "rewarded"
 ## Tests swap in testing/fake_admob.gd.
 var script_path := SCRIPT_PATH
 var _admob = null  # the plugin's Admob node (untyped: loaded at run time)
+## Ads may be requested (consent, and on iOS the tracking answer, are in).
 var _sdk_started := false
+## initialize() called / its completion received.
+var _sdk_init := false
+var _sdk_ready := false
+## iOS: the consent form waits for the SDK.
+var _form_after_init := false
 var _consent_retry_at := -1
 var _loaded_at := {INTERSTITIAL: -1, REWARDED: -1}
 var _loading := {INTERSTITIAL: false, REWARDED: false}
@@ -73,6 +89,8 @@ var _debug := false
 var ios := OS.has_feature("ios")
 var _att_asked_at := -1
 var _att_answered := false
+## 0: no second ask; 1: waiting for the app to be active; 2: asked again.
+var _att_again := 0
 
 
 ## True when the plugin runs on this device (its Android or iOS library is
@@ -160,6 +178,10 @@ func start(setup: Dictionary) -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_RESUMED and _admob and not _sdk_started:
 		_ask_consent()
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN and _att_again == 1:
+		_att_again = 2
+		_log("asking for tracking permission again (no prompt was shown)")
+		_admob.request_tracking_authorization()
 
 
 func _process(_delta: float) -> void:
@@ -193,10 +215,19 @@ func _consent() -> int:
 func _on_consent_info_updated() -> void:
 	_log("consent %s, form available: %s" % [Consent.keys()[_consent()], _admob.is_consent_form_available()])
 	if _consent() == Consent.REQUIRED and _admob.is_consent_form_available():
-		_admob.load_consent_form()
+		_load_form()
 	else:
 		_start_sdk_if_allowed()
 	changed.emit()
+
+
+func _load_form() -> void:
+	if ios and not _sdk_ready:
+		_form_after_init = true
+		_init_sdk()
+		return
+	_log("loading the consent form")
+	_admob.load_consent_form()
 
 
 func _start_sdk_if_allowed() -> void:
@@ -211,6 +242,17 @@ func _start_sdk() -> void:
 		return
 	_sdk_started = true
 	_consent_retry_at = -1
+	if _sdk_ready:
+		_load(INTERSTITIAL)
+		_load(REWARDED)
+	else:
+		_init_sdk()
+
+
+func _init_sdk() -> void:
+	if _sdk_init:
+		return
+	_sdk_init = true
 	_log("starting the SDK")
 	_admob.initialize()
 
@@ -226,18 +268,30 @@ func _ask_tracking() -> void:
 
 
 func _on_tracking_answer(allowed: bool) -> void:
+	var answer := "allowed" if allowed else "not allowed"
 	if _att_answered:
+		if _att_again == 2:
+			_log("tracking %s (asked again)" % answer)
 		return
 	_att_answered = true
-	_log("tracking %s" % ("allowed" if allowed else "not allowed"))
+	var at_once := Time.get_ticks_msec() - _att_asked_at < ATT_AT_ONCE_MS
+	_log("tracking %s%s" % [answer, " at once" if at_once and not allowed else ""])
+	if at_once and not allowed and _att_again == 0:
+		_att_again = 1
 	if not _sdk_started:
 		_start_sdk()
 
 
 func _on_initialized(_status: Variant) -> void:
-	_log("SDK ready, loading ads")
-	_load(INTERSTITIAL)
-	_load(REWARDED)
+	_sdk_ready = true
+	if _form_after_init:
+		_form_after_init = false
+		_log("SDK ready, loading the consent form")
+		_admob.load_consent_form()
+	if _sdk_started:
+		_log("SDK ready, loading ads")
+		_load(INTERSTITIAL)
+		_load(REWARDED)
 
 
 # --- Loading -----------------------------------------------------------------

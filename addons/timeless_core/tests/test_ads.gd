@@ -223,6 +223,34 @@ func test_admob_consent_form_then_sdk() -> void:
 	b.free()
 
 
+func test_admob_ios_starts_the_sdk_before_the_consent_form() -> void:
+	# The plugin's iOS side loads the form only after initialize()
+	# ("AdmobPlugin has not been initialized" on the iPad, 2026-11-06).
+	var b := _admob(REQUIRED, true, true)
+	var f: Node = b._admob
+	f.consent_info_updated.emit()
+	check_eq(f.count("initialize"), 1, "iOS: the SDK first")
+	check_eq(f.count("load_consent_form"), 0, "the form waits for it")
+	f.initialization_completed.emit(null)
+	check_eq(f.count("load_consent_form"), 1, "then the form")
+	check_eq(f.count("load_interstitial_ad"), 0, "no ads before a choice")
+	f.consent_form_loaded.emit()
+	f.consent = OBTAINED
+	f.consent_form_dismissed.emit(null)
+	check_eq(f.count("request_tracking_authorization"), 1, "Apple's prompt after the form")
+	check_eq(f.count("load_interstitial_ad"), 0, "ads wait for its answer")
+	f.tracking_authorization_granted.emit()
+	check_eq(f.count("initialize"), 1, "the SDK isn't started twice")
+	check_eq(f.count("load_interstitial_ad"), 1, "an interstitial loaded")
+	check_eq(f.count("load_rewarded_ad"), 1, "a rewarded video loaded")
+	# Privacy choices: the SDK is up, so the form loads at once.
+	b.show_privacy_options()
+	f.consent = REQUIRED
+	f.consent_info_updated.emit()
+	check_eq(f.count("load_consent_form"), 2, "form again, straight away")
+	b.free()
+
+
 func test_admob_consent_not_required_or_unknown() -> void:
 	var b := _admob(NOT_REQUIRED)
 	b._admob.consent_info_updated.emit()
@@ -316,7 +344,23 @@ func test_admob_ios_asks_for_tracking_before_the_sdk() -> void:
 	check_eq(f.count("initialize"), 1, "then starts, whatever the answer")
 	f.tracking_authorization_granted.emit()
 	check_eq(f.count("initialize"), 1, "only once")
+	# That "no" came at once, so no prompt was shown (the app wasn't active):
+	# asked once more when the app is next active.
+	b.notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN)
+	check_eq(f.count("request_tracking_authorization"), 2, "asked again when active")
+	b.notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN)
+	check_eq(f.count("request_tracking_authorization"), 2, "only once more")
+	f.tracking_authorization_granted.emit()
+	check_eq(f.count("initialize"), 1, "the SDK isn't started again")
 	b.free()
+	# The player's own "no" (it took a while): not asked again.
+	var slow := _admob(NOT_REQUIRED, true, true)
+	slow._admob.consent_info_updated.emit()
+	slow._att_asked_at = Time.get_ticks_msec() - 5_000
+	slow._admob.tracking_authorization_denied.emit()
+	slow.notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN)
+	check_eq(slow._admob.count("request_tracking_authorization"), 1, "a considered no stays")
+	slow.free()
 	# No answer at all: the SDK starts after a while.
 	var silent := _admob(NOT_REQUIRED, true, true)
 	silent._admob.consent_info_updated.emit()

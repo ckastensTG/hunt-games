@@ -29,6 +29,7 @@ var failures: Array[String] = []
 
 func _initialize() -> void:
 	AdService.backend_override = "sim"
+	IAPService.backend_override = "sim"
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
@@ -68,6 +69,7 @@ func _clicks() -> bool:
 	match _click_step:
 		0:
 			AdService.backend_override = ""
+			IAPService.backend_override = ""
 			(game.ads.backend as SimAdBackend).instant = true
 			game.mode = GreyboxScript.Mode.HOTSEAT
 			game.new_game()
@@ -130,6 +132,7 @@ func _clicks() -> bool:
 			_check_sounds(["draw"], "an agreed draw")
 			_check_undo_against_ai()
 			_check_ads()
+			_check_settings()
 			_click_step = 4
 		4:
 			# The look picked after the video is built behind the loading
@@ -199,7 +202,81 @@ func _check_ads() -> void:
 			ads.unlock_extras_for_session())
 	if not game.choose_look("stone") or not game.look_loading() or game._loading == null:
 		failures.append("looks: open after the video, behind the loading screen")
+	# Remove ads on the purchase stand-in: no more ads, every look open, and
+	# the in-game menu stops offering it.
+	var iap: IAPService = game.iap
+	if not iap.backend is SimIapBackend:
+		failures.append("purchases: the test stand-in in test builds (%s)" % iap.backend.kind())
+	else:
+		var store := iap.backend as SimIapBackend
+		store.instant = true
+		store.store_path = "user://smoke_iap_store.cfg"
+		iap.save_path = "user://smoke_purchases.cfg"
+		iap._on_product_loaded(GreyboxScript.REMOVE_ADS, "US$1.99")
+		ads.extras_unlocked_for_session = false
+		game.menu.open("pause")
+		var buy_text := L10n.t("Remove ads · %s") % "US$1.99"
+		if not _menu_has_text(buy_text):
+			failures.append("purchases: Remove ads with its price in the in-game menu")
+		var got := []
+		iap.buy(GreyboxScript.REMOVE_ADS, func(r: int) -> void: got.append(r))
+		if got != [IAPService.Result.PURCHASED] or not ads.ads_removed or ads.ads_enabled():
+			failures.append("purchases: Remove ads turns ads off (%s)" % [got])
+		if game.look_locked("modern"):
+			failures.append("purchases: every look open after Remove ads")
+		if _menu_has_text(buy_text) or _menu_has_text(L10n.t("Restore purchases")):
+			failures.append("purchases: not offered once bought")
+		game.menu.close()
+		iap.forget_purchases()
+		ads.set_ads_removed(false)
 	print("ads: ok")
+
+
+## Settings from the main menu: the in-game menu's settings (sound and
+## music sliders, Remove ads), and Back returns to the main menu.
+func _check_settings() -> void:
+	var menu: Node = game.menu
+	menu.open("home")
+	var settings := _menu_button(L10n.t("Settings"))
+	if settings == null:
+		failures.append("settings: a Settings button on the main menu")
+		menu.close()
+		return
+	settings.pressed.emit()
+	var sliders := menu.find_children("*", "HSlider", true, false).filter(
+		func(n: Node) -> bool: return n.is_visible_in_tree() and not _going(n))
+	if menu._screen != "settings" or sliders.size() != 2:
+		failures.append("settings: opens with Sound and Music (%s, %d sliders)" % [menu._screen, sliders.size()])
+	if not _menu_has_text(L10n.t("Remove ads · %s") % "US$1.99"):
+		failures.append("settings: Remove ads offered there too")
+	var back := _menu_button(L10n.t("Back"))
+	if back:
+		back.pressed.emit()
+	if menu._screen != "home" or not menu.visible:
+		failures.append("settings: Back returns to the main menu (%s)" % menu._screen)
+	menu.close()
+	print("settings: ok")
+
+
+func _menu_has_text(text: String) -> bool:
+	return _menu_button(text) != null
+
+
+func _menu_button(text: String) -> Button:
+	for n in game.menu.find_children("*", "Button", true, false):
+		if (n as Button).text == text and n.is_visible_in_tree() and not _going(n):
+			return n
+	return null
+
+
+## The node or one of its parents is queued for deletion (a screen being
+## replaced).
+func _going(n: Node) -> bool:
+	while n:
+		if n.is_queued_for_deletion():
+			return true
+		n = n.get_parent()
+	return false
 
 
 ## The sounds played since the last check, in order.

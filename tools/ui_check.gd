@@ -17,7 +17,7 @@ extends SceneTree
 const GreyboxScript := preload("res://scenes/greybox/greybox.gd")
 const MENU_SCREENS := ["home", "vs_ai", "pass", "nearby", "nearby_host", "nearby_wait", "nearby_join",
 	"online", "friend", "friend_setup", "friend_join", "quick", "connecting", "error", "confirm_leave",
-	"origins", "pause", "looks"]
+	"origins", "pause", "settings", "looks"]
 
 var game: Node3D
 var langs: Array = []
@@ -84,6 +84,19 @@ func _process(_delta: float) -> bool:
 			# locked and More looks shows its longest text.
 			if game.ads.backend is SimAdBackend:
 				(game.ads.backend as SimAdBackend).fill = false
+				# And as in the EEA: Privacy choices in the in-game menu.
+				(game.ads.backend as SimAdBackend).privacy_options = true
+			# Remove ads for sale, with a long local price, so the menus show
+			# the purchase buttons at their widest.
+			game.ads.ads_removed = false
+			game.iap.prices[GreyboxScript.REMOVE_ADS] = "R$ 10,90"
+			game.iap.owned.erase(GreyboxScript.REMOVE_ADS)
+			# A game set aside, so the main menu shows Continue too (its
+			# longest form).
+			game.save_path = "user://ui_check_match.save"
+			var f := FileAccess.open(game.save_path, FileAccess.WRITE)
+			f.store_string(JSON.stringify(game.session.to_dict()))
+			f.close()
 			for lang in langs:
 				for screen in _screens():
 					if only_screens.is_empty() or screen.get_slice(":", 0) in only_screens or screen in only_screens:
@@ -262,6 +275,7 @@ func _text_of(c: Control) -> String:
 
 func _finish() -> bool:
 	TranslationServer.set_locale("en")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(game.save_path))
 	# Only the first problem for each control on each screen shape and language.
 	var seen := {}
 	var unique: Array[String] = []

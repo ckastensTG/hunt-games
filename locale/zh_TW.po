@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: adapted from zh_CN with Taiwan vocabulary (not converted character by character); translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:915
+#: scenes/greybox/greybox.gd:931
 msgid "Loading…"
 msgstr "載入中…"
 
@@ -141,7 +141,7 @@ msgstr "下一步 ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:625
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:645
 msgid "Looking for an opponent…"
 msgstr "正在尋找對手…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "立即開始"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:831
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:874
 msgid "Not now"
 msgstr "先不要"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "要認輸嗎？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:733
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:753
 msgid "Resign"
 msgstr "認輸"
 
@@ -251,302 +251,353 @@ msgstr "對方未能連線，繼續尋找…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "時間到，已替你下了一步（第 %d 次，共 3 次）。"
 
-#: scenes/play/play_menu.gd:251
+#: scenes/play/play_menu.gd:268
 msgid "Back"
 msgstr "返回"
 
-#: scenes/play/play_menu.gd:306
+#: scenes/play/play_menu.gd:323
 msgid "Rules"
 msgstr "規則"
 
-#: scenes/play/play_menu.gd:326
+#: scenes/play/play_menu.gd:343
 msgid "Language"
 msgstr "語言"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:352 scenes/play/play_menu.gd:723
+#: scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:743
 msgid "Continue"
 msgstr "繼續"
 
-#: scenes/play/play_menu.gd:353 scenes/play/play_menu.gd:379
+#: scenes/play/play_menu.gd:370 scenes/play/play_menu.gd:399
 msgid "Play against the AI"
 msgstr "與電腦對弈"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:355 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:372 scenes/play/play_menu.gd:419
 msgid "Pass and play"
 msgstr "同機雙人"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:357 scenes/play/play_menu.gd:408
+#: scenes/play/play_menu.gd:374 scenes/play/play_menu.gd:428
 msgid "Play local"
 msgstr "區域網路對戰"
 
-#: scenes/play/play_menu.gd:359 scenes/play/play_menu.gd:511
+#: scenes/play/play_menu.gd:376 scenes/play/play_menu.gd:531
 msgid "Play online"
 msgstr "線上對戰"
 
-#: scenes/play/play_menu.gd:360 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:377 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "玩法"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:363 scenes/play/play_menu.gd:668
+#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:688
 msgid "Game origins"
 msgstr "遊戲起源"
 
+#. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
+#: scenes/play/play_menu.gd:382 scenes/play/play_menu.gd:802
+msgid "Settings"
+msgstr "設定"
+
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:370
+#: scenes/play/play_menu.gd:390
 msgid "Quit game"
 msgstr "結束遊戲"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Novice"
 msgstr "新手"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Apprentice"
 msgstr "學徒"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Adept"
 msgstr "高手"
 
-#: scenes/play/play_menu.gd:383
+#: scenes/play/play_menu.gd:403
 msgid "Master"
 msgstr "大師"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:388 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:408 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "對手"
 
-#: scenes/play/play_menu.gd:391 scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:427
+#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:447
 msgid "Start"
 msgstr "開始"
 
-#: scenes/play/play_menu.gd:400
+#: scenes/play/play_menu.gd:420
 msgid "Two players share this device and take turns."
 msgstr "兩位玩家共用這台裝置，輪流下棋。"
 
-#: scenes/play/play_menu.gd:409
+#: scenes/play/play_menu.gd:429
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "兩台裝置需連上同一個 Wi-Fi。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:412 scenes/play/play_menu.gd:423
+#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:443
 msgid "Host a game"
 msgstr "建立對局"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:414 scenes/play/play_menu.gd:455
+#: scenes/play/play_menu.gd:434 scenes/play/play_menu.gd:475
 msgid "Join a game"
 msgstr "加入對局"
 
-#: scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:542
+#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:562
 msgid "Create a code"
 msgstr "產生代碼"
 
-#: scenes/play/play_menu.gd:441
+#: scenes/play/play_menu.gd:461
 msgid "Waiting for a player"
 msgstr "等待玩家加入"
 
-#: scenes/play/play_menu.gd:442
+#: scenes/play/play_menu.gd:462
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "在另一台裝置上選擇「區域網路對戰」，再選擇「加入對局」。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:446
+#: scenes/play/play_menu.gd:466
 msgid "If the game doesn't appear there, enter this code"
 msgstr "如果那邊沒有出現這局，請輸入此代碼"
 
-#: scenes/play/play_menu.gd:451 scenes/play/play_menu.gd:571 scenes/play/play_menu.gd:622 scenes/play/play_menu.gd:629 scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:471 scenes/play/play_menu.gd:591 scenes/play/play_menu.gd:642 scenes/play/play_menu.gd:649 scenes/play/play_menu.gd:654
 msgid "Cancel"
 msgstr "取消"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:477
 msgid "Looking for games on this Wi-Fi…"
 msgstr "正在此 Wi-Fi 中尋找對局…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:468
+#: scenes/play/play_menu.gd:488
 msgid "Code"
 msgstr "代碼"
 
-#: scenes/play/play_menu.gd:476 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:496 scenes/play/play_menu.gd:623
 msgid "Join"
 msgstr "加入"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:513
+#: scenes/play/play_menu.gd:533
 msgid "Play with someone online"
 msgstr "與線上玩家對戰"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:518 scenes/play/play_menu.gd:627
+#: scenes/play/play_menu.gd:538 scenes/play/play_menu.gd:647
 msgid "Standard rules, about a minute per move"
 msgstr "標準規則，每步約一分鐘"
 
-#: scenes/play/play_menu.gd:519 scenes/play/play_menu.gd:539
+#: scenes/play/play_menu.gd:539 scenes/play/play_menu.gd:559
 msgid "Play with a friend"
 msgstr "與好友對戰"
 
-#: scenes/play/play_menu.gd:540
+#: scenes/play/play_menu.gd:560
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "一人產生代碼，另一人輸入。手機、平板和電腦之間都能對戰。"
 
-#: scenes/play/play_menu.gd:543 scenes/play/play_menu.gd:587
+#: scenes/play/play_menu.gd:563 scenes/play/play_menu.gd:607
 msgid "Enter a code"
 msgstr "輸入代碼"
 
-#: scenes/play/play_menu.gd:551
+#: scenes/play/play_menu.gd:571
 msgid "Your code"
 msgstr "你的代碼"
 
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:633
+#: scenes/play/play_menu.gd:573 scenes/play/play_menu.gd:653
 msgid "Connecting…"
 msgstr "正在連線…"
 
-#: scenes/play/play_menu.gd:556
+#: scenes/play/play_menu.gd:576
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "把代碼傳給好友，對方輸入後對局就會開始。"
 
-#: scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:579
 msgid "Share"
 msgstr "分享"
 
-#: scenes/play/play_menu.gd:561
+#: scenes/play/play_menu.gd:581
 msgid "Copy"
 msgstr "複製"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:564 scenes/play/play_menu.gd:583
+#: scenes/play/play_menu.gd:584 scenes/play/play_menu.gd:603
 msgid "Copied"
 msgstr "已複製"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:577
+#: scenes/play/play_menu.gd:597
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "來 Timeless Games 和我下一局吧！我的對局代碼是 %s。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:613
+#: scenes/play/play_menu.gd:633
 msgid "No one is free right now"
 msgstr "目前沒有空閒的玩家"
 
-#: scenes/play/play_menu.gd:614
+#: scenes/play/play_menu.gd:634
 msgid "We can keep looking while you play."
 msgstr "你下棋時我們可以繼續尋找。"
 
-#: scenes/play/play_menu.gd:615
+#: scenes/play/play_menu.gd:635
 msgid "Play against the AI while we keep looking"
 msgstr "先與電腦對弈，同時繼續尋找"
 
-#: scenes/play/play_menu.gd:618
+#: scenes/play/play_menu.gd:638
 msgid "Keep searching"
 msgstr "繼續尋找"
 
-#: scenes/play/play_menu.gd:619
+#: scenes/play/play_menu.gd:639
 msgid "Invite a friend instead"
 msgstr "改為邀請好友"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:659
 msgid "Couldn't start the game"
 msgstr "無法開始對局"
 
-#: scenes/play/play_menu.gd:642
+#: scenes/play/play_menu.gd:662
 msgid "OK"
 msgstr "確定"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:650
+#: scenes/play/play_menu.gd:670
 msgid "Leave this game?"
 msgstr "要離開這局嗎？"
 
-#: scenes/play/play_menu.gd:651
+#: scenes/play/play_menu.gd:671
 msgid "It counts as a loss."
 msgstr "這將算作輸棋。"
 
-#: scenes/play/play_menu.gd:652
+#: scenes/play/play_menu.gd:672
 msgid "Leave"
 msgstr "離開"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:658
+#: scenes/play/play_menu.gd:678
 msgid "Stay"
 msgstr "留下"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:683
+#: scenes/play/play_menu.gd:703
 msgid "Sources"
 msgstr "資料來源"
 
-#: scenes/play/play_menu.gd:729
+#: scenes/play/play_menu.gd:749
 msgid "Offer a draw"
 msgstr "提議和局"
 
+#. In-game menu button: end this game and go back to the main menu.
+#: scenes/play/play_menu.gd:789
+msgid "Quit to main menu"
+msgstr "回到主選單"
+
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:758
+#: scenes/play/play_menu.gd:831
 msgid "Look"
 msgstr "外觀"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:761
+#: scenes/play/play_menu.gd:834
 msgid "Sound"
 msgstr "音效"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:763
+#: scenes/play/play_menu.gd:836
 msgid "Music"
 msgstr "音樂"
 
-#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:767
-msgid "Privacy choices"
-msgstr "隱私權選項"
-
-#. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:796
-msgid "Quit to main menu"
-msgstr "回到主選單"
-
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:810
+#: scenes/play/play_menu.gd:846
 msgid "More looks"
 msgstr "更多外觀"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:812
+#: scenes/play/play_menu.gd:848
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "觀看一段短影片，即可在關閉遊戲前隨意切換外觀。"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:816
+#: scenes/play/play_menu.gd:852
 msgid "No video is ready right now. Try again in a moment."
 msgstr "目前沒有可播放的影片，請稍後再試。"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:819
+#: scenes/play/play_menu.gd:855
 msgid "Watch a video"
 msgstr "觀看影片"
 
+#. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
+#: scenes/play/play_menu.gd:871
+msgid "Or remove ads to keep every look for good."
+msgstr "或者移除廣告，永久保留所有外觀。"
+
+#. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
+#: scenes/play/play_menu.gd:872 scenes/play/play_menu.gd:886 tools/smoke_greybox.gd:217
+#, c-format
+msgid "Remove ads · %s"
+msgstr "移除廣告 · %s"
+
+#. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
+#: scenes/play/play_menu.gd:892 tools/smoke_greybox.gd:226
+msgid "Restore purchases"
+msgstr "恢復購買"
+
+#. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+#: scenes/play/play_menu.gd:896
+msgid "Privacy choices"
+msgstr "隱私權選項"
+
+#. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
+#: scenes/play/play_menu.gd:915
+msgid "Thank you! Ads are off and every look is yours."
+msgstr "謝謝！廣告已關閉，所有外觀都歸你了。"
+
+#. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
+#: scenes/play/play_menu.gd:925
+msgid "Your payment is pending. Ads will turn off as soon as it goes through."
+msgstr "你的付款正在處理中。付款完成後廣告就會關閉。"
+
+#. Message when buying "Remove ads" failed (not when the player cancelled).
+#: scenes/play/play_menu.gd:928
+msgid "The purchase didn't go through. Please try again later."
+msgstr "購買未能完成，請稍後再試。"
+
+#. Message after "Restore purchases" found Remove ads.
+#: scenes/play/play_menu.gd:938
+msgid "Your purchase is restored."
+msgstr "已恢復你的購買。"
+
+#. Message after "Restore purchases" found nothing bought with this store account.
+#: scenes/play/play_menu.gd:941
+msgid "No purchase to restore on this account."
+msgstr "此帳號沒有可恢復的購買。"
+
+#. Message when the store (Google Play, the App Store) can't be reached.
+#: scenes/play/play_menu.gd:944
+msgid "The store isn't available right now."
+msgstr "商店目前無法使用。"
+
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:851
+#: scenes/play/play_menu.gd:966
 msgid "Graphics"
 msgstr "畫質"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:932
+#: scenes/play/play_menu.gd:1047
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:969
+#: scenes/play/play_menu.gd:1084
 msgid "Waiting"
 msgstr "等待中"
 
@@ -1133,6 +1184,16 @@ msgstr "一種復原"
 #: titles/common/hunt_tutorials.gd:332
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "在一百年前的記載中，狗只能向前走，這樣一來，待在塔裡的美洲獅就永遠抓不到。這裡狗的走法和美洲獅的勝利條件採用 Trapial-Kuzen，這是該遊戲的一種現代馬普切版本。塔被當作普通棋盤，美洲獅先走，除非你在設定中更改。"
+
+#. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
+#: titles/common/title_config.gd:202
+msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
+msgstr "這樣我們就能向你顯示更相關的廣告。Bagh Chal 靠廣告維持免費。"
+
+#. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
+#: titles/common/title_config.gd:204
+msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
+msgstr "Bagh Chal 會在你的 Wi-Fi 網路中尋找對局，讓你和附近的人一起玩。"
 
 #. Graphics setting: the game picks the quality for this device. Keep it short.
 #: ui/game_graphics.gd:96

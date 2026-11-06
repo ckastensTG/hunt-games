@@ -15,6 +15,9 @@ extends RefCounted
 ## shows or clicks a live ad on the account. The Android App ID also sits in
 ## res://addons/AdmobPlugin/android_export.cfg, which the AdMob plugin writes
 ## into the manifest (tests/test_ads_setup.gd checks they match).
+##
+## Purchases: "iap" maps each product key to its product ID, the same in
+## Google Play and the App Store (bible §3.1: one "Remove ads", US$1.99).
 
 const DEV := "dev"
 const BAGH_CHAL := "bagh_chal"
@@ -44,6 +47,9 @@ const TITLES := {
 			"deployment_id": "62e0d1d7527840f7a52383c2be071b83",  # Live Deployment
 		},
 		# From Christopher's AdMob account, 2026-11-04 (publisher pub-8333290579862415).
+		# Created by Christopher in Play Console and App Store Connect as a
+		# one-time (non-consumable) product, US$1.99.
+		"iap": {"remove_ads": "remove_ads"},
 		"admob": {
 			"android": {
 				"app_id": "ca-app-pub-8333290579862415~4379954395",
@@ -65,6 +71,7 @@ const TITLES := {
 		"package": "",  # M3
 		"eos": {},  # its own EOS product, M3 (bible §5.2)
 		"admob": {},  # its own AdMob apps, M3
+		"iap": {},  # its own store apps and Remove ads, M3
 	},
 }
 
@@ -90,6 +97,8 @@ var package: String
 var eos: Dictionary
 ## {"android": {app_id, interstitial, rewarded}, "ios": {...}}, or {}.
 var admob: Dictionary
+## Purchases: {key: product ID}, e.g. {"remove_ads": "remove_ads"}.
+var iap: Dictionary
 
 
 static var _active: TitleConfig
@@ -120,6 +129,7 @@ static func for_id(title: String) -> TitleConfig:
 		c.package = t.package
 		c.eos = t.eos.duplicate()
 		c.admob = t.admob.duplicate(true)
+		c.iap = t.iap.duplicate()
 	else:
 		c.short_name = "Hunt Games (dev)"
 		c.rule_sets = HuntRuleSets.ALL.duplicate()
@@ -131,6 +141,7 @@ static func for_id(title: String) -> TitleConfig:
 		c.package = ""
 		c.eos = TITLES[BAGH_CHAL].eos.duplicate()
 		c.admob = TITLES[BAGH_CHAL].admob.duplicate(true)
+		c.iap = TITLES[BAGH_CHAL].iap.duplicate()
 	return c
 
 
@@ -169,6 +180,28 @@ func ad_setup() -> Dictionary:
 		"interstitial": ad_unit("interstitial"),
 		"rewarded": ad_unit("rewarded"),
 		"debug": OS.is_debug_build(),
+	}
+
+
+## What IAPService.start() needs: the title's products, and whether it's a
+## test build.
+func iap_setup() -> Dictionary:
+	return {"products": iap.duplicate(), "debug": OS.is_debug_build()}
+
+
+## The texts of iOS's permission prompts, in English; the iOS export preset
+## carries them in additional_plist_content (tests/test_ads_setup.gd checks
+## they match), and timeless_core's export step writes their translations
+## into each language's InfoPlist.strings. Marked here so they're translated
+## with the rest.
+static func ios_usage(title: String) -> Dictionary:
+	if title != BAGH_CHAL and title != DEV:
+		return {}
+	return {
+		# TRANSLATORS: iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
+		"NSUserTrackingUsageDescription": L10n.N_("This lets us show you ads that are more relevant. Bagh Chal is free because of ads."),
+		# TRANSLATORS: iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
+		"NSLocalNetworkUsageDescription": L10n.N_("Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."),
 	}
 
 

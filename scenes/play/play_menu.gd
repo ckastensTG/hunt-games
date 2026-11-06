@@ -5,9 +5,13 @@ extends CanvasLayer
 ## Android's back gesture.
 ##
 ##   Home ─ Play against the AI · Pass and play · Play local · Play online
-##          · How to play · Game origins · Language · Quit game (not on iOS)
-##          (Continue only when an AI game was set aside for an online match)
+##          · How to play · Game origins · Settings · Language · Quit game
+##          (not on iOS) (Continue only when an AI game was set aside for an
+##          online match)
 ##   Game origins ─ the game's history and its sources (HuntOrigins)
+##   Settings ─ the in-game menu's settings, before a game: Look · Graphics
+##              · Sound · Music · Language · Remove ads · Restore purchases
+##              · Privacy choices → Back to the main menu
 ##   Play against the AI ─ side, opponent level, rules → Start
 ##   Pass and play ─ rules → Start
 ##   Play local ─ Host a game (side, rules → waiting, with a code)
@@ -18,16 +22,20 @@ extends CanvasLayer
 ##               └ Play with a friend ─ Create a code (side, rules → code to
 ##                                     share) · Enter a code
 ##   Pause ─ Continue · (against another device: Offer a draw, Resign) · Look
-##           · Graphics · Sound · Music · Language · Privacy choices (where
-##           ad consent applies) · Quit to main menu
+##           · Graphics · Sound · Music · Language · Remove ads (with the
+##           store's price) · Restore purchases · Privacy choices (where ad
+##           consent applies) · Quit to main menu
 ##   More looks ─ a locked look was picked: watch a video to open every look
-##                until the app closes (AdService), or not now
+##                until the app closes (AdService), remove ads to open them
+##                for good (IAPService), or not now
 ##
 ## "Play online" only shows when an online service is available (bible §5.2:
 ## offline-first). The network work is in play_controller.gd; this only
 ## shows its state and calls it. Rebuilt when the language changes.
 
 const CARD_WIDTH := 640
+## The purchase that turns ads off and opens every look (greybox.REMOVE_ADS).
+const REMOVE_ADS := "remove_ads"
 const PlayController := preload("res://scenes/play/play_controller.gd")
 
 var game: Node
@@ -59,7 +67,10 @@ func _ready() -> void:
 	play.changed.connect(_on_play_changed)
 	play.nearby_hosts_changed.connect(_fill_hosts)
 	game.ads.changed.connect(func() -> void:
-		if visible and _screen in ["looks", "pause"]:
+		if visible and _screen in ["looks", "pause", "settings"]:
+			_render())
+	game.iap.changed.connect(func() -> void:
+		if visible and _screen in ["looks", "pause", "settings"]:
 			_render())
 	get_viewport().size_changed.connect(_on_resized)
 	_build()
@@ -169,6 +180,11 @@ func _render() -> void:
 		return
 	for c in _card_box.get_children():
 		c.queue_free()
+	# The main menu, the in-game menu and Settings are the longest cards:
+	# tighter on short (landscape phone) screens, so their last button stays
+	# on screen.
+	var tight := _screen in ["home", "pause", "settings"] and get_viewport().get_visible_rect().size.y < 1000
+	_card_box.add_theme_constant_override("separation", 8 if tight else 14)
 	_hosts_box = null
 	_live_label = null
 	match _screen:
@@ -206,6 +222,8 @@ func _render() -> void:
 			_confirm_leave()
 		"pause":
 			_pause()
+		"settings":
+			_settings()
 		"looks":
 			_looks()
 		"origins":
@@ -214,7 +232,7 @@ func _render() -> void:
 
 ## The Game origins text is sized to the screen: lay it out again after a turn.
 func _on_resized() -> void:
-	if visible and _screen == "origins":
+	if visible and _screen in ["origins", "home", "pause", "settings"]:
 		_render.call_deferred()
 
 
@@ -361,7 +379,10 @@ func _home() -> void:
 	if HuntOrigins.has_text(_title_id()):
 		# TRANSLATORS: Main menu button: opens a short history of the game, with its sources.
 		_button(L10n.t("Game origins"), func() -> void: _go("origins"))
+	# TRANSLATORS: Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
+	_button(L10n.t("Settings"), func() -> void: _go("settings"))
 	_gap(2)
+	# Also here, with its globe, so a player who can't read the menu finds it.
 	_language_row()
 	# Not on iOS: apps there don't close themselves (Apple: users leave with
 	# the Home gesture; a self-closing app looks like a crash).
@@ -735,6 +756,59 @@ func _pause() -> void:
 			game._match_ui.ask_resign())
 		resign.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_card_box.add_child(row)
+	_settings_rows()
+	if OS.is_debug_build() and not game.is_network():
+		# Not translated: test builds only (perf_test.gd). One row: the
+		# performance test and its two follow-ups, and "Ad break", which
+		# makes an interstitial due and takes the break after a game, so the
+		# ad can be checked on a device without finishing two games.
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 8)
+		for suite in ["main", "detail", "candidates", "ad"]:
+			var label: String = "Perf test" if suite == "main" else ("Ad break" if suite == "ad" else suite.capitalize())
+			var test := _small_button(label, row, func() -> void:
+				close()
+				if suite == "ad":
+					game.ads.policy.games_since_ad = AdPolicy.MIN_GAMES
+					game.ads.policy.last_ad_ms = Time.get_ticks_msec() - AdPolicy.MIN_GAP_MS
+					game.after_game_break()
+				else:
+					game.start_perf_test(suite))
+			test.flat = true
+			test.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			test.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+		_card_box.add_child(row)
+		if game.ads.ads_removed:
+			# Test builds: forget Remove ads here, to try the purchase again.
+			var forget := _small_button("Forget purchase (test)", _card_box, func() -> void:
+				game.iap.forget_purchases()
+				game.ads.set_ads_removed(false))
+			forget.flat = true
+			forget.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+	_gap(2)
+	# TRANSLATORS: In-game menu button: end this game and go back to the main menu.
+	var quit := _button(L10n.t("Quit to main menu"), func() -> void:
+		if game.is_network() and game.session.is_ongoing():
+			_after_confirm = func() -> void: game.quit_to_menu()
+			_go("confirm_leave")
+		else:
+			game.quit_to_menu())
+	quit.flat = true
+	quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+
+
+## Settings from the main menu: what the in-game menu sets, before a game.
+## Back returns to the main menu.
+func _settings() -> void:
+	_title(L10n.t("Settings"), 44)
+	_gap(2)
+	_settings_rows()
+	_back_button()
+
+
+## Look, Graphics, Sound, Music, Language and the purchase rows: in the
+## in-game menu and on Settings.
+func _settings_rows() -> void:
 	var styles: Array = game.art_styles()
 	if styles.size() > 1:
 		# Locked looks carry a padlock; picking one opens More looks.
@@ -762,49 +836,12 @@ func _pause() -> void:
 	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
-	if game.ads.privacy_options_available():
-		# TRANSLATORS: In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-		var privacy := _button(L10n.t("Privacy choices"), func() -> void:
-			close()
-			game.ads.show_privacy_options())
-		privacy.flat = true
-		privacy.custom_minimum_size = Vector2(0, 52)
-		privacy.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
-	if OS.is_debug_build() and not game.is_network():
-		# Not translated: test builds only (perf_test.gd). One row: the
-		# performance test and its two follow-ups, and "Ad break", which
-		# makes an interstitial due and takes the break after a game, so the
-		# ad can be checked on a device without finishing two games.
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 8)
-		for suite in ["main", "detail", "candidates", "ad"]:
-			var label: String = "Perf test" if suite == "main" else ("Ad break" if suite == "ad" else suite.capitalize())
-			var test := _small_button(label, row, func() -> void:
-				close()
-				if suite == "ad":
-					game.ads.policy.games_since_ad = AdPolicy.MIN_GAMES
-					game.ads.policy.last_ad_ms = Time.get_ticks_msec() - AdPolicy.MIN_GAP_MS
-					game.after_game_break()
-				else:
-					game.start_perf_test(suite))
-			test.flat = true
-			test.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			test.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
-		_card_box.add_child(row)
-	_gap(2)
-	# TRANSLATORS: In-game menu button: end this game and go back to the main menu.
-	var quit := _button(L10n.t("Quit to main menu"), func() -> void:
-		if game.is_network() and game.session.is_ongoing():
-			_after_confirm = func() -> void: game.quit_to_menu()
-			_go("confirm_leave")
-		else:
-			game.quit_to_menu())
-	quit.flat = true
-	quit.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+	_purchase_rows()
 
 
 ## More looks: the look picked is locked. A rewarded video opens every look
-## until the app closes (Remove ads opens them for good: IAP, next round).
+## until the app closes; Remove ads opens them for good (where a store sells
+## it).
 func _looks() -> void:
 	# TRANSLATORS: Title of the screen offering the other looks (styles of board and pieces) for a short video.
 	_title(L10n.t("More looks"), 38)
@@ -828,7 +865,86 @@ func _looks() -> void:
 			if wanted != "":
 				game.choose_look(wanted)), true)
 	watch.disabled = not ready
+	var price: String = game.iap.price(REMOVE_ADS)
+	if price != "":
+		_gap(2)
+		# TRANSLATORS: On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
+		_text(L10n.t("Or remove ads to keep every look for good."), "book", 19, SeriesTheme.TEXT_DIM)
+		var buy := _button(L10n.t("Remove ads · %s") % price, _buy_remove_ads)
+		buy.disabled = game.iap.busy
 	_back_button(L10n.t("Not now"))
+
+
+## Remove ads (with the store's price) where a store sells it and the player
+## hasn't bought it; then one row of quiet buttons: Restore purchases (where
+## there's a store) and Privacy choices (where ad consent applies).
+func _purchase_rows() -> void:
+	var iap: IAPService = game.iap
+	var removed: bool = game.ads.ads_removed
+	var price := iap.price(REMOVE_ADS)
+	if price != "" and not removed:
+		# TRANSLATORS: Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
+		var buy := _button(L10n.t("Remove ads · %s") % price, _buy_remove_ads)
+		buy.disabled = iap.busy
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	if not removed and iap.backend and iap.backend.kind() != "none":
+		# TRANSLATORS: In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
+		var restore := _small_button(L10n.t("Restore purchases"), row, _restore_purchases)
+		restore.disabled = iap.busy
+	if game.ads.privacy_options_available():
+		# TRANSLATORS: In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
+		_small_button(L10n.t("Privacy choices"), row, func() -> void:
+			if _screen == "pause":
+				close()  # the game is under the form; Settings stays behind it
+			game.ads.show_privacy_options())
+	for b in row.get_children():
+		b.flat = true
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+	if row.get_child_count() > 0:
+		_card_box.add_child(row)
+	else:
+		row.free()
+
+
+func _buy_remove_ads() -> void:
+	game.iap.buy(REMOVE_ADS, func(result: int) -> void:
+		match result:
+			IAPService.Result.PURCHASED:
+				# TRANSLATORS: Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
+				game._match_ui.show_toast(L10n.t("Thank you! Ads are off and every look is yours."), 4.5)
+				if _screen == "looks":
+					var wanted := _wanted_look
+					_wanted_look = ""
+					back()
+					if wanted != "":
+						game.choose_look(wanted)
+					return
+			IAPService.Result.PENDING:
+				# TRANSLATORS: Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
+				game._match_ui.show_toast(L10n.t("Your payment is pending. Ads will turn off as soon as it goes through."), 5.0)
+			IAPService.Result.FAILED, IAPService.Result.UNAVAILABLE:
+				# TRANSLATORS: Message when buying "Remove ads" failed (not when the player cancelled).
+				game._match_ui.show_toast(L10n.t("The purchase didn't go through. Please try again later."))
+		if visible:
+			_render())
+
+
+func _restore_purchases() -> void:
+	game.iap.restore(func(result: int) -> void:
+		match result:
+			IAPService.Restore.RESTORED:
+				# TRANSLATORS: Message after "Restore purchases" found Remove ads.
+				game._match_ui.show_toast(L10n.t("Your purchase is restored."))
+			IAPService.Restore.NOTHING:
+				# TRANSLATORS: Message after "Restore purchases" found nothing bought with this store account.
+				game._match_ui.show_toast(L10n.t("No purchase to restore on this account."))
+			IAPService.Restore.FAILED, IAPService.Restore.UNAVAILABLE:
+				# TRANSLATORS: Message when the store (Google Play, the App Store) can't be reached.
+				game._match_ui.show_toast(L10n.t("The store isn't available right now."))
+		if visible:
+			_render())
 
 
 ## Graphics: Auto (showing the tier it chose), High, Medium, Low.

@@ -13,11 +13,14 @@ extends Node3D
 ## Ads (AdService, bible §3.1): an interstitial may show at a break after a
 ## finished game (Play again on this device, Main menu, New opponent), never
 ## on a rematch against another player. One look is free; the others open
-## for the session after a rewarded video, or for good with Remove ads.
+## for the session after a rewarded video, or for good with Remove ads
+## (IAPService: the purchase, Restore, and owned at start turn ads off).
 ## Undo is for games against the AI only, never against a person
 ## (Christopher, 2026-11-06).
 
 enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI, NETWORK }
+## The purchase that turns ads off and opens every look (TitleConfig "iap").
+const REMOVE_ADS := "remove_ads"
 
 const SPACING := 1.0
 const HudScript := preload("res://scenes/greybox/hud.gd")
@@ -104,6 +107,8 @@ var music: MusicPlayer
 var perf: PerfOverlay
 ## Ads, the look unlock and Remove ads (one AdService for the app).
 var ads: AdService
+## Purchases: Remove ads (one IAPService for the app).
+var iap: IAPService
 ## Auto graphics measures and steps down on devices (not in the editor).
 var graphics_auto := not OS.has_feature("editor")
 var _graphics_auto := GameGraphics.Auto.new()
@@ -161,6 +166,10 @@ func _ready() -> void:
 	personas = _make_personas()
 	ads = AdService.instance()
 	ads.start(title.ad_setup())
+	iap = IAPService.instance()
+	iap.start(title.iap_setup())
+	iap.changed.connect(_on_purchases_changed)
+	_on_purchases_changed()
 	_styles["bagh_chal"] = BaghChalArt.styles()
 	# The saved look, unless it's locked again (it was opened by a video in
 	# an earlier session): then the free one.
@@ -830,6 +839,13 @@ func current_style() -> HuntArtStyle:
 		if st.id == want:
 			return st
 	return list[0]
+
+
+## Remove ads bought, restored, or found owned at start: no more ads, every
+## look open (AdService keeps it too, so it holds offline).
+func _on_purchases_changed() -> void:
+	if iap.owns(REMOVE_ADS) and not ads.ads_removed:
+		ads.set_ads_removed(true)
 
 
 ## True when a look needs a rewarded video (or Remove ads) first.

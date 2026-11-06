@@ -17,6 +17,8 @@ var instant := false
 ## With `instant`: whether the rewarded video counts as watched.
 var instant_earn := true
 var fill := true
+## Tools: show "Privacy choices" as if consent applied (the EEA).
+var privacy_options := false
 ## Ads shown so far (tests).
 var interstitials_shown := 0
 var rewarded_shown := 0
@@ -38,6 +40,10 @@ func interstitial_ready() -> bool:
 
 func rewarded_ready() -> bool:
 	return fill
+
+
+func privacy_options_available() -> bool:
+	return privacy_options
 
 
 func show_interstitial() -> void:
