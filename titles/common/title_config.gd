@@ -18,6 +18,14 @@ extends RefCounted
 ##
 ## Purchases: "iap" maps each product key to its product ID, the same in
 ## Google Play and the App Store (bible §3.1: one "Remove ads", US$1.99).
+##
+## Achievements: "achievements" maps each key (HuntAchievements decides when
+## one is earned) to its ID in Game Center (chosen by us when the achievement
+## was created in App Store Connect) and in Google Play Games (made by Play
+## Console, "CgkI…"; "" until it exists).
+##
+## Credits: "author" is the line on the Credits screen ("Bagh Chal is a game
+## by …"; Christopher, 2026-11-08).
 
 const DEV := "dev"
 const BAGH_CHAL := "bagh_chal"
@@ -50,6 +58,21 @@ const TITLES := {
 		# Created by Christopher in Play Console and App Store Connect as a
 		# one-time (non-consumable) product, US$1.99.
 		"iap": {"remove_ads": "remove_ads"},
+		"author": "Christopher Kastensmidt",
+		# The eight launch achievements (Christopher, 2026-11-08; launch
+		# checklist §5.8). Game Center: the IDs set in App Store Connect.
+		# Google Play Games: the IDs Play Console gave them (games project
+		# 782700281832; the Android presets' godot_play_game_services/game_id).
+		"achievements": {
+			"first_lesson": {"game_center": "baghchal.first_lesson", "play_games": "CgkI6P_J5OMWEAIQBg"},
+			"the_hunt": {"game_center": "baghchal.the_hunt", "play_games": "CgkI6P_J5OMWEAIQBQ"},
+			"herd_holds": {"game_center": "baghchal.herd_holds", "play_games": "CgkI6P_J5OMWEAIQAQ"},
+			"tiger_tamer": {"game_center": "baghchal.tiger_tamer", "play_games": "CgkI6P_J5OMWEAIQAw"},
+			"apex": {"game_center": "baghchal.apex", "play_games": "CgkI6P_J5OMWEAIQBw"},
+			"not_one_left": {"game_center": "baghchal.not_one_left", "play_games": "CgkI6P_J5OMWEAIQAg"},
+			"neighbors": {"game_center": "baghchal.neighbors", "play_games": "CgkI6P_J5OMWEAIQBA"},
+			"across_the_world": {"game_center": "baghchal.across_the_world", "play_games": "CgkI6P_J5OMWEAIQCA"},
+		},
 		"admob": {
 			"android": {
 				"app_id": "ca-app-pub-8333290579862415~4379954395",
@@ -72,6 +95,8 @@ const TITLES := {
 		"eos": {},  # its own EOS product, M3 (bible §5.2)
 		"admob": {},  # its own AdMob apps, M3
 		"iap": {},  # its own store apps and Remove ads, M3
+		"author": "Christopher Kastensmidt",
+		"achievements": {},  # its own, M3
 	},
 }
 
@@ -99,6 +124,10 @@ var eos: Dictionary
 var admob: Dictionary
 ## Purchases: {key: product ID}, e.g. {"remove_ads": "remove_ads"}.
 var iap: Dictionary
+## {key: {"game_center": ID, "play_games": ID}}, or {}.
+var achievements: Dictionary
+## Who made the game, for the Credits screen.
+var author: String
 
 
 static var _active: TitleConfig
@@ -130,6 +159,8 @@ static func for_id(title: String) -> TitleConfig:
 		c.eos = t.eos.duplicate()
 		c.admob = t.admob.duplicate(true)
 		c.iap = t.iap.duplicate()
+		c.achievements = t.achievements.duplicate(true)
+		c.author = t.author
 	else:
 		c.short_name = "Hunt Games (dev)"
 		c.rule_sets = HuntRuleSets.ALL.duplicate()
@@ -142,6 +173,8 @@ static func for_id(title: String) -> TitleConfig:
 		c.eos = TITLES[BAGH_CHAL].eos.duplicate()
 		c.admob = TITLES[BAGH_CHAL].admob.duplicate(true)
 		c.iap = TITLES[BAGH_CHAL].iap.duplicate()
+		c.achievements = TITLES[BAGH_CHAL].achievements.duplicate(true)
+		c.author = TITLES[BAGH_CHAL].author
 	return c
 
 
@@ -187,6 +220,12 @@ func ad_setup() -> Dictionary:
 ## test build.
 func iap_setup() -> Dictionary:
 	return {"products": iap.duplicate(), "debug": OS.is_debug_build()}
+
+
+## What AchievementService.start() needs: the title's achievements with
+## their Game Center and Google Play Games IDs, and whether it's a test build.
+func achievements_setup() -> Dictionary:
+	return {"achievements": achievements.duplicate(true), "debug": OS.is_debug_build()}
 
 
 ## The texts of iOS's permission prompts, in English; the iOS export preset

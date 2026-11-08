@@ -11,7 +11,11 @@ extends CanvasLayer
 ##   Game origins ─ the game's history and its sources (HuntOrigins)
 ##   Settings ─ the in-game menu's settings, before a game: Look · Graphics
 ##              · Sound · Music · Language · Remove ads · Restore purchases
-##              · Privacy choices → Back to the main menu
+##              · Privacy choices · Achievements · Credits → Back to the
+##              main menu
+##   Credits ─ who made the game, and Open-source licenses: the notices the
+##             app has to carry (OpenSource: Godot and the code inside it,
+##             the plugins and SDKs, the fonts), each opening its full text
 ##   Play against the AI ─ side, opponent level, rules → Start
 ##   Pass and play ─ rules → Start
 ##   Play local ─ Host a game (side, rules → waiting, with a code)
@@ -24,7 +28,8 @@ extends CanvasLayer
 ##   Pause ─ Continue · (against another device: Offer a draw, Resign) · Look
 ##           · Graphics · Sound · Music · Language · Remove ads (with the
 ##           store's price) · Restore purchases · Privacy choices (where ad
-##           consent applies) · Quit to main menu
+##           consent applies) · Achievements (where Game Center or Google
+##           Play Games runs) · Credits · Quit to main menu
 ##   More looks ─ a locked look was picked: watch a video to open every look
 ##                until the app closes (AdService), remove ads to open them
 ##                for good (IAPService), or not now
@@ -53,6 +58,10 @@ var _error_back := "home"
 var _after_confirm: Callable
 ## The locked look the player picked (More looks switches to it after the video).
 var _wanted_look := ""
+## The open-source notice the licence screen shows (an OpenSource entry id).
+var _license_id := ""
+## A short (landscape phone) screen: the longest cards are tighter.
+var _tight := false
 
 
 func _init(owner_game: Node) -> void:
@@ -184,6 +193,7 @@ func _render() -> void:
 	# tighter on short (landscape phone) screens, so their last button stays
 	# on screen.
 	var tight := _screen in ["home", "pause", "settings"] and get_viewport().get_visible_rect().size.y < 1000
+	_tight = tight
 	_card_box.add_theme_constant_override("separation", 8 if tight else 14)
 	_hosts_box = null
 	_live_label = null
@@ -228,11 +238,17 @@ func _render() -> void:
 			_looks()
 		"origins":
 			_origins()
+		"credits":
+			_credits()
+		"licenses":
+			_licenses()
+		"license":
+			_license()
 
 
 ## The Game origins text is sized to the screen: lay it out again after a turn.
 func _on_resized() -> void:
-	if visible and _screen in ["origins", "home", "pause", "settings"]:
+	if visible and _screen in ["origins", "home", "pause", "settings", "licenses", "license"]:
 		_render.call_deferred()
 
 
@@ -837,6 +853,123 @@ func _settings_rows() -> void:
 	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
 	_purchase_rows()
+	_extras_row()
+
+
+## Achievements (where Game Center or Google Play Games runs: their own
+## screen) and Credits: one row of quiet buttons under the purchase rows.
+## Not in the in-game menu on a landscape phone, where it doesn't fit (the
+## main menu's Settings always has them).
+func _extras_row() -> void:
+	if _screen == "pause" and _tight:
+		return
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	if game.achievements and game.achievements.can_show():
+		# TRANSLATORS: Settings button: opens Game Center (iPhone/iPad) or Google Play Games (Android) on the game's achievements. The usual platform word.
+		_small_button(L10n.t("Achievements"), row, func() -> void:
+			game.achievements.show(func(ok: bool) -> void:
+				if not ok:
+					# TRANSLATORS: Message when Game Center or Google Play Games can't open (not signed in, offline).
+					game._match_ui.show_toast(L10n.t("Achievements aren't available right now."))))
+	# TRANSLATORS: Settings button and screen title: who made the game, and the open-source licences.
+	_small_button(L10n.t("Credits"), row, func() -> void: _go("credits"))
+	for b in row.get_children():
+		b.flat = true
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_color_override("font_color", SeriesTheme.TEXT_DIM)
+	_card_box.add_child(row)
+
+
+## Credits: who made the game, then the open-source licences.
+func _credits() -> void:
+	var title := _title_id()
+	_title(L10n.t("Credits"), 44)
+	_gap(6)
+	# TRANSLATORS: On the Credits screen. First %s: the game's name (e.g. "Bagh Chal"); second %s: the name of the person who made it.
+	_text(L10n.t("%s is a game by %s.") % [HuntText.title_name(title), TitleConfig.active().author], "book", 24)
+	_gap(10)
+	# TRANSLATORS: Button and screen title: the licences of the open-source software and fonts the game uses.
+	_button(L10n.t("Open-source licenses"), func() -> void: _go("licenses"))
+	_back_button()
+
+
+## Every open-source notice: Godot first, then the plugins and SDKs, then the
+## fonts. Each opens its full text.
+func _licenses() -> void:
+	_title(L10n.t("Open-source licenses"), 36)
+	# TRANSLATORS: On the "Open-source licenses" screen, above the list. "Tap" also covers clicking.
+	_text(L10n.t("This game is made with the software and fonts below. Tap one to read its license."), "book", 18, SeriesTheme.TEXT_DIM)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var screen_h := get_viewport().get_visible_rect().size.y
+	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, clampf(screen_h - 360.0, 220.0, 1000.0))
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.add_theme_constant_override("separation", 2)
+	for e in OpenSource.entries(HuntCredits.entries()):
+		var b := Button.new()
+		b.flat = true
+		b.text = str(e.name)
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		b.custom_minimum_size = Vector2(0, 48)
+		b.add_theme_font_size_override("font_size", SeriesTheme.fs(17))
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var id := str(e.id)
+		b.pressed.connect(func() -> void:
+			_license_id = id
+			_go("license"))
+		box.add_child(b)
+	var pad := MarginContainer.new()  # keeps the list clear of the scroll bar
+	pad.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pad.add_theme_constant_override("margin_right", 18)
+	pad.add_child(box)
+	scroll.add_child(pad)
+	_card_box.add_child(scroll)
+	_back_button()
+
+
+## One notice in full: copyright lines and licence (English, as written).
+## Long ones (Godot's with the code inside it, the EOS SDK's) are laid out
+## in the background and scroll with a finger like Game origins.
+func _license() -> void:
+	var e := OpenSource.find(_license_id, HuntCredits.entries())
+	_title(L10n.t("Open-source licenses"), 30)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var screen_h := get_viewport().get_visible_rect().size.y
+	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, clampf(screen_h - 300.0, 260.0, 1100.0))
+	var r := RichTextLabel.new()
+	r.bbcode_enabled = false
+	r.fit_content = true
+	r.scroll_active = false
+	r.threaded = true
+	r.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	r.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	r.add_theme_font_override("normal_font", SeriesTheme.font("ui"))
+	r.add_theme_font_size_override("normal_font_size", SeriesTheme.fs(14))
+	r.add_theme_color_override("default_color", SeriesTheme.TEXT)
+	r.text = OpenSource.text(e) if not e.is_empty() else ""
+	# The notice's name heads the text, inside the scroll (some are long).
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
+	box.add_theme_constant_override("separation", 12)
+	var heading := SeriesTheme.label(str(e.get("name", "")), "medium", 19, SeriesTheme.ACCENT)
+	heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(heading)
+	box.add_child(r)
+	var pad := MarginContainer.new()
+	pad.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pad.mouse_filter = Control.MOUSE_FILTER_PASS
+	pad.add_theme_constant_override("margin_right", 18)
+	pad.add_child(box)
+	scroll.add_child(pad)
+	_card_box.add_child(scroll)
+	_back_button()
 
 
 ## More looks: the look picked is locked. A rewarded video opens every look

@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:931
+#: scenes/greybox/greybox.gd:941
 msgid "Loading…"
 msgstr "読み込み中…"
 
@@ -141,7 +141,7 @@ msgstr "次へ ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:645
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:659
 msgid "Looking for an opponent…"
 msgstr "対戦相手を探しています…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "今すぐ対戦"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:874
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:991
 msgid "Not now"
 msgstr "今はしない"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "この対局を投了しますか？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:753
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:767
 msgid "Resign"
 msgstr "投了する"
 
@@ -251,353 +251,384 @@ msgstr "相手が接続しませんでした。引き続き探しています…
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "時間切れのため、代わりに一手指しました（%d／3 回）。"
 
-#: scenes/play/play_menu.gd:268
+#: scenes/play/play_menu.gd:282 tools/smoke_greybox.gd:276
 msgid "Back"
 msgstr "戻る"
 
-#: scenes/play/play_menu.gd:323
+#: scenes/play/play_menu.gd:337
 msgid "Rules"
 msgstr "ルール"
 
-#: scenes/play/play_menu.gd:343
+#: scenes/play/play_menu.gd:357
 msgid "Language"
 msgstr "言語"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:743
+#: scenes/play/play_menu.gd:383 scenes/play/play_menu.gd:757
 msgid "Continue"
 msgstr "続ける"
 
-#: scenes/play/play_menu.gd:370 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:384 scenes/play/play_menu.gd:413
 msgid "Play against the AI"
 msgstr "AI と対局"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:372 scenes/play/play_menu.gd:419
+#: scenes/play/play_menu.gd:386 scenes/play/play_menu.gd:433
 msgid "Pass and play"
 msgstr "1台で2人対戦"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:374 scenes/play/play_menu.gd:428
+#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:442
 msgid "Play local"
 msgstr "ローカル対戦"
 
-#: scenes/play/play_menu.gd:376 scenes/play/play_menu.gd:531
+#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:545
 msgid "Play online"
 msgstr "オンライン対局"
 
-#: scenes/play/play_menu.gd:377 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:391 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "遊び方"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:688
+#: scenes/play/play_menu.gd:394 scenes/play/play_menu.gd:702
 msgid "Game origins"
 msgstr "ゲームの由来"
 
 #. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
-#: scenes/play/play_menu.gd:382 scenes/play/play_menu.gd:802
+#: scenes/play/play_menu.gd:396 scenes/play/play_menu.gd:816 tools/smoke_greybox.gd:240
 msgid "Settings"
 msgstr "設定"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:390
+#: scenes/play/play_menu.gd:404
 msgid "Quit game"
 msgstr "ゲームを終了"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Novice"
 msgstr "初心者"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Apprentice"
 msgstr "見習い"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Adept"
 msgstr "熟練者"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Master"
 msgstr "名人"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:408 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:422 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "対戦相手"
 
-#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:447
+#: scenes/play/play_menu.gd:425 scenes/play/play_menu.gd:437 scenes/play/play_menu.gd:461
 msgid "Start"
 msgstr "開始"
 
-#: scenes/play/play_menu.gd:420
+#: scenes/play/play_menu.gd:434
 msgid "Two players share this device and take turns."
 msgstr "2人でこの端末を使い、交互に指します。"
 
-#: scenes/play/play_menu.gd:429
+#: scenes/play/play_menu.gd:443
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "2台の端末を同じ Wi-Fi に接続してください。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:443
+#: scenes/play/play_menu.gd:446 scenes/play/play_menu.gd:457
 msgid "Host a game"
 msgstr "対局を作る"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:434 scenes/play/play_menu.gd:475
+#: scenes/play/play_menu.gd:448 scenes/play/play_menu.gd:489
 msgid "Join a game"
 msgstr "対局に参加"
 
-#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:562
+#: scenes/play/play_menu.gd:457 scenes/play/play_menu.gd:576
 msgid "Create a code"
 msgstr "コードを作る"
 
-#: scenes/play/play_menu.gd:461
+#: scenes/play/play_menu.gd:475
 msgid "Waiting for a player"
 msgstr "相手を待っています"
 
-#: scenes/play/play_menu.gd:462
+#: scenes/play/play_menu.gd:476
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "もう1台で「ローカル対戦」、続いて「対局に参加」を選んでください。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:466
+#: scenes/play/play_menu.gd:480
 msgid "If the game doesn't appear there, enter this code"
 msgstr "表示されない場合は、このコードを入力してください"
 
-#: scenes/play/play_menu.gd:471 scenes/play/play_menu.gd:591 scenes/play/play_menu.gd:642 scenes/play/play_menu.gd:649 scenes/play/play_menu.gd:654
+#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:656 scenes/play/play_menu.gd:663 scenes/play/play_menu.gd:668
 msgid "Cancel"
 msgstr "キャンセル"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:477
+#: scenes/play/play_menu.gd:491
 msgid "Looking for games on this Wi-Fi…"
 msgstr "この Wi-Fi で対局を探しています…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:488
+#: scenes/play/play_menu.gd:502
 msgid "Code"
 msgstr "コード"
 
-#: scenes/play/play_menu.gd:496 scenes/play/play_menu.gd:623
+#: scenes/play/play_menu.gd:510 scenes/play/play_menu.gd:637
 msgid "Join"
 msgstr "参加"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:533
+#: scenes/play/play_menu.gd:547
 msgid "Play with someone online"
 msgstr "オンラインの誰かと対局"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:538 scenes/play/play_menu.gd:647
+#: scenes/play/play_menu.gd:552 scenes/play/play_menu.gd:661
 msgid "Standard rules, about a minute per move"
 msgstr "標準ルール・1手あたり約1分"
 
-#: scenes/play/play_menu.gd:539 scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:573
 msgid "Play with a friend"
 msgstr "友だちと対局"
 
-#: scenes/play/play_menu.gd:560
+#: scenes/play/play_menu.gd:574
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "1人がコードを作り、もう1人が入力します。スマホ、タブレット、パソコンの間で遊べます。"
 
-#: scenes/play/play_menu.gd:563 scenes/play/play_menu.gd:607
+#: scenes/play/play_menu.gd:577 scenes/play/play_menu.gd:621
 msgid "Enter a code"
 msgstr "コードを入力"
 
-#: scenes/play/play_menu.gd:571
+#: scenes/play/play_menu.gd:585
 msgid "Your code"
 msgstr "あなたのコード"
 
-#: scenes/play/play_menu.gd:573 scenes/play/play_menu.gd:653
+#: scenes/play/play_menu.gd:587 scenes/play/play_menu.gd:667
 msgid "Connecting…"
 msgstr "接続中…"
 
-#: scenes/play/play_menu.gd:576
+#: scenes/play/play_menu.gd:590
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "このコードを友だちに送ってください。入力されると対局が始まります。"
 
-#: scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:593
 msgid "Share"
 msgstr "共有"
 
-#: scenes/play/play_menu.gd:581
+#: scenes/play/play_menu.gd:595
 msgid "Copy"
 msgstr "コピー"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:584 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:617
 msgid "Copied"
 msgstr "コピーしました"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:597
+#: scenes/play/play_menu.gd:611
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games で一緒に遊ぼう！対局コードは %s です。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:633
+#: scenes/play/play_menu.gd:647
 msgid "No one is free right now"
 msgstr "今は誰も空いていません"
 
-#: scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:648
 msgid "We can keep looking while you play."
 msgstr "対局しているあいだも探し続けられます。"
 
-#: scenes/play/play_menu.gd:635
+#: scenes/play/play_menu.gd:649
 msgid "Play against the AI while we keep looking"
 msgstr "探しているあいだ AI と対局"
 
-#: scenes/play/play_menu.gd:638
+#: scenes/play/play_menu.gd:652
 msgid "Keep searching"
 msgstr "探し続ける"
 
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:653
 msgid "Invite a friend instead"
 msgstr "代わりに友だちを誘う"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:659
+#: scenes/play/play_menu.gd:673
 msgid "Couldn't start the game"
 msgstr "対局を始められませんでした"
 
-#: scenes/play/play_menu.gd:662
+#: scenes/play/play_menu.gd:676
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:670
+#: scenes/play/play_menu.gd:684
 msgid "Leave this game?"
 msgstr "この対局を抜けますか？"
 
-#: scenes/play/play_menu.gd:671
+#: scenes/play/play_menu.gd:685
 msgid "It counts as a loss."
 msgstr "負けになります。"
 
-#: scenes/play/play_menu.gd:672
+#: scenes/play/play_menu.gd:686
 msgid "Leave"
 msgstr "抜ける"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:678
+#: scenes/play/play_menu.gd:692
 msgid "Stay"
 msgstr "残る"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:703
+#: scenes/play/play_menu.gd:717
 msgid "Sources"
 msgstr "参考文献"
 
-#: scenes/play/play_menu.gd:749
+#: scenes/play/play_menu.gd:763
 msgid "Offer a draw"
 msgstr "引き分けを提案"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:789
+#: scenes/play/play_menu.gd:803
 msgid "Quit to main menu"
 msgstr "メインメニューに戻る"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:831
+#: scenes/play/play_menu.gd:845
 msgid "Look"
 msgstr "見た目"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:834
+#: scenes/play/play_menu.gd:848
 msgid "Sound"
 msgstr "効果音"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:836
+#: scenes/play/play_menu.gd:850
 msgid "Music"
 msgstr "音楽"
 
+#. Settings button: opens Game Center (iPhone/iPad) or Google Play Games (Android) on the game's achievements. The usual platform word.
+#: scenes/play/play_menu.gd:863
+msgid "Achievements"
+msgstr "実績"
+
+#. Message when Game Center or Google Play Games can't open (not signed in, offline).
+#: scenes/play/play_menu.gd:867
+msgid "Achievements aren't available right now."
+msgstr "現在、実績を表示できません。"
+
+#. Settings button and screen title: who made the game, and the open-source licences.
+#: scenes/play/play_menu.gd:869 scenes/play/play_menu.gd:880 tools/smoke_greybox.gd:253
+msgid "Credits"
+msgstr "クレジット"
+
+#. On the Credits screen. First %s: the game's name (e.g. "Bagh Chal"); second %s: the name of the person who made it.
+#: scenes/play/play_menu.gd:883
+#, c-format
+msgid "%s is a game by %s."
+msgstr "%sは%sによるゲームです。"
+
+#. Button and screen title: the licences of the open-source software and fonts the game uses.
+#: scenes/play/play_menu.gd:886 scenes/play/play_menu.gd:893 tools/smoke_greybox.gd:260
+msgid "Open-source licenses"
+msgstr "オープンソースライセンス"
+
+#. On the "Open-source licenses" screen, above the list. "Tap" also covers clicking.
+#: scenes/play/play_menu.gd:895
+msgid "This game is made with the software and fonts below. Tap one to read its license."
+msgstr "このゲームは以下のソフトウェアとフォントを使用しています。項目をタップするとライセンスを表示します。"
+
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:846
+#: scenes/play/play_menu.gd:963
 msgid "More looks"
 msgstr "ほかの見た目"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:848
+#: scenes/play/play_menu.gd:965
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "短い動画を見ると、ゲームを閉じるまで見た目を自由に切り替えられます。"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:852
+#: scenes/play/play_menu.gd:969
 msgid "No video is ready right now. Try again in a moment."
 msgstr "いまは再生できる動画がありません。少し待ってからもう一度お試しください。"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:855
+#: scenes/play/play_menu.gd:972
 msgid "Watch a video"
 msgstr "動画を見る"
 
 #. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
-#: scenes/play/play_menu.gd:871
+#: scenes/play/play_menu.gd:988
 msgid "Or remove ads to keep every look for good."
 msgstr "または広告を削除すると、すべての見た目をずっと使えます。"
 
 #. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
-#: scenes/play/play_menu.gd:872 scenes/play/play_menu.gd:886 tools/smoke_greybox.gd:217
+#: scenes/play/play_menu.gd:989 scenes/play/play_menu.gd:1003 tools/smoke_greybox.gd:218 tools/smoke_greybox.gd:250
 #, c-format
 msgid "Remove ads · %s"
 msgstr "広告を削除 · %s"
 
 #. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
-#: scenes/play/play_menu.gd:892 tools/smoke_greybox.gd:226
+#: scenes/play/play_menu.gd:1009 tools/smoke_greybox.gd:227
 msgid "Restore purchases"
 msgstr "購入を復元"
 
 #. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:896
+#: scenes/play/play_menu.gd:1013
 msgid "Privacy choices"
 msgstr "プライバシーの設定"
 
 #. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
-#: scenes/play/play_menu.gd:915
+#: scenes/play/play_menu.gd:1032
 msgid "Thank you! Ads are off and every look is yours."
 msgstr "ありがとうございます！広告がなくなり、すべての見た目を使えるようになりました。"
 
 #. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
-#: scenes/play/play_menu.gd:925
+#: scenes/play/play_menu.gd:1042
 msgid "Your payment is pending. Ads will turn off as soon as it goes through."
 msgstr "お支払いは保留中です。支払いが完了すると広告は表示されなくなります。"
 
 #. Message when buying "Remove ads" failed (not when the player cancelled).
-#: scenes/play/play_menu.gd:928
+#: scenes/play/play_menu.gd:1045
 msgid "The purchase didn't go through. Please try again later."
 msgstr "購入を完了できませんでした。しばらくしてからもう一度お試しください。"
 
 #. Message after "Restore purchases" found Remove ads.
-#: scenes/play/play_menu.gd:938
+#: scenes/play/play_menu.gd:1055
 msgid "Your purchase is restored."
 msgstr "購入を復元しました。"
 
 #. Message after "Restore purchases" found nothing bought with this store account.
-#: scenes/play/play_menu.gd:941
+#: scenes/play/play_menu.gd:1058
 msgid "No purchase to restore on this account."
 msgstr "このアカウントには復元できる購入がありません。"
 
 #. Message when the store (Google Play, the App Store) can't be reached.
-#: scenes/play/play_menu.gd:944
+#: scenes/play/play_menu.gd:1061
 msgid "The store isn't available right now."
 msgstr "現在ストアを利用できません。"
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:966
+#: scenes/play/play_menu.gd:1083
 msgid "Graphics"
 msgstr "画質"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:1047
+#: scenes/play/play_menu.gd:1164
 #, c-format
 msgid "Your name: %s"
 msgstr "あなたの名前：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:1084
+#: scenes/play/play_menu.gd:1201
 msgid "Waiting"
 msgstr "待機中"
 
@@ -1186,12 +1217,12 @@ msgid "In the accounts written down a century ago, the dogs may only go forward,
 msgstr "100年前の記録では犬は前にしか進めず、それでは塔にとどまるピューマを決して捕まえられません。ここでは犬の動きとピューマの勝ち方を、この遊びの現代のマプチェ版である Trapial-Kuzen に合わせています。塔は普通の盤として扱い、設定で変えない限りピューマが先手です。"
 
 #. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
-#: titles/common/title_config.gd:202
+#: titles/common/title_config.gd:239
 msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
 msgstr "より関連性の高い広告を表示するために使います。Bagh Chal は広告のおかげで無料で遊べます。"
 
 #. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
-#: titles/common/title_config.gd:204
+#: titles/common/title_config.gd:241
 msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
 msgstr "近くの人と対戦できるよう、Bagh Chal が Wi-Fi ネットワーク上の対局を探します。"
 

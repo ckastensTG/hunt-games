@@ -25,6 +25,7 @@ boot_splash/show_image.android=true
 [autoload]
 
 EOSGRuntime="*res://addons/epic-online-services-godot/runtime.gd"
+GodotPlayGameServices="*uid://dmf5hpen6dgdd"
 
 [display]
 
@@ -36,7 +37,7 @@ window/handheld/orientation=6
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/timeless_core/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/timeless_core/plugin.cfg")
 
 [internationalization]
 

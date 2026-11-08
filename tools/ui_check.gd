@@ -17,7 +17,7 @@ extends SceneTree
 const GreyboxScript := preload("res://scenes/greybox/greybox.gd")
 const MENU_SCREENS := ["home", "vs_ai", "pass", "nearby", "nearby_host", "nearby_wait", "nearby_join",
 	"online", "friend", "friend_setup", "friend_join", "quick", "connecting", "error", "confirm_leave",
-	"origins", "pause", "settings", "looks"]
+	"origins", "pause", "settings", "looks", "credits", "licenses", "license"]
 
 var game: Node3D
 var langs: Array = []
@@ -32,6 +32,14 @@ var phase := "boot"
 var issues: Array[String] = []
 var checked := 0
 var _cur_lang := ""
+
+
+## Stands in for Game Center or Google Play Games, so Settings shows the
+## Achievements button next to Credits (that row at its widest).
+class AnyService:
+	extends AchievementBackend
+	func kind() -> String:
+		return "game_center"
 
 
 func _initialize() -> void:
@@ -91,6 +99,7 @@ func _process(_delta: float) -> bool:
 			game.ads.ads_removed = false
 			game.iap.prices[GreyboxScript.REMOVE_ADS] = "R$ 10,90"
 			game.iap.owned.erase(GreyboxScript.REMOVE_ADS)
+			game.achievements.backend = AnyService.new()
 			# A game set aside, so the main menu shows Continue too (its
 			# longest form).
 			game.save_path = "user://ui_check_match.save"
@@ -147,6 +156,8 @@ func _play_some_moves() -> void:
 
 func _setup(screen: String) -> void:
 	if screen.begins_with("menu:"):
+		# The licence screen with the longest name as its title.
+		game.menu._license_id = "google_sdks"
 		game.menu.open(screen.substr(5))
 	elif screen == "hud":
 		game.menu.close()

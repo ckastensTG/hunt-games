@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:931
+#: scenes/greybox/greybox.gd:941
 msgid "Loading…"
 msgstr "Yükleniyor…"
 
@@ -141,7 +141,7 @@ msgstr "İleri ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:645
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:659
 msgid "Looking for an opponent…"
 msgstr "Rakip aranıyor…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "Şimdi oyna"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:874
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:991
 msgid "Not now"
 msgstr "Şimdi değil"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "Bu oyunda pes edilsin mi?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:753
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:767
 msgid "Resign"
 msgstr "Pes et"
 
@@ -251,353 +251,384 @@ msgstr "Diğer oyuncu bağlanmadı. Aramaya devam ediliyor…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Süre doldu, senin yerine hamle yapıldı (%d/3)."
 
-#: scenes/play/play_menu.gd:268
+#: scenes/play/play_menu.gd:282 tools/smoke_greybox.gd:276
 msgid "Back"
 msgstr "Geri"
 
-#: scenes/play/play_menu.gd:323
+#: scenes/play/play_menu.gd:337
 msgid "Rules"
 msgstr "Kurallar"
 
-#: scenes/play/play_menu.gd:343
+#: scenes/play/play_menu.gd:357
 msgid "Language"
 msgstr "Dil"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:369 scenes/play/play_menu.gd:743
+#: scenes/play/play_menu.gd:383 scenes/play/play_menu.gd:757
 msgid "Continue"
 msgstr "Devam et"
 
-#: scenes/play/play_menu.gd:370 scenes/play/play_menu.gd:399
+#: scenes/play/play_menu.gd:384 scenes/play/play_menu.gd:413
 msgid "Play against the AI"
 msgstr "YZ'ye karşı oyna"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:372 scenes/play/play_menu.gd:419
+#: scenes/play/play_menu.gd:386 scenes/play/play_menu.gd:433
 msgid "Pass and play"
 msgstr "Aynı cihazda iki kişi"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:374 scenes/play/play_menu.gd:428
+#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:442
 msgid "Play local"
 msgstr "Yerel oyna"
 
-#: scenes/play/play_menu.gd:376 scenes/play/play_menu.gd:531
+#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:545
 msgid "Play online"
 msgstr "Çevrimiçi oyna"
 
-#: scenes/play/play_menu.gd:377 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:391 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Nasıl oynanır"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:380 scenes/play/play_menu.gd:688
+#: scenes/play/play_menu.gd:394 scenes/play/play_menu.gd:702
 msgid "Game origins"
 msgstr "Oyunun kökeni"
 
 #. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
-#: scenes/play/play_menu.gd:382 scenes/play/play_menu.gd:802
+#: scenes/play/play_menu.gd:396 scenes/play/play_menu.gd:816 tools/smoke_greybox.gd:240
 msgid "Settings"
 msgstr "Ayarlar"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:390
+#: scenes/play/play_menu.gd:404
 msgid "Quit game"
 msgstr "Oyundan çık"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Novice"
 msgstr "Acemi"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Apprentice"
 msgstr "Çırak"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Adept"
 msgstr "Kalfa"
 
-#: scenes/play/play_menu.gd:403
+#: scenes/play/play_menu.gd:417
 msgid "Master"
 msgstr "Usta"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:408 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:422 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "Rakip"
 
-#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:423 scenes/play/play_menu.gd:447
+#: scenes/play/play_menu.gd:425 scenes/play/play_menu.gd:437 scenes/play/play_menu.gd:461
 msgid "Start"
 msgstr "Başla"
 
-#: scenes/play/play_menu.gd:420
+#: scenes/play/play_menu.gd:434
 msgid "Two players share this device and take turns."
 msgstr "İki oyuncu bu cihazı paylaşır ve sırayla oynar."
 
-#: scenes/play/play_menu.gd:429
+#: scenes/play/play_menu.gd:443
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "İki cihaz da aynı Wi-Fi ağında olmalı."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:443
+#: scenes/play/play_menu.gd:446 scenes/play/play_menu.gd:457
 msgid "Host a game"
 msgstr "Oyun kur"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:434 scenes/play/play_menu.gd:475
+#: scenes/play/play_menu.gd:448 scenes/play/play_menu.gd:489
 msgid "Join a game"
 msgstr "Oyuna katıl"
 
-#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:562
+#: scenes/play/play_menu.gd:457 scenes/play/play_menu.gd:576
 msgid "Create a code"
 msgstr "Kod oluştur"
 
-#: scenes/play/play_menu.gd:461
+#: scenes/play/play_menu.gd:475
 msgid "Waiting for a player"
 msgstr "Oyuncu bekleniyor"
 
-#: scenes/play/play_menu.gd:462
+#: scenes/play/play_menu.gd:476
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "Diğer cihazda Yerel oyna'yı, sonra Oyuna katıl'ı seç."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:466
+#: scenes/play/play_menu.gd:480
 msgid "If the game doesn't appear there, enter this code"
 msgstr "Oyun orada görünmezse bu kodu gir"
 
-#: scenes/play/play_menu.gd:471 scenes/play/play_menu.gd:591 scenes/play/play_menu.gd:642 scenes/play/play_menu.gd:649 scenes/play/play_menu.gd:654
+#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:656 scenes/play/play_menu.gd:663 scenes/play/play_menu.gd:668
 msgid "Cancel"
 msgstr "İptal"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:477
+#: scenes/play/play_menu.gd:491
 msgid "Looking for games on this Wi-Fi…"
 msgstr "Bu Wi-Fi ağında oyun aranıyor…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:488
+#: scenes/play/play_menu.gd:502
 msgid "Code"
 msgstr "Kod"
 
-#: scenes/play/play_menu.gd:496 scenes/play/play_menu.gd:623
+#: scenes/play/play_menu.gd:510 scenes/play/play_menu.gd:637
 msgid "Join"
 msgstr "Katıl"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:533
+#: scenes/play/play_menu.gd:547
 msgid "Play with someone online"
 msgstr "Çevrimiçi biriyle oyna"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:538 scenes/play/play_menu.gd:647
+#: scenes/play/play_menu.gd:552 scenes/play/play_menu.gd:661
 msgid "Standard rules, about a minute per move"
 msgstr "Standart kurallar, hamle başına yaklaşık bir dakika"
 
-#: scenes/play/play_menu.gd:539 scenes/play/play_menu.gd:559
+#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:573
 msgid "Play with a friend"
 msgstr "Bir arkadaşla oyna"
 
-#: scenes/play/play_menu.gd:560
+#: scenes/play/play_menu.gd:574
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "Biriniz kod oluşturur, diğeri girer. Telefon, tablet ve bilgisayarlar arasında çalışır."
 
-#: scenes/play/play_menu.gd:563 scenes/play/play_menu.gd:607
+#: scenes/play/play_menu.gd:577 scenes/play/play_menu.gd:621
 msgid "Enter a code"
 msgstr "Kod gir"
 
-#: scenes/play/play_menu.gd:571
+#: scenes/play/play_menu.gd:585
 msgid "Your code"
 msgstr "Kodun"
 
-#: scenes/play/play_menu.gd:573 scenes/play/play_menu.gd:653
+#: scenes/play/play_menu.gd:587 scenes/play/play_menu.gd:667
 msgid "Connecting…"
 msgstr "Bağlanıyor…"
 
-#: scenes/play/play_menu.gd:576
+#: scenes/play/play_menu.gd:590
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "Bu kodu arkadaşına gönder. Kodu girdiğinde oyun başlar."
 
-#: scenes/play/play_menu.gd:579
+#: scenes/play/play_menu.gd:593
 msgid "Share"
 msgstr "Paylaş"
 
-#: scenes/play/play_menu.gd:581
+#: scenes/play/play_menu.gd:595
 msgid "Copy"
 msgstr "Kopyala"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:584 scenes/play/play_menu.gd:603
+#: scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:617
 msgid "Copied"
 msgstr "Kopyalandı"
 
 #. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:597
+#: scenes/play/play_menu.gd:611
 #, c-format
 msgid "Play with me in Timeless Games! My game code is %s."
 msgstr "Timeless Games'te benimle oyna! Oyun kodum: %s."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:633
+#: scenes/play/play_menu.gd:647
 msgid "No one is free right now"
 msgstr "Şu anda müsait kimse yok"
 
-#: scenes/play/play_menu.gd:634
+#: scenes/play/play_menu.gd:648
 msgid "We can keep looking while you play."
 msgstr "Sen oynarken aramaya devam edebiliriz."
 
-#: scenes/play/play_menu.gd:635
+#: scenes/play/play_menu.gd:649
 msgid "Play against the AI while we keep looking"
 msgstr "Biz ararken YZ'ye karşı oyna"
 
-#: scenes/play/play_menu.gd:638
+#: scenes/play/play_menu.gd:652
 msgid "Keep searching"
 msgstr "Aramaya devam et"
 
-#: scenes/play/play_menu.gd:639
+#: scenes/play/play_menu.gd:653
 msgid "Invite a friend instead"
 msgstr "Bunun yerine arkadaşını davet et"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:659
+#: scenes/play/play_menu.gd:673
 msgid "Couldn't start the game"
 msgstr "Oyun başlatılamadı"
 
-#: scenes/play/play_menu.gd:662
+#: scenes/play/play_menu.gd:676
 msgid "OK"
 msgstr "Tamam"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:670
+#: scenes/play/play_menu.gd:684
 msgid "Leave this game?"
 msgstr "Bu oyundan çıkılsın mı?"
 
-#: scenes/play/play_menu.gd:671
+#: scenes/play/play_menu.gd:685
 msgid "It counts as a loss."
 msgstr "Bu yenilgi sayılır."
 
-#: scenes/play/play_menu.gd:672
+#: scenes/play/play_menu.gd:686
 msgid "Leave"
 msgstr "Çık"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:678
+#: scenes/play/play_menu.gd:692
 msgid "Stay"
 msgstr "Kal"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:703
+#: scenes/play/play_menu.gd:717
 msgid "Sources"
 msgstr "Kaynaklar"
 
-#: scenes/play/play_menu.gd:749
+#: scenes/play/play_menu.gd:763
 msgid "Offer a draw"
 msgstr "Beraberlik teklif et"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:789
+#: scenes/play/play_menu.gd:803
 msgid "Quit to main menu"
 msgstr "Ana menüye dön"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:831
+#: scenes/play/play_menu.gd:845
 msgid "Look"
 msgstr "Görünüm"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:834
+#: scenes/play/play_menu.gd:848
 msgid "Sound"
 msgstr "Ses"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:836
+#: scenes/play/play_menu.gd:850
 msgid "Music"
 msgstr "Müzik"
 
+#. Settings button: opens Game Center (iPhone/iPad) or Google Play Games (Android) on the game's achievements. The usual platform word.
+#: scenes/play/play_menu.gd:863
+msgid "Achievements"
+msgstr "Başarılar"
+
+#. Message when Game Center or Google Play Games can't open (not signed in, offline).
+#: scenes/play/play_menu.gd:867
+msgid "Achievements aren't available right now."
+msgstr "Başarılar şu anda kullanılamıyor."
+
+#. Settings button and screen title: who made the game, and the open-source licences.
+#: scenes/play/play_menu.gd:869 scenes/play/play_menu.gd:880 tools/smoke_greybox.gd:253
+msgid "Credits"
+msgstr "Emeği Geçenler"
+
+#. On the Credits screen. First %s: the game's name (e.g. "Bagh Chal"); second %s: the name of the person who made it.
+#: scenes/play/play_menu.gd:883
+#, c-format
+msgid "%s is a game by %s."
+msgstr "%s, %s tarafından yapılmış bir oyundur."
+
+#. Button and screen title: the licences of the open-source software and fonts the game uses.
+#: scenes/play/play_menu.gd:886 scenes/play/play_menu.gd:893 tools/smoke_greybox.gd:260
+msgid "Open-source licenses"
+msgstr "Açık kaynak lisansları"
+
+#. On the "Open-source licenses" screen, above the list. "Tap" also covers clicking.
+#: scenes/play/play_menu.gd:895
+msgid "This game is made with the software and fonts below. Tap one to read its license."
+msgstr "Bu oyun aşağıdaki yazılım ve yazı tipleriyle yapılmıştır. Lisansını okumak için birine dokunun."
+
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:846
+#: scenes/play/play_menu.gd:963
 msgid "More looks"
 msgstr "Diğer görünümler"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:848
+#: scenes/play/play_menu.gd:965
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "Uygulamayı kapatana kadar görünümü değiştirmek için kısa bir video izle."
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:852
+#: scenes/play/play_menu.gd:969
 msgid "No video is ready right now. Try again in a moment."
 msgstr "Şu anda hazır bir video yok. Birazdan tekrar dene."
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:855
+#: scenes/play/play_menu.gd:972
 msgid "Watch a video"
 msgstr "Video izle"
 
 #. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
-#: scenes/play/play_menu.gd:871
+#: scenes/play/play_menu.gd:988
 msgid "Or remove ads to keep every look for good."
 msgstr "Ya da reklamları kaldır, tüm görünümler kalıcı olarak senin olsun."
 
 #. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
-#: scenes/play/play_menu.gd:872 scenes/play/play_menu.gd:886 tools/smoke_greybox.gd:217
+#: scenes/play/play_menu.gd:989 scenes/play/play_menu.gd:1003 tools/smoke_greybox.gd:218 tools/smoke_greybox.gd:250
 #, c-format
 msgid "Remove ads · %s"
 msgstr "Reklamları kaldır · %s"
 
 #. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
-#: scenes/play/play_menu.gd:892 tools/smoke_greybox.gd:226
+#: scenes/play/play_menu.gd:1009 tools/smoke_greybox.gd:227
 msgid "Restore purchases"
 msgstr "Satın alımları geri yükle"
 
 #. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:896
+#: scenes/play/play_menu.gd:1013
 msgid "Privacy choices"
 msgstr "Gizlilik tercihleri"
 
 #. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
-#: scenes/play/play_menu.gd:915
+#: scenes/play/play_menu.gd:1032
 msgid "Thank you! Ads are off and every look is yours."
 msgstr "Teşekkürler! Reklamlar kapandı ve tüm görünümler artık senin."
 
 #. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
-#: scenes/play/play_menu.gd:925
+#: scenes/play/play_menu.gd:1042
 msgid "Your payment is pending. Ads will turn off as soon as it goes through."
 msgstr "Ödemen beklemede. Ödeme tamamlanır tamamlanmaz reklamlar kapanacak."
 
 #. Message when buying "Remove ads" failed (not when the player cancelled).
-#: scenes/play/play_menu.gd:928
+#: scenes/play/play_menu.gd:1045
 msgid "The purchase didn't go through. Please try again later."
 msgstr "Satın alma tamamlanamadı. Lütfen daha sonra tekrar dene."
 
 #. Message after "Restore purchases" found Remove ads.
-#: scenes/play/play_menu.gd:938
+#: scenes/play/play_menu.gd:1055
 msgid "Your purchase is restored."
 msgstr "Satın alımın geri yüklendi."
 
 #. Message after "Restore purchases" found nothing bought with this store account.
-#: scenes/play/play_menu.gd:941
+#: scenes/play/play_menu.gd:1058
 msgid "No purchase to restore on this account."
 msgstr "Bu hesapta geri yüklenecek satın alım yok."
 
 #. Message when the store (Google Play, the App Store) can't be reached.
-#: scenes/play/play_menu.gd:944
+#: scenes/play/play_menu.gd:1061
 msgid "The store isn't available right now."
 msgstr "Mağazaya şu anda ulaşılamıyor."
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:966
+#: scenes/play/play_menu.gd:1083
 msgid "Graphics"
 msgstr "Grafik"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:1047
+#: scenes/play/play_menu.gd:1164
 #, c-format
 msgid "Your name: %s"
 msgstr "Adın: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:1084
+#: scenes/play/play_menu.gd:1201
 msgid "Waiting"
 msgstr "Bekleniyor"
 
@@ -1192,12 +1223,12 @@ msgid "In the accounts written down a century ago, the dogs may only go forward,
 msgstr "Yüz yıl önce yazıya geçirilen anlatımlarda köpekler yalnızca ileri gidebilir; o zaman kulede kalan bir puma asla yakalanamaz. Burada köpeklerin hareketi ve pumanın kazanması, oyunun günümüzdeki bir Mapuche sürümü olan Trapial-Kuzen'deki gibidir. Kule sıradan bir tahta parçasıdır ve sen ayarlardan değiştirmedikçe ilk hamleyi puma yapar."
 
 #. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
-#: titles/common/title_config.gd:202
+#: titles/common/title_config.gd:239
 msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
 msgstr "Böylece sana daha ilgili reklamlar gösterebiliriz. Bagh Chal, reklamlar sayesinde ücretsiz."
 
 #. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
-#: titles/common/title_config.gd:204
+#: titles/common/title_config.gd:241
 msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
 msgstr "Bagh Chal, yakındaki biriyle oynayabilmen için Wi-Fi ağında oyun arar."
 

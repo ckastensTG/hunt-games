@@ -249,6 +249,30 @@ func _check_settings() -> void:
 		failures.append("settings: opens with Sound and Music (%s, %d sliders)" % [menu._screen, sliders.size()])
 	if not _menu_has_text(L10n.t("Remove ads · %s") % "US$1.99"):
 		failures.append("settings: Remove ads offered there too")
+	# Credits → Open-source licenses → Godot's notice, and back to Settings.
+	var credits := _menu_button(L10n.t("Credits"))
+	if credits == null:
+		failures.append("settings: a Credits button")
+	else:
+		credits.pressed.emit()
+		if menu._screen != "credits" or not _menu_has_label("Christopher Kastensmidt"):
+			failures.append("credits: the author's line (%s)" % menu._screen)
+		var licenses := _menu_button(L10n.t("Open-source licenses"))
+		if licenses:
+			licenses.pressed.emit()
+		var godot := _menu_button("Godot Engine")
+		if menu._screen != "licenses" or godot == null or _menu_button("Epic Online Services SDK") == null:
+			failures.append("credits: the licence list (%s)" % menu._screen)
+		elif godot:
+			godot.pressed.emit()
+			var texts := menu.find_children("*", "RichTextLabel", true, false).filter(
+				func(n: Node) -> bool: return not _going(n) and (n as RichTextLabel).text.contains("This game uses Godot Engine"))
+			if menu._screen != "license" or texts.is_empty():
+				failures.append("credits: Godot's notice opens (%s)" % menu._screen)
+		for i in 3:
+			menu.back()
+		if menu._screen != "settings":
+			failures.append("credits: Back three times returns to Settings (%s)" % menu._screen)
 	var back := _menu_button(L10n.t("Back"))
 	if back:
 		back.pressed.emit()
@@ -260,6 +284,13 @@ func _check_settings() -> void:
 
 func _menu_has_text(text: String) -> bool:
 	return _menu_button(text) != null
+
+
+func _menu_has_label(part: String) -> bool:
+	for n in game.menu.find_children("*", "Label", true, false):
+		if (n as Label).text.contains(part) and n.is_visible_in_tree() and not _going(n):
+			return true
+	return false
 
 
 func _menu_button(text: String) -> Button:

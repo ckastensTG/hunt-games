@@ -17,6 +17,9 @@ extends Node3D
 ## (IAPService: the purchase, Restore, and owned at start turn ads off).
 ## Undo is for games against the AI only, never against a person
 ## (Christopher, 2026-11-06).
+## Achievements (AchievementService, Game Center and Google Play Games): the
+## game reports what a finished game or the walkthrough earned
+## (HuntAchievements decides).
 
 enum Mode { HOTSEAT, HUMAN_PREY, HUMAN_HUNTER, AI_VS_AI, NETWORK }
 ## The purchase that turns ads off and opens every look (TitleConfig "iap").
@@ -109,6 +112,8 @@ var perf: PerfOverlay
 var ads: AdService
 ## Purchases: Remove ads (one IAPService for the app).
 var iap: IAPService
+## Achievements (one AchievementService for the app).
+var achievements: AchievementService
 ## Auto graphics measures and steps down on devices (not in the editor).
 var graphics_auto := not OS.has_feature("editor")
 var _graphics_auto := GameGraphics.Auto.new()
@@ -170,6 +175,8 @@ func _ready() -> void:
 	iap.start(title.iap_setup())
 	iap.changed.connect(_on_purchases_changed)
 	_on_purchases_changed()
+	achievements = AchievementService.instance()
+	achievements.start(title.achievements_setup())
 	_styles["bagh_chal"] = BaghChalArt.styles()
 	# The saved look, unless it's locked again (it was opened by a video in
 	# an earlier session): then the free one.
@@ -518,6 +525,9 @@ func _on_game_over(_status: int, _reason: int) -> void:
 	if not tutorial_active and session.kind != MatchSession.Kind.AI_VS_AI and session != _counted_session:
 		_counted_session = session
 		ads.game_finished()
+	if not tutorial_active:
+		for key in HuntAchievements.for_game(session, local_side()):
+			achievements.unlock(key)
 	# The sting waits for the last move to land.
 	_sting_pending = not tutorial_active
 	if not _animating:
@@ -1325,6 +1335,9 @@ func start_tutorial() -> void:
 func _on_tutorial_finished(play_now: bool) -> void:
 	_stop_tween()
 	tutorial_active = false
+	if play_now:
+		# "Start playing" on the last step: the whole walkthrough was seen.
+		achievements.unlock(HuntAchievements.FIRST_LESSON)
 	var back := _saved_session
 	_saved_session = null
 	if play_now or back == null:
