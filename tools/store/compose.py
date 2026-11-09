@@ -15,6 +15,16 @@ Run from the hunt-games root:
         language after the first is made. --classes picks the device
         classes (the App Store and Google Play use different locale codes,
         so run once per store with its --lang).
+    python3 tools/store/compose.py --search --raw3d=... --rawui=... --captions=... --out=... --lang=...
+        the App Store's search results image (3:2, 3840x2560; iOS 27 shows it
+        in search instead of the first screenshots): the --search-scene
+        picture (store_shots.gd at the "search" size, default "capture")
+        under the --search-caption caption (default "brass")
+        -> OUT/app-store/<lang>/search-results.png
+    python3 tools/store/compose.py --header=RENDER --out=DIR
+        the App Store's product page header (21:9, 3840x1646, no text: the
+        icon and name sit under it), from a hero render (style_frame.gd
+        --views=hero at 3840x1646) -> OUT/app-store/header/product-page-header.png
 
 Captions: a JSON file {"order": [scenes...], "<scene>": [headline, line]}
 (timeless-store-assets/<title>/shared/<lang>/captions.json, next to the
@@ -56,7 +66,12 @@ CLASSES = {
     "play_tablet": {"store": "google-play", "folder": "tablet-10", "canvas": (2560, 1440),
                     "band": 280, "frame": (330, 280, 1900, 1100), "headline": 88, "line": 44,
                     "also": ("tablet-7", (1920, 1080))},
+    # App Store: the search results image (3:2), a landscape game picture (the
+    # 10" tablet's shape) under a caption big enough to read on a phone.
+    "search": {"store": "app-store", "folder": "", "canvas": (3840, 2560),
+               "band": 720, "frame": (400, 720, 3040, 1760), "headline": 240, "line": 124},
 }
+HEADER = (3840, 1646)
 
 
 def background(size: tuple[int, int], glow_box: tuple[int, int, int, int]) -> Image.Image:
@@ -233,7 +248,7 @@ def main() -> None:
     ap.add_argument("--captions")
     ap.add_argument("--out")
     ap.add_argument("--lang", default="en")
-    ap.add_argument("--classes", default=",".join(CLASSES))
+    ap.add_argument("--classes", default=",".join(k for k in CLASSES if k != "search"))
     ap.add_argument("--headline-font", default=str(FONTS / "AlegreyaSC-Medium.ttf"))
     ap.add_argument("--line-font", default=str(FONTS / "AlegreyaSans-Regular.ttf"))
     ap.add_argument("--feature", help="hero render -> OUT/google-play/LANG/feature-graphic.png")
@@ -241,10 +256,42 @@ def main() -> None:
     ap.add_argument("--feature-title-font", default=str(FONTS / "AlegreyaSC-Medium.ttf"))
     ap.add_argument("--feature-line", default="")
     ap.add_argument("--logo", help="the line's white lockup (TEX_Logo_TimelessGames_White.png)")
+    ap.add_argument("--search", action="store_true", help="the App Store search results image")
+    ap.add_argument("--search-scene", default="capture")
+    ap.add_argument("--search-caption", default="brass")
+    ap.add_argument("--header", help="hero render -> OUT/app-store/header/product-page-header.png")
     ap.add_argument("--icon", action="append", default=[],
                     help="NAME=render.png[@left,top,side] -> OUT/app-store/icon/AppIcon-1024_NAME.png "
                          "and google-play/icon/icon-512_NAME.png")
     a = ap.parse_args()
+    if a.header:
+        im = Image.open(a.header).convert("RGB")
+        if im.size != HEADER:
+            # Fill the width, then keep the middle.
+            im = im.resize((HEADER[0], round(im.height * HEADER[0] / im.width)), Image.LANCZOS)
+            top = max(0, (im.height - HEADER[1]) // 2)
+            im = im.crop((0, top, HEADER[0], top + HEADER[1]))
+        dst = pathlib.Path(a.out) / "app-store" / "header" / "product-page-header.png"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        im.save(dst, optimize=True)
+        print(f"{dst}  {im.size[0]}x{im.size[1]}")
+        return
+    if a.search:
+        c = CLASSES["search"]
+        caps = json.loads(pathlib.Path(a.captions).read_text(encoding="utf-8"))
+        scene = a.search_scene
+        if a.raw3d:
+            shot = Image.alpha_composite(Image.open(pathlib.Path(a.raw3d) / "search" / f"{scene}.png").convert("RGBA"),
+                                         Image.open(pathlib.Path(a.rawui) / "search" / f"{scene}.png").convert("RGBA"))
+        else:
+            shot = Image.open(pathlib.Path(a.raw) / "search" / f"{scene}.png")
+        headline, line = caps[a.search_caption]
+        img = compose(c, shot, headline, line, pathlib.Path(a.headline_font), pathlib.Path(a.line_font))
+        dst = pathlib.Path(a.out) / "app-store" / a.lang / "search-results.png"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        img.save(dst, optimize=True)
+        print(f"{dst}  {img.size[0]}x{img.size[1]}")
+        return
     if a.feature or a.icon:
         out = pathlib.Path(a.out)
         if a.feature:

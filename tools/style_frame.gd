@@ -6,7 +6,7 @@ extends SceneTree
 ##     [--rendering-method forward_plus|mobile|gl_compatibility] \
 ##     -s res://tools/style_frame.gd -- --out=DIR [--plies=N] [--views=hero,ai,prey] [--tag=NAME]
 ##     [--style=brass|stone|modern] [--ui] [--select] [--result] [--tutorial=STEP]
-##     [--cam=FX,FY,FZ:TX,TY,TZ] [--fov=DEG]
+##     [--cam=FX,FY,FZ:TX,TY,TZ] [--fov=DEG] [--keep-dof]
 ##     [--rules=ID] [--locale=CODE] [--pseudo]
 ##
 ## Views: hero = the cinematic style frame; ai = the AI-vs-AI camera;
@@ -46,6 +46,9 @@ var hero_cam: Camera3D
 var cam_from := Vector3.ZERO
 var cam_to := Vector3.ZERO
 var cam_fov := 32.0
+## --keep-dof: with --cam, keep the hero view's own depth of field (the App
+## Store header: the room behind as in the style frame).
+var keep_dof := false
 
 
 func _initialize() -> void:
@@ -82,6 +85,8 @@ func _initialize() -> void:
 			cam_to = Vector3(t[0], t[1], t[2])
 		elif arg.begins_with("--fov="):
 			cam_fov = float(arg.substr(6))
+		elif arg == "--keep-dof":
+			keep_dof = true
 	if tag == "":
 		tag = "_" + RenderingServer.get_current_rendering_method()
 	tag = "_" + style + tag
@@ -147,8 +152,9 @@ func _setup(view: String) -> void:
 		if cam_from != cam_to:
 			hero_cam.fov = cam_fov
 			hero_cam.near = 0.05
-			hero_cam.attributes.dof_blur_near_enabled = false
-			hero_cam.attributes.dof_blur_far_distance = cam_from.distance_to(cam_to) * 2.5
+			if not keep_dof:
+				hero_cam.attributes.dof_blur_near_enabled = false
+				hero_cam.attributes.dof_blur_far_distance = cam_from.distance_to(cam_to) * 2.5
 			hero_cam.position = cam_from
 			hero_cam.look_at(cam_to, Vector3.UP)
 		hero_cam.make_current()
