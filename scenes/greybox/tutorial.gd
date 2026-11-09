@@ -99,8 +99,9 @@ func _build() -> void:
 	_place()
 
 
-## Top left, under the menu button; in portrait, under the turn banner (which
-## sits below the top corners there).
+## Top left, under the menu button and the title plate (landscape: with
+## Large text the plate reaches lower); in portrait, under the turn banner
+## (which sits below the top corners there).
 func _place() -> void:
 	var size := get_viewport().get_visible_rect().size
 	var y := 118.0
@@ -108,6 +109,9 @@ func _place() -> void:
 	if size.y > size.x and hud and hud._turn_panel:
 		var banner: Control = hud._turn_panel
 		y = banner.offset_top + banner.get_combined_minimum_size().y + 14.0
+	elif hud and hud._title_box and hud._title_box.visible:
+		var plate: Control = hud._title_box
+		y = maxf(y, plate.position.y + plate.get_combined_minimum_size().y + 12.0)
 	_card.position = Vector2(28, y)
 
 

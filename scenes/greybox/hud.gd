@@ -41,6 +41,11 @@ var _new_opponent: Button
 var _hint: Label
 var _hint_panel: PanelContainer
 var _turn_panel: PanelContainer
+## Who you're playing against the AI (Bagh Chal's people, HuntOpponents).
+var _opponent: PanelContainer
+var _opponent_emblem: OpponentEmblem
+var _opponent_name: Label
+var _opponent_level: Label
 var _stop: Button
 var _moves_panel: PanelContainer
 var _moves: RichTextLabel
@@ -73,6 +78,7 @@ func _build() -> void:
 	_build_menu_button()
 	_build_title()
 	_build_turn()
+	_build_opponent()
 	_build_score()
 	_build_undo()
 	_build_hint()
@@ -193,6 +199,34 @@ func _build_turn() -> void:
 	_root.add_child(panel)
 	_margin(panel, Control.PRESET_CENTER_TOP, 0, 22)
 	_turn_panel = panel
+
+
+## The opponent against the AI: emblem, name and level. Under the turn
+## banner in portrait, under the title in landscape (_layout).
+func _build_opponent() -> void:
+	_opponent = PanelContainer.new()
+	var s := SeriesTheme.panel_box(SeriesTheme.PANEL_SOFT, Color(0, 0, 0, 0), 30)
+	s.content_margin_left = 7
+	s.content_margin_right = 22
+	s.content_margin_top = 5
+	s.content_margin_bottom = 5
+	s.shadow_size = 0
+	_opponent.add_theme_stylebox_override("panel", s)
+	_opponent.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	_opponent_emblem = OpponentEmblem.make("topi", 48.0)
+	_opponent_name = SeriesTheme.label("", "display", 23, SeriesTheme.TEXT)
+	_opponent_name.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_opponent_level = SeriesTheme.label("", "caps", 15, SeriesTheme.TEXT_DIM)
+	_opponent_level.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(_opponent_emblem)
+	row.add_child(_opponent_name)
+	row.add_child(_opponent_level)
+	_opponent.add_child(row)
+	_opponent.visible = false
+	_root.add_child(_opponent)
+	_margin(_opponent, Control.PRESET_TOP_LEFT, 28, 120)
 
 
 func _build_score() -> void:
@@ -353,6 +387,15 @@ func _layout() -> void:
 		_turn_panel.offset_top = 22.0 + maxf(_score_panel.get_combined_minimum_size().y, _menu_button.custom_minimum_size.y) + 14.0
 	else:
 		_turn_panel.offset_top = 22.0
+	# The opponent: centred under the turn banner (portrait), or under the
+	# title on the left (landscape).
+	var opp := _opponent.get_combined_minimum_size()
+	_opponent.size = opp
+	if portrait:
+		_opponent.position = Vector2(roundf((size.x - opp.x) / 2.0),
+			_turn_panel.offset_top + _turn_panel.get_combined_minimum_size().y + 12.0)
+	else:
+		_opponent.position = Vector2(edge, _title_box.position.y + _title_box.get_combined_minimum_size().y + 14.0)
 	# The hint wraps at the room it has (the panel adds 44 of padding).
 	var room := size.x - 2.0 * edge - 44.0 if portrait else size.x - 2.0 * (edge + side_w + 24.0) - 44.0
 	if _stop.visible:
@@ -405,6 +448,14 @@ func refresh() -> void:
 	_root.visible = game.menu == null or not game.menu.is_open()
 	_menu_button.visible = shown
 	_undo.visible = shown and game.mode in [game.Mode.HUMAN_PREY, game.Mode.HUMAN_HUNTER]
+	# Against the AI: who it is (the title's people; none in pass and play).
+	var person := HuntOpponents.at_level(title_id, game.level)
+	_opponent.visible = shown and not person.is_empty() and game.mode in [game.Mode.HUMAN_PREY, game.Mode.HUMAN_HUNTER]
+	if _opponent.visible:
+		_opponent_emblem.kind = person.emblem
+		_opponent_emblem.queue_redraw()
+		_opponent_name.text = L10n.t(person.name)
+		_opponent_level.text = HuntOpponents.level_name(game.level)
 	_undo.disabled = not game.can_undo()
 	_moves_panel.visible = shown
 

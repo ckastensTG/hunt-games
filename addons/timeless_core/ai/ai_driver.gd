@@ -2,17 +2,20 @@ class_name AIDriver
 extends RefCounted
 ## Runs one AI move on a worker thread (framework §4.2): start() searches a
 ## copy of the position, poll() hands back the move once it's ready, cancel()
-## stops it (undo, resign, leaving the game).
+## stops it (undo, resign, leaving the game). The persona plays with its own
+## style for the side to move (AIPersona.evaluator_for).
 
 var _task := -1
 var _cancel := false
 var _result := PackedInt32Array()
+var _lapse := false
 
 
 func start(state: HuntState, persona: AIPersona, evaluator: HuntEvaluator, seed_value: int) -> void:
 	cancel()
 	_cancel = false
 	_result = PackedInt32Array()
+	_lapse = false
 	var snapshot := state.clone()
 	_task = WorkerThreadPool.add_task(_work.bind(persona, evaluator, snapshot, seed_value), false, "AI move")
 
@@ -32,6 +35,12 @@ func poll() -> PackedInt32Array:
 	return _result
 
 
+## True when the last move was one of the persona's lapses (a bigger slip;
+## AIPersona.lapse_rate), so the game can show it with a longer pause.
+func last_was_lapse() -> bool:
+	return _lapse
+
+
 func cancel() -> void:
 	if _task >= 0:
 		_cancel = true
@@ -48,7 +57,8 @@ static func choose_now(state: HuntState, persona: AIPersona, evaluator: HuntEval
 
 
 func _work(persona: AIPersona, evaluator: HuntEvaluator, snapshot: HuntState, seed_value: int) -> void:
-	var search := persona.make_searcher(evaluator)
+	# The persona's own style for the side it plays.
+	var search := persona.make_searcher(persona.evaluator_for(snapshot.side, evaluator), seed_value)
 	search.begin(snapshot)
 	while not search.step(4000):
 		if _cancel:
@@ -56,4 +66,6 @@ func _work(persona: AIPersona, evaluator: HuntEvaluator, snapshot: HuntState, se
 			return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
-	_result = persona.pick(search, rng)
+	var picked := persona.pick_ex(search, rng)
+	_result = picked.move
+	_lapse = picked.lapse

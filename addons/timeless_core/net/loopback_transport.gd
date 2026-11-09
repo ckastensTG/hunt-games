@@ -8,6 +8,7 @@ var _inbox: Array[PackedByteArray] = []
 var _open := false
 var _announced := false
 var _dropped := false
+var _quiet := false
 
 
 static func pair() -> Array[LoopbackTransport]:
@@ -52,22 +53,27 @@ func close() -> void:
 
 
 func is_open() -> bool:
-	return _open and not _dropped
+	return _open and (not _dropped or _quiet)
 
 
-## Simulates a dropped connection on both ends.
-func drop() -> void:
+## Simulates a dropped connection on both ends. `quiet`: packets are lost
+## with no event either way, and come back the same way (as an EOS link can).
+func drop(quiet := false) -> void:
 	for t in [self, other()]:
 		if t == null:
 			continue
 		if not t._dropped:
 			t._dropped = true
 			t._inbox.clear()
-			t._announced = false
-			t.disconnected.emit()
+			if quiet:
+				t._quiet = true
+			else:
+				t._announced = false
+				t.disconnected.emit()
 
 
 func restore() -> void:
 	for t in [self, other()]:
 		if t != null:
 			t._dropped = false
+			t._quiet = false

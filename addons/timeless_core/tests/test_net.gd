@@ -166,6 +166,44 @@ func test_reconnect_resyncs() -> void:
 	check_eq(guest.phase, NetMatch.Phase.PLAYING, "playing again")
 
 
+func test_a_link_that_comes_back_quietly() -> void:
+	# The link drops and returns with no event (as EOS can do): both sides
+	# notice the silence, and the guest's repeated HELLO ends the wait.
+	var p := _pair_matches(MatchSession.Kind.ONLINE_FRIEND)
+	var host: NetMatch = p[0]
+	var guest: NetMatch = p[1]
+	var links: Array = p[2]
+	_pump([host, guest])
+	links[0].drop(true)
+	host.session.commit(_first_legal(host.session.state), HuntState.PREY)
+	_pump([host, guest], 3, 1000 + NetMatch.SILENCE_MS + 500)
+	check_eq(host.phase, NetMatch.Phase.RECONNECTING, "host waits")
+	check_eq(guest.phase, NetMatch.Phase.RECONNECTING, "guest waits")
+	links[0].restore()
+	_pump([host, guest], 6, 1000 + NetMatch.SILENCE_MS + 500 + NetMatch.RECONNECT_TRY_MS)
+	check_eq(host.phase, NetMatch.Phase.PLAYING, "host plays on")
+	check_eq(guest.phase, NetMatch.Phase.PLAYING, "guest plays on")
+	check_eq(guest.session.moves.size(), 1, "guest caught up")
+	check_eq(guest.session.position_hash(), host.session.position_hash(), "same position")
+
+
+func test_one_side_waiting_hears_the_other() -> void:
+	# Only the host noticed a gap; the guest's next ping ends the host's wait
+	# (the host sends the moves), so neither side gives up on the other.
+	var p := _pair_matches(MatchSession.Kind.ONLINE_FRIEND)
+	var host: NetMatch = p[0]
+	var guest: NetMatch = p[1]
+	_pump([host, guest])
+	host._lose_connection()
+	check_eq(host.phase, NetMatch.Phase.RECONNECTING, "host waits")
+	var back := []
+	host.reconnected.connect(func() -> void: back.append(true))
+	_pump([host, guest], 4, 1000 + NetMatch.PING_MS + 10)
+	check_eq(host.phase, NetMatch.Phase.PLAYING, "host plays on")
+	check_eq(back.size(), 1, "reconnected once")
+	check_eq(guest.phase, NetMatch.Phase.PLAYING, "guest never stopped")
+
+
 func test_resync_redraws_without_move_signals() -> void:
 	# A resync replaces the moves with a `reset`, not a move signal per move.
 	var p := _pair_matches()
@@ -306,8 +344,10 @@ func test_nearby_codes() -> void:
 
 func test_lan_discovery_hears_a_beacon() -> void:
 	var listener := LanDiscovery.new()
+	listener.set_probe_targets([])  # beacons only
 	check(listener.listen(45991), "listening")
 	var host := LanDiscovery.new()
+	host.set_probe_port(45995)
 	host.set_destination("127.0.0.1", 45991)
 	host.advertise({"title": "test", "name": {"key": "scribe", "n": 7}, "code": "60N-0G0Q"})
 	var t0 := Time.get_ticks_msec()
@@ -321,6 +361,49 @@ func test_lan_discovery_hears_a_beacon() -> void:
 		check_eq(found[0].get("code"), "60N-0G0Q", "with its code")
 	host.stop_advertising()
 	listener.stop_listening()
+
+
+## iPhones can't hear broadcasts: the joiner asks each address directly and
+## the host answers with its beacon.
+func test_lan_discovery_finds_a_host_by_probing() -> void:
+	var host := LanDiscovery.new()
+	host.set_probe_port(45993)
+	host.set_destination("127.0.0.1", 45999)  # its broadcasts reach nobody
+	host.advertise({"title": "test", "name": {"key": "potter", "n": 12}, "code": "60N-0G0R"})
+	var joiner := LanDiscovery.new()
+	joiner.set_probe_port(45993)
+	joiner.set_probe_targets(["127.0.0.1"])
+	check(joiner.listen(45992), "listening")
+	var t0 := Time.get_ticks_msec()
+	while joiner.hosts().is_empty() and Time.get_ticks_msec() - t0 < 2000:
+		joiner.poll()
+		host.poll()
+		OS.delay_msec(10)
+	var found := joiner.hosts()
+	check_eq(found.size(), 1, "the host answered")
+	if not found.is_empty():
+		check_eq(found[0].get("code"), "60N-0G0R", "with its code")
+		check_eq(found[0].get("ip"), "127.0.0.1", "from its address")
+	# A host that stopped answers nothing; the game drops out of the list.
+	host.stop_advertising()
+	var t1 := Time.get_ticks_msec()
+	while not joiner.hosts().is_empty() and Time.get_ticks_msec() - t1 < 6000:
+		joiner.poll()
+		OS.delay_msec(20)
+	check(joiner.hosts().is_empty(), "gone once it stops")
+	joiner.stop_listening()
+
+
+func test_lan_probe_targets() -> void:
+	var t := LanDiscovery.probe_targets(["192.168.1.23", "127.0.0.1", "fe80::1", "169.254.3.4", "100.64.0.2"])
+	check_eq(t.size(), 254, "253 neighbours and the broadcast address")
+	check(not t.has("192.168.1.23"), "not itself")
+	check(t.has("192.168.1.1") and t.has("192.168.1.254"), "the whole /24")
+	check(not t.has("192.168.1.0") and not t.has("192.168.1.255"), "no network or broadcast address of the /24")
+	check_eq(t[t.size() - 1], LanDiscovery.BROADCAST, "the broadcast last")
+	var two := LanDiscovery.probe_targets(["10.0.0.5", "172.20.1.9", "10.0.0.7", "172.40.1.1"])
+	check_eq(two.size(), 253 * 2 + 1, "two private networks, each once; 172.40 isn't private")
+	check_eq(LanDiscovery.probe_targets([]), [LanDiscovery.BROADCAST], "no network: only the broadcast")
 
 
 # --- Online matching (fake backend) -------------------------------------------------

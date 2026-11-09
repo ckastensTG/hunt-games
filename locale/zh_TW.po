@@ -10,105 +10,105 @@ msgstr ""
 "X-Review-Status: adapted from zh_CN with Taiwan vocabulary (not converted character by character); translation confidence good; NEEDS native-speaker review before release (bible §7)\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:941
+#: scenes/greybox/greybox.gd:979
 msgid "Loading…"
 msgstr "載入中…"
 
-#: scenes/greybox/hud.gd:140
+#: scenes/greybox/hud.gd:146
 msgid "Menu"
 msgstr "選單"
 
-#: scenes/greybox/hud.gd:164
+#: scenes/greybox/hud.gd:170
 msgid "Undo"
 msgstr "悔棋"
 
 #. Button: end a chain of captures after the current jump.
-#: scenes/greybox/hud.gd:235
+#: scenes/greybox/hud.gd:269
 msgid "Stop here"
 msgstr "到此為止"
 
 #. Title of the list of moves played so far.
-#: scenes/greybox/hud.gd:254
+#: scenes/greybox/hud.gd:288
 msgid "Moves"
 msgstr "棋步"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:305 scenes/greybox/hud.gd:484
+#: scenes/greybox/hud.gd:339 scenes/greybox/hud.gd:535
 msgid "Play again"
 msgstr "再來一局"
 
 #. Button after an online quick match: look for someone else to play.
-#: scenes/greybox/hud.gd:315
+#: scenes/greybox/hud.gd:349
 msgid "New opponent"
 msgstr "換個對手"
 
 #. Button on the game-over card: back to the main menu.
-#: scenes/greybox/hud.gd:320
+#: scenes/greybox/hud.gd:354
 msgid "Main menu"
 msgstr "主選單"
 
 #. Button on the game-over card: close it to look at the final position.
-#: scenes/greybox/hud.gd:324
+#: scenes/greybox/hud.gd:358
 msgid "Look at the board"
 msgstr "查看棋盤"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:390
+#: scenes/greybox/hud.gd:433
 msgid "thinking"
 msgstr "思考中"
 
-#: scenes/greybox/hud.gd:423 scenes/greybox/hud.gd:472
+#: scenes/greybox/hud.gd:474 scenes/greybox/hud.gd:523
 msgid "A draw"
 msgstr "和局"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:430
+#: scenes/greybox/hud.gd:481
 #, c-format
 msgid "Captured %d / %d"
 msgstr "已吃 %d / %d"
 
-#: scenes/greybox/hud.gd:458
+#: scenes/greybox/hud.gd:509
 msgid "No moves yet"
 msgstr "尚無棋步"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:302
+#: scenes/greybox/hud.gd:529 tools/smoke_multiplayer.gd:326
 msgid "You won"
 msgstr "你贏了"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:478 tools/smoke_multiplayer.gd:155
+#: scenes/greybox/hud.gd:529 tools/smoke_multiplayer.gd:179
 msgid "You lost"
 msgstr "你輸了"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:484 tools/smoke_multiplayer.gd:157
+#: scenes/greybox/hud.gd:535 tools/smoke_multiplayer.gd:181
 msgid "Rematch"
 msgstr "再戰一局"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:496
+#: scenes/greybox/hud.gd:547
 #, c-format
 msgid "place %s"
 msgstr "放在 %s"
 
-#: scenes/greybox/hud.gd:505
+#: scenes/greybox/hud.gd:556
 msgid "Watching the AI play both sides."
 msgstr "電腦正在替雙方下棋。"
 
-#: scenes/greybox/hud.gd:509
+#: scenes/greybox/hud.gd:560
 msgid "Waiting for your opponent's move."
 msgstr "等待對手下棋。"
 
-#: scenes/greybox/hud.gd:511
+#: scenes/greybox/hud.gd:562
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "連跳吃子：選擇下一個落點，或到此為止。"
 
-#: scenes/greybox/hud.gd:517
+#: scenes/greybox/hud.gd:568
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "選擇去向。斷開的圓環表示吃子。"
 
-#: scenes/greybox/hud.gd:518
+#: scenes/greybox/hud.gd:569
 msgid "Pick where it goes."
 msgstr "選擇去向。"
 
@@ -126,22 +126,22 @@ msgid "‹ Back"
 msgstr "‹ 上一步"
 
 #. Step counter in the walkthrough: step number and number of steps.
-#: scenes/greybox/tutorial.gd:175
+#: scenes/greybox/tutorial.gd:179
 #, c-format
 msgid "How to play · %d of %d"
 msgstr "玩法 · 第 %d 步，共 %d 步"
 
-#: scenes/greybox/tutorial.gd:178
+#: scenes/greybox/tutorial.gd:182
 msgid "Start playing"
 msgstr "開始對局"
 
-#: scenes/greybox/tutorial.gd:178
+#: scenes/greybox/tutorial.gd:182
 msgid "Next ›"
 msgstr "下一步 ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:659
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:784
 msgid "Looking for an opponent…"
 msgstr "正在尋找對手…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "立即開始"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:991
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:1182
 msgid "Not now"
 msgstr "先不要"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "要認輸嗎？"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:767
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:892
 msgid "Resign"
 msgstr "認輸"
 
@@ -219,7 +219,7 @@ msgstr "已提議和局，等待對方回覆。"
 msgid "Rematch offered. Waiting for an answer."
 msgstr "已邀請再戰，等待對方回覆。"
 
-#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:301
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:325
 msgid "Your opponent left the game."
 msgstr "對手已離開對局。"
 
@@ -227,7 +227,7 @@ msgstr "對手已離開對局。"
 msgid "Reconnected."
 msgstr "已重新連線。"
 
-#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:146
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:170
 msgid "Your opponent declined the draw."
 msgstr "對手拒絕了和局。"
 
@@ -251,384 +251,378 @@ msgstr "對方未能連線，繼續尋找…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "時間到，已替你下了一步（第 %d 次，共 3 次）。"
 
-#: scenes/play/play_menu.gd:282 tools/smoke_greybox.gd:276
+#: scenes/play/play_menu.gd:293 tools/smoke_greybox.gd:292
 msgid "Back"
 msgstr "返回"
 
-#: scenes/play/play_menu.gd:337
+#: scenes/play/play_menu.gd:353
 msgid "Rules"
 msgstr "規則"
 
-#: scenes/play/play_menu.gd:357
+#: scenes/play/play_menu.gd:373
 msgid "Language"
 msgstr "語言"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:383 scenes/play/play_menu.gd:757
+#: scenes/play/play_menu.gd:400 scenes/play/play_menu.gd:882
 msgid "Continue"
 msgstr "繼續"
 
-#: scenes/play/play_menu.gd:384 scenes/play/play_menu.gd:413
+#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:430
 msgid "Play against the AI"
 msgstr "與電腦對弈"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:386 scenes/play/play_menu.gd:433
+#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:553
 msgid "Pass and play"
 msgstr "同機雙人"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:388 scenes/play/play_menu.gd:442
+#: scenes/play/play_menu.gd:405 scenes/play/play_menu.gd:562
 msgid "Play local"
 msgstr "區域網路對戰"
 
-#: scenes/play/play_menu.gd:390 scenes/play/play_menu.gd:545
+#: scenes/play/play_menu.gd:407 scenes/play/play_menu.gd:665 scenes/play/play_menu.gd:742
 msgid "Play online"
 msgstr "線上對戰"
 
-#: scenes/play/play_menu.gd:391 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:408 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "玩法"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:394 scenes/play/play_menu.gd:702
+#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:827
 msgid "Game origins"
 msgstr "遊戲起源"
 
 #. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
-#: scenes/play/play_menu.gd:396 scenes/play/play_menu.gd:816 tools/smoke_greybox.gd:240
+#: scenes/play/play_menu.gd:413 scenes/play/play_menu.gd:941 tools/smoke_greybox.gd:242
 msgid "Settings"
 msgstr "設定"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:404
+#: scenes/play/play_menu.gd:421
 msgid "Quit game"
 msgstr "結束遊戲"
 
-#: scenes/play/play_menu.gd:417
-msgid "Novice"
-msgstr "新手"
-
-#: scenes/play/play_menu.gd:417
-msgid "Apprentice"
-msgstr "學徒"
-
-#: scenes/play/play_menu.gd:417
-msgid "Adept"
-msgstr "高手"
-
-#: scenes/play/play_menu.gd:417
-msgid "Master"
-msgstr "大師"
-
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:422 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:459 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "對手"
 
-#: scenes/play/play_menu.gd:425 scenes/play/play_menu.gd:437 scenes/play/play_menu.gd:461
+#: scenes/play/play_menu.gd:446 scenes/play/play_menu.gd:557 scenes/play/play_menu.gd:581
 msgid "Start"
 msgstr "開始"
 
-#: scenes/play/play_menu.gd:434
+#: scenes/play/play_menu.gd:554
 msgid "Two players share this device and take turns."
 msgstr "兩位玩家共用這台裝置，輪流下棋。"
 
-#: scenes/play/play_menu.gd:443
+#: scenes/play/play_menu.gd:563
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "兩台裝置需連上同一個 Wi-Fi。"
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:446 scenes/play/play_menu.gd:457
+#: scenes/play/play_menu.gd:566 scenes/play/play_menu.gd:577
 msgid "Host a game"
 msgstr "建立對局"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:448 scenes/play/play_menu.gd:489
+#: scenes/play/play_menu.gd:568 scenes/play/play_menu.gd:609
 msgid "Join a game"
 msgstr "加入對局"
 
-#: scenes/play/play_menu.gd:457 scenes/play/play_menu.gd:576
+#: scenes/play/play_menu.gd:577 scenes/play/play_menu.gd:696
 msgid "Create a code"
 msgstr "產生代碼"
 
-#: scenes/play/play_menu.gd:475
+#: scenes/play/play_menu.gd:595
 msgid "Waiting for a player"
 msgstr "等待玩家加入"
 
-#: scenes/play/play_menu.gd:476
+#: scenes/play/play_menu.gd:596
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "在另一台裝置上選擇「區域網路對戰」，再選擇「加入對局」。"
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:480
+#: scenes/play/play_menu.gd:600
 msgid "If the game doesn't appear there, enter this code"
 msgstr "如果那邊沒有出現這局，請輸入此代碼"
 
-#: scenes/play/play_menu.gd:485 scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:656 scenes/play/play_menu.gd:663 scenes/play/play_menu.gd:668
+#: scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:725 scenes/play/play_menu.gd:781 scenes/play/play_menu.gd:788 scenes/play/play_menu.gd:793
 msgid "Cancel"
 msgstr "取消"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:491
+#: scenes/play/play_menu.gd:611
 msgid "Looking for games on this Wi-Fi…"
 msgstr "正在此 Wi-Fi 中尋找對局…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:502
+#: scenes/play/play_menu.gd:622
 msgid "Code"
 msgstr "代碼"
 
-#: scenes/play/play_menu.gd:510 scenes/play/play_menu.gd:637
+#: scenes/play/play_menu.gd:630 scenes/play/play_menu.gd:762
 msgid "Join"
 msgstr "加入"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:547
+#: scenes/play/play_menu.gd:667
 msgid "Play with someone online"
 msgstr "與線上玩家對戰"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:552 scenes/play/play_menu.gd:661
+#: scenes/play/play_menu.gd:672 scenes/play/play_menu.gd:786
 msgid "Standard rules, about a minute per move"
 msgstr "標準規則，每步約一分鐘"
 
-#: scenes/play/play_menu.gd:553 scenes/play/play_menu.gd:573
+#: scenes/play/play_menu.gd:673 scenes/play/play_menu.gd:693 scenes/play/play_menu.gd:742
 msgid "Play with a friend"
 msgstr "與好友對戰"
 
-#: scenes/play/play_menu.gd:574
+#: scenes/play/play_menu.gd:694
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "一人產生代碼，另一人輸入。手機、平板和電腦之間都能對戰。"
 
-#: scenes/play/play_menu.gd:577 scenes/play/play_menu.gd:621
+#: scenes/play/play_menu.gd:697 scenes/play/play_menu.gd:742 scenes/play/play_menu.gd:746
 msgid "Enter a code"
 msgstr "輸入代碼"
 
-#: scenes/play/play_menu.gd:585
+#: scenes/play/play_menu.gd:705
 msgid "Your code"
 msgstr "你的代碼"
 
-#: scenes/play/play_menu.gd:587 scenes/play/play_menu.gd:667
+#: scenes/play/play_menu.gd:707 scenes/play/play_menu.gd:792
 msgid "Connecting…"
 msgstr "正在連線…"
 
-#: scenes/play/play_menu.gd:590
+#: scenes/play/play_menu.gd:710
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "把代碼傳給好友，對方輸入後對局就會開始。"
 
-#: scenes/play/play_menu.gd:593
+#: scenes/play/play_menu.gd:713 scenes/play/play_menu.gd:733
 msgid "Share"
 msgstr "分享"
 
-#: scenes/play/play_menu.gd:595
+#: scenes/play/play_menu.gd:715
 msgid "Copy"
 msgstr "複製"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:617
+#: scenes/play/play_menu.gd:718 scenes/play/play_menu.gd:736
 msgid "Copied"
 msgstr "已複製"
 
-#. Message sent with the system share sheet. %s is a code like TG-7KQ2.
-#: scenes/play/play_menu.gd:611
+#. Message sent with the system share sheet. The first %s is the game's name (Bagh Chal), the second a code like TG-7K4Q. A line with the menu path to enter the code follows it.
+#: scenes/play/play_menu.gd:741
 #, c-format
-msgid "Play with me in Timeless Games! My game code is %s."
-msgstr "來 Timeless Games 和我下一局吧！我的對局代碼是 %s。"
+msgid "Play %s with me! My game code is %s."
+msgstr "來和我下一局 %s 吧！我的對局代碼是 %s。"
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:647
+#: scenes/play/play_menu.gd:772
 msgid "No one is free right now"
 msgstr "目前沒有空閒的玩家"
 
-#: scenes/play/play_menu.gd:648
+#: scenes/play/play_menu.gd:773
 msgid "We can keep looking while you play."
 msgstr "你下棋時我們可以繼續尋找。"
 
-#: scenes/play/play_menu.gd:649
+#: scenes/play/play_menu.gd:774
 msgid "Play against the AI while we keep looking"
 msgstr "先與電腦對弈，同時繼續尋找"
 
-#: scenes/play/play_menu.gd:652
+#: scenes/play/play_menu.gd:777
 msgid "Keep searching"
 msgstr "繼續尋找"
 
-#: scenes/play/play_menu.gd:653
+#: scenes/play/play_menu.gd:778
 msgid "Invite a friend instead"
 msgstr "改為邀請好友"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:673
+#: scenes/play/play_menu.gd:798
 msgid "Couldn't start the game"
 msgstr "無法開始對局"
 
-#: scenes/play/play_menu.gd:676
+#: scenes/play/play_menu.gd:801
 msgid "OK"
 msgstr "確定"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:684
+#: scenes/play/play_menu.gd:809
 msgid "Leave this game?"
 msgstr "要離開這局嗎？"
 
-#: scenes/play/play_menu.gd:685
+#: scenes/play/play_menu.gd:810
 msgid "It counts as a loss."
 msgstr "這將算作輸棋。"
 
-#: scenes/play/play_menu.gd:686
+#: scenes/play/play_menu.gd:811
 msgid "Leave"
 msgstr "離開"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:692
+#: scenes/play/play_menu.gd:817
 msgid "Stay"
 msgstr "留下"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:717
+#: scenes/play/play_menu.gd:842
 msgid "Sources"
 msgstr "資料來源"
 
-#: scenes/play/play_menu.gd:763
+#: scenes/play/play_menu.gd:888
 msgid "Offer a draw"
 msgstr "提議和局"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:803
+#: scenes/play/play_menu.gd:928
 msgid "Quit to main menu"
 msgstr "回到主選單"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:845
+#: scenes/play/play_menu.gd:970
 msgid "Look"
 msgstr "外觀"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:848
+#: scenes/play/play_menu.gd:973
 msgid "Sound"
 msgstr "音效"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:850
+#: scenes/play/play_menu.gd:975
 msgid "Music"
 msgstr "音樂"
 
+#. Settings switch: makes every text in the game bigger. Keep it short.
+#: scenes/play/play_menu.gd:998 tools/smoke_greybox.gd:256 tools/smoke_greybox.gd:305
+msgid "Large text"
+msgstr "大字體"
+
+#. Settings switch: the phone vibrates lightly when a piece moves, at a capture and at the end of a game. The phone's usual word. Keep it short.
+#: scenes/play/play_menu.gd:1002 tools/smoke_greybox.gd:257
+msgid "Vibration"
+msgstr "震動"
+
 #. Settings button: opens Game Center (iPhone/iPad) or Google Play Games (Android) on the game's achievements. The usual platform word.
-#: scenes/play/play_menu.gd:863
+#: scenes/play/play_menu.gd:1042
 msgid "Achievements"
 msgstr "成就"
 
 #. Message when Game Center or Google Play Games can't open (not signed in, offline).
-#: scenes/play/play_menu.gd:867
+#: scenes/play/play_menu.gd:1046
 msgid "Achievements aren't available right now."
 msgstr "成就目前無法使用。"
 
 #. Settings button and screen title: who made the game, and the open-source licences.
-#: scenes/play/play_menu.gd:869 scenes/play/play_menu.gd:880 tools/smoke_greybox.gd:253
+#: scenes/play/play_menu.gd:1048 scenes/play/play_menu.gd:1059 tools/smoke_greybox.gd:269
 msgid "Credits"
 msgstr "製作群"
 
 #. On the Credits screen. First %s: the game's name (e.g. "Bagh Chal"); second %s: the name of the person who made it.
-#: scenes/play/play_menu.gd:883
+#: scenes/play/play_menu.gd:1062
 #, c-format
 msgid "%s is a game by %s."
 msgstr "%s 是由 %s 製作的遊戲。"
 
 #. Button and screen title: the licences of the open-source software and fonts the game uses.
-#: scenes/play/play_menu.gd:886 scenes/play/play_menu.gd:893 tools/smoke_greybox.gd:260
+#: scenes/play/play_menu.gd:1065 scenes/play/play_menu.gd:1072 scenes/play/play_menu.gd:1112 tools/smoke_greybox.gd:276
 msgid "Open-source licenses"
 msgstr "開放原始碼授權"
 
 #. On the "Open-source licenses" screen, above the list. "Tap" also covers clicking.
-#: scenes/play/play_menu.gd:895
+#: scenes/play/play_menu.gd:1074
 msgid "This game is made with the software and fonts below. Tap one to read its license."
 msgstr "本遊戲使用了以下軟體與字型。點一下任一項即可閱讀其授權。"
 
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:963
+#: scenes/play/play_menu.gd:1154
 msgid "More looks"
 msgstr "更多外觀"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:965
+#: scenes/play/play_menu.gd:1156
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "觀看一段短影片，即可在關閉遊戲前隨意切換外觀。"
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:969
+#: scenes/play/play_menu.gd:1160
 msgid "No video is ready right now. Try again in a moment."
 msgstr "目前沒有可播放的影片，請稍後再試。"
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:972
+#: scenes/play/play_menu.gd:1163
 msgid "Watch a video"
 msgstr "觀看影片"
 
 #. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
-#: scenes/play/play_menu.gd:988
+#: scenes/play/play_menu.gd:1179
 msgid "Or remove ads to keep every look for good."
 msgstr "或者移除廣告，永久保留所有外觀。"
 
 #. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
-#: scenes/play/play_menu.gd:989 scenes/play/play_menu.gd:1003 tools/smoke_greybox.gd:218 tools/smoke_greybox.gd:250
+#: scenes/play/play_menu.gd:1180 scenes/play/play_menu.gd:1194 tools/smoke_greybox.gd:220 tools/smoke_greybox.gd:252
 #, c-format
 msgid "Remove ads · %s"
 msgstr "移除廣告 · %s"
 
 #. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
-#: scenes/play/play_menu.gd:1009 tools/smoke_greybox.gd:227
+#: scenes/play/play_menu.gd:1200 tools/smoke_greybox.gd:229
 msgid "Restore purchases"
 msgstr "恢復購買"
 
 #. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:1013
+#: scenes/play/play_menu.gd:1204
 msgid "Privacy choices"
 msgstr "隱私權選項"
 
 #. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
-#: scenes/play/play_menu.gd:1032
+#: scenes/play/play_menu.gd:1223
 msgid "Thank you! Ads are off and every look is yours."
 msgstr "謝謝！廣告已關閉，所有外觀都歸你了。"
 
 #. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
-#: scenes/play/play_menu.gd:1042
+#: scenes/play/play_menu.gd:1233
 msgid "Your payment is pending. Ads will turn off as soon as it goes through."
 msgstr "你的付款正在處理中。付款完成後廣告就會關閉。"
 
 #. Message when buying "Remove ads" failed (not when the player cancelled).
-#: scenes/play/play_menu.gd:1045
+#: scenes/play/play_menu.gd:1236
 msgid "The purchase didn't go through. Please try again later."
 msgstr "購買未能完成，請稍後再試。"
 
 #. Message after "Restore purchases" found Remove ads.
-#: scenes/play/play_menu.gd:1055
+#: scenes/play/play_menu.gd:1246
 msgid "Your purchase is restored."
 msgstr "已恢復你的購買。"
 
 #. Message after "Restore purchases" found nothing bought with this store account.
-#: scenes/play/play_menu.gd:1058
+#: scenes/play/play_menu.gd:1249
 msgid "No purchase to restore on this account."
 msgstr "此帳號沒有可恢復的購買。"
 
 #. Message when the store (Google Play, the App Store) can't be reached.
-#: scenes/play/play_menu.gd:1061
+#: scenes/play/play_menu.gd:1252
 msgid "The store isn't available right now."
 msgstr "商店目前無法使用。"
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:1083
+#: scenes/play/play_menu.gd:1274
 msgid "Graphics"
 msgstr "畫質"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:1164
+#: scenes/play/play_menu.gd:1355
 #, c-format
 msgid "Your name: %s"
 msgstr "你的名字：%s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:1201
+#: scenes/play/play_menu.gd:1392
 msgid "Waiting"
 msgstr "等待中"
 
@@ -644,7 +638,7 @@ msgstr "旅人"
 msgid "Potter"
 msgstr "陶匠"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:285
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:309
 msgid "Weaver"
 msgstr "織工"
 
@@ -712,7 +706,7 @@ msgstr "這台裝置沒有連上 Wi-Fi。"
 msgid "Something went wrong. Please try again."
 msgstr "發生問題，請再試一次。"
 
-#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:156
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:180
 msgid "You resigned."
 msgstr "你認輸了。"
 
@@ -774,6 +768,66 @@ msgstr "石頭與鵝卵石"
 #: titles/bagh_chal/art/stone_style.gd:41
 msgid "The historical way: lines cut into stone and chalked, tigers and goats of river stone, on a straw mat."
 msgstr "古老的玩法：在石板上刻線並用粉筆描白，以河石當作老虎與山羊，放在草蓆上。"
+
+#. Name of the weakest computer opponent in Bagh Chal, a Nepali boy ("Sanu" is a common nickname, "little one"). Write it in your script as a name (e.g. ru Сану, ja サヌ); languages written in Latin letters keep "Sanu".
+#: titles/common/hunt_opponents.gd:24
+msgid "Sanu"
+msgstr "薩努"
+
+#. One line about the computer opponent Sanu (a beginner, a boy).
+#: titles/common/hunt_opponents.gd:26
+msgid "Just learned the game. Plays fast, and loves the tigers."
+msgstr "剛學會這個棋。下得快，最愛老虎。"
+
+#. Name of a computer opponent in Bagh Chal: Maya, a Nepali woman, with "Didi" ("older sister", a respectful way to address a woman in Nepal). Write it in your script as a name (e.g. ru Майя Диди, ja マヤ・ディディ); languages written in Latin letters keep "Maya Didi".
+#: titles/common/hunt_opponents.gd:31
+msgid "Maya Didi"
+msgstr "瑪雅·迪迪"
+
+#. One line about the computer opponent Maya Didi, who runs a tea stall. "When she's looking": she plays well when she isn't distracted.
+#: titles/common/hunt_opponents.gd:33
+msgid "Plays between customers at her tea stall. Steady, when she's looking."
+msgstr "在她的茶攤上，趁招呼客人的空檔下棋。專心的時候很穩。"
+
+#. Name of a computer opponent in Bagh Chal: Hari, a Nepali man, with "Dai" ("older brother", a friendly way to address a man in Nepal). Write it in your script as a name (e.g. ru Хари Дай, ja ハリ・ダイ); languages written in Latin letters keep "Hari Dai".
+#: titles/common/hunt_opponents.gd:38
+msgid "Hari Dai"
+msgstr "哈里·戴"
+
+#. One line about the computer opponent Hari Dai, a woodcarver. "A trap": in Bagh Chal the goats win by trapping the tigers.
+#: titles/common/hunt_opponents.gd:40
+msgid "Carved his own board. Patient, and fond of a trap."
+msgstr "親手刻了自己的棋盤。有耐心，愛設陷阱。"
+
+#. Name of the strongest computer opponent in Bagh Chal: "Hajurba", Nepali for grandfather, used as his name. Write it in your script as a name (e.g. ru Хаджурба, ja ハジュルバ); languages written in Latin letters keep "Hajurba".
+#: titles/common/hunt_opponents.gd:45
+msgid "Hajurba"
+msgstr "哈朱爾巴"
+
+#. One line about the computer opponent Hajurba, an old man. A pati is a public rest-house in Nepal where people meet and play: keep the word as in "Game origins".
+#: titles/common/hunt_opponents.gd:47
+msgid "Sixty years of evenings at the pati. Rarely speaks. Rarely loses."
+msgstr "在 pati 度過了六十年的傍晚。很少說話，很少輸。"
+
+#. The weakest computer opponent level.
+#: titles/common/hunt_opponents.gd:75
+msgid "Novice"
+msgstr "新手"
+
+#. The second computer opponent level.
+#: titles/common/hunt_opponents.gd:78
+msgid "Apprentice"
+msgstr "學徒"
+
+#. The third computer opponent level.
+#: titles/common/hunt_opponents.gd:81
+msgid "Adept"
+msgstr "高手"
+
+#. The strongest computer opponent level.
+#: titles/common/hunt_opponents.gd:84
+msgid "Master"
+msgstr "大師"
 
 #. "Game origins" text for Bagh Chal, paragraph 1 of 7. Keep the [i]…[/i] tags around the italic words. Bagh Chal and dhun kasa stay as they are.
 #: titles/common/hunt_origins.gd:24
@@ -1217,12 +1271,12 @@ msgid "In the accounts written down a century ago, the dogs may only go forward,
 msgstr "在一百年前的記載中，狗只能向前走，這樣一來，待在塔裡的美洲獅就永遠抓不到。這裡狗的走法和美洲獅的勝利條件採用 Trapial-Kuzen，這是該遊戲的一種現代馬普切版本。塔被當作普通棋盤，美洲獅先走，除非你在設定中更改。"
 
 #. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
-#: titles/common/title_config.gd:239
+#: titles/common/title_config.gd:241
 msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
 msgstr "這樣我們就能向你顯示更相關的廣告。Bagh Chal 靠廣告維持免費。"
 
 #. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
-#: titles/common/title_config.gd:241
+#: titles/common/title_config.gd:243
 msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
 msgstr "Bagh Chal 會在你的 Wi-Fi 網路中尋找對局，讓你和附近的人一起玩。"
 

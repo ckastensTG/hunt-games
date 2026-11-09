@@ -122,6 +122,12 @@ func destroy_lobby(lobby_id: String) -> void:
 
 func p2p_open(peer: String, socket: String, _as_host: bool) -> void:
 	_opened[peer + "|" + socket] = true
+	# Both ends open: the link is up (EOS pairs them), on each side.
+	var other: FakeEOSApi = _apis.get(peer)
+	if other != null and other._opened.has(user + "|" + socket):
+		var me := user
+		_later(func() -> void: p2p_connected.emit(peer, socket))
+		_tell(peer, func(api: FakeEOSApi) -> void: api.p2p_connected.emit(me, socket))
 
 
 func p2p_send(peer: String, socket: String, bytes: PackedByteArray) -> bool:
@@ -157,6 +163,14 @@ func drop_link(peer: String, socket: String) -> void:
 	var me := user
 	_later(func() -> void: p2p_interrupted.emit(peer, socket))
 	_tell(peer, func(api: FakeEOSApi) -> void: api.p2p_interrupted.emit(me, socket))
+
+
+## Simulates EOS closing the link on both sides (it timed out: a phone was
+## off Wi-Fi too long). Each side has to open its socket again.
+func close_link(peer: String, socket: String) -> void:
+	var me := user
+	_later(func() -> void: p2p_closed.emit(peer, socket))
+	_tell(peer, func(api: FakeEOSApi) -> void: api.p2p_closed.emit(me, socket))
 
 
 func restore_link(peer: String, socket: String) -> void:

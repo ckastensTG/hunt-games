@@ -42,6 +42,8 @@ func _initialize() -> void:
 	if out_dir != "":
 		DirAccess.make_dir_recursive_absolute(out_dir)
 	_rng.seed = 7
+	# Don't probe the machine's real network (a shared cloud network in CI).
+	LanDiscovery.sweep = false
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE))
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	game.save_path = SAVE
@@ -88,13 +90,25 @@ func _menus() -> void:
 	await _shot("menu_error")
 	game.play.error = ""
 	game.menu._go("home", false)
-	# Starting a game against the AI from the menu.
+	# Starting a game against the AI from the menu: four people to choose
+	# from; a tap on a card chooses.
 	game.menu._go("vs_ai", false)
+	await _frames(2)
+	var cards: Array = game.menu._card_box.find_children("Opponent*", "PanelContainer", true, false)
+	_check(cards.size() == 4, "four opponents to choose from")
+	if cards.size() == 4:
+		var tap := InputEventMouseButton.new()
+		tap.button_index = MOUSE_BUTTON_LEFT
+		tap.pressed = false
+		(cards[3] as Control).gui_input.emit(tap)
+		await _frames(2)
+		_check(game.level == HuntPersonas.MASTER, "a tap on his card chooses Hajurba")
 	game.menu._side = HuntState.HUNTER
 	game.start_local(game.Mode.HUMAN_HUNTER, HuntRuleSets.BAGH_CHAL_STANDARD, 0)
 	await _frames(2)
 	_check(not game.menu.is_open(), "the menu closes when a game starts")
 	_check(game.local_side() == HuntState.HUNTER, "playing the tigers")
+	_check(game._hud._opponent.visible and game._hud._opponent_name.text == "Sanu", "Sanu over the board")
 	await _until(func() -> bool: return game.can_play(), 10.0, "the AI's first goat")
 	_play_one()
 	await _until(func() -> bool: return game.can_play(), 10.0, "our turn again")
@@ -114,6 +128,19 @@ func _menus() -> void:
 	await _frames(2)
 	_check(game.menu.is_open() and game.menu._screen == "home", "Quit to main menu shows the main menu")
 	_check(not game.has_saved_game(), "and the quit game is no longer saved")
+	# A person's pace: Maya Didi's goat takes about her think_ms (0.8 s),
+	# however fast the search. The first AI_MOVE_DELAY of it counts game
+	# time, which runs ahead of the clock here (--fixed-fps, headless), so
+	# only the rest is sure to show on the clock.
+	var t0 := Time.get_ticks_msec()
+	game.start_local(game.Mode.HUMAN_HUNTER, HuntRuleSets.BAGH_CHAL_STANDARD, HuntPersonas.APPRENTICE)
+	await _until(func() -> bool: return game.can_play(), 10.0, "Maya Didi's first goat")
+	var took := Time.get_ticks_msec() - t0
+	var at_least: int = HuntPersonas.styled(HuntPersonas.APPRENTICE).think_ms - int(game.AI_MOVE_DELAY * 1000.0)
+	_check(took >= at_least, "Maya Didi takes her time (%d ms, at least %d)" % [took, at_least])
+	_check(game._hud._opponent_name.text == "Maya Didi", "Maya Didi over the board")
+	game.quit_to_menu()
+	await _frames(2)
 
 
 # --- 2. Quick match -------------------------------------------------------------
@@ -274,7 +301,7 @@ func _nearby_game() -> void:
 	_check(play.code == JoinCode.from_ipv4(ip), "nearby code for %s" % ip)
 	await _shot("nearby_wait")
 	var ear := LanDiscovery.new()
-	ear.listen(LanDiscovery.PORT + 1)  # the host's beacon port is busy in this one process
+	ear.listen(LanDiscovery.PORT + 10)  # the host's ports are busy in this one process
 	# A second device joins with the code.
 	var link := ENetTransport.join(JoinCode.to_ipv4(play.code))
 	var guest := NetMatch.as_guest(link, play.title_id(), "smoke", {"key": "weaver", "n": 1234}, play._resolver())

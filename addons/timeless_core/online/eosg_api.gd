@@ -104,6 +104,8 @@ func tick() -> void:
 		var s: Dictionary = _sockets[socket]
 		var mp: EOSGMultiplayerPeer = s.mp
 		mp.poll()
+		if s.get("dead", false):
+			continue
 		if s.id <= 0:
 			s.id = mp.get_peer_id(s.peer)
 			if s.id > 0:
@@ -372,7 +374,7 @@ func p2p_open(peer: String, socket: String, as_host: bool) -> void:
 	if as_host:
 		# Only the player from our lobby gets in.
 		mp.set_auto_accept_connection_requests(false)
-		mp.incoming_connection_request.connect(_on_request.bind(socket))
+		mp.incoming_connection_request.connect(_on_request.bind(socket, mp))
 		err = mp.create_server(socket)
 	else:
 		err = mp.create_client(socket, peer)
@@ -380,15 +382,17 @@ func p2p_open(peer: String, socket: String, as_host: bool) -> void:
 		push_warning("EOS: P2P socket failed: %s" % error_string(err))
 		return
 	mp.transfer_mode = MultiplayerPeer.TRANSFER_MODE_RELIABLE
-	mp.peer_connection_established.connect(_on_link_up.bind(socket))
-	mp.peer_connection_interrupted.connect(_on_link_down.bind(socket))
-	mp.peer_connection_closed.connect(_on_link_closed.bind(socket))
+	# Bound to this peer too: a socket opened again under the same name
+	# mustn't hear the old one's events.
+	mp.peer_connection_established.connect(_on_link_up.bind(socket, mp))
+	mp.peer_connection_interrupted.connect(_on_link_down.bind(socket, mp))
+	mp.peer_connection_closed.connect(_on_link_closed.bind(socket, mp))
 	_sockets[socket] = {"mp": mp, "peer": peer, "host": as_host, "id": 0, "out": []}
 
 
 func p2p_send(peer: String, socket: String, bytes: PackedByteArray) -> bool:
 	var s: Dictionary = _sockets.get(socket, {})
-	if s.is_empty() or s.peer != peer or bytes.size() > MAX_PACKET:
+	if s.is_empty() or s.peer != peer or bytes.size() > MAX_PACKET or s.get("dead", false):
 		return false
 	if s.id <= 0:
 		s.out.append(bytes)
@@ -419,11 +423,10 @@ func p2p_close(_peer: String, socket: String) -> void:
 	(s.mp as EOSGMultiplayerPeer).close()
 
 
-func _on_request(data: Dictionary, socket: String) -> void:
+func _on_request(data: Dictionary, socket: String, mp: EOSGMultiplayerPeer) -> void:
 	var s: Dictionary = _sockets.get(socket, {})
-	if s.is_empty():
+	if s.is_empty() or s.mp != mp or s.get("dead", false):
 		return
-	var mp: EOSGMultiplayerPeer = s.mp
 	var who := str(data.get("remote_user_id", ""))
 	if who == s.peer:
 		mp.accept_connection_request(who)
@@ -431,22 +434,30 @@ func _on_request(data: Dictionary, socket: String) -> void:
 		mp.deny_connection_request(who)
 
 
-func _on_link_up(data: Dictionary, socket: String) -> void:
+func _on_link_up(data: Dictionary, socket: String, mp: EOSGMultiplayerPeer) -> void:
 	var s: Dictionary = _sockets.get(socket, {})
 	# The first time, tick() reports the link once the two ends have paired.
-	if not s.is_empty() and s.id > 0 and str(data.get("remote_user_id", s.peer)) == s.peer:
+	if not s.is_empty() and s.mp == mp and not s.get("dead", false) and s.id > 0 and str(data.get("remote_user_id", s.peer)) == s.peer:
 		p2p_connected.emit(s.peer, socket)
 
 
-func _on_link_down(data: Dictionary, socket: String) -> void:
+func _on_link_down(data: Dictionary, socket: String, mp: EOSGMultiplayerPeer) -> void:
 	var s: Dictionary = _sockets.get(socket, {})
-	if not s.is_empty() and str(data.get("remote_user_id", s.peer)) == s.peer:
+	if not s.is_empty() and s.mp == mp and not s.get("dead", false) and str(data.get("remote_user_id", s.peer)) == s.peer:
 		p2p_interrupted.emit(s.peer, socket)
 
 
-func _on_link_closed(data: Dictionary, socket: String) -> void:
+func _on_link_closed(data: Dictionary, socket: String, mp: EOSGMultiplayerPeer) -> void:
 	var s: Dictionary = _sockets.get(socket, {})
-	if not s.is_empty() and str(data.get("remote_user_id", s.peer)) == s.peer:
+	if not s.is_empty() and s.mp == mp and str(data.get("remote_user_id", s.peer)) == s.peer:
+		# Done with this socket: it neither pairs nor sends again (its old peer
+		# id may linger). The transport opens a fresh one on each side
+		# (EOSP2PTransport.reconnect); what's sent meanwhile is dropped, and
+		# NetMatch asks again once the new link is up.
+		s.dead = true
+		s.out.clear()
+		if OS.is_debug_build():
+			print("[eos] P2P link closed (reason %d)" % int(data.get("reason", 0)))
 		p2p_closed.emit(s.peer, socket)
 
 

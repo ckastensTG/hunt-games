@@ -38,6 +38,10 @@ func test_ios_info_plist_app_id_and_tracking_text() -> void:
 			var plist := str(presets.get_value(section, "application/additional_plist_content", ""))
 			found += 1
 			check_eq(plist.count("<key>NSUserTrackingUsageDescription</key>"), 1, "%s: the tracking prompt's text" % section)
+			# Export compliance (Christopher, 2026-11-08): only standard HTTPS
+			# (Epic's and Google's SDKs), so no non-exempt encryption; App Store
+			# Connect then doesn't ask for each build.
+			check_eq(plist.count("<key>ITSAppUsesNonExemptEncryption</key><false/>"), 1, "%s: export compliance answered" % section)
 			# The prompts' English texts are TitleConfig's, so the export step
 			# finds their translations (editor/ios_plist_strings.gd).
 			var texts := IOSPlistStrings.usage_texts(plist)

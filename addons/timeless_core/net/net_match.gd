@@ -130,9 +130,15 @@ func poll(now_ms := -1) -> void:
 				_lose_connection()
 			_tick_clock()
 		Phase.RECONNECTING:
-			if transport.can_reconnect() and _now - _last_try >= RECONNECT_TRY_MS:
+			if _now - _last_try >= RECONNECT_TRY_MS:
 				_last_try = _now
-				transport.reconnect()
+				if transport.can_reconnect():
+					transport.reconnect()
+				# The guest asks again every few seconds: a link can come back
+				# without saying so (EOS restores links quietly, and packets
+				# simply flow again), and then nothing else would end the wait.
+				if not _is_host:
+					_send_hello()
 			if _now - _lost_at > RECONNECT_WINDOW_MS:
 				_give_up_on_opponent()
 
@@ -200,6 +206,10 @@ func leave() -> void:
 
 func _on_connected() -> void:
 	_last_heard = _now
+	_send_hello()
+
+
+func _send_hello() -> void:
 	var have := session.moves.size() if session != null else 0
 	_send(NetProtocol.Msg.HELLO, {"proto": NetProtocol.VERSION, "build": build, "title": title,
 		"name": local_name, "match_id": session.match_id if session != null else "", "have": have})
@@ -218,6 +228,15 @@ func _on_packet(bytes: PackedByteArray) -> void:
 	if msg.is_empty():
 		return
 	_last_heard = _now
+	var waiting := phase == Phase.RECONNECTING
+	_handle(msg)
+	# Still waiting after handling it (HELLO and RESYNC end the wait
+	# themselves): the link works again all the same.
+	if waiting and phase == Phase.RECONNECTING:
+		_heard_while_reconnecting(int(msg.t))
+
+
+func _handle(msg: Dictionary) -> void:
 	match int(msg.t):
 		NetProtocol.Msg.HELLO:
 			_on_hello(msg)
@@ -431,6 +450,24 @@ func _tick_clock() -> void:
 		_send(NetProtocol.Msg.RESIGN, {"reason": MatchSession.Ending.FORFEIT_TIMEOUT})
 	else:
 		turn_timed_out.emit()
+
+
+## Something arrived while waiting for the other side: the link works again,
+## whatever the transport said. The host sends the moves and plays on; the
+## guest asks for them (the host's RESYNC then ends the wait). HELLO and
+## RESYNC end the wait by themselves.
+func _heard_while_reconnecting(t: int) -> void:
+	if t == NetProtocol.Msg.HELLO or t == NetProtocol.Msg.RESYNC or t == NetProtocol.Msg.BYE:
+		return
+	if session == null:
+		return
+	if _is_host:
+		_send(NetProtocol.Msg.RESYNC, {"moves": NetProtocol.moves_to_wire(session.moves)})
+		phase = Phase.PLAYING
+		_turn_started = _now
+		reconnected.emit()
+	elif t != NetProtocol.Msg.RESYNC_REQ:
+		_send(NetProtocol.Msg.RESYNC_REQ)
 
 
 func _lose_connection() -> void:

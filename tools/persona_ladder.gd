@@ -1,7 +1,7 @@
 extends SceneTree
-## AI level ladder: the greybox's AI levels (HuntPersonas) play each other, to
-## see whether each level is really stronger than the one below and whether the
-## top levels can lose (framework §12, "self-play").
+## AI level ladder: the AI levels (HuntPersonas) play each other, to see
+## whether each level is really stronger than the one below and whether the
+## top levels can lose (framework §12, "self-play"), and how each person plays.
 ##
 ##   godot --headless --path . -s res://tools/persona_ladder.gd -- \
 ##     [--rules=bagh_chal_standard,jogo_da_onca_adugo] [--pairs=adept:master,master:master]
@@ -9,12 +9,16 @@ extends SceneTree
 ##
 ## Each pair "a:b" plays --games games with a as the hunter and b as the prey,
 ## then as many with the sides swapped. The first --opening plies are picked
-## among near-best moves so that games differ. Personas: novice, apprentice,
-## adept, master, plus "deep" (no mistakes, depth 10 and 4x Master's time),
-## standing in for a player who reads further ahead than Master.
+## among near-best moves so that games differ. Personas: Bagh Chal's people
+## with their styles (sanu, maya, hari, hajurba: HuntPersonas.styled), the
+## plain levels (novice, apprentice, adept, master: HuntPersonas.plain), and
+## "deep" (no mistakes, depth 10 and 4x Master's time), standing in for a
+## player who reads further ahead than Master.
 ##
-## Prints the results per pair and side, then each persona's average completed
-## search depth and time per move. Time limits are wall-clock, so depth depends
+## Prints the results per pair and side, then for each persona: its average
+## completed search depth and time per move, the captures it made per game
+## as the hunter, the goats it placed on the edge during placement (share),
+## and its lapses. Time limits are wall-clock, so depth depends
 ## on the machine: a phone reaches less than a desktop.
 
 var rule_ids: Array = [HuntRuleSets.BAGH_CHAL_STANDARD]
@@ -23,7 +27,8 @@ var games := 4
 var opening := 2
 var seed_base := 1
 var csv_path := ""
-var stats := {}  # persona id -> {moves, depth, ms}
+var stats := {}  # persona id -> {moves, depth, ms, hunter_games, captures, placements, edge, lapses}
+const PEOPLE := ["sanu", "maya", "hari", "hajurba"]
 
 
 func _init() -> void:
@@ -71,11 +76,12 @@ func _init() -> void:
 				print("%-27s %-11s %-11s  %5d  %11d  %9d  %5d  %9.0f  %12.1f" % [id, hunter_id, prey_id, games,
 					t.hunter, t.prey, t.draw, float(t.plies) / games, float(t.captured) / games])
 	print("")
-	print("persona      moves  avg completed depth  avg ms per move")
+	print("persona      moves  avg completed depth  avg ms per move  captures per game as hunter  edge placements  lapses")
 	for pid in stats:
 		var st: Dictionary = stats[pid]
-		print("%-11s  %5d  %19.1f  %15.0f" % [pid, st.moves, float(st.depth) / maxi(st.moves, 1),
-			float(st.ms) / maxi(st.moves, 1)])
+		print("%-11s  %5d  %19.1f  %15.0f  %27.2f  %14.0f%%  %6d" % [pid, st.moves, float(st.depth) / maxi(st.moves, 1),
+			float(st.ms) / maxi(st.moves, 1), float(st.captures) / maxi(st.hunter_games, 1),
+			100.0 * st.edge / maxi(st.placements, 1), st.lapses])
 	quit()
 
 
@@ -86,9 +92,14 @@ func persona(id: String) -> AIPersona:
 		master.max_depth = 10
 		master.time_limit_ms *= 4
 		return master
-	for spec in HuntPersonas.SPECS:
-		if spec[0] == id:
-			return HuntPersonas.make(spec)
+	var person := PEOPLE.find(id)
+	if person >= 0:
+		var p := HuntPersonas.styled(person)
+		p.id = id
+		return p
+	for i in HuntPersonas.SPECS.size():
+		if HuntPersonas.SPECS[i][0] == id:
+			return HuntPersonas.plain(i)
 	push_error("unknown persona %s" % id)
 	return null
 
@@ -105,21 +116,34 @@ func play(rules: HuntRuleSet, hunter: AIPersona, prey: AIPersona, game_seed: int
 	opener.candidate_window = 20
 	opener.mistake_rate = 1.0
 	opener.temperature = 10.0
+	var hs: Dictionary = stats.get(hunter.id, {"moves": 0, "depth": 0, "ms": 0, "hunter_games": 0,
+		"captures": 0, "placements": 0, "edge": 0, "lapses": 0})
+	hs.hunter_games += 1
+	stats[hunter.id] = hs
 	var moves: Array[PackedInt32Array] = []
 	var status := s.analyze(moves)
 	while status == HuntState.Status.ONGOING and s.ply < 300:
 		var p: AIPersona = opener if s.ply < opening else (hunter if s.side == HuntState.HUNTER else prey)
-		var search := p.make_searcher(evaluator)
+		var search := p.make_searcher(p.evaluator_for(s.side, evaluator), rng.randi() if p.vary_ties else 0)
 		var t0 := Time.get_ticks_msec()
 		search.begin(s)
 		while not search.step(20000):
 			pass
-		var m := p.pick(search, rng)
-		if p != opener:
-			var st: Dictionary = stats.get(p.id, {"moves": 0, "depth": 0, "ms": 0})
+		var picked := p.pick_ex(search, rng)
+		var m: PackedInt32Array = picked.move
+		if p != opener and not m.is_empty():
+			var st: Dictionary = stats.get(p.id, {"moves": 0, "depth": 0, "ms": 0, "hunter_games": 0,
+				"captures": 0, "placements": 0, "edge": 0, "lapses": 0})
 			st.moves += 1
 			st.depth += search.completed_depth
 			st.ms += Time.get_ticks_msec() - t0
+			st.captures += HuntState.captures_in(m)
+			if picked.lapse:
+				st.lapses += 1
+			if m[0] == HuntState.Kind.PLACE:
+				st.placements += 1
+				if m[1] in s.board.tagged("edge"):
+					st.edge += 1
 			stats[p.id] = st
 		if m.is_empty():
 			break

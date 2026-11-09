@@ -6,6 +6,7 @@ The series typography (framework §11; decided by Christopher 2026-11-03):
 |---|---|
 | `AlegreyaSC-Medium.ttf` | Display: titles, banners, panel headings (small caps) |
 | `Alegreya-Variable.ttf` | Book text: rule names, walkthrough text, game-over lines |
+| `Alegreya-MediumItalic.ttf` | Book italics: notes, the rule set under a title, book titles in Game origins' sources (Alegreya's real italic, weight 500; added 2026-11-08, from the `@expo-google-fonts/alegreya` npm package, v0.4.2: Alegreya 2.009, the same version as the upright files, with the same 1,254 characters) |
 | `AlegreyaSans-Regular/Medium/Bold.ttf` | Interface: labels, buttons, menus |
 | `cjk/NotoSans{SC,TC,JP,KR}-{Regular,Medium,Bold}.subset.ttf` | Fallback for Simplified and Traditional Chinese, Japanese and Korean |
 | `thai/NotoSansThai-{Regular,Medium,Bold}.ttf` | Fallback for Thai |

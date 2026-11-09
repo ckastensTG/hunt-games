@@ -34,6 +34,8 @@ const PlayControllerScript := preload("res://scenes/play/play_controller.gd")
 const PlayMenuScript := preload("res://scenes/play/play_menu.gd")
 const MatchUIScript := preload("res://scenes/play/match_ui.gd")
 const PerfTestScript := preload("res://scenes/greybox/perf_test.gd")
+## The pause before the AI starts on its move; a person's pace
+## (AIPersona.think_ms) can make it shorter (Sanu) or the whole move longer.
 const AI_MOVE_DELAY := 0.35
 const SAVE_PATH := "user://match.save"
 ## Piece sounds every look provides (tools/audio/make_sounds.py), and the
@@ -106,7 +108,9 @@ var menu: CanvasLayer
 var sfx: SfxPlayer
 ## The look's music (MusicPlayer, on the Music bus).
 var music: MusicPlayer
-## The frame-rate readout for testing (F3 or a three-finger tap).
+## The frame-rate readout for testing (F3 or a three-finger tap): test
+## builds only (Christopher, 2026-11-08: "hide the frame-rate readout in
+## release builds"). Null in release builds.
 var perf: PerfOverlay
 ## Ads, the look unlock and Remove ads (one AdService for the app).
 var ads: AdService
@@ -155,6 +159,11 @@ var _pending_click := Vector2.INF
 var _animating := false
 var _ai := AIDriver.new()
 var _ai_wait := 0.0
+## The AI's move, ready but held back for the person's pace (think_ms, and a
+## longer pause before one of Maya Didi's lapses), and when it may show.
+var _ai_held := PackedInt32Array()
+var _ai_release_ms := 0
+var _ai_started_ms := 0
 var _rng := RandomNumberGenerator.new()
 var _sound_dirs := ["", ""]   # the piece and sting folders loaded
 var _sting_pending := false
@@ -168,6 +177,7 @@ func _ready() -> void:
 	if not title.rule_sets.has(_rule_set_id):
 		_rule_set_id = title.rule_sets[0]
 	L10n.apply_saved_locale()
+	GameText.apply_saved()
 	personas = _make_personas()
 	ads = AdService.instance()
 	ads.start(title.ad_setup())
@@ -191,9 +201,10 @@ func _ready() -> void:
 	add_child(sfx)
 	music = MusicPlayer.new()
 	add_child(music)
-	perf = PerfOverlay.new()
-	perf.info = _perf_info
-	add_child(perf)
+	if OS.is_debug_build():
+		perf = PerfOverlay.new()
+		perf.info = _perf_info
+		add_child(perf)
 	_boot_mark("settings, ads, sound and music players")
 	_build_environment()
 	_boot_mark("environment and camera")
@@ -555,7 +566,7 @@ func _after_move() -> void:
 	_refresh_ui()
 	_show_last_move()
 	if status == HuntState.Status.ONGOING and _is_ai_side(state.side):
-		_ai_wait = AI_MOVE_DELAY
+		_ai_wait = _ai_delay()
 
 
 func _is_ai_side(side: int) -> bool:
@@ -566,12 +577,12 @@ func _is_ai_side(side: int) -> bool:
 
 ## True while the AI is choosing a move.
 func ai_thinking() -> bool:
-	return _ai.is_thinking()
+	return _ai.is_thinking() or not _ai_held.is_empty()
 
 
 ## True when a click on the board would play a move now.
 func can_play() -> bool:
-	if tutorial_active or _animating or _ai.is_thinking() or session == null or status != HuntState.Status.ONGOING:
+	if tutorial_active or _animating or ai_thinking() or session == null or status != HuntState.Status.ONGOING:
 		return false
 	if session.control.get(state.side) != MatchSession.Driver.LOCAL:
 		return false
@@ -590,19 +601,49 @@ func _process(delta: float) -> void:
 		var move := _ai.poll()
 		if not _ai.is_thinking():
 			if not move.is_empty() and _is_ai_side(state.side):
-				session.commit(move, state.side)
+				var due := _ai_started_ms + _ai_pace_ms(_ai.last_was_lapse())
+				if Time.get_ticks_msec() < due:
+					_ai_held = move
+					_ai_release_ms = due
+				else:
+					session.commit(move, state.side)
 			_refresh_ui()
+	elif not _ai_held.is_empty() and Time.get_ticks_msec() >= _ai_release_ms and not (menu and menu.is_open()):
+		var held := _ai_held
+		_ai_held = PackedInt32Array()
+		if _is_ai_side(state.side) and status == HuntState.Status.ONGOING:
+			session.commit(held, state.side)
+		_refresh_ui()
 
 
 func _start_ai() -> void:
-	if _ai.is_thinking() or status != HuntState.Status.ONGOING:
+	if ai_thinking() or status != HuntState.Status.ONGOING:
 		return
+	_ai_started_ms = Time.get_ticks_msec()
 	_ai.start(state, personas[level], evaluator, _rng.randi())
 	_refresh_ui()
 
 
+## The pause before the AI starts: AI_MOVE_DELAY, or less for a quick
+## person (their whole move takes think_ms).
+func _ai_delay() -> float:
+	var think: int = personas[level].think_ms
+	return minf(AI_MOVE_DELAY, think / 1000.0) if think > 0 else AI_MOVE_DELAY
+
+
+## How long after the search starts the move may show: the rest of the
+## person's think_ms, plus their pause before a lapse.
+func _ai_pace_ms(lapse: bool) -> int:
+	var p: AIPersona = personas[level]
+	var ms := p.think_ms - int(_ai_delay() * 1000.0)
+	if lapse:
+		ms += p.lapse_pause_ms
+	return maxi(ms, 0)
+
+
 func _stop_ai() -> void:
 	_ai_wait = 0.0
+	_ai_held = PackedInt32Array()
 	_ai.cancel()
 
 
@@ -1227,7 +1268,15 @@ func _load_sounds() -> void:
 
 
 ## "slide" and "set" have a take for each piece (the tiger is heavier).
+## The phone vibrates with them (GameHaptics): a tick when a goat lands or a
+## piece comes to rest, a firmer tap for each capture (a jump's landing has
+## none of its own: its capture follows).
 func _piece_sound(event: String, kind: int) -> void:
+	match event:
+		"place", "set":
+			GameHaptics.pulse(GameHaptics.MOVE)
+		"capture":
+			GameHaptics.pulse(GameHaptics.CAPTURE)
 	if event == "slide" or event == "set":
 		event += "_tiger" if kind == HuntState.HUNTER else "_goat"
 	sfx.play(event)
@@ -1248,6 +1297,7 @@ func _play_sting() -> void:
 		event = "win" if me < 0 or (st == HuntState.Status.HUNTER_WIN) == (me == HuntState.HUNTER) else "lose"
 	music.duck(STING_DUCK)
 	sfx.play(event, 1.0, 0.0, false)
+	GameHaptics.pulse(GameHaptics.END)
 
 
 # --- View: marks -----------------------------------------------------------

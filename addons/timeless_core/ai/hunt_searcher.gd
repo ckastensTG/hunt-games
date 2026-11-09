@@ -46,6 +46,10 @@ var time_limit_ms: int = 0
 var exact_root_scores: bool = false
 ## Stop iterating once a forced win or loss is proven.
 var stop_on_decisive: bool = true
+## Non-zero: the root moves start in an order shuffled with this seed
+## (captures still first), so among moves that score the same a different
+## one is chosen from game to game. Strength is unchanged (AIPersona.vary_ties).
+var vary_seed: int = 0
 var tt_max_entries: int = 300000
 
 # Results of the last completed iteration.
@@ -87,6 +91,8 @@ func begin(state: HuntState) -> void:
 		done = true
 		return
 	_order(moves, null)
+	if vary_seed != 0:
+		_shuffle_root(moves)
 	root_moves = moves
 	best_move = root_moves[0]
 	if root_moves.size() == 1 and not exact_root_scores:
@@ -273,6 +279,24 @@ func _iteration_done(root: Array) -> void:
 	root_scores = scores
 	_depth += 1
 	_push_root()
+
+
+## Shuffles the captures among themselves and the other moves among
+## themselves (captures stay in front: they're searched first).
+func _shuffle_root(moves: Array[PackedInt32Array]) -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = vary_seed
+	var caps := 0
+	while caps < moves.size() and moves[caps][0] == HuntState.Kind.JUMP:
+		caps += 1
+	for part in [[0, caps], [caps, moves.size()]]:
+		var a: int = part[0]
+		var b: int = part[1]
+		for i in range(b - 1, a, -1):
+			var j := rng.randi_range(a, i)
+			var t := moves[i]
+			moves[i] = moves[j]
+			moves[j] = t
 
 
 func _finish() -> void:

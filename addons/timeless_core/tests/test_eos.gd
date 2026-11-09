@@ -173,7 +173,78 @@ func test_drop_and_return_of_the_link() -> void:
 	check_eq(events, ["up", "down", "up"], "down and back up")
 	ta.close()
 	_pump([a, b, ta, tb], 3)
-	check(tb.is_closed(), "closed when the other side closes")
+	check(not tb.is_open() and not tb.is_closed(), "the other side closing: down, until this side is done with it")
+	check(ta.is_closed(), "closed by its own side")
+	FakeEOSApi.reset_cloud()
+
+
+func test_a_closed_link_is_opened_again() -> void:
+	# Device test 2026-11-08: a phone off Wi-Fi for 10 s; EOS closed the link
+	# and it never came back. Now each side opens a fresh socket and the
+	# match carries on.
+	FakeEOSApi.reset_cloud()
+	var api_a := FakeEOSApi.new()
+	var api_b := FakeEOSApi.new()
+	var a := EOSOnlineBackend.new(api_a, IDS)
+	var b := EOSOnlineBackend.new(api_b, IDS)
+	a.login()
+	b.login()
+	_pump([a, b], 3)
+	var ta := a.open_transport("lobbyZ", b.user_id(), true)
+	var tb := b.open_transport("lobbyZ", a.user_id(), false)
+	var heard := []
+	ta.packet.connect(func(bytes: PackedByteArray) -> void: heard.append(bytes.get_string_from_utf8()))
+	_pump([a, b, ta, tb], 2)
+	api_a.close_link(b.user_id(), EOSOnlineBackend.socket_for("lobbyZ"))
+	_pump([a, b, ta, tb], 3)
+	check(not ta.is_open() and not tb.is_open(), "down on both sides")
+	check(ta.can_reconnect() and tb.can_reconnect(), "both may open again")
+	ta.reconnect()
+	tb.reconnect()
+	_pump([a, b, ta, tb], 4)
+	check(ta.is_open() and tb.is_open(), "up again on both sides")
+	check(not ta.can_reconnect() and not tb.can_reconnect(), "nothing more to do")
+	tb.send("after".to_utf8_buffer())
+	_pump([a, b, ta, tb], 3)
+	check_eq(heard, ["after"], "messages flow again")
+	FakeEOSApi.reset_cloud()
+
+
+func test_a_match_survives_a_closed_link() -> void:
+	# The whole path: NetMatch over EOS, the link closed by EOS, and the
+	# match back to playing with the same moves.
+	FakeEOSApi.reset_cloud()
+	var api_a := FakeEOSApi.new()
+	var api_b := FakeEOSApi.new()
+	var a := EOSOnlineBackend.new(api_a, IDS)
+	var b := EOSOnlineBackend.new(api_b, IDS)
+	a.login()
+	b.login()
+	_pump([a, b], 3)
+	var ta := a.open_transport("lobbyW", b.user_id(), true)
+	var tb := b.open_transport("lobbyW", a.user_id(), false)
+	var resolve := func(id: String) -> HuntRuleSet: return HuntFixtures.tigers_and_goats() if id == "tg" else null
+	var host := NetMatch.as_host(ta, "tg", HuntState.PREY, MatchSession.Kind.ONLINE_FRIEND, 0, "test", "b1",
+		{"key": "scribe", "n": 1}, resolve)
+	var guest := NetMatch.as_guest(tb, "test", "b1", {"key": "potter", "n": 2}, resolve)
+	var t := 1000
+	for _i in 6:
+		a.poll()
+		b.poll()
+		host.poll(t)
+		guest.poll(t)
+	check_eq(guest.phase, NetMatch.Phase.PLAYING, "playing")
+	host.session.commit(host.session.state.legal_moves()[0], HuntState.PREY)
+	api_a.close_link(b.user_id(), EOSOnlineBackend.socket_for("lobbyW"))
+	for step in [2000, 5000, 8000, 11000, 14000, 17000]:
+		for _i in 4:
+			a.poll()
+			b.poll()
+			host.poll(step)
+			guest.poll(step)
+	check_eq(host.phase, NetMatch.Phase.PLAYING, "host plays on")
+	check_eq(guest.phase, NetMatch.Phase.PLAYING, "guest plays on")
+	check_eq(guest.session.moves.size(), host.session.moves.size(), "same moves")
 	FakeEOSApi.reset_cloud()
 
 

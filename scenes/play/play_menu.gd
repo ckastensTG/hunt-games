@@ -10,23 +10,27 @@ extends CanvasLayer
 ##          online match)
 ##   Game origins ─ the game's history and its sources (HuntOrigins)
 ##   Settings ─ the in-game menu's settings, before a game: Look · Graphics
-##              · Sound · Music · Language · Remove ads · Restore purchases
+##              · Sound · Music · Language · Large text · Vibration (phones)
+##              · Remove ads · Restore purchases
 ##              · Privacy choices · Achievements · Credits → Back to the
 ##              main menu
 ##   Credits ─ who made the game, and Open-source licenses: the notices the
 ##             app has to carry (OpenSource: Godot and the code inside it,
 ##             the plugins and SDKs, the fonts), each opening its full text
-##   Play against the AI ─ side, opponent level, rules → Start
+##   Play against the AI ─ side, opponent (Bagh Chal: four people, HuntOpponents;
+##                         otherwise the level), rules → Start
 ##   Pass and play ─ rules → Start
 ##   Play local ─ Host a game (side, rules → waiting, with a code)
 ##              └ Join a game (games heard on this Wi-Fi, or type a code)
 ##   Play online ─ Play with someone online (quick match: searching; after a
 ##               │ minute: play against the AI while we keep looking / keep
 ##               │ searching / invite a friend)
-##               └ Play with a friend ─ Create a code (side, rules → code to
-##                                     share) · Enter a code
+##               └ Play with a friend ─ Create a code (side, rules → the
+##                                     code, Share, Copy) · Enter a code
 ##   Pause ─ Continue · (against another device: Offer a draw, Resign) · Look
-##           · Graphics · Sound · Music · Language · Remove ads (with the
+##           · Graphics · Sound · Music · Language · Large text · Vibration
+##           (phones; on a landscape phone not in test builds, whose test
+##           buttons take the space) · Remove ads (with the
 ##           store's price) · Restore purchases · Privacy choices (where ad
 ##           consent applies) · Achievements (where Game Center or Google
 ##           Play Games runs) · Credits · Quit to main menu
@@ -62,6 +66,10 @@ var _wanted_look := ""
 var _license_id := ""
 ## A short (landscape phone) screen: the longest cards are tighter.
 var _tight := false
+## The test buttons in the in-game menu (Perf test, Ad break, Forget
+## purchase): test builds only. ui_check turns them off to check the menu as
+## it ships.
+var test_tools := OS.is_debug_build()
 
 
 func _init(owner_game: Node) -> void:
@@ -189,10 +197,10 @@ func _render() -> void:
 		return
 	for c in _card_box.get_children():
 		c.queue_free()
-	# The main menu, the in-game menu and Settings are the longest cards:
-	# tighter on short (landscape phone) screens, so their last button stays
-	# on screen.
-	var tight := _screen in ["home", "pause", "settings"] and get_viewport().get_visible_rect().size.y < 1000
+	# The main menu, the in-game menu, Settings and Play against the AI are
+	# the longest cards: tighter on short (landscape phone) screens, so their
+	# last button stays on screen.
+	var tight := _screen in ["home", "pause", "settings", "vs_ai"] and get_viewport().get_visible_rect().size.y < 1000
 	_tight = tight
 	_card_box.add_theme_constant_override("separation", 8 if tight else 14)
 	_hosts_box = null
@@ -336,7 +344,12 @@ func _rules_picker() -> void:
 	for id in sets:
 		pick.add_item(HuntText.rule_set_menu(id))
 	pick.selected = sets.find(_rule_set)
-	pick.item_selected.connect(func(i: int) -> void: _rule_set = sets[i])
+	pick.item_selected.connect(func(i: int) -> void:
+		var before := _title_id()
+		_rule_set = sets[i]
+		# Another title's game (dev builds): its own opponents.
+		if _screen == "vs_ai" and _title_id() != before:
+			_render())
 	_row(L10n.t("Rules"), pick)
 
 
@@ -377,7 +390,8 @@ func _title_id() -> String:
 # --- Screens -----------------------------------------------------------------
 
 func _home() -> void:
-	_title(HuntText.title_name(_title_id()), 56)
+	# A smaller title on a landscape phone with Large text, so Quit fits.
+	_title(HuntText.title_name(_title_id()), 46 if _tight and SeriesTheme.large else 56)
 	_gap(6)
 	# Only an AI game set aside for an online match waits here; any other
 	# game is resumed from the in-game menu, or straight away at start.
@@ -415,14 +429,18 @@ func _home() -> void:
 func _vs_ai() -> void:
 	_title(L10n.t("Play against the AI"))
 	_side_picker()
-	var level := OptionButton.new()
-	level.add_theme_font_size_override("font_size", SeriesTheme.fs(19))
-	for label in [L10n.t("Novice"), L10n.t("Apprentice"), L10n.t("Adept"), L10n.t("Master")]:
-		level.add_item(label)
-	level.selected = game.level
-	level.item_selected.connect(func(i: int) -> void: game.level = i)
-	# TRANSLATORS: Menu label: how strong the computer opponent is.
-	_row(L10n.t("Opponent"), level)
+	var title := _title_id()
+	if HuntOpponents.has_people(title):
+		_opponents(title)
+	else:
+		var level := OptionButton.new()
+		level.add_theme_font_size_override("font_size", SeriesTheme.fs(19))
+		for i in 4:
+			level.add_item(HuntOpponents.level_name(i))
+		level.selected = game.level
+		level.item_selected.connect(func(i: int) -> void: game.level = i)
+		# TRANSLATORS: Menu label: how strong the computer opponent is.
+		_row(L10n.t("Opponent"), level)
 	_rules_picker()
 	_gap()
 	_button(L10n.t("Start"), func() -> void:
@@ -430,6 +448,105 @@ func _vs_ai() -> void:
 		var mode: int = game.Mode.HUMAN_PREY if _side == HuntState.PREY else game.Mode.HUMAN_HUNTER
 		game.start_local(mode, _rule_set, game.level), true)
 	_back_button()
+
+
+## The title's named opponents (HuntOpponents), one card each: emblem, name,
+## level and a line about them; the chosen one has a brass edge. Tall
+## screens list them with their lines; short ones (landscape phones, and
+## landscape tablets with Large text) show two columns of name cards and the
+## chosen one's line under them.
+func _opponents(title: String) -> void:
+	var label := SeriesTheme.label(L10n.t("Opponent"), "body", 19, SeriesTheme.TEXT_DIM)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_card_box.add_child(label)
+	# Short: a landscape phone, or a landscape tablet with Large text (the
+	# list with every line would run off the bottom).
+	var height := get_viewport().get_visible_rect().size.y
+	var short := height < 1000 or (SeriesTheme.large and height < 1400)
+	var people := HuntOpponents.people(title)
+	var holder: Container
+	if short:
+		var grid := GridContainer.new()
+		grid.columns = 2
+		grid.add_theme_constant_override("h_separation", 10)
+		grid.add_theme_constant_override("v_separation", 10)
+		holder = grid
+	else:
+		var list := VBoxContainer.new()
+		list.add_theme_constant_override("separation", 10)
+		holder = list
+	for p in people:
+		holder.add_child(_opponent_card(p, p.level == game.level, not short))
+	_card_box.add_child(holder)
+	if short:
+		var chosen := HuntOpponents.at_level(title, game.level)
+		if not chosen.is_empty():
+			_text(L10n.t(chosen.about), "book", 18, SeriesTheme.TEXT_DIM)
+
+
+func _opponent_card(p: Dictionary, chosen: bool, with_line: bool) -> PanelContainer:
+	var card := PanelContainer.new()
+	card.name = "Opponent%d" % p.level
+	var bg := Color(0.2, 0.15, 0.1, 0.95) if chosen else Color(0.13, 0.1, 0.075, 0.9)
+	var s := SeriesTheme.panel_box(bg, SeriesTheme.BRASS if chosen else Color(SeriesTheme.BRASS, 0.22), 12)
+	s.set_border_width_all(2 if chosen else 1)
+	s.content_margin_left = 12
+	s.content_margin_right = 14
+	s.content_margin_top = 8
+	s.content_margin_bottom = 8
+	s.shadow_size = 0
+	card.add_theme_stylebox_override("panel", s)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.mouse_filter = Control.MOUSE_FILTER_STOP
+	card.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	card.gui_input.connect(func(e: InputEvent) -> void:
+		var tap := e as InputEventMouseButton
+		if tap and tap.button_index == MOUSE_BUTTON_LEFT and not tap.pressed:
+			_choose_opponent(p.level))
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14 if with_line else 10)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(OpponentEmblem.make(p.emblem, 64.0 if with_line else 48.0, chosen))
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 0)
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var who := SeriesTheme.label(L10n.t(p.name), "display", 26 if with_line else 22, SeriesTheme.ACCENT if chosen else SeriesTheme.TEXT)
+	who.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var level := SeriesTheme.label(HuntOpponents.level_name(p.level), "caps", 15, SeriesTheme.BRASS if chosen else SeriesTheme.TEXT_DIM)
+	if with_line:
+		# The name and level side by side, the line under them.
+		var head := HFlowContainer.new()
+		head.add_theme_constant_override("h_separation", 12)
+		head.add_theme_constant_override("v_separation", 0)
+		head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		level.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		who.autowrap_mode = TextServer.AUTOWRAP_OFF
+		head.add_child(who)
+		head.add_child(level)
+		col.add_child(head)
+		var about := SeriesTheme.label(L10n.t(p.about), "book", 17, SeriesTheme.TEXT if chosen else SeriesTheme.TEXT_DIM)
+		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		about.custom_minimum_size = Vector2(CARD_WIDTH - 210, 0)
+		col.add_child(about)
+	else:
+		who.custom_minimum_size = Vector2(150, 0)
+		col.add_child(who)
+		col.add_child(level)
+	for c in col.find_children("*", "Label", true, false):
+		(c as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(col)
+	card.add_child(row)
+	return card
+
+
+func _choose_opponent(level: int) -> void:
+	if level == game.level:
+		return
+	game.level = level
+	L10n.save_setting("ai_level", level)
+	_render()
 
 
 func _pass_and_play() -> void:
@@ -608,16 +725,21 @@ func _friend_host() -> void:
 	_back_button(L10n.t("Cancel"))
 
 
-## The system share sheet where a plugin provides one; otherwise copies.
+## The system share sheet (ShareSheet: Android and iOS); elsewhere, or if
+## it can't open, the message is copied. The message names the game, gives
+## the code and, on its own line, the menu path to enter it.
 func _share(code: String) -> void:
-	# TRANSLATORS: Message sent with the system share sheet. %s is a code like TG-7KQ2.
-	var text := L10n.t("Play with me in Timeless Games! My game code is %s.") % code
-	for plugin in ["GodotShare", "Share"]:
-		if Engine.has_singleton(plugin):
-			Engine.get_singleton(plugin).call("shareText", "Timeless Games", "", text)
-			return
+	var text := share_message(code, _title_id())
+	if ShareSheet.share(text, L10n.t("Share")):
+		return
 	DisplayServer.clipboard_set(text)
 	game._match_ui.show_toast(L10n.t("Copied"))
+
+
+static func share_message(code: String, title: String) -> String:
+	# TRANSLATORS: Message sent with the system share sheet. The first %s is the game's name (Bagh Chal), the second a code like TG-7K4Q. A line with the menu path to enter the code follows it.
+	var text := L10n.t("Play %s with me! My game code is %s.") % [HuntText.title_name(title), code]
+	return text + "\n" + " › ".join([L10n.t("Play online"), L10n.t("Play with a friend"), L10n.t("Enter a code")])
 
 
 func _friend_join() -> void:
@@ -773,7 +895,7 @@ func _pause() -> void:
 		resign.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_card_box.add_child(row)
 	_settings_rows()
-	if OS.is_debug_build() and not game.is_network():
+	if _shows_test_tools():
 		# Not translated: test builds only (perf_test.gd). One row: the
 		# performance test and its two follow-ups, and "Ad break", which
 		# makes an interstitial due and takes the break after a game, so the
@@ -852,8 +974,58 @@ func _settings_rows() -> void:
 	# TRANSLATORS: Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
 	_sound_row(GameSound.MUSIC, L10n.t("Music"))
 	_language_row()
+	_comfort_row()
 	_purchase_rows()
 	_extras_row()
+
+
+## Whether the in-game menu shows the test buttons.
+func _shows_test_tools() -> bool:
+	return test_tools and not game.is_network()
+
+
+## Large text, and Vibration on phones: two switches on one row. In the
+## in-game menu on a landscape phone only in the app as it ships: in a test
+## build the test buttons take that space (the main menu's Settings always
+## has them).
+func _comfort_row() -> void:
+	if _screen == "pause" and _tight and _shows_test_tools():
+		return
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 16)
+	row.custom_minimum_size.y = 58
+	# TRANSLATORS: Settings switch: makes every text in the game bigger. Keep it short.
+	_switch(row, L10n.t("Large text"), GameText.is_large(), func(on: bool) -> void:
+		GameText.set_large(on, get_tree()))
+	if GameHaptics.available():
+		# TRANSLATORS: Settings switch: the phone vibrates lightly when a piece moves, at a capture and at the end of a game. The phone's usual word. Keep it short.
+		_switch(row, L10n.t("Vibration"), GameHaptics.is_on(), func(on: bool) -> void:
+			GameHaptics.set_on(on)
+			GameHaptics.pulse(GameHaptics.MOVE))
+	_card_box.add_child(row)
+
+
+## An on/off switch with its label after it, sharing a row.
+func _switch(parent: Control, text: String, on: bool, toggled: Callable) -> void:
+	var box := HBoxContainer.new()
+	box.add_theme_constant_override("separation", 10)
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var sw := SeriesSwitch.new()
+	sw.button_pressed = on
+	sw.tooltip_text = text
+	sw.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	sw.toggled.connect(toggled)
+	var l := SeriesTheme.label(text, "body", 19, SeriesTheme.TEXT_DIM)
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(sw)
+	box.add_child(l)
+	# Switches sharing a row share it in proportion to their labels, so a
+	# long word (ja バイブレーション) isn't broken while the other has room.
+	var text_w := SeriesTheme.font("ui").get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, SeriesTheme.fs(19)).x
+	box.size_flags_stretch_ratio = SeriesSwitch.W + 18.0 + text_w
+	parent.add_child(box)
 
 
 ## Achievements (where Game Center or Google Play Games runs: their own
@@ -903,7 +1075,9 @@ func _licenses() -> void:
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	var screen_h := get_viewport().get_visible_rect().size.y
-	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, clampf(screen_h - 360.0, 220.0, 1000.0))
+	# Room for the title, the line above and Back: more with Large text.
+	var reserve := 360.0 * (SeriesTheme.LARGE_SCALE if SeriesTheme.large else 1.0)
+	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, clampf(screen_h - reserve, 220.0, 1000.0))
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.add_theme_constant_override("separation", 2)

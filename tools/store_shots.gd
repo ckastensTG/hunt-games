@@ -130,11 +130,13 @@ func _play(n: int) -> Array[PackedInt32Array]:
 	for _i in n:
 		if s.status() != HuntState.Status.ONGOING:
 			break
-		var search: HuntSearcher = game.personas[1].make_searcher(game.evaluator)
+		# The plain Apprentice (no person's style), so the position stays the same.
+		var apprentice := HuntPersonas.plain(HuntPersonas.APPRENTICE)
+		var search: HuntSearcher = apprentice.make_searcher(game.evaluator)
 		search.begin(s)
 		while not search.step(4000):
 			pass
-		var m: PackedInt32Array = game.personas[1].pick(search, rng)
+		var m: PackedInt32Array = apprentice.pick(search, rng)
 		out.append(m)
 		s.make(m)
 	_moves_cache[n] = out

@@ -30,6 +30,8 @@ var failures: Array[String] = []
 func _initialize() -> void:
 	AdService.backend_override = "sim"
 	IAPService.backend_override = "sim"
+	# Vibrations recorded instead of felt (and the Vibration switch shown).
+	GameHaptics.recorder = []
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	game.autosave = false  # leave the player's saved game alone
 	root.add_child(game)
@@ -249,6 +251,20 @@ func _check_settings() -> void:
 		failures.append("settings: opens with Sound and Music (%s, %d sliders)" % [menu._screen, sliders.size()])
 	if not _menu_has_text(L10n.t("Remove ads · %s") % "US$1.99"):
 		failures.append("settings: Remove ads offered there too")
+	# Large text and Vibration: two switches; Large text makes every size bigger.
+	var switches := _switches()
+	var large: Button = switches.get(L10n.t("Large text"))
+	if large == null or not switches.has(L10n.t("Vibration")):
+		failures.append("settings: Large text and Vibration switches (%s)" % str(switches.keys()))
+	elif large.button_pressed or SeriesTheme.fs(19) != 21:
+		failures.append("settings: normal text to start with")
+	else:
+		large.button_pressed = true
+		if not SeriesTheme.large or SeriesTheme.fs(19) != 26 or not bool(L10n.load_setting(GameText.SETTING, false)):
+			failures.append("settings: Large text makes 19 + 2 into 26 and is saved")
+		GameText.set_large(false, self)
+		if SeriesTheme.fs(19) != 21:
+			failures.append("settings: back to normal text")
 	# Credits → Open-source licenses → Godot's notice, and back to Settings.
 	var credits := _menu_button(L10n.t("Credits"))
 	if credits == null:
@@ -279,7 +295,32 @@ func _check_settings() -> void:
 	if menu._screen != "home" or not menu.visible:
 		failures.append("settings: Back returns to the main menu (%s)" % menu._screen)
 	menu.close()
+	# The in-game menu: Large text and Vibration as the app ships, also on a
+	# short (landscape phone) screen; there, in a test build, the test buttons
+	# take their place.
+	var short: bool = game.get_viewport().get_visible_rect().size.y < 1000
+	for tools in [false, true]:
+		menu.test_tools = tools
+		menu.open("pause")
+		var has_switches := _switches().has(L10n.t("Large text"))
+		var has_tests := _menu_has_text("Perf test")
+		if has_switches == (tools and short) or has_tests != tools:
+			failures.append("in-game menu (test buttons %s, short %s): switches %s, test buttons %s" % [tools, short, has_switches, has_tests])
+		menu.close()
+	menu.test_tools = OS.is_debug_build()
+	# The frame-rate readout (three-finger tap) exists in test builds only.
+	if (game.perf != null) != OS.is_debug_build():
+		failures.append("the frame-rate readout only in test builds")
 	print("settings: ok")
+
+
+## The visible on/off switches in the menu, by their label.
+func _switches() -> Dictionary:
+	var switches := {}
+	for n in game.menu.find_children("*", "SeriesSwitch", true, false):
+		if n.is_visible_in_tree() and not _going(n):
+			switches[(n as Button).tooltip_text] = n
+	return switches
 
 
 func _menu_has_text(text: String) -> bool:
@@ -357,6 +398,7 @@ func _next_game() -> void:
 		return
 	current = queue.pop_front()
 	game.sfx.played.clear()
+	(GameHaptics.recorder as Array).clear()
 	game.mode = GreyboxScript.Mode.AI_VS_AI
 	game.level = 0
 	if current == "komikan_dogs_first":
@@ -379,6 +421,15 @@ func _ai() -> bool:
 		var want_sting: bool = game._title() == "bagh_chal" and game.status != HuntState.Status.ONGOING
 		if stings.size() != (1 if want_sting else 0):
 			failures.append("%s: expected %d end sting, got %s" % [current, 1 if want_sting else 0, stings])
+		# The phone vibrates with the pieces, and once more at the end.
+		var buzz: Array = GameHaptics.recorder
+		if game.history.size() > 0 and not buzz.has(GameHaptics.MOVE):
+			failures.append("%s: no vibration for a move" % current)
+		if st.captured > 0 and not buzz.has(GameHaptics.CAPTURE):
+			failures.append("%s: no vibration for a capture" % current)
+		var want_end: bool = game.status != HuntState.Status.ONGOING
+		if buzz.count(GameHaptics.END) != (1 if want_end else 0):
+			failures.append("%s: expected %d end vibration, got %d" % [current, 1 if want_end else 0, buzz.count(GameHaptics.END)])
 		if st.hash_key != st.compute_hash():
 			failures.append("%s: hash drift" % current)
 		_next_game()

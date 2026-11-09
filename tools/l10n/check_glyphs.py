@@ -23,8 +23,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import po  # noqa: E402
 
 FONTS = pathlib.Path("ui/fonts")
-LATIN = ["AlegreyaSC-Medium.ttf", "Alegreya-Variable.ttf", "AlegreyaSans-Regular.ttf",
-         "AlegreyaSans-Medium.ttf", "AlegreyaSans-Bold.ttf"]
+LATIN = ["AlegreyaSC-Medium.ttf", "Alegreya-Variable.ttf", "Alegreya-MediumItalic.ttf",
+         "AlegreyaSans-Regular.ttf", "AlegreyaSans-Medium.ttf", "AlegreyaSans-Bold.ttf"]
 CJK = {"zh_CN": "SC", "zh_TW": "TC", "ja": "JP", "ko": "KR"}
 # Languages drawn by a whole fallback font: language -> ui/fonts/<folder>
 WHOLE = {"th": "thai", "ne": "devanagari"}

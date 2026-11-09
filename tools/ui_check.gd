@@ -1,14 +1,18 @@
 extends SceneTree
 ## Checks the interface in every language at one screen shape (run it once
 ## per shape, with --resolution and --shape=name): each menu screen,
-## the in-game display, the result card, the questions and toast, the loading
+## the in-game display (also against the AI, with the opponent: "hud_ai"),
+## the result card, the questions and toast, the loading
 ## screen (a look being built), and every
 ## How to play step. A check fails when a visible control reaches outside the
 ## screen (or, inside a scrolling area, outside it sideways), or is squeezed
 ## below the size its text needs.
 ##   xvfb-run -a -s "-screen 0 1400x1400x24" godot --path . --rendering-method gl_compatibility \
 ##     --fixed-fps 30 --resolution 540x1200 -s res://tools/ui_check.gd -- --shape=phone_portrait \
-##     [--shots=DIR] [--langs=en,de] [--screens=menu,hud]
+##     [--shots=DIR] [--langs=en,de] [--screens=menu,hud] [--large]
+## --large checks everything with Large text on (Settings; SeriesTheme.fs).
+## The in-game menu is checked as it ships, without the test buttons; with
+## --test-tools, as in a test build.
 ## Shapes used: phone_portrait 540x1200, phone_landscape 1200x540,
 ## tablet_portrait 768x1024, tablet_landscape 1024x768.
 ## With --shots, saves a picture of every check for the languages in --shot-langs
@@ -32,6 +36,8 @@ var phase := "boot"
 var issues: Array[String] = []
 var checked := 0
 var _cur_lang := ""
+var large := false
+var test_tools := false
 
 
 ## Stands in for Game Center or Google Play Games, so Settings shows the
@@ -54,11 +60,17 @@ func _initialize() -> void:
 			shape = arg.substr(8)
 		elif arg.begins_with("--screens="):
 			only_screens = Array(arg.substr(10).split(","))
+		elif arg == "--large":
+			large = true
+		elif arg == "--test-tools":
+			test_tools = true
 	if langs.is_empty():
 		for entry in L10n.languages():
 			langs.append(entry[0])
 	if shots_dir != "":
 		DirAccess.make_dir_recursive_absolute(shots_dir)
+	# Settings shows the Vibration switch (as on a phone).
+	GameHaptics.recorder = []
 	game = load("res://scenes/greybox/greybox.tscn").instantiate()
 	game.autosave = false
 	root.add_child(game)
@@ -68,7 +80,7 @@ func _screens() -> Array:
 	var list: Array = []
 	for s in MENU_SCREENS:
 		list.append("menu:" + s)
-	list.append_array(["hud", "result", "dialog:draw", "dialog:resign", "toast", "loading"])
+	list.append_array(["hud", "hud_ai", "result", "dialog:draw", "dialog:resign", "toast", "loading"])
 	var steps := HuntTutorials.build(game.rules) if game.rules else []
 	for i in steps.size():
 		list.append("tutorial:%d" % i)
@@ -100,6 +112,11 @@ func _process(_delta: float) -> bool:
 			game.iap.prices[GreyboxScript.REMOVE_ADS] = "R$ 10,90"
 			game.iap.owned.erase(GreyboxScript.REMOVE_ADS)
 			game.achievements.backend = AnyService.new()
+			game.menu.test_tools = test_tools
+			# The text size being checked (not saved: the player's setting
+			# stays as it was).
+			SeriesTheme.set_large(large)
+			root.propagate_notification(Node.NOTIFICATION_TRANSLATION_CHANGED)
 			# A game set aside, so the main menu shows Continue too (its
 			# longest form).
 			game.save_path = "user://ui_check_match.save"
@@ -158,9 +175,18 @@ func _setup(screen: String) -> void:
 	if screen.begins_with("menu:"):
 		# The licence screen with the longest name as its title.
 		game.menu._license_id = "google_sdks"
+		# Play against the AI with the opponent whose line is longest (short
+		# screens show the chosen one's line under the cards).
+		game.level = _longest_person("about")
 		game.menu.open(screen.substr(5))
 	elif screen == "hud":
 		game.menu.close()
+		game._hud.refresh()
+	elif screen == "hud_ai":
+		# Against the AI: the opponent strip, with the longest name.
+		game.menu.close()
+		game.mode = GreyboxScript.Mode.HUMAN_PREY
+		game.level = _longest_person("name")
 		game._hud.refresh()
 	elif screen == "result":
 		game.menu.close()
@@ -190,7 +216,10 @@ func _setup(screen: String) -> void:
 
 
 func _teardown(screen: String) -> void:
-	if screen == "result":
+	if screen == "hud_ai":
+		game.mode = GreyboxScript.Mode.HOTSEAT
+		game._hud.refresh()
+	elif screen == "result":
 		game.status = HuntState.Status.ONGOING
 		game._hud.refresh()
 	elif screen.begins_with("dialog:"):
@@ -204,6 +233,19 @@ func _teardown(screen: String) -> void:
 		if int(screen.substr(9)) == HuntTutorials.build(game.rules).size() - 1 or jobs.is_empty() or not str(jobs[0][3]).begins_with("tutorial:"):
 			game._tutorial.stop(false)
 			_play_some_moves_again()
+
+
+## The AI level whose person has the longest name (with the level's name)
+## or line in the current language.
+func _longest_person(what: String) -> int:
+	var best := 0
+	var most := -1
+	for p in HuntOpponents.people("bagh_chal"):
+		var text := L10n.t(p.name) + HuntOpponents.level_name(p.level) if what == "name" else L10n.t(p.about)
+		if text.length() > most:
+			most = text.length()
+			best = p.level
+	return best
 
 
 func _play_some_moves_again() -> void:

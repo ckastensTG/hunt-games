@@ -46,11 +46,9 @@ static func font(name: String) -> Font:
 				v.variation_opentype = {"wght": 500}
 				_fonts[name] = v
 			"book_italic":
-				var v := FontVariation.new()
-				v.base_font = load(FONTS + "Alegreya-Variable.ttf")
-				v.variation_opentype = {"wght": 450}
-				v.variation_transform = Transform2D(Vector2(1, 0), Vector2(0.18, 1), Vector2.ZERO)
-				_fonts[name] = v
+				# Alegreya's own italic (Medium, like the book text's weight),
+				# not the upright font slanted: real italic letterforms.
+				_fonts[name] = load(FONTS + "Alegreya-MediumItalic.ttf")
 			"ui":
 				_fonts[name] = load(FONTS + "AlegreyaSans-Regular.ttf")
 			"ui_medium":
@@ -137,10 +135,26 @@ static func _button_box(bg: Color, border: Color) -> StyleBoxFlat:
 ## at plus TEXT_BUMP. Christopher, 2026-11-05: "increase every text in the game
 ## by two points" (easier to read and to tap on phones).
 const TEXT_BUMP := 2
+## Large text (Settings; GameText): every size a quarter bigger again.
+## Christopher, 2026-11-08: "normal" and "large" with a significant
+## difference between the two.
+const LARGE_SCALE := 1.25
+
+## Large text is on. Set through set_large() (GameText), which also makes
+## theme() build afresh at the new sizes.
+static var large := false
 
 
 static func fs(size: int) -> int:
-	return size + TEXT_BUMP
+	var s := size + TEXT_BUMP
+	return roundi(s * LARGE_SCALE) if large else s
+
+
+static func set_large(on: bool) -> void:
+	if on == large:
+		return
+	large = on
+	_theme = null
 
 
 static func theme() -> Theme:
