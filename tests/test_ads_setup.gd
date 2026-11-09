@@ -42,6 +42,14 @@ func test_ios_info_plist_app_id_and_tracking_text() -> void:
 			# (Epic's and Google's SDKs), so no non-exempt encryption; App Store
 			# Connect then doesn't ask for each build.
 			check_eq(plist.count("<key>ITSAppUsesNonExemptEncryption</key><false/>"), 1, "%s: export compliance answered" % section)
+			# The app's privacy manifest, which Godot writes from these options.
+			# Apple rejects NSPrivacyTracking true without tracking domains, and
+			# domains without NSPrivacyTracking (ITMS-91064; build 1.0.0 (2),
+			# 2026-11-09). Our own code tracks nothing: AdMob declares its
+			# tracking and domains in its own SDK's manifest.
+			var tracking: bool = presets.get_value(section, "privacy/tracking_enabled", false)
+			var domains: PackedStringArray = presets.get_value(section, "privacy/tracking_domains", PackedStringArray())
+			check(not tracking and domains.is_empty(), "%s: the app's own manifest declares no tracking (tracking %s, %d domains)" % [section, tracking, domains.size()])
 			# The prompts' English texts are TitleConfig's, so the export step
 			# finds their translations (editor/ios_plist_strings.gd).
 			var texts := IOSPlistStrings.usage_texts(plist)
