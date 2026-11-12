@@ -50,6 +50,11 @@ var stop_on_decisive: bool = true
 ## (captures still first), so among moves that score the same a different
 ## one is chosen from game to game. Strength is unchanged (AIPersona.vary_ties).
 var vary_seed: int = 0
+## How much worse than an even position a draw is for the side the search
+## plays (the side to move at the root): a draw scores -contempt for it and
+## +contempt for the other side. 0 = a draw is even. With contempt the AI
+## plays on rather than repeat positions (AIPersona.contempt).
+var contempt: int = 0
 var tt_max_entries: int = 300000
 
 # Results of the last completed iteration.
@@ -67,6 +72,7 @@ var _depth: int = 0
 var _start_ms: int = 0
 var _tt := {}
 var _iter_scores := PackedInt64Array()
+var _root_side: int = HuntState.HUNTER
 
 
 func _init(eval: HuntEvaluator = null) -> void:
@@ -75,6 +81,7 @@ func _init(eval: HuntEvaluator = null) -> void:
 
 func begin(state: HuntState) -> void:
 	_state = state.clone()
+	_root_side = _state.side
 	_stack.clear()
 	nodes = 0
 	completed_depth = 0
@@ -314,7 +321,7 @@ func _out_of_limits() -> bool:
 
 func _terminal_score(st: HuntState.Status, ply: int) -> int:
 	if st == HuntState.Status.DRAW:
-		return 0
+		return -contempt if _state.side == _root_side else contempt
 	var hunter_won := st == HuntState.Status.HUNTER_WIN
 	var mover_is_hunter := _state.side == HuntState.HUNTER
 	return (WIN - ply) if hunter_won == mover_is_hunter else -(WIN - ply)

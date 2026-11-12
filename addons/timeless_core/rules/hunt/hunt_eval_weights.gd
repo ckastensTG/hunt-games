@@ -23,3 +23,17 @@ extends Resource
 ## Per empty point the hunters can reach by steps without passing a prey
 ## (their territory). Trapping games: the prey win by shrinking it. 0 = off.
 @export var hunter_territory: int = 0
+## Per prey the hunters could jump from a point they can reach by steps
+## (their territory, or where they stand), the point beyond it being empty:
+## gaps in the prey's wall. Trapping games: the prey advance as a solid
+## front. Counts for the hunter. 0 = off.
+@export var prey_exposed: int = 0
+## When the prey side is to move and the hunters threaten two or more prey
+## at once (one move rarely saves both). Counts for the hunter. 0 = off.
+@export var double_threat: int = 0
+## Score positions relative to the rule set's starting position, so an even
+## game scores about 0 and the side that is ahead is the one scoring above it.
+## Needed with contempt (AIPersona.contempt): otherwise the terms that always
+## favour the hunter (mobility, territory) make every draw look good to the
+## prey. Off = scores as they come.
+@export var centered := false

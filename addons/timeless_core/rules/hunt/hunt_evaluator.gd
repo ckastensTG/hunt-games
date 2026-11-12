@@ -3,6 +3,10 @@ extends RefCounted
 ## Static evaluation for hunt games, from the side to move's point of view.
 
 var weights: HuntEvalWeights
+# With weights.centered: the starting position's score, for the rule set it
+# was taken from.
+var _center_rules: HuntRuleSet = null
+var _center := 0
 
 
 func _init(w: HuntEvalWeights = null) -> void:
@@ -10,6 +14,17 @@ func _init(w: HuntEvalWeights = null) -> void:
 
 
 func evaluate(s: HuntState) -> int:
+	var score := _raw(s)
+	if weights.centered:
+		if _center_rules != s.rules:
+			_center_rules = s.rules
+			_center = _raw(HuntState.create(s.rules))
+		score -= _center
+	return score if s.side == HuntState.HUNTER else -score
+
+
+## The score from the hunter's point of view, before centering.
+func _raw(s: HuntState) -> int:
 	var w := weights
 	var board := s.board
 	var cells := s.cells
@@ -39,6 +54,8 @@ func evaluate(s: HuntState) -> int:
 		score += threats * w.threat_hunter_to_move
 	else:
 		score += threats * w.threat_prey_to_move
+		if threats >= 2:
+			score += w.double_threat
 
 	if s.reserve > 0 and w.prey_edge_in_placement != 0:
 		var on_edge := 0
@@ -57,18 +74,23 @@ func evaluate(s: HuntState) -> int:
 					prey_moves += 1
 		score -= prey_moves * w.prey_mobility
 
-	if w.hunter_territory != 0:
-		score += _territory(s) * w.hunter_territory
+	if w.hunter_territory != 0 or w.prey_exposed != 0:
+		var seen := PackedByteArray()
+		var territory := _territory(s, seen)
+		score += territory * w.hunter_territory
+		if w.prey_exposed != 0:
+			score += _exposed(s, seen) * w.prey_exposed
 
-	return score if s.side == HuntState.HUNTER else -score
+	return score
 
 
 ## Empty points reachable from the hunters by steps alone (prey block).
-func _territory(s: HuntState) -> int:
+## `seen` comes back marking them and the hunters' own points.
+func _territory(s: HuntState, seen := PackedByteArray()) -> int:
 	var board := s.board
 	var cells := s.cells
-	var seen := PackedByteArray()
 	seen.resize(cells.size())
+	seen.fill(0)
 	var stack := PackedInt32Array()
 	for h in s.hunters:
 		seen[h] = 1
@@ -83,6 +105,23 @@ func _territory(s: HuntState) -> int:
 				count += 1
 				stack.append(j)
 	return count
+
+
+## Prey a hunter could jump from a point marked in `seen` (see _territory),
+## the landing point being empty.
+func _exposed(s: HuntState, seen: PackedByteArray) -> int:
+	var board := s.board
+	var cells := s.cells
+	var exposed := 0
+	for a in seen.size():
+		if seen[a] == 0:
+			continue
+		var overs := board.jump_over[a]
+		var lands := board.jump_land[a]
+		for k in overs.size():
+			if cells[overs[k]] == HuntState.PREY and cells[lands[k]] == HuntState.EMPTY:
+				exposed |= 1 << overs[k]
+	return _popcount(exposed)
 
 
 static func _popcount(x: int) -> int:

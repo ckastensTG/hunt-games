@@ -195,3 +195,17 @@ func test_backend_choice() -> void:
 	check_eq(AchievementService.pick_backend(SETUP), "none", "no service on this platform")
 	check(not GameCenterBackend.available(), "Game Center only on iPhone and iPad")
 	check(not PlayGamesBackend.available(), "Google Play Games only on Android")
+
+
+## A title whose store records aren't made yet signs in to neither service.
+func test_services_need_the_titles_ids() -> void:
+	check(AchievementService.has_ids(SETUP, "game_center"), "Game Center IDs given")
+	check(AchievementService.has_ids(SETUP, "play_games"), "a Google Play Games ID given")
+	var unmade := {"achievements": {
+		"first_lesson": {"game_center": "", "play_games": ""},
+		"the_hunt": {},
+	}}
+	check(not AchievementService.has_ids(unmade, "game_center"), "no Game Center IDs yet")
+	check(not AchievementService.has_ids(unmade, "play_games"), "no Google Play Games IDs yet")
+	check_eq(AchievementService.pick_backend(unmade), "none", "no IDs: no service")
+	check(not AchievementService.has_ids({}, "play_games"), "a title without achievements")

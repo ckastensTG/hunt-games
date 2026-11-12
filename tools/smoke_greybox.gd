@@ -7,6 +7,7 @@ extends SceneTree
 ## 3. "How to play" for every rule set: every step shown and its moves
 ##    played on the board, then the walkthrough closed and the game back.
 ## 4. The interface in every launch language.
+## Also Settings, Credits and Other Timeless Games from the main menu.
 ## Ads run on the test stand-in (instant): no ad after the first finished
 ## game, one at the break after the second; one look free, the others after
 ## a rewarded video, built behind the loading screen. Undo only against the AI.
@@ -135,6 +136,7 @@ func _clicks() -> bool:
 			_check_undo_against_ai()
 			_check_ads()
 			_check_settings()
+			_check_more_games()
 			_click_step = 4
 		4:
 			# The look picked after the video is built behind the loading
@@ -314,6 +316,82 @@ func _check_settings() -> void:
 	print("settings: ok")
 
 
+## Other Timeless Games from the main menu (after Game origins): the shipped
+## list, Bagh Chal available with its card opening the store on a tap, Jogo
+## da Onça coming soon with its card and no tap, the line for an empty tab,
+## a long series (20 games) scrolling inside the menu card, Back.
+func _check_more_games() -> void:
+	var menu: Node = game.menu
+	menu.open("home")
+	var buttons: Array = menu.find_children("*", "Button", true, false).filter(
+		func(n: Node) -> bool: return n.is_visible_in_tree() and not _going(n)).map(
+		func(n: Node) -> String: return (n as Button).text)
+	var at := buttons.find(L10n.t("Other Timeless Games"))
+	if at < 0 or at != buttons.find(L10n.t("Game origins")) + 1:
+		failures.append("other games: the button right after Game origins (%s)" % str(buttons))
+		menu.close()
+		return
+	_menu_button(L10n.t("Other Timeless Games")).pressed.emit()
+	var available := _menu_button(L10n.t("Available now"))
+	var soon := _menu_button(L10n.t("Coming soon"))
+	if menu._screen != "more_games" or available == null or soon == null or not available.button_pressed:
+		failures.append("other games: opens on Available now, with both tabs (%s)" % menu._screen)
+	var pictures := func() -> Array:
+		return menu.find_children("*", "TextureRect", true, false).filter(
+			func(n: Node) -> bool: return n.is_visible_in_tree() and not _going(n) and (n as TextureRect).texture != null)
+	if menu._games_shown != ["bagh_chal"] or pictures.call().size() != 1:
+		failures.append("other games: Bagh Chal available, with its card (%s)" % str(menu._games_shown))
+	else:
+		var pic: TextureRect = pictures.call()[0]
+		var frame := pic.get_parent() as Control
+		if pic.texture.get_size() != Vector2(1024, 250) or absf(frame.custom_minimum_size.aspect() - 1024.0 / 250.0) > 0.05:
+			failures.append("other games: a 1024 x 250 card (%s, frame %s)" % [pic.texture.get_size(), frame.custom_minimum_size])
+		if frame.get_meta("opens_store", "") != "bagh_chal" or frame.mouse_filter != Control.MOUSE_FILTER_PASS:
+			failures.append("other games: an available game's card opens its store page and lets a drag through")
+	soon.pressed.emit()
+	if menu._games_shown != ["jogo_da_onca"] or pictures.call().size() != 1:
+		failures.append("other games: Jogo da Onça coming soon, with its card (%s)" % str(menu._games_shown))
+	elif (pictures.call()[0] as Node).get_parent().has_meta("opens_store"):
+		failures.append("other games: a coming-soon card opens nothing")
+	var kept: Array = game.catalog.entries
+	game.catalog.entries = []
+	menu._render()
+	if not _menu_has_label(L10n.t("No games here yet.")):
+		failures.append("other games: an empty tab says so")
+	# 20 games (the series' plan): the list scrolls inside the menu card.
+	var many := []
+	for i in 20:
+		var e: Dictionary = kept[0].duplicate(true)
+		e.id = "game_%02d" % i
+		many.append(e)
+	game.catalog.entries = many
+	menu._games_tab = "available"
+	menu._render()
+	var scrolls: Array = menu.find_children("*", "ScrollContainer", true, false).filter(
+		func(n: Node) -> bool: return not _going(n))
+	var cards := 0
+	for n in menu.find_children("*", "PanelContainer", true, false):
+		if not _going(n) and n.has_meta("opens_store"):
+			cards += 1
+	var screen_h: float = game.get_viewport().get_visible_rect().size.y
+	if cards != 20 or scrolls.size() != 1:
+		failures.append("other games: 20 cards in one scrolling list (%d cards, %d lists)" % [cards, scrolls.size()])
+	else:
+		var scroll := scrolls[0] as ScrollContainer
+		var card_h: float = (menu.find_children("*", "PanelContainer", true, false).filter(
+			func(n: Node) -> bool: return not _going(n) and n.has_meta("opens_store"))[0] as Control).custom_minimum_size.y
+		if scroll.custom_minimum_size.y >= 20 * card_h or scroll.custom_minimum_size.y > screen_h - 250 or scroll.vertical_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED:
+			failures.append("other games: the list fits the screen and scrolls (%s of %d cards %.0f high, screen %.0f)" % [scroll.custom_minimum_size.y, 20, card_h, screen_h])
+	game.catalog.entries = kept
+	menu._games_tab = ""
+	menu._render()
+	_menu_button(L10n.t("Back")).pressed.emit()
+	if menu._screen != "home":
+		failures.append("other games: Back returns to the main menu (%s)" % menu._screen)
+	menu.close()
+	print("other games: ok")
+
+
 ## The visible on/off switches in the menu, by their label.
 func _switches() -> Dictionary:
 	var switches := {}
@@ -466,7 +544,10 @@ func _tutorial() -> bool:
 		_tut_step = 0
 		_tut_move = 0
 		tut._run += 1  # drive the steps from here, not the timed playback
-		game.tutorial_set_state(tut._steps[0].start)
+		tut._set_position(tut._steps[0])
+		var ids := HuntTutorials.walkthrough_ids(current)
+		if game.rules.id != ids[0] or tut._steps.size() != HuntTutorials.build_walkthrough(ids).size():
+			failures.append("%s: the walkthrough didn't start on its main rule set" % current)
 		return false
 	var step: Dictionary = tut._steps[_tut_step]
 	if _tut_move < step.moves.size():
@@ -480,14 +561,16 @@ func _tutorial() -> bool:
 	_tut_move = 0
 	if _tut_step >= tut._steps.size():
 		tut.stop(false)
-		if game.tutorial_active or game.history.size() != 0:
+		if game.tutorial_active or game.history.size() != 0 or game.rules.id != current:
 			failures.append("%s: closing the walkthrough didn't bring the game back" % current)
 		print("%-28s how to play: %d steps ok" % [current, tut._steps.size()])
 		_tut_step = -1
 		return false
 	tut._index = _tut_step
 	tut._fill_card()
-	game.tutorial_set_state(tut._steps[_tut_step].start)
+	tut._set_position(tut._steps[_tut_step])
+	if game.rules.id != (tut._steps[_tut_step].rules as HuntRuleSet).id:
+		failures.append("%s, step %d: not on its rule set" % [current, _tut_step + 1])
 	return false
 
 

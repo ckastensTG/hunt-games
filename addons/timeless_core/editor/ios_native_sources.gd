@@ -4,7 +4,8 @@ extends EditorExportPlugin
 ## into the exported Xcode project and adds them to the app target, so Xcode
 ## compiles them with the rest of the app. Nothing is built ahead of time and
 ## no plugin is installed. Today: TimelessShare.m, the share sheet
-## (platform/share_sheet.gd).
+## (platform/share_sheet.gd), and TimelessStoreSheet.m, Apple's App Store
+## sheet for "Other Timeless Games" (catalog/store_links.gd).
 ##
 ## Godot writes the project with a group for the app's own files (path =
 ## <name>, holding dummy.cpp and friends) and one Sources build phase; each

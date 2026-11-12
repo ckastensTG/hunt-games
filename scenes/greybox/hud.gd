@@ -381,6 +381,13 @@ func _layout() -> void:
 	var size := get_viewport().get_visible_rect().size
 	var portrait := size.y > size.x
 	_title_box.visible = not portrait
+	# Godot grows a control to fit its content but never shrinks it: when the
+	# score panel's last line hides (no-capture count reset, How to play), the
+	# panel would stay tall while the turn banner below is placed by the
+	# panel's new, shorter size, and a wide banner (Large text, French or
+	# German) runs into it. Fit the panel to what it shows now.
+	_score_panel.offset_left = _score_panel.offset_right
+	_score_panel.offset_bottom = _score_panel.offset_top
 	var edge := 28.0
 	var side_w := _score_panel.get_combined_minimum_size().x
 	if portrait:
@@ -442,7 +449,8 @@ func refresh() -> void:
 	var rules: HuntRuleSet = game.rules
 	var teaching: bool = game.tutorial_active
 	_title.text = HuntText.title_name(title_id)
-	_subtitle.text = HuntText.rule_set_name(game._rule_set_id)
+	# The walkthrough names the rule set it's on (Parlett's step at the end).
+	_subtitle.text = HuntText.rule_set_name(game.rules.id if teaching else game._rule_set_id)
 	var net_game: bool = game.is_network()
 	var shown: bool = not teaching
 	_root.visible = game.menu == null or not game.menu.is_open()

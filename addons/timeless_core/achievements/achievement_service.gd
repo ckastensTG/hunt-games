@@ -65,17 +65,31 @@ func start(setup: Dictionary) -> void:
 	_use(pick_backend(setup))
 
 
-## The service where its plugin runs; otherwise none.
+## The service where its plugin runs and the title has IDs for it; otherwise
+## none. Until a title's store records exist (no Game Center or Google Play
+## Games IDs yet), it doesn't sign in at all: Google Play Games can't without
+## the game ID in the Android presets, and an empty achievements screen helps
+## nobody. Unlocks are still kept, and go out from the first build with IDs.
 static func pick_backend(setup: Dictionary) -> String:
 	if backend_override != "":
 		return backend_override
 	if (setup.get("achievements", {}) as Dictionary).is_empty():
 		return "none"
-	if GameCenterBackend.available():
+	if GameCenterBackend.available() and has_ids(setup, "game_center"):
 		return "game_center"
-	if PlayGamesBackend.available():
+	if PlayGamesBackend.available() and has_ids(setup, "play_games"):
 		return "play_games"
 	return "none"
+
+
+## Whether the title gave any of its achievements an ID on this service
+## ("game_center" or "play_games").
+static func has_ids(setup: Dictionary, kind: String) -> bool:
+	var all: Dictionary = setup.get("achievements", {})
+	for key in all:
+		if str((all[key] as Dictionary).get(kind, "")) != "":
+			return true
+	return false
 
 
 func _use(kind: String) -> void:

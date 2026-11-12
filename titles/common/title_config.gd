@@ -28,6 +28,8 @@ extends RefCounted
 ## by …"; Christopher, 2026-11-08).
 
 const DEV := "dev"
+## The game list and English cards shipped with the build (GameCatalog).
+const CATALOG_DIR := "res://titles/common/catalog"
 const BAGH_CHAL := "bagh_chal"
 const JOGO_DA_ONCA := "jogo_da_onca"
 ## Suffix for Komikan with the dogs moving first (see resolve_rule_set).
@@ -220,6 +222,14 @@ func ad_setup() -> Dictionary:
 ## test build.
 func iap_setup() -> Dictionary:
 	return {"products": iap.duplicate(), "debug": OS.is_debug_build()}
+
+
+## What GameCatalog.start() needs ("Other Timeless Games", playbook Phase 9):
+## the series' game list and English cards as shipped with the build, and
+## the line to show. The list is the same for every title; the build's copy
+## is refreshed from the site's (website/apps-site/games/v1/) before export.
+func catalog_setup() -> Dictionary:
+	return {"bundled_dir": CATALOG_DIR, "line": "timeless"}
 
 
 ## What AchievementService.start() needs: the title's achievements with

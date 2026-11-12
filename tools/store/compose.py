@@ -100,12 +100,16 @@ def fit_font(path: pathlib.Path, size: int, text: str, max_w: int) -> ImageFont.
     return ImageFont.truetype(str(path), size)
 
 
+# Where a run without spaces (Chinese, Japanese) breaks best: after these.
+CJK_BREAK_AFTER = "、，。；：！？）」』"
+
+
 def wrap(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list[str]:
     """As few lines as _wrap_at(max_w) gives, made as even as possible (no
     single word left alone on the last line)."""
     lines = _wrap_at(text, font, max_w)
-    if len(lines) < 2:
-        return lines
+    if len(lines) < 2 or all(ln[-1] in CJK_BREAK_AFTER for ln in lines[:-1]):
+        return lines  # one line, or broken after punctuation: keep those breaks
     lo, hi = 1, max_w
     while lo < hi:  # the narrowest width that still needs no more lines
         mid = (lo + hi) // 2
@@ -135,6 +139,11 @@ def _wrap_at(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> list[str]:
             cut = len(ln)
             while cut > 1 and font.getlength(ln[:cut]) > max_w:
                 cut -= 1
+            # Prefer to break after a comma or full stop in the second half,
+            # so a name like ヴォ・ゼファ isn't split.
+            soft = max((i + 1 for i, ch in enumerate(ln[:cut]) if ch in CJK_BREAK_AFTER), default=0)
+            if soft >= cut / 2:
+                cut = soft
             out.append(ln[:cut])
             ln = ln[cut:]
         out.append(ln)

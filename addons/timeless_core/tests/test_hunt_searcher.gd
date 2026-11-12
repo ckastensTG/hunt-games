@@ -82,3 +82,19 @@ func test_persona_mistakes_are_seeded() -> void:
 		rng.seed = 42
 		picks.append(p.choose(s, HuntEvaluator.new(), rng))
 	check_eq(picks[0], picks[1], "same seed, same move")
+
+
+## Contempt: a draw scores -contempt for the side the search plays and
+## +contempt for the other side.
+func test_contempt_scores_draws_against_the_searching_side() -> void:
+	var s := HuntState.create(HuntFixtures.tigers_and_goats())
+	var search := HuntSearcher.new(HuntEvaluator.new())
+	search.contempt = 70
+	search.begin(s)
+	check_eq(search._terminal_score(HuntState.Status.DRAW, 3), -70, "the searching side's draw")
+	search._state.make(search._state.legal_moves()[0])
+	check_eq(search._terminal_score(HuntState.Status.DRAW, 4), 70, "the other side's draw")
+	search.contempt = 0
+	check_eq(search._terminal_score(HuntState.Status.DRAW, 4), 0, "no contempt: a draw is even")
+	search.cancel()
+

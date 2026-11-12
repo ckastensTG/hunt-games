@@ -116,6 +116,9 @@ var perf: PerfOverlay
 var ads: AdService
 ## Purchases: Remove ads (one IAPService for the app).
 var iap: IAPService
+## Other Timeless Games: the series' game list and cards (one GameCatalog for
+## the app; the main menu refreshes it).
+var catalog: GameCatalog
 ## Achievements (one AchievementService for the app).
 var achievements: AchievementService
 ## Auto graphics measures and steps down on devices (not in the editor).
@@ -187,6 +190,8 @@ func _ready() -> void:
 	_on_purchases_changed()
 	achievements = AchievementService.instance()
 	achievements.start(title.achievements_setup())
+	catalog = GameCatalog.instance()
+	catalog.start(title.catalog_setup())
 	_styles["bagh_chal"] = BaghChalArt.styles()
 	# The saved look, unless it's locked again (it was opened by a video in
 	# an earlier session): then the free one.
@@ -1372,13 +1377,14 @@ func start_tutorial() -> void:
 	_tutorial_from_menu = menu != null and menu.is_open()
 	if menu:
 		menu.close()
-	# The walkthrough gets a session of its own; the game comes back after.
+	# The walkthrough gets a session of its own, on the title's main rule set
+	# (the variation's steps at the end switch rule sets); the game comes back
+	# after.
 	_saved_session = session
-	var s := MatchSession.create(rules, session.rule_set_id, MatchSession.Kind.PASS_AND_PLAY,
-		MatchSession.Driver.LOCAL, MatchSession.Driver.LOCAL)
+	var ids := HuntTutorials.walkthrough_ids(_rule_set_id)
 	tutorial_active = true
-	_use_session(s)
-	_tutorial.start(rules)
+	tutorial_use_rules(HuntRuleSets.by_id(ids[0]))
+	_tutorial.start(ids)
 	_refresh_ui()
 
 
@@ -1402,6 +1408,14 @@ func _on_tutorial_finished(play_now: bool) -> void:
 
 func is_animating() -> bool:
 	return _animating
+
+
+## The walkthrough moves to a rule set (the variation at its end, or back):
+## a session of its own on that rule set. The player's own rule set
+## (_rule_set_id) stays as it was, for "Start playing".
+func tutorial_use_rules(r: HuntRuleSet) -> void:
+	_use_session(MatchSession.create(r, r.id, MatchSession.Kind.PASS_AND_PLAY,
+		MatchSession.Driver.LOCAL, MatchSession.Driver.LOCAL))
 
 
 ## Shows a tutorial position (a copy: the walkthrough keeps its own).

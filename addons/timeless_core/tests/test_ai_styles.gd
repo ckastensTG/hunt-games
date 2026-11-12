@@ -154,3 +154,11 @@ func test_driver_uses_the_style_and_reports_lapses() -> void:
 			break
 		OS.delay_msec(1)
 	check(driver.last_was_lapse(), "a lapse is reported")
+
+
+func test_contempt_reaches_the_search() -> void:
+	var p := AIPersona.new()
+	check_eq(p.make_searcher(HuntEvaluator.new()).contempt, 0, "none by default")
+	p.contempt = 120
+	check_eq(p.make_searcher(HuntEvaluator.new()).contempt, 120, "the persona's contempt")
+

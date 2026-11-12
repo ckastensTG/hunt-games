@@ -53,6 +53,20 @@ func test_each_person_plays_their_own_way() -> void:
 	check(hajurba.evaluator_for(HuntState.PREY, base) == base, "Hajurba plays with the title's own")
 
 
+## Even the best slips now and then, so a win against him is possible
+## (Christopher, 2026-11-09; bible v1.19); the plain Master (tools) doesn't.
+func test_the_master_slips_now_and_then() -> void:
+	var hajurba := HuntPersonas.styled(HuntPersonas.MASTER)
+	check(hajurba.mistake_rate > 0.0 and hajurba.candidate_window > 0, "small slips")
+	check(hajurba.lapse_rate > 0.0 and hajurba.lapse_window > hajurba.candidate_window, "and now and then a real one")
+	check(hajurba.lapse_window < HuntRuleSets.weights_for(HuntRuleSets.by_id(HuntRuleSets.BAGH_CHAL_STANDARD)).capture,
+		"never as much as a whole goat")
+	check(hajurba.lapse_rate + hajurba.mistake_rate < HuntPersonas.styled(HuntPersonas.ADEPT).mistake_rate + 0.01,
+		"less often than Hari Dai")
+	check_eq(HuntPersonas.plain(HuntPersonas.MASTER).mistake_rate, 0.0, "the plain Master is exact")
+	check_eq(HuntPersonas.plain(HuntPersonas.MASTER).lapse_rate, 0.0, "and never lapses")
+
+
 func test_plain_levels_have_no_style() -> void:
 	for i in HuntPersonas.SPECS.size():
 		var p := HuntPersonas.plain(i)

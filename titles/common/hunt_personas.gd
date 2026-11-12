@@ -49,8 +49,19 @@ const STYLES := [
 		"prey_style": {"hunter_blocked": 2.2, "hunter_mobility": 1.6, "threat_prey_to_move": 1.4},
 	},
 	# Hajurba: the strongest, unhurried, and not the same game twice: among
-	# equally good moves he picks a different one from game to game.
-	{"vary_ties": true, "think_ms": 1600},
+	# equally good moves he picks a different one from game to game. Even he
+	# slips now and then (Christopher, 2026-11-09: "The AI, even the best,
+	# should make a mistake from time to time to give a chance to win"; the
+	# series standard since bible v1.19): a small slip in 1 move of 20, about
+	# Hari Dai's size, and in about 1 of 30 a real one, worth more than a
+	# threatened goat but less than a captured one. Jogo da Onça's Vó Zefa has
+	# the same rates; her windows (300, 900) are about three times these, as
+	# that game's evaluation counts the hunter's room.
+	{
+		"vary_ties": true, "think_ms": 1600,
+		"candidate_window": 100, "mistake_rate": 0.05, "temperature": 40.0,
+		"lapse_rate": 0.03, "lapse_window": 600,
+	},
 ]
 
 

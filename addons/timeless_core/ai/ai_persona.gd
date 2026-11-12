@@ -19,6 +19,9 @@ extends Resource
 ##                     game (the root moves are tried in a varied order; no
 ##                     cost in strength)
 ##   think_ms          the least time a move takes to appear (its pace)
+##   contempt          how much worse than even a draw is for it (points; a
+##                     capture is about 1000): it plays on instead of
+##                     repeating (HuntSearcher.contempt)
 
 @export var id: String = ""
 @export var display_name_key: String = ""
@@ -35,6 +38,7 @@ extends Resource
 @export var vary_ties := false
 @export var think_ms: int = 0
 @export var lapse_pause_ms: int = 0
+@export var contempt: int = 0
 
 
 ## The evaluator this persona plays `side` with: the title's, with the
@@ -60,6 +64,7 @@ func make_searcher(evaluator: HuntEvaluator, seed_value := 0) -> HuntSearcher:
 	s.max_depth = max_depth
 	s.time_limit_ms = time_limit_ms
 	s.exact_root_scores = (candidate_window > 0 and mistake_rate > 0.0) or (lapse_window > 0 and lapse_rate > 0.0)
+	s.contempt = contempt
 	if vary_ties:
 		s.vary_seed = seed_value if seed_value != 0 else 1
 	return s

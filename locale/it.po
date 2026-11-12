@@ -10,7 +10,7 @@ msgstr ""
 "X-Review-Status: translation confidence high (bible §7); native review before release\n"
 
 #. Shown while the board and pieces of another look are prepared (it can take a few seconds).
-#: scenes/greybox/greybox.gd:979
+#: scenes/greybox/greybox.gd:987
 msgid "Loading…"
 msgstr "Caricamento…"
 
@@ -33,7 +33,7 @@ msgid "Moves"
 msgstr "Mosse"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:339 scenes/greybox/hud.gd:535
+#: scenes/greybox/hud.gd:339 scenes/greybox/hud.gd:543
 msgid "Play again"
 msgstr "Gioca ancora"
 
@@ -53,95 +53,95 @@ msgid "Look at the board"
 msgstr "Guarda il tavoliere"
 
 #. The AI is choosing its move. Shown after the turn banner, followed by animated dots.
-#: scenes/greybox/hud.gd:433
+#: scenes/greybox/hud.gd:440
 msgid "thinking"
 msgstr "sta pensando"
 
-#: scenes/greybox/hud.gd:474 scenes/greybox/hud.gd:523
+#: scenes/greybox/hud.gd:482 scenes/greybox/hud.gd:531
 msgid "A draw"
 msgstr "Patta"
 
 #. Pieces captured so far / captures needed to win.
-#: scenes/greybox/hud.gd:481
+#: scenes/greybox/hud.gd:489
 #, c-format
 msgid "Captured %d / %d"
 msgstr "Catture %d / %d"
 
-#: scenes/greybox/hud.gd:509
+#: scenes/greybox/hud.gd:517
 msgid "No moves yet"
 msgstr "Ancora nessuna mossa"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:529 tools/smoke_multiplayer.gd:326
+#: scenes/greybox/hud.gd:537 tools/smoke_multiplayer.gd:329
 msgid "You won"
 msgstr "Hai vinto"
 
 #. Small line above the result when one player is on this device.
-#: scenes/greybox/hud.gd:529 tools/smoke_multiplayer.gd:179
+#: scenes/greybox/hud.gd:537 tools/smoke_multiplayer.gd:182
 msgid "You lost"
 msgstr "Hai perso"
 
 #. Button after a game against another player: play them again (sides swap).
-#: scenes/greybox/hud.gd:535 tools/smoke_multiplayer.gd:181
+#: scenes/greybox/hud.gd:543 tools/smoke_multiplayer.gd:184
 msgid "Rematch"
 msgstr "Rivincita"
 
 #. Move list entry for putting a goat on the board. %s is a point name such as c3.
-#: scenes/greybox/hud.gd:547
+#: scenes/greybox/hud.gd:555
 #, c-format
 msgid "place %s"
 msgstr "piazza in %s"
 
-#: scenes/greybox/hud.gd:556
+#: scenes/greybox/hud.gd:564
 msgid "Watching the AI play both sides."
 msgstr "L'IA gioca per entrambe le parti."
 
-#: scenes/greybox/hud.gd:560
+#: scenes/greybox/hud.gd:568
 msgid "Waiting for your opponent's move."
 msgstr "In attesa della mossa dell'avversario."
 
-#: scenes/greybox/hud.gd:562
+#: scenes/greybox/hud.gd:570
 msgid "Capture chain: pick the next landing, or stop here."
 msgstr "Catena di catture: scegli il prossimo salto o fermati qui."
 
-#: scenes/greybox/hud.gd:568
+#: scenes/greybox/hud.gd:576
 msgid "Pick where it goes. A broken ring marks a capture."
 msgstr "Scegli dove va. Un anello spezzato indica una cattura."
 
-#: scenes/greybox/hud.gd:569
+#: scenes/greybox/hud.gd:577
 msgid "Pick where it goes."
 msgstr "Scegli dove va."
 
-#: scenes/greybox/tutorial.gd:79
+#: scenes/greybox/tutorial.gd:80
 msgid "Close"
 msgstr "Chiudi"
 
 #. Button: play this step of the walkthrough again.
-#: scenes/greybox/tutorial.gd:83
+#: scenes/greybox/tutorial.gd:84
 msgid "Replay"
 msgstr "Rivedi"
 
-#: scenes/greybox/tutorial.gd:86
+#: scenes/greybox/tutorial.gd:87
 msgid "‹ Back"
 msgstr "‹ Indietro"
 
 #. Step counter in the walkthrough: step number and number of steps.
-#: scenes/greybox/tutorial.gd:179
+#: scenes/greybox/tutorial.gd:182
 #, c-format
 msgid "How to play · %d of %d"
 msgstr "Come si gioca · %d di %d"
 
-#: scenes/greybox/tutorial.gd:182
+#: scenes/greybox/tutorial.gd:185
 msgid "Start playing"
 msgstr "Inizia a giocare"
 
-#: scenes/greybox/tutorial.gd:182
+#: scenes/greybox/tutorial.gd:185
 msgid "Next ›"
 msgstr "Avanti ›"
 
 #. A small line over the board while the game keeps looking for an online opponent in the background.
 #. Quick match is searching for an online opponent.
-#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:784
+#: scenes/play/match_ui.gd:92 scenes/play/play_menu.gd:816
 msgid "Looking for an opponent…"
 msgstr "Cerco un avversario…"
 
@@ -156,7 +156,7 @@ msgid "Play now"
 msgstr "Gioca ora"
 
 #. Button on "Opponent ready — play now?": keep playing the AI and stop looking.
-#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:1182
+#: scenes/play/match_ui.gd:133 scenes/play/play_menu.gd:1362
 msgid "Not now"
 msgstr "Non ora"
 
@@ -198,7 +198,7 @@ msgid "Resign this game?"
 msgstr "Abbandonare questa partita?"
 
 #. Confirmation before giving up a game against another player.
-#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:892
+#: scenes/play/match_ui.gd:281 scenes/play/play_menu.gd:1072
 msgid "Resign"
 msgstr "Abbandona"
 
@@ -219,7 +219,7 @@ msgstr "Patta proposta. In attesa di risposta."
 msgid "Rematch offered. Waiting for an answer."
 msgstr "Rivincita proposta. In attesa di risposta."
 
-#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:325
+#: scenes/play/play_controller.gd:328 scenes/play/play_controller.gd:425 scenes/play/play_text.gd:81 tools/smoke_multiplayer.gd:328
 msgid "Your opponent left the game."
 msgstr "Il tuo avversario ha lasciato la partita."
 
@@ -227,7 +227,7 @@ msgstr "Il tuo avversario ha lasciato la partita."
 msgid "Reconnected."
 msgstr "Riconnesso."
 
-#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:170
+#: scenes/play/play_controller.gd:432 tools/smoke_multiplayer.gd:173
 msgid "Your opponent declined the draw."
 msgstr "Il tuo avversario ha rifiutato la patta."
 
@@ -251,378 +251,398 @@ msgstr "L'altro giocatore non si è collegato. Continuiamo a cercare…"
 msgid "Time ran out, so a move was played for you (%d of 3)."
 msgstr "Tempo scaduto: è stata giocata una mossa per te (%d su 3)."
 
-#: scenes/play/play_menu.gd:293 tools/smoke_greybox.gd:292
+#: scenes/play/play_menu.gd:316 tools/smoke_greybox.gd:294 tools/smoke_greybox.gd:388
 msgid "Back"
 msgstr "Indietro"
 
-#: scenes/play/play_menu.gd:353
+#: scenes/play/play_menu.gd:376
 msgid "Rules"
 msgstr "Regole"
 
-#: scenes/play/play_menu.gd:373
+#: scenes/play/play_menu.gd:396
 msgid "Language"
 msgstr "Lingua"
 
 #. Menu button: go back to the game that was set aside.
-#: scenes/play/play_menu.gd:400 scenes/play/play_menu.gd:882
+#: scenes/play/play_menu.gd:425 scenes/play/play_menu.gd:1062
 msgid "Continue"
 msgstr "Continua"
 
-#: scenes/play/play_menu.gd:401 scenes/play/play_menu.gd:430
+#: scenes/play/play_menu.gd:426 scenes/play/play_menu.gd:462
 msgid "Play against the AI"
 msgstr "Gioca contro l'IA"
 
 #. Menu button: two people share this device and take turns.
-#: scenes/play/play_menu.gd:403 scenes/play/play_menu.gd:553
+#: scenes/play/play_menu.gd:428 scenes/play/play_menu.gd:585
 msgid "Pass and play"
 msgstr "In due sullo stesso dispositivo"
 
 #. Menu button: play with someone on the same Wi-Fi network (each on their own device).
-#: scenes/play/play_menu.gd:405 scenes/play/play_menu.gd:562
+#: scenes/play/play_menu.gd:430 scenes/play/play_menu.gd:594
 msgid "Play local"
 msgstr "Gioca in locale"
 
-#: scenes/play/play_menu.gd:407 scenes/play/play_menu.gd:665 scenes/play/play_menu.gd:742
+#: scenes/play/play_menu.gd:432 scenes/play/play_menu.gd:697 scenes/play/play_menu.gd:774
 msgid "Play online"
 msgstr "Gioca online"
 
-#: scenes/play/play_menu.gd:408 tests/test_localization.gd:14
+#: scenes/play/play_menu.gd:433 tests/test_localization.gd:14
 msgid "How to play"
 msgstr "Come si gioca"
 
 #. Main menu button: opens a short history of the game, with its sources.
-#: scenes/play/play_menu.gd:411 scenes/play/play_menu.gd:827
+#: scenes/play/play_menu.gd:436 scenes/play/play_menu.gd:859 tools/smoke_greybox.gd:330
 msgid "Game origins"
 msgstr "Origini del gioco"
 
+#. Main menu button and the title of its screen: the other games in the series (this one is listed too), with links to their store pages. "Timeless Games" is the series' name: keep it in Latin letters, as written.
+#: scenes/play/play_menu.gd:438 scenes/play/play_menu.gd:899 tools/smoke_greybox.gd:329 tools/smoke_greybox.gd:334
+msgid "Other Timeless Games"
+msgstr "Altri Timeless Games"
+
 #. Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
-#: scenes/play/play_menu.gd:413 scenes/play/play_menu.gd:941 tools/smoke_greybox.gd:242
+#: scenes/play/play_menu.gd:444 scenes/play/play_menu.gd:1121 tools/smoke_greybox.gd:244
 msgid "Settings"
 msgstr "Impostazioni"
 
 #. Main menu button: close the game completely.
-#: scenes/play/play_menu.gd:421
+#: scenes/play/play_menu.gd:453
 msgid "Quit game"
 msgstr "Esci dal gioco"
 
 #. Menu label: how strong the computer opponent is.
 #. Shown instead of a player's name when it can't be read.
-#: scenes/play/play_menu.gd:443 scenes/play/play_menu.gd:459 scenes/play/play_text.gd:15
+#: scenes/play/play_menu.gd:475 scenes/play/play_menu.gd:491 scenes/play/play_text.gd:15
 msgid "Opponent"
 msgstr "Avversario"
 
-#: scenes/play/play_menu.gd:446 scenes/play/play_menu.gd:557 scenes/play/play_menu.gd:581
+#: scenes/play/play_menu.gd:478 scenes/play/play_menu.gd:589 scenes/play/play_menu.gd:613
 msgid "Start"
 msgstr "Inizia"
 
-#: scenes/play/play_menu.gd:554
+#: scenes/play/play_menu.gd:586
 msgid "Two players share this device and take turns."
 msgstr "Due giocatori condividono questo dispositivo e giocano a turno."
 
-#: scenes/play/play_menu.gd:563
+#: scenes/play/play_menu.gd:595
 msgid "Both devices need to be on the same Wi-Fi."
 msgstr "I due dispositivi devono essere sulla stessa rete Wi-Fi."
 
 #. Menu button: start a game that another device on the same Wi-Fi can join.
-#: scenes/play/play_menu.gd:566 scenes/play/play_menu.gd:577
+#: scenes/play/play_menu.gd:598 scenes/play/play_menu.gd:609
 msgid "Host a game"
 msgstr "Crea una partita"
 
 #. Menu button: join a game another device on the same Wi-Fi is hosting.
-#: scenes/play/play_menu.gd:568 scenes/play/play_menu.gd:609
+#: scenes/play/play_menu.gd:600 scenes/play/play_menu.gd:641
 msgid "Join a game"
 msgstr "Unisciti a una partita"
 
-#: scenes/play/play_menu.gd:577 scenes/play/play_menu.gd:696
+#: scenes/play/play_menu.gd:609 scenes/play/play_menu.gd:728
 msgid "Create a code"
 msgstr "Crea un codice"
 
-#: scenes/play/play_menu.gd:595
+#: scenes/play/play_menu.gd:627
 msgid "Waiting for a player"
 msgstr "In attesa di un giocatore"
 
-#: scenes/play/play_menu.gd:596
+#: scenes/play/play_menu.gd:628
 msgid "On the other device, choose Play local, then Join a game."
 msgstr "Sull'altro dispositivo scegli Gioca in locale, poi Unisciti a una partita."
 
 #. Above a code like 7KQ-2M4P that the other player can type to join.
-#: scenes/play/play_menu.gd:600
+#: scenes/play/play_menu.gd:632
 msgid "If the game doesn't appear there, enter this code"
 msgstr "Se la partita non compare, inserisci questo codice"
 
-#: scenes/play/play_menu.gd:605 scenes/play/play_menu.gd:725 scenes/play/play_menu.gd:781 scenes/play/play_menu.gd:788 scenes/play/play_menu.gd:793
+#: scenes/play/play_menu.gd:637 scenes/play/play_menu.gd:757 scenes/play/play_menu.gd:813 scenes/play/play_menu.gd:820 scenes/play/play_menu.gd:825
 msgid "Cancel"
 msgstr "Annulla"
 
 #. Shown while listening for games hosted on the same Wi-Fi; a list of games appears below.
-#: scenes/play/play_menu.gd:611
+#: scenes/play/play_menu.gd:643
 msgid "Looking for games on this Wi-Fi…"
 msgstr "Cerco partite su questa rete Wi-Fi…"
 
 #. Placeholder in the box for typing a nearby game's code.
-#: scenes/play/play_menu.gd:622
+#: scenes/play/play_menu.gd:654
 msgid "Code"
 msgstr "Codice"
 
-#: scenes/play/play_menu.gd:630 scenes/play/play_menu.gd:762
+#: scenes/play/play_menu.gd:662 scenes/play/play_menu.gd:794
 msgid "Join"
 msgstr "Unisciti"
 
 #. Menu button: quick match against a random online player.
-#: scenes/play/play_menu.gd:667
+#: scenes/play/play_menu.gd:699
 msgid "Play with someone online"
 msgstr "Gioca con qualcuno online"
 
 #. Small print under "Play with someone online".
-#: scenes/play/play_menu.gd:672 scenes/play/play_menu.gd:786
+#: scenes/play/play_menu.gd:704 scenes/play/play_menu.gd:818
 msgid "Standard rules, about a minute per move"
 msgstr "Regole standard, circa un minuto a mossa"
 
-#: scenes/play/play_menu.gd:673 scenes/play/play_menu.gd:693 scenes/play/play_menu.gd:742
+#: scenes/play/play_menu.gd:705 scenes/play/play_menu.gd:725 scenes/play/play_menu.gd:774
 msgid "Play with a friend"
 msgstr "Gioca con un amico"
 
-#: scenes/play/play_menu.gd:694
+#: scenes/play/play_menu.gd:726
 msgid "One of you creates a code, the other enters it. It works between phones, tablets and computers."
 msgstr "Uno crea un codice, l'altro lo inserisce. Funziona tra telefoni, tablet e computer."
 
-#: scenes/play/play_menu.gd:697 scenes/play/play_menu.gd:742 scenes/play/play_menu.gd:746
+#: scenes/play/play_menu.gd:729 scenes/play/play_menu.gd:774 scenes/play/play_menu.gd:778
 msgid "Enter a code"
 msgstr "Inserisci un codice"
 
-#: scenes/play/play_menu.gd:705
+#: scenes/play/play_menu.gd:737
 msgid "Your code"
 msgstr "Il tuo codice"
 
-#: scenes/play/play_menu.gd:707 scenes/play/play_menu.gd:792
+#: scenes/play/play_menu.gd:739 scenes/play/play_menu.gd:824
 msgid "Connecting…"
 msgstr "Connessione…"
 
-#: scenes/play/play_menu.gd:710
+#: scenes/play/play_menu.gd:742
 msgid "Send this code to your friend. The game starts when they enter it."
 msgstr "Invia questo codice al tuo amico. La partita inizia quando lo inserisce."
 
-#: scenes/play/play_menu.gd:713 scenes/play/play_menu.gd:733
+#: scenes/play/play_menu.gd:745 scenes/play/play_menu.gd:765
 msgid "Share"
 msgstr "Condividi"
 
-#: scenes/play/play_menu.gd:715
+#: scenes/play/play_menu.gd:747
 msgid "Copy"
 msgstr "Copia"
 
 #. Toast after copying the game code.
-#: scenes/play/play_menu.gd:718 scenes/play/play_menu.gd:736
+#: scenes/play/play_menu.gd:750 scenes/play/play_menu.gd:768
 msgid "Copied"
 msgstr "Copiato"
 
 #. Message sent with the system share sheet. The first %s is the game's name (Bagh Chal), the second a code like TG-7K4Q. A line with the menu path to enter the code follows it.
-#: scenes/play/play_menu.gd:741
+#: scenes/play/play_menu.gd:773
 #, c-format
 msgid "Play %s with me! My game code is %s."
 msgstr "Gioca a %s con me! Il mio codice partita è %s."
 
 #. Quick match found no one after about a minute.
-#: scenes/play/play_menu.gd:772
+#: scenes/play/play_menu.gd:804
 msgid "No one is free right now"
 msgstr "Al momento non c'è nessuno libero"
 
-#: scenes/play/play_menu.gd:773
+#: scenes/play/play_menu.gd:805
 msgid "We can keep looking while you play."
 msgstr "Possiamo continuare a cercare mentre giochi."
 
-#: scenes/play/play_menu.gd:774
+#: scenes/play/play_menu.gd:806
 msgid "Play against the AI while we keep looking"
 msgstr "Gioca contro l'IA mentre cerchiamo"
 
-#: scenes/play/play_menu.gd:777
+#: scenes/play/play_menu.gd:809
 msgid "Keep searching"
 msgstr "Continua a cercare"
 
-#: scenes/play/play_menu.gd:778
+#: scenes/play/play_menu.gd:810
 msgid "Invite a friend instead"
 msgstr "Invita un amico"
 
 #. Title over a message saying why a game with another player couldn't start.
-#: scenes/play/play_menu.gd:798
+#: scenes/play/play_menu.gd:830
 msgid "Couldn't start the game"
 msgstr "Impossibile avviare la partita"
 
-#: scenes/play/play_menu.gd:801
+#: scenes/play/play_menu.gd:833
 msgid "OK"
 msgstr "OK"
 
 #. Asked before leaving a game against another player that's still going.
-#: scenes/play/play_menu.gd:809
+#: scenes/play/play_menu.gd:841
 msgid "Leave this game?"
 msgstr "Lasciare questa partita?"
 
-#: scenes/play/play_menu.gd:810
+#: scenes/play/play_menu.gd:842
 msgid "It counts as a loss."
 msgstr "Conta come una sconfitta."
 
-#: scenes/play/play_menu.gd:811
+#: scenes/play/play_menu.gd:843
 msgid "Leave"
 msgstr "Esci"
 
 #. Button: don't leave the game against another player.
-#: scenes/play/play_menu.gd:817
+#: scenes/play/play_menu.gd:849
 msgid "Stay"
 msgstr "Resta"
 
 #. Heading over the list of books and articles at the end of "Game origins".
-#: scenes/play/play_menu.gd:842
+#: scenes/play/play_menu.gd:874
 msgid "Sources"
 msgstr "Fonti"
 
-#: scenes/play/play_menu.gd:888
+#. Tab on the "Other Timeless Games" screen: games already in the store.
+#: scenes/play/play_menu.gd:908 tools/smoke_greybox.gd:335
+msgid "Available now"
+msgstr "Disponibili"
+
+#. Tab on the "Other Timeless Games" screen: games not out yet.
+#: scenes/play/play_menu.gd:910 tools/smoke_greybox.gd:336
+msgid "Coming soon"
+msgstr "In arrivo"
+
+#. On the "Other Timeless Games" screen, when a tab has no games in it.
+#: scenes/play/play_menu.gd:933 tools/smoke_greybox.gd:359
+msgid "No games here yet."
+msgstr "Non ci sono ancora giochi qui."
+
+#: scenes/play/play_menu.gd:1068
 msgid "Offer a draw"
 msgstr "Proponi patta"
 
 #. In-game menu button: end this game and go back to the main menu.
-#: scenes/play/play_menu.gd:928
+#: scenes/play/play_menu.gd:1108
 msgid "Quit to main menu"
 msgstr "Esci al menu principale"
 
 #. Menu label: the visual style of board and pieces (a noun, not "to look"). Keep it short.
-#: scenes/play/play_menu.gd:970
+#: scenes/play/play_menu.gd:1150
 msgid "Look"
 msgstr "Stile"
 
 #. Settings label next to an on/off switch and a volume slider: the game's sound effects (pieces, end of game). Keep it short.
-#: scenes/play/play_menu.gd:973
+#: scenes/play/play_menu.gd:1153
 msgid "Sound"
 msgstr "Suoni"
 
 #. Settings label next to an on/off switch and a volume slider: the game's music. Keep it short.
-#: scenes/play/play_menu.gd:975
+#: scenes/play/play_menu.gd:1155
 msgid "Music"
 msgstr "Musica"
 
 #. Settings switch: makes every text in the game bigger. Keep it short.
-#: scenes/play/play_menu.gd:998 tools/smoke_greybox.gd:256 tools/smoke_greybox.gd:305
+#: scenes/play/play_menu.gd:1178 tools/smoke_greybox.gd:258 tools/smoke_greybox.gd:307
 msgid "Large text"
 msgstr "Testo grande"
 
 #. Settings switch: the phone vibrates lightly when a piece moves, at a capture and at the end of a game. The phone's usual word. Keep it short.
-#: scenes/play/play_menu.gd:1002 tools/smoke_greybox.gd:257
+#: scenes/play/play_menu.gd:1182 tools/smoke_greybox.gd:259
 msgid "Vibration"
 msgstr "Vibrazione"
 
 #. Settings button: opens Game Center (iPhone/iPad) or Google Play Games (Android) on the game's achievements. The usual platform word.
-#: scenes/play/play_menu.gd:1042
+#: scenes/play/play_menu.gd:1222
 msgid "Achievements"
 msgstr "Obiettivi"
 
 #. Message when Game Center or Google Play Games can't open (not signed in, offline).
-#: scenes/play/play_menu.gd:1046
+#: scenes/play/play_menu.gd:1226
 msgid "Achievements aren't available right now."
 msgstr "Gli obiettivi non sono disponibili al momento."
 
 #. Settings button and screen title: who made the game, and the open-source licences.
-#: scenes/play/play_menu.gd:1048 scenes/play/play_menu.gd:1059 tools/smoke_greybox.gd:269
+#: scenes/play/play_menu.gd:1228 scenes/play/play_menu.gd:1239 tools/smoke_greybox.gd:271
 msgid "Credits"
 msgstr "Riconoscimenti"
 
 #. On the Credits screen. First %s: the game's name (e.g. "Bagh Chal"); second %s: the name of the person who made it.
-#: scenes/play/play_menu.gd:1062
+#: scenes/play/play_menu.gd:1242
 #, c-format
 msgid "%s is a game by %s."
 msgstr "%s è un gioco di %s."
 
 #. Button and screen title: the licences of the open-source software and fonts the game uses.
-#: scenes/play/play_menu.gd:1065 scenes/play/play_menu.gd:1072 scenes/play/play_menu.gd:1112 tools/smoke_greybox.gd:276
+#: scenes/play/play_menu.gd:1245 scenes/play/play_menu.gd:1252 scenes/play/play_menu.gd:1292 tools/smoke_greybox.gd:278
 msgid "Open-source licenses"
 msgstr "Licenze open source"
 
 #. On the "Open-source licenses" screen, above the list. "Tap" also covers clicking.
-#: scenes/play/play_menu.gd:1074
+#: scenes/play/play_menu.gd:1254
 msgid "This game is made with the software and fonts below. Tap one to read its license."
 msgstr "Questo gioco usa il software e i caratteri qui sotto. Tocca una voce per leggerne la licenza."
 
 #. Title of the screen offering the other looks (styles of board and pieces) for a short video.
-#: scenes/play/play_menu.gd:1154
+#: scenes/play/play_menu.gd:1334
 msgid "More looks"
 msgstr "Altri stili"
 
 #. On the "More looks" screen. The video is an ad; "until you close the game" means until the app is closed.
-#: scenes/play/play_menu.gd:1156
+#: scenes/play/play_menu.gd:1336
 msgid "Watch a short video to switch looks until you close the game."
 msgstr "Guarda un breve video per cambiare stile finché non chiudi il gioco."
 
 #. On the "More looks" screen when no video could be loaded (offline, or none available).
-#: scenes/play/play_menu.gd:1160
+#: scenes/play/play_menu.gd:1340
 msgid "No video is ready right now. Try again in a moment."
 msgstr "Nessun video disponibile al momento. Riprova tra poco."
 
 #. Button: play a short video (an ad) to open the other looks.
-#: scenes/play/play_menu.gd:1163
+#: scenes/play/play_menu.gd:1343
 msgid "Watch a video"
 msgstr "Guarda un video"
 
 #. On the "More looks" screen, above the Remove ads button: buying it opens every look permanently.
-#: scenes/play/play_menu.gd:1179
+#: scenes/play/play_menu.gd:1359
 msgid "Or remove ads to keep every look for good."
 msgstr "Oppure rimuovi la pubblicità per tenere tutti gli stili per sempre."
 
 #. Button: buy "Remove ads" (no more ads, and every look of the board open for good). %s is the store's price, e.g. "US$1.99". Keep it short.
-#: scenes/play/play_menu.gd:1180 scenes/play/play_menu.gd:1194 tools/smoke_greybox.gd:220 tools/smoke_greybox.gd:252
+#: scenes/play/play_menu.gd:1360 scenes/play/play_menu.gd:1374 tools/smoke_greybox.gd:222 tools/smoke_greybox.gd:254
 #, c-format
 msgid "Remove ads · %s"
 msgstr "Rimuovi pubblicità · %s"
 
 #. In-game menu button: get back a purchase made before with the same store account (a new phone, a reinstall). The usual store wording. Shares a row with "Privacy choices".
-#: scenes/play/play_menu.gd:1200 tools/smoke_greybox.gd:229
+#: scenes/play/play_menu.gd:1380 tools/smoke_greybox.gd:231
 msgid "Restore purchases"
 msgstr "Ripristina acquisti"
 
 #. In-game menu button: shows Google's consent form again, to change the choice about ads and personal data.
-#: scenes/play/play_menu.gd:1204
+#: scenes/play/play_menu.gd:1384
 msgid "Privacy choices"
 msgstr "Opzioni sulla privacy"
 
 #. Message after buying "Remove ads": thanks, no more ads, and every look (style of board and pieces) is theirs.
-#: scenes/play/play_menu.gd:1223
+#: scenes/play/play_menu.gd:1403
 msgid "Thank you! Ads are off and every look is yours."
 msgstr "Grazie! La pubblicità è disattivata e tutti gli stili sono tuoi."
 
 #. Message when the store holds the payment for "Remove ads" (e.g. paying in cash, or a parent must approve).
-#: scenes/play/play_menu.gd:1233
+#: scenes/play/play_menu.gd:1413
 msgid "Your payment is pending. Ads will turn off as soon as it goes through."
 msgstr "Il pagamento è in sospeso. La pubblicità verrà disattivata appena sarà completato."
 
 #. Message when buying "Remove ads" failed (not when the player cancelled).
-#: scenes/play/play_menu.gd:1236
+#: scenes/play/play_menu.gd:1416
 msgid "The purchase didn't go through. Please try again later."
 msgstr "L'acquisto non è andato a buon fine. Riprova più tardi."
 
 #. Message after "Restore purchases" found Remove ads.
-#: scenes/play/play_menu.gd:1246
+#: scenes/play/play_menu.gd:1426
 msgid "Your purchase is restored."
 msgstr "Il tuo acquisto è stato ripristinato."
 
 #. Message after "Restore purchases" found nothing bought with this store account.
-#: scenes/play/play_menu.gd:1249
+#: scenes/play/play_menu.gd:1429
 msgid "No purchase to restore on this account."
 msgstr "Nessun acquisto da ripristinare su questo account."
 
 #. Message when the store (Google Play, the App Store) can't be reached.
-#: scenes/play/play_menu.gd:1252
+#: scenes/play/play_menu.gd:1432
 msgid "The store isn't available right now."
 msgstr "Lo store non è disponibile al momento."
 
 #. Settings label next to a list: the graphics quality (Auto, High, Medium, Low). Keep it short.
-#: scenes/play/play_menu.gd:1274
+#: scenes/play/play_menu.gd:1454
 msgid "Graphics"
 msgstr "Qualità grafica"
 
 #. Followed by this player's name as others see it, e.g. "Your name: Potter 4821".
-#: scenes/play/play_menu.gd:1355
+#: scenes/play/play_menu.gd:1535
 #, c-format
 msgid "Your name: %s"
 msgstr "Il tuo nome: %s"
 
 #. Shown, with animated dots, while waiting for the other player to join.
-#: scenes/play/play_menu.gd:1392
+#: scenes/play/play_menu.gd:1572
 msgid "Waiting"
 msgstr "In attesa"
 
@@ -638,7 +658,7 @@ msgstr "Viaggiatore"
 msgid "Potter"
 msgstr "Vasaio"
 
-#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:309
+#: scenes/play/play_text.gd:30 tools/smoke_multiplayer.gd:312
 msgid "Weaver"
 msgstr "Tessitore"
 
@@ -706,7 +726,7 @@ msgstr "Questo dispositivo non è connesso a una rete Wi-Fi."
 msgid "Something went wrong. Please try again."
 msgstr "Qualcosa è andato storto. Riprova."
 
-#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:180
+#: scenes/play/play_text.gd:75 tools/smoke_multiplayer.gd:183
 msgid "You resigned."
 msgstr "Hai abbandonato."
 
@@ -1089,200 +1109,205 @@ msgstr "Mosse del giaguaro senza catturare: %d / %d"
 msgid "Puma moves without capturing: %d / %d"
 msgstr "Mosse del puma senza catturare: %d / %d"
 
-#: titles/common/hunt_tutorials.gd:134
+#: titles/common/hunt_tutorials.gd:166
 msgid "Tigers and goats"
 msgstr "Tigri e capre"
 
-#: titles/common/hunt_tutorials.gd:135
+#: titles/common/hunt_tutorials.gd:167
 msgid "Four tigers against twenty goats. The tigers start on the corners; the goats start in hand, off the board. The goats move first."
 msgstr "Quattro tigri contro venti capre. Le tigri partono dagli angoli; le capre partono in mano, fuori dal tavoliere. Le capre muovono per prime."
 
-#: titles/common/hunt_tutorials.gd:140
+#: titles/common/hunt_tutorials.gd:172
 msgid "Placing the goats"
 msgstr "Piazzare le capre"
 
-#: titles/common/hunt_tutorials.gd:141
+#: titles/common/hunt_tutorials.gd:173
 msgid "While goats are left in hand, every goat turn is a placement: one goat onto any empty point. Goats on the board can't move until all twenty are placed. The tigers move in between."
 msgstr "Finché restano capre in mano, ogni turno delle capre è un piazzamento: una capra su un punto libero qualsiasi. Le capre sul tavoliere non possono muoversi finché non sono state piazzate tutte e venti. Nel frattempo muovono le tigri."
 
-#: titles/common/hunt_tutorials.gd:145
+#: titles/common/hunt_tutorials.gd:177
 msgid "How a tiger moves"
 msgstr "Come muove una tigre"
 
-#: titles/common/hunt_tutorials.gd:146
+#: titles/common/hunt_tutorials.gd:178
 msgid "A tiger steps along a line to the next empty point. Diagonals run only through every other point, so some points have eight neighbours and the rest four or fewer."
 msgstr "Una tigre si sposta lungo una linea fino al punto libero successivo. Le diagonali passano solo per un punto sì e uno no, quindi alcuni punti hanno otto vicini e gli altri quattro o meno."
 
-#: titles/common/hunt_tutorials.gd:153 titles/common/hunt_tutorials.gd:230 titles/common/hunt_tutorials.gd:299
+#: titles/common/hunt_tutorials.gd:185 titles/common/hunt_tutorials.gd:269 titles/common/hunt_tutorials.gd:338
 msgid "Capturing"
 msgstr "Catturare"
 
-#: titles/common/hunt_tutorials.gd:154
+#: titles/common/hunt_tutorials.gd:186
 msgid "A tiger captures by jumping over a goat next to it on a line, onto the empty point just beyond. The goat leaves the board. One goat per jump, and capturing is never compulsory."
 msgstr "Una tigre cattura saltando una capra che le sta accanto su una linea, fino al punto libero subito dopo. La capra lascia il tavoliere. Una capra per salto, e catturare non è mai obbligatorio."
 
-#: titles/common/hunt_tutorials.gd:160
+#: titles/common/hunt_tutorials.gd:192
 msgid "Safety in numbers"
 msgstr "L'unione fa la forza"
 
-#: titles/common/hunt_tutorials.gd:161
+#: titles/common/hunt_tutorials.gd:193
 msgid "A goat with another goat right behind it, or the edge of the board, can't be jumped: the tiger needs an empty point to land on. Goats that stay together are safe."
 msgstr "Una capra che ha subito dietro un'altra capra, o il bordo del tavoliere, non può essere saltata: la tigre ha bisogno di un punto libero su cui atterrare. Le capre che restano unite sono al sicuro."
 
-#: titles/common/hunt_tutorials.gd:166
+#: titles/common/hunt_tutorials.gd:198
 msgid "Moving the goats"
 msgstr "Muovere le capre"
 
-#: titles/common/hunt_tutorials.gd:167
+#: titles/common/hunt_tutorials.gd:199
 msgid "Once all the goats are in play, a goat steps along a line to the next empty point, just as a tiger does. Goats never jump and never capture."
 msgstr "Quando tutte le capre sono in gioco, una capra si sposta lungo una linea fino al punto libero successivo, proprio come una tigre. Le capre non saltano e non catturano mai."
 
-#: titles/common/hunt_tutorials.gd:177 titles/common/hunt_tutorials.gd:186
+#: titles/common/hunt_tutorials.gd:208
 msgid "How the tigers win"
 msgstr "Come vincono le tigri"
 
-#: titles/common/hunt_tutorials.gd:178
-msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
-msgstr "Nella versione di Parlett le tigri devono catturare tutte e venti le capre. Per il resto è come nel gioco standard."
-
-#: titles/common/hunt_tutorials.gd:187
+#: titles/common/hunt_tutorials.gd:209
 msgid "The tigers win by capturing five goats."
 msgstr "Le tigri vincono catturando cinque capre."
 
-#: titles/common/hunt_tutorials.gd:195
+#: titles/common/hunt_tutorials.gd:217
 msgid "How the goats win"
 msgstr "Come vincono le capre"
 
-#: titles/common/hunt_tutorials.gd:196
+#: titles/common/hunt_tutorials.gd:218
 msgid "The goats win when no tiger can move: every tiger is hemmed in by goats it can't jump."
 msgstr "Le capre vincono quando nessuna tigre può muoversi: ogni tigre è circondata da capre che non può saltare."
 
 #. Walkthrough step title: the rules for a drawn game.
-#: titles/common/hunt_tutorials.gd:204 titles/common/hunt_tutorials.gd:266 titles/common/hunt_tutorials.gd:325
+#: titles/common/hunt_tutorials.gd:226 titles/common/hunt_tutorials.gd:305 titles/common/hunt_tutorials.gd:364
 msgid "Draws"
 msgstr "Patte"
 
-#: titles/common/hunt_tutorials.gd:205
+#: titles/common/hunt_tutorials.gd:227
 msgid "Once all the goats are placed, no move may bring back a position that has already occurred. The game is a draw if the tigers go 50 moves without capturing, or if every move left would repeat a position."
 msgstr "Quando tutte le capre sono state piazzate, nessuna mossa può riportare una posizione già vista. La partita è patta se le tigri fanno 50 mosse senza catturare, o se ogni mossa rimasta ripeterebbe una posizione."
 
-#: titles/common/hunt_tutorials.gd:218
+#. Walkthrough step title: the last part of How to play, on the other rule set in the game. "Parlett 1976" is that rule set's name: write it as in the rules menu ("Bagh Chal · Parlett 1976").
+#: titles/common/hunt_tutorials.gd:242
+msgid "The variation: Parlett 1976"
+msgstr "La variante: Parlett 1976"
+
+#: titles/common/hunt_tutorials.gd:243
+msgid "In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."
+msgstr "Nella versione di Parlett le tigri devono catturare tutte e venti le capre. Per il resto è come nel gioco standard."
+
+#: titles/common/hunt_tutorials.gd:257
 msgid "The jaguar and the dogs"
 msgstr "Il giaguaro e i cani"
 
-#: titles/common/hunt_tutorials.gd:219
+#: titles/common/hunt_tutorials.gd:258
 msgid "One jaguar against fourteen dogs. The jaguar starts in the middle of the board and the dogs fill the far half. The jaguar moves first."
 msgstr "Un giaguaro contro quattordici cani. Il giaguaro parte dal centro del tavoliere e i cani occupano la metà opposta. Il giaguaro muove per primo."
 
-#: titles/common/hunt_tutorials.gd:224
+#: titles/common/hunt_tutorials.gd:263
 msgid "Moving"
 msgstr "Muovere"
 
-#: titles/common/hunt_tutorials.gd:225
+#: titles/common/hunt_tutorials.gd:264
 msgid "Each turn, one piece steps along a line to the next empty point, in any direction. The triangle is part of the board, and either side may go in."
 msgstr "A ogni turno un pezzo si sposta lungo una linea fino al punto libero successivo, in qualsiasi direzione. Il triangolo fa parte del tavoliere, e tutte e due le parti possono entrarci."
 
-#: titles/common/hunt_tutorials.gd:231
+#: titles/common/hunt_tutorials.gd:270
 msgid "The jaguar captures by jumping over a dog next to it on a line, onto the empty point just beyond. The dog leaves the board. Capturing is optional."
 msgstr "Il giaguaro cattura saltando un cane che gli sta accanto su una linea, fino al punto libero subito dopo. Il cane lascia il tavoliere. Catturare è facoltativo."
 
-#: titles/common/hunt_tutorials.gd:237
+#: titles/common/hunt_tutorials.gd:276
 msgid "Chains of captures"
 msgstr "Catture a catena"
 
-#: titles/common/hunt_tutorials.gd:238
+#: titles/common/hunt_tutorials.gd:277
 msgid "After a capture the jaguar may jump again, and again, changing direction as it likes, and it may stop after any jump. No dog can be jumped twice in one turn."
 msgstr "Dopo una cattura il giaguaro può saltare ancora, e ancora, cambiando direzione come vuole, e può fermarsi dopo qualsiasi salto. Nessun cane può essere saltato due volte nello stesso turno."
 
-#: titles/common/hunt_tutorials.gd:244
+#: titles/common/hunt_tutorials.gd:283
 msgid "Strength in pairs"
 msgstr "La forza della coppia"
 
-#: titles/common/hunt_tutorials.gd:245
+#: titles/common/hunt_tutorials.gd:284
 msgid "Two dogs in a row along a line protect each other: the jaguar has nowhere to land."
 msgstr "Due cani in fila su una linea si proteggono a vicenda: il giaguaro non ha dove atterrare."
 
-#: titles/common/hunt_tutorials.gd:250
+#: titles/common/hunt_tutorials.gd:289
 msgid "How the jaguar wins"
 msgstr "Come vince il giaguaro"
 
-#: titles/common/hunt_tutorials.gd:251
+#: titles/common/hunt_tutorials.gd:290
 msgid "The jaguar wins by capturing five dogs."
 msgstr "Il giaguaro vince catturando cinque cani."
 
-#: titles/common/hunt_tutorials.gd:258 titles/common/hunt_tutorials.gd:306
+#: titles/common/hunt_tutorials.gd:297 titles/common/hunt_tutorials.gd:345
 msgid "How the dogs win"
 msgstr "Come vincono i cani"
 
-#: titles/common/hunt_tutorials.gd:259
+#: titles/common/hunt_tutorials.gd:298
 msgid "The dogs win when the jaguar can't move at all."
 msgstr "I cani vincono quando il giaguaro non può più muoversi in alcun modo."
 
-#: titles/common/hunt_tutorials.gd:267
+#: titles/common/hunt_tutorials.gd:306
 msgid "If the same position comes up three times, or the jaguar goes 50 moves without capturing, the game is a draw."
 msgstr "Se la stessa posizione si presenta tre volte, o il giaguaro fa 50 mosse senza catturare, la partita è patta."
 
-#: titles/common/hunt_tutorials.gd:278
+#: titles/common/hunt_tutorials.gd:317
 msgid "The puma and the dogs"
 msgstr "Il puma e i cani"
 
 #. "The tower" is the name of Komikan's triangle in the Spanish sources ("la torre"). Use the ordinary word for tower.
-#: titles/common/hunt_tutorials.gd:280
+#: titles/common/hunt_tutorials.gd:319
 msgid "Komikan is a Mapuche hunting game. The puma starts inside the tower, the triangle, and twelve dogs wait at the far end. The puma moves first."
 msgstr "Il komikan è un gioco di caccia mapuche. Il puma parte dentro la torre, il triangolo, e dodici cani aspettano all'altra estremità. Il puma muove per primo."
 
-#: titles/common/hunt_tutorials.gd:285
+#: titles/common/hunt_tutorials.gd:324
 msgid "The puma"
 msgstr "Il puma"
 
-#: titles/common/hunt_tutorials.gd:286
+#: titles/common/hunt_tutorials.gd:325
 msgid "The puma steps along any line, in any direction, forward or back."
 msgstr "Il puma si sposta lungo qualsiasi linea, in qualsiasi direzione, avanti o indietro."
 
-#: titles/common/hunt_tutorials.gd:291
+#: titles/common/hunt_tutorials.gd:330
 msgid "Moving the dogs"
 msgstr "Muovere i cani"
 
-#: titles/common/hunt_tutorials.gd:292
+#: titles/common/hunt_tutorials.gd:331
 msgid "A dog steps the same way: along any line to the next empty point, forward, sideways or back. Only the puma can jump."
 msgstr "Un cane si sposta allo stesso modo: lungo qualsiasi linea fino al punto libero successivo, avanti, di lato o indietro. Solo il puma può saltare."
 
-#: titles/common/hunt_tutorials.gd:300
+#: titles/common/hunt_tutorials.gd:339
 msgid "The puma captures by jumping over a lone dog onto the empty point beyond. It may jump again and again, changing direction, and stop after any jump. Two dogs in a row protect each other."
 msgstr "Il puma cattura saltando un cane isolato fino al punto libero dietro di lui. Può saltare ancora e ancora, cambiando direzione, e fermarsi dopo qualsiasi salto. Due cani in fila su una linea si proteggono a vicenda."
 
-#: titles/common/hunt_tutorials.gd:307
+#: titles/common/hunt_tutorials.gd:346
 msgid "The dogs win by hemming the puma in so that it can't move."
 msgstr "I cani vincono circondando il puma in modo che non possa più muoversi."
 
-#: titles/common/hunt_tutorials.gd:315
+#: titles/common/hunt_tutorials.gd:354
 msgid "How the puma wins"
 msgstr "Come vince il puma"
 
-#: titles/common/hunt_tutorials.gd:316
+#: titles/common/hunt_tutorials.gd:355
 msgid "The puma wins as soon as it has eaten three dogs."
 msgstr "Il puma vince appena ha mangiato tre cani."
 
-#: titles/common/hunt_tutorials.gd:326
+#: titles/common/hunt_tutorials.gd:365
 msgid "If the same position comes up three times, or the puma goes 50 moves without capturing, the game is a draw."
 msgstr "Se la stessa posizione si presenta tre volte, o il puma fa 50 mosse senza catturare, la partita è patta."
 
-#: titles/common/hunt_tutorials.gd:330
+#: titles/common/hunt_tutorials.gd:369
 msgid "A reconstruction"
 msgstr "Una ricostruzione"
 
 #. Trapial-Kuzen is the name of a modern Mapuche version of Komikan (Argentina); keep it as is.
-#: titles/common/hunt_tutorials.gd:332
+#: titles/common/hunt_tutorials.gd:371
 msgid "In the accounts written down a century ago, the dogs may only go forward, and then a puma that stays in the tower can never be caught. Here the dogs move and the puma wins as in Trapial-Kuzen, a modern Mapuche version of the game. The tower is ordinary board, and the puma moves first unless you change it in the settings."
 msgstr "Nei resoconti scritti un secolo fa, i cani possono solo avanzare, e così un puma che resta nella torre non può mai essere preso. Qui i cani si muovono e il puma vince come nel Trapial-Kuzen, una versione mapuche moderna del gioco. La torre è un normale tratto di tavoliere, e il puma muove per primo, a meno che tu non lo cambi nelle impostazioni."
 
 #. iPhone/iPad system prompt, under Apple's question "Allow Bagh Chal to track your activity across other companies' apps and websites?". Says why: more relevant ads, and ads keep the game free.
-#: titles/common/title_config.gd:241
+#: titles/common/title_config.gd:251
 msgid "This lets us show you ads that are more relevant. Bagh Chal is free because of ads."
 msgstr "Così possiamo mostrarti annunci più pertinenti. Bagh Chal è gratuito grazie agli annunci."
 
 #. iPhone/iPad system prompt, under Apple's question "Bagh Chal would like to find and connect to devices on your local network". Says why: to play someone nearby on the same Wi-Fi.
-#: titles/common/title_config.gd:243
+#: titles/common/title_config.gd:253
 msgid "Bagh Chal looks for games on your Wi-Fi network so you can play someone nearby."
 msgstr "Bagh Chal cerca partite sulla tua rete Wi-Fi per farti giocare con qualcuno nelle vicinanze."
 

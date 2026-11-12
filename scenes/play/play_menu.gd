@@ -5,10 +5,17 @@ extends CanvasLayer
 ## Android's back gesture.
 ##
 ##   Home ─ Play against the AI · Pass and play · Play local · Play online
-##          · How to play · Game origins · Settings · Language · Quit game
-##          (not on iOS) (Continue only when an AI game was set aside for an
-##          online match)
+##          · How to play · Game origins · Other Timeless Games · Settings
+##          · Language · Quit game (not on iOS) (Continue only when an AI
+##          game was set aside for an online match)
 ##   Game origins ─ the game's history and its sources (HuntOrigins)
+##   Other Timeless Games ─ the series' games on this store (GameCatalog;
+##          the screen's key is "more_games", its first name), in two tabs:
+##          Available now · Coming soon, scrolling when there are many (the
+##          series plans 20). Each card is a band of the game's store
+##          picture in the player's language; an available one opens its
+##          store page (Apple's sheet on iPhone and iPad), a coming-soon one
+##          nothing. The game itself is in the list too.
 ##   Settings ─ the in-game menu's settings, before a game: Look · Graphics
 ##              · Sound · Music · Language · Large text · Vibration (phones)
 ##              · Remove ads · Restore purchases
@@ -43,6 +50,11 @@ extends CanvasLayer
 ## shows its state and calls it. Rebuilt when the language changes.
 
 const CARD_WIDTH := 640
+## Other Timeless Games: a card's width over its height (1024 × 250).
+const GAME_CARD_ASPECT := 1024.0 / 250.0
+## A tap opens a store page; a finger that moved further than this (in
+## pixels) was scrolling the list.
+const TAP_SLOP := 16.0
 ## The purchase that turns ads off and opens every look (greybox.REMOVE_ADS).
 const REMOVE_ADS := "remove_ads"
 const PlayController := preload("res://scenes/play/play_controller.gd")
@@ -66,6 +78,12 @@ var _wanted_look := ""
 var _license_id := ""
 ## A short (landscape phone) screen: the longest cards are tighter.
 var _tight := false
+## Other Timeless Games: the tab showing ("available" or "coming_soon"; ""
+## picks one when the screen opens), the games it shows, and each one's
+## picture (null while it shows the game's name instead).
+var _games_tab := ""
+var _games_shown: Array = []
+var _game_pictures := {}
 ## The test buttons in the in-game menu (Perf test, Ad break, Forget
 ## purchase): test builds only. ui_check turns them off to check the menu as
 ## it ships.
@@ -89,6 +107,7 @@ func _ready() -> void:
 	game.iap.changed.connect(func() -> void:
 		if visible and _screen in ["looks", "pause", "settings"]:
 			_render())
+	game.catalog.changed.connect(_on_catalog_changed)
 	get_viewport().size_changed.connect(_on_resized)
 	_build()
 
@@ -246,6 +265,8 @@ func _render() -> void:
 			_looks()
 		"origins":
 			_origins()
+		"more_games":
+			_more_games()
 		"credits":
 			_credits()
 		"licenses":
@@ -256,7 +277,7 @@ func _render() -> void:
 
 ## The Game origins text is sized to the screen: lay it out again after a turn.
 func _on_resized() -> void:
-	if visible and _screen in ["origins", "home", "pause", "settings", "licenses", "license"]:
+	if visible and _screen in ["origins", "home", "pause", "settings", "licenses", "license", "more_games"]:
 		_render.call_deferred()
 
 
@@ -279,7 +300,9 @@ func _text(text: String, role := "book", size := 20, color := SeriesTheme.TEXT) 
 func _button(text: String, on_press: Callable, accent := false, parent: Control = null) -> Button:
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(0, 64)
+	# The main menu on a short (landscape phone) screen: a little lower, so
+	# all of it fits with Other Timeless Games, Continue and Play online.
+	b.custom_minimum_size = Vector2(0, 56 if _tight and _screen == "home" else 64)
 	b.add_theme_font_size_override("font_size", SeriesTheme.fs(22))
 	if accent:
 		b.add_theme_color_override("font_color", SeriesTheme.ACCENT)
@@ -392,7 +415,9 @@ func _title_id() -> String:
 func _home() -> void:
 	# A smaller title on a landscape phone with Large text, so Quit fits.
 	_title(HuntText.title_name(_title_id()), 46 if _tight and SeriesTheme.large else 56)
-	_gap(6)
+	# On a short screen the spaces go, so Quit fits with Large text too.
+	if not _tight:
+		_gap(6)
 	# Only an AI game set aside for an online match waits here; any other
 	# game is resumed from the in-game menu, or straight away at start.
 	if game.has_saved_game():
@@ -409,9 +434,16 @@ func _home() -> void:
 	if HuntOrigins.has_text(_title_id()):
 		# TRANSLATORS: Main menu button: opens a short history of the game, with its sources.
 		_button(L10n.t("Game origins"), func() -> void: _go("origins"))
+	# TRANSLATORS: Main menu button and the title of its screen: the other games in the series (this one is listed too), with links to their store pages. "Timeless Games" is the series' name: keep it in Latin letters, as written.
+	_button(L10n.t("Other Timeless Games"), func() -> void:
+		_games_tab = ""
+		_go("more_games"))
+	# The series' list, read again at most once a day (in the background).
+	game.catalog.refresh_if_due()
 	# TRANSLATORS: Main menu button and the title of its screen: look, graphics, sound, music, language and purchases, set before a game. Keep it short.
 	_button(L10n.t("Settings"), func() -> void: _go("settings"))
-	_gap(2)
+	if not _tight:
+		_gap(2)
 	# Also here, with its globe, so a player who can't read the menu finds it.
 	_language_row()
 	# Not on iOS: apps there don't close themselves (Apple: users leave with
@@ -852,6 +884,154 @@ func _origins() -> void:
 	scroll.add_child(pad)
 	_card_box.add_child(scroll)
 	_back_button()
+
+
+## Other Timeless Games: the series' games on this store (GameCatalog), in
+## two tabs. Each card is a 1024 × 250 band of the game's store picture (its
+## name and line at full size) in the player's language, else in English,
+## else its name; an available game's card opens its store page with a tap,
+## a coming-soon one's doesn't. The list scrolls inside the menu card, so a
+## long series (20 games planned) fits any screen.
+func _more_games() -> void:
+	var catalog: GameCatalog = game.catalog
+	var locale := TranslationServer.get_locale()
+	catalog.fetch_cards(locale)
+	_title(L10n.t("Other Timeless Games"), 36)
+	var available: Array = catalog.games("available")
+	var soon: Array = catalog.games("coming_soon")
+	if _games_tab == "":
+		_games_tab = "coming_soon" if available.is_empty() and not soon.is_empty() else "available"
+	var tabs := HBoxContainer.new()
+	tabs.add_theme_constant_override("separation", 10)
+	var group := ButtonGroup.new()
+	# TRANSLATORS: Tab on the "Other Timeless Games" screen: games already in the store.
+	var available_text := L10n.t("Available now")
+	# TRANSLATORS: Tab on the "Other Timeless Games" screen: games not out yet.
+	var soon_text := L10n.t("Coming soon")
+	for t in [["available", available_text], ["coming_soon", soon_text]]:
+		var b := Button.new()
+		b.toggle_mode = true
+		b.button_group = group
+		b.text = t[1]
+		b.button_pressed = _games_tab == t[0]
+		b.custom_minimum_size = Vector2(0, 56)
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_font_size_override("font_size", SeriesTheme.fs(20))
+		var tab: String = t[0]
+		b.pressed.connect(func() -> void:
+			if _games_tab != tab:
+				_games_tab = tab
+				_render())
+		tabs.add_child(b)
+	_card_box.add_child(tabs)
+	var list: Array = available if _games_tab == "available" else soon
+	_games_shown = list.map(func(e: Dictionary) -> String: return e.id)
+	_game_pictures.clear()
+	if list.is_empty():
+		_gap(6)
+		# TRANSLATORS: On the "Other Timeless Games" screen, when a tab has no games in it.
+		_text(L10n.t("No games here yet."), "italic", 19, SeriesTheme.TEXT_DIM)
+		_gap(6)
+		_back_button()
+		return
+	# The cards are as wide as the menu card allows (1024 × 250 pictures);
+	# the list takes the room left on the screen and scrolls beyond it.
+	var screen_h := get_viewport().get_visible_rect().size.y
+	var reserve := 300.0 * (SeriesTheme.LARGE_SCALE if SeriesTheme.large else 1.0)
+	var room := clampf(screen_h - reserve, 150.0, 1400.0)
+	var full_w := float(CARD_WIDTH - 88 - 18)
+	var pic_h := minf(roundf(full_w / GAME_CARD_ASPECT), room)
+	var pic_size := Vector2(roundf(pic_h * GAME_CARD_ASPECT), pic_h)
+	var gap := 10
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.custom_minimum_size = Vector2(CARD_WIDTH - 88, minf(room, list.size() * pic_h + (list.size() - 1) * gap))
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
+	box.add_theme_constant_override("separation", gap)
+	for e in list:
+		box.add_child(_game_card(e, locale, pic_size, _games_tab == "available"))
+	var pad := MarginContainer.new()  # keeps the cards clear of the scroll bar
+	pad.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pad.mouse_filter = Control.MOUSE_FILTER_PASS
+	pad.add_theme_constant_override("margin_right", 18)
+	pad.add_child(box)
+	scroll.add_child(pad)
+	_card_box.add_child(scroll)
+	_back_button()
+
+
+## One game: its picture in a brass frame (or its name, while there's no
+## picture). An available game's card opens its store page with a tap; the
+## list scrolls under a finger that moves (the card lets the drag through).
+func _game_card(e: Dictionary, locale: String, size: Vector2, opens: bool) -> Control:
+	var frame := PanelContainer.new()
+	var style := SeriesTheme.panel_box(Color(0.08, 0.06, 0.05), SeriesTheme.BRASS, 6)
+	style.set_content_margin_all(2)
+	style.shadow_size = 4
+	frame.add_theme_stylebox_override("panel", style)
+	frame.custom_minimum_size = size
+	frame.mouse_filter = Control.MOUSE_FILTER_PASS if opens else Control.MOUSE_FILTER_IGNORE
+	var tex: Texture2D = game.catalog.card(e, locale)
+	if tex:
+		var pic := TextureRect.new()
+		pic.texture = tex
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		pic.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		frame.add_child(pic)
+		_game_pictures[e.id] = pic
+	else:
+		var name_label := SeriesTheme.label(str(e.name), "display", 30, SeriesTheme.ACCENT)
+		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		frame.add_child(name_label)
+		_game_pictures[e.id] = null
+	if opens:
+		frame.set_meta("opens_store", e.id)
+		frame.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		var down := [Vector2.INF]
+		frame.gui_input.connect(func(event: InputEvent) -> void:
+			var mb := event as InputEventMouseButton
+			if mb == null or mb.button_index != MOUSE_BUTTON_LEFT:
+				return
+			if mb.pressed:
+				down[0] = mb.global_position
+			elif down[0] != Vector2.INF and mb.global_position.distance_to(down[0]) <= TAP_SLOP:
+				down[0] = Vector2.INF
+				game.catalog.open_store(e)
+			else:
+				down[0] = Vector2.INF)
+	var holder := CenterContainer.new()
+	holder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	holder.mouse_filter = Control.MOUSE_FILTER_PASS
+	holder.add_child(frame)
+	return holder
+
+
+## The list or a picture arrived: the pictures change in place; a new list,
+## or a picture where a name was, builds the screen again.
+func _on_catalog_changed() -> void:
+	if not visible or _screen != "more_games":
+		return
+	var list: Array = game.catalog.games(_games_tab)
+	if list.map(func(e: Dictionary) -> String: return e.id) != _games_shown:
+		_render()
+		return
+	var locale := TranslationServer.get_locale()
+	for e in list:
+		var tex: Texture2D = game.catalog.card(e, locale)
+		var pic = _game_pictures.get(e.id)
+		if pic == null:
+			if tex != null:
+				_render()
+				return
+		elif tex != null and is_instance_valid(pic):
+			pic.texture = tex
 
 
 ## Body text with [i]…[/i] italics, wrapping to the card's width. It lets

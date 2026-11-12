@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "updated": "2026-11-11",
+  "games": [
+    {
+      "id": "bagh_chal",
+      "line": "timeless",
+      "name": "Bagh Chal",
+      "google_play": {
+        "status": "available",
+        "package": "com.timegalleon.baghchal"
+      },
+      "app_store": {
+        "status": "available",
+        "apple_id": "6830657856"
+      },
+      "card": {
+        "rev": 2,
+        "locales": [
+          "en",
+          "pt_BR",
+          "es",
+          "fr",
+          "de",
+          "it",
+          "ru",
+          "pl",
+          "tr",
+          "zh_CN",
+          "zh_TW",
+          "ja",
+          "ko",
+          "id",
+          "th",
+          "ne"
+        ]
+      }
+    },
+    {
+      "id": "jogo_da_onca",
+      "line": "timeless",
+      "name": "Jogo da Onça",
+      "google_play": {
+        "status": "coming_soon",
+        "package": "com.timegalleon.jogodaonca"
+      },
+      "app_store": {
+        "status": "coming_soon",
+        "apple_id": "6832707061"
+      },
+      "card": {
+        "rev": 2,
+        "locales": [
+          "en",
+          "pt_BR",
+          "es",
+          "fr",
+          "de",
+          "it",
+          "ru",
+          "pl",
+          "tr",
+          "zh_CN",
+          "zh_TW",
+          "ja",
+          "ko",
+          "id",
+          "th"
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 extends CanvasLayer
-## "How to play": plays a rule set's walkthrough (HuntTutorials) on the real
-## board. For each step it sets the position, shows the marks, then plays the
+## "How to play": plays the title's walkthrough (HuntTutorials) on the real
+## board, switching to the variation's rule set for the steps at the end. For
+## each step it sets the position, shows the marks, then plays the
 ## scripted moves one by one, highlighting the piece and where it goes, while
 ## a card on the left (where the game settings usually are) explains the rule. Back, Next, Replay and Close;
 ## the game that was on the board comes back afterwards.
@@ -130,8 +131,10 @@ func is_running() -> bool:
 	return visible
 
 
-func start(rules: HuntRuleSet) -> void:
-	_steps = HuntTutorials.build(rules)
+## `rule_set_ids`: the rule sets the walkthrough covers, the main one first
+## (HuntTutorials.walkthrough_ids).
+func start(rule_set_ids: Array) -> void:
+	_steps = HuntTutorials.build_walkthrough(rule_set_ids)
 	if _steps.is_empty():
 		return
 	visible = true
@@ -188,7 +191,7 @@ func _show(index: int) -> void:
 	var run := _run
 	_fill_card()
 	var step := _steps[_index]
-	game.tutorial_set_state(step.start)
+	_set_position(step)
 	for m in step.marks:
 		game.tutorial_mark(m[0], m[1])
 	if step.moves.is_empty():
@@ -212,3 +215,16 @@ func _show(index: int) -> void:
 		game.tutorial_clear_marks()
 		game.tutorial_show_last_move()
 		await get_tree().create_timer(BETWEEN_MOVES).timeout
+
+
+## A step's position, on its rule set (the variation's steps switch rule
+## sets; going back switches back).
+func _set_position(step: Dictionary) -> void:
+	var r: HuntRuleSet = step.rules
+	if game.rules == null or game.rules.id != r.id:
+		game.tutorial_use_rules(r)
+	game.tutorial_set_state(step.start)
+	# The HUD lays itself out (deferred) for the new position: the score
+	# panel fits its lines, so the turn banner can move. Place the card again
+	# after that, or it sits where the last step's banner was.
+	_place.call_deferred()

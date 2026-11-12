@@ -222,3 +222,43 @@ func test_territory_counts_reachable_points() -> void:
 	check_eq(e._territory(s), 0, "walled in")
 	s = HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(4, 4)])
 	check_eq(e._territory(s), 23, "everything but its own point and the prey's")
+
+
+func test_exposed_counts_gaps_in_the_wall() -> void:
+	var b := HuntFixtures.alquerque()
+	var e := HuntEvaluator.new()
+	var seen := PackedByteArray()
+	# A hunter in the corner, three prey around it with nothing behind them:
+	# each can be jumped.
+	var s := HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1)])
+	e._territory(s, seen)
+	check_eq(e._exposed(s, seen), 3, "three prey with gaps behind them")
+	# A second row behind them closes every gap.
+	s = HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1),
+		Vector2(0, 2), Vector2(2, 0), Vector2(2, 2)])
+	e._territory(s, seen)
+	check_eq(e._exposed(s, seen), 0, "a solid wall")
+	# Far away but reachable: a lone prey the hunter can walk up to.
+	s = HuntFixtures.state(b, [Vector2(0, 0)], [Vector2(3, 3)])
+	e._territory(s, seen)
+	check_eq(e._exposed(s, seen), 1, "a lone prey in the hunter's room")
+
+
+func test_centered_scores_the_start_as_even() -> void:
+	var w := HuntEvalWeights.new()
+	w.hunter_territory = 10
+	var rules := HuntFixtures.rules(HuntFixtures.alquerque(), [Vector2(2, 2)], [Vector2(0, 0), Vector2(4, 0)])
+	var start := HuntState.create(rules)
+	var plain := HuntEvaluator.new(w)
+	check(plain.evaluate(start) != 0, "uncentered: the hunter's room counts for it")
+	w = w.duplicate()
+	w.centered = true
+	var centered := HuntEvaluator.new(w)
+	check_eq(centered.evaluate(start), 0, "centered: the start is even")
+	var later := start.clone()
+	later.make(later.legal_moves()[0])
+	# The prey to move: the same position scores the same distance from the
+	# start, from the prey's side.
+	# start's raw score is plain.evaluate(start) (the hunter moves first).
+	check_eq(centered.evaluate(later), plain.evaluate(later) + plain.evaluate(start),
+		"centered = the plain score less the start's, from the side to move")

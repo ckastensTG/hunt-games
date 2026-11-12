@@ -1,8 +1,12 @@
 class_name HuntTutorials
 extends RefCounted
-## "How to play": a scripted walkthrough per rule set. Each step shows a
-## position, highlights points, plays a few moves on the board and explains
-## one rule in a sentence or three.
+## "How to play": one scripted walkthrough per title. It teaches the
+## title's main rule set in full, then what each further rule set changes
+## (Christopher, 2026-11-09, for every title: one How to play button, so one
+## walkthrough, with the variation at the end; bible v1.19). Bagh Chal: the
+## standard game, then Parlett's rules. Each step shows a position,
+## highlights points, plays a few moves on the board and explains one rule in
+## a sentence or three.
 ##
 ## The rules engine plays every scripted move (build() fails on an illegal
 ## one) and tests/test_tutorials.gd checks each step's outcome, so a
@@ -28,14 +32,35 @@ static func N_(text: String) -> String:
 	return text
 
 
-## The steps for a rule set, resolved against its board: positions as
-## HuntStates (one per step, before its moves) and moves as engine moves.
-static func build(rules: HuntRuleSet) -> Array[Dictionary]:
-	var script := steps_for(rules.id)
+## The rule sets one walkthrough covers, the main one first: Bagh Chal's
+## two together, whichever is being played. (Jogo da Onça's rule sets, left
+## in this project for dev builds only, keep a walkthrough each.)
+static func walkthrough_ids(rule_set_id: String) -> Array:
+	if rule_set_id in [HuntRuleSets.BAGH_CHAL_STANDARD, HuntRuleSets.BAGH_CHAL_PARLETT]:
+		return [HuntRuleSets.BAGH_CHAL_STANDARD, HuntRuleSets.BAGH_CHAL_PARLETT]
+	return [rule_set_id]
+
+
+## The walkthrough for those rule sets: the first in full (steps_for), then
+## each further one's differences (variation_for). Every step carries the
+## rule set it's shown on as "rules"; the player switches when it changes.
+static func build_walkthrough(rule_set_ids: Array) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for k in rule_set_ids.size():
+		var rules := HuntRuleSets.by_id(rule_set_ids[k])
+		out.append_array(build(rules, steps_for(rules.id) if k == 0 else variation_for(rules.id)))
+	return out
+
+
+## One part of the walkthrough, resolved against its rule set's board:
+## positions as HuntStates (one per step, before its moves) and moves as
+## engine moves.
+static func build(rules: HuntRuleSet, script: Array) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var state := HuntState.create(rules)
 	for raw in script:
 		var step: Dictionary = raw.duplicate(true)
+		step["rules"] = rules
 		if raw.has("setup"):
 			state = HuntState.create(rules)
 			if raw.setup is Dictionary:
@@ -112,12 +137,11 @@ static func point(board: BoardDef, name: String) -> int:
 	return id
 
 
+## The full walkthrough of a main rule set.
 static func steps_for(rule_set_id: String) -> Array:
 	match rule_set_id:
 		HuntRuleSets.BAGH_CHAL_STANDARD:
-			return _bagh_chal(false)
-		HuntRuleSets.BAGH_CHAL_PARLETT:
-			return _bagh_chal(true)
+			return _bagh_chal()
 		HuntRuleSets.ADUGO:
 			return _adugo()
 		HuntRuleSets.KOMIKAN:
@@ -125,9 +149,17 @@ static func steps_for(rule_set_id: String) -> Array:
 	return []
 
 
+## The end of the walkthrough for a further rule set: only what it changes.
+static func variation_for(rule_set_id: String) -> Array:
+	match rule_set_id:
+		HuntRuleSets.BAGH_CHAL_PARLETT:
+			return _parlett()
+	return []
+
+
 # --- Bagh Chal ---------------------------------------------------------------
 
-static func _bagh_chal(parlett: bool) -> Array:
+static func _bagh_chal() -> Array:
 	var corners := ["a1", "e1", "a5", "e5"]
 	var steps := [
 		{
@@ -172,24 +204,14 @@ static func _bagh_chal(parlett: bool) -> Array:
 			"moves": [["step", "c2", "c3"]],
 		},
 	]
-	if parlett:
-		steps.append({
-			"title": N_("How the tigers win"),
-			"text": N_("In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."),
-			"setup": {"hunters": ["c3", "a5", "e1", "e5"], "prey": ["c4"], "reserve": 0, "captured": 19, "side": "hunter"},
-			"marks": [["c3", "select"], ["c5", "capture"]],
-			"moves": [["jump", "c3", "c5"]],
-			"outcome": "hunter_win",
-		})
-	else:
-		steps.append({
-			"title": N_("How the tigers win"),
-			"text": N_("The tigers win by capturing five goats."),
-			"setup": {"hunters": ["c3", "a5", "e1", "e5"], "prey": ["c1", "a3", "b1", "c4", "d2", "b4"], "reserve": 10, "captured": 4, "side": "hunter"},
-			"marks": [["c3", "select"], ["c5", "capture"]],
-			"moves": [["jump", "c3", "c5"]],
-			"outcome": "hunter_win",
-		})
+	steps.append({
+		"title": N_("How the tigers win"),
+		"text": N_("The tigers win by capturing five goats."),
+		"setup": {"hunters": ["c3", "a5", "e1", "e5"], "prey": ["c1", "a3", "b1", "c4", "d2", "b4"], "reserve": 10, "captured": 4, "side": "hunter"},
+		"marks": [["c3", "select"], ["c5", "capture"]],
+		"moves": [["jump", "c3", "c5"]],
+		"outcome": "hunter_win",
+	})
 	steps.append_array([
 		{
 			"title": N_("How the goats win"),
@@ -208,6 +230,23 @@ static func _bagh_chal(parlett: bool) -> Array:
 		},
 	])
 	return steps
+
+
+# --- Parlett's rules, the variation -----------------------------------------
+# After the standard game: only the way the tigers win changes.
+
+static func _parlett() -> Array:
+	return [
+		{
+			# TRANSLATORS: Walkthrough step title: the last part of How to play, on the other rule set in the game. "Parlett 1976" is that rule set's name: write it as in the rules menu ("Bagh Chal · Parlett 1976").
+			"title": N_("The variation: Parlett 1976"),
+			"text": N_("In Parlett's version the tigers must capture all twenty goats. Everything else is as in the standard game."),
+			"setup": {"hunters": ["c3", "a5", "e1", "e5"], "prey": ["c4"], "reserve": 0, "captured": 19, "side": "hunter"},
+			"marks": [["c3", "select"], ["c5", "capture"]],
+			"moves": [["jump", "c3", "c5"]],
+			"outcome": "hunter_win",
+		},
+	]
 
 
 # --- Jogo da Onça (Adugo) ----------------------------------------------------

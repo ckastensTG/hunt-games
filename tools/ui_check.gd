@@ -21,7 +21,9 @@ extends SceneTree
 const GreyboxScript := preload("res://scenes/greybox/greybox.gd")
 const MENU_SCREENS := ["home", "vs_ai", "pass", "nearby", "nearby_host", "nearby_wait", "nearby_join",
 	"online", "friend", "friend_setup", "friend_join", "quick", "connecting", "error", "confirm_leave",
-	"origins", "pause", "settings", "looks", "credits", "licenses", "license"]
+	"origins", "more_games", "more_games_soon", "more_games_empty", "more_games_many", "pause",
+	"settings", "looks",
+	"credits", "licenses", "license"]
 
 var game: Node3D
 var langs: Array = []
@@ -38,6 +40,9 @@ var checked := 0
 var _cur_lang := ""
 var large := false
 var test_tools := false
+## The game list while the empty and the 20-game Other Timeless Games tabs
+## are checked.
+var _kept_games: Array = []
 
 
 ## Stands in for Game Center or Google Play Games, so Settings shows the
@@ -81,7 +86,7 @@ func _screens() -> Array:
 	for s in MENU_SCREENS:
 		list.append("menu:" + s)
 	list.append_array(["hud", "hud_ai", "result", "dialog:draw", "dialog:resign", "toast", "loading"])
-	var steps := HuntTutorials.build(game.rules) if game.rules else []
+	var steps := HuntTutorials.build_walkthrough(HuntTutorials.walkthrough_ids(game._rule_set_id)) if game.rules else []
 	for i in steps.size():
 		list.append("tutorial:%d" % i)
 	return list
@@ -178,7 +183,23 @@ func _setup(screen: String) -> void:
 		# Play against the AI with the opponent whose line is longest (short
 		# screens show the chosen one's line under the cards).
 		game.level = _longest_person("about")
-		game.menu.open(screen.substr(5))
+		# Other Timeless Games: Available now (Bagh Chal), Coming soon (Jogo
+		# da Onça), a tab with no games (its line), and the series' 20 games
+		# (a scrolling list).
+		var menu_screen := screen.substr(5)
+		if menu_screen.begins_with("more_games"):
+			game.menu._games_tab = "coming_soon" if menu_screen == "more_games_soon" else "available"
+			if menu_screen in ["more_games_empty", "more_games_many"]:
+				_kept_games = game.catalog.entries
+				game.catalog.entries = []
+			if menu_screen == "more_games_many":
+				for i in 20:
+					# The two real games over and over, so the cards have pictures.
+					var e: Dictionary = _kept_games[i % _kept_games.size()].duplicate(true)
+					e.stores.google_play.status = "available"
+					game.catalog.entries.append(e)
+			menu_screen = "more_games"
+		game.menu.open(menu_screen)
 	elif screen == "hud":
 		game.menu.close()
 		game._hud.refresh()
@@ -213,9 +234,12 @@ func _setup(screen: String) -> void:
 			game._tutorial._run += 1  # no timed playback
 		game._tutorial._index = i
 		game._tutorial._fill_card()
+		game._tutorial._set_position(game._tutorial._steps[i])
 
 
 func _teardown(screen: String) -> void:
+	if screen in ["menu:more_games_empty", "menu:more_games_many"]:
+		game.catalog.entries = _kept_games
 	if screen == "hud_ai":
 		game.mode = GreyboxScript.Mode.HOTSEAT
 		game._hud.refresh()
@@ -230,7 +254,7 @@ func _teardown(screen: String) -> void:
 		game._hide_loading()
 		game.menu.close()
 	elif screen.begins_with("tutorial:"):
-		if int(screen.substr(9)) == HuntTutorials.build(game.rules).size() - 1 or jobs.is_empty() or not str(jobs[0][3]).begins_with("tutorial:"):
+		if int(screen.substr(9)) == game._tutorial._steps.size() - 1 or jobs.is_empty() or not str(jobs[0][3]).begins_with("tutorial:"):
 			game._tutorial.stop(false)
 			_play_some_moves_again()
 
